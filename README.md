@@ -1,7 +1,8 @@
 # 🎮 Newport Hustle
-## *The Most Ridiculous Small-Town Crime Simulator Ever Made*
 
 ![Newport Hustle Logo](NewportHustleGame/Assets/UI/Branding/Newport_Hustle_Logo.png)
+
+## *The Most Ridiculous Small-Town Crime Simulator Ever Made*
 
 ### 🤣 What is Newport Hustle?
 
