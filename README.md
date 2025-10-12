@@ -96,29 +96,28 @@ The Newport PD operates on a sophisticated 4-star wanted system:
 
 ---
 
-## 🎮 **PLAY THE DEMO NOW!**
+## 💼 **Portfolio Project - Source Code Available**
 
-### 🌐 **Web Demo** (Instant Play)
-**[► PLAY NEWPORT HUSTLE DEMO ◄](https://demo.newporthustle.game)**  
-*No download required! Works on any device with a web browser.*
+### 🔍 **This is a Development Showcase**
+This repository demonstrates Unity game development skills through a complete GTA-style mobile game implementation. All source code is available for review by potential employers or collaborators.
 
-### 📱 **Mobile Demo Downloads**
+### 🛠️ **Technical Implementation**
+- **Engine**: Unity 2021.3 LTS
+- **Platform**: Mobile (Android/iOS)
+- **Languages**: C# (2000+ lines of game code)
+- **Architecture**: Modular system design with JSON configuration
 
-#### iOS TestFlight (iPhone/iPad)
-1. Install TestFlight from App Store
-2. Click: **[Join iOS Beta](https://testflight.apple.com/join/newport-hustle)**
-3. Download and laugh your butt off
+### 📂 **Key Components to Review**
+- **`Scripts/Vehicles/VehicleController.cs`** - Complete vehicle physics system
+- **`Scripts/World/PoliceSystem.cs`** - AI behavior and wanted system
+- **`Scripts/World/ZoneManager.cs`** - Open-world city management
+- **`Config/VehicleDatabase.json`** - Data-driven game configuration
 
-#### Android APK (Direct Download)
-1. Enable "Unknown Sources" in Settings
-2. Download: **[Newport Hustle Demo.apk](https://demo.newporthustle.game/android)**
-3. Install and enjoy the chaos
-
-### 💻 **Desktop Demo** (Windows/Mac/Linux)
-**[Download Desktop Demo](https://demo.newporthustle.game/desktop)**
-- Windows: Newport_Hustle_Demo.exe
-- Mac: Newport_Hustle_Demo.dmg  
-- Linux: Newport_Hustle_Demo.AppImage
+### 🎯 **Development Skills Demonstrated**
+- Mobile game architecture and optimization
+- Complex physics and AI systems
+- JSON-based configuration management
+- Professional code organization and documentation
 
 ---
 
