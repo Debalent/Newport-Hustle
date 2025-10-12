@@ -108,16 +108,37 @@ This repository demonstrates Unity game development skills through a complete GT
 - **Architecture**: Modular system design with JSON configuration
 
 ### 📂 **Key Components to Review**
-- **`Scripts/Vehicles/VehicleController.cs`** - Complete vehicle physics system
-- **`Scripts/World/PoliceSystem.cs`** - AI behavior and wanted system
-- **`Scripts/World/ZoneManager.cs`** - Open-world city management
-- **`Config/VehicleDatabase.json`** - Data-driven game configuration
+- **[`Scripts/Vehicles/VehicleController.cs`](NewportHustleGame/Scripts/Vehicles/VehicleController.cs)** - Complete vehicle physics system
+- **[`Scripts/World/PoliceSystem.cs`](NewportHustleGame/Scripts/World/PoliceSystem.cs)** - AI behavior and wanted system
+- **[`Scripts/World/ZoneManager.cs`](NewportHustleGame/Scripts/World/ZoneManager.cs)** - Open-world city management
+- **[`Config/VehicleDatabase.json`](NewportHustleGame/Config/VehicleDatabase.json)** - Data-driven game configuration
 
-### 🎯 **Development Skills Demonstrated**
+### � **View the UI/UX System**
+
+Want to see the game interface? Check out the complete UI implementation:
+
+- **[View UI Scripts →](NewportHustleGame/Scripts/UI/)** - All UI components (HUD, Menus, Mobile Controls)
+- **[MenuNavigation.cs](NewportHustleGame/Scripts/UI/MenuNavigation.cs)** - Complete menu system with settings
+- **[HUDController.cs](NewportHustleGame/Scripts/UI/HUDController.cs)** - Mobile HUD with stats, missions, and location
+- **[Joystick.cs](NewportHustleGame/Scripts/UI/Joystick.cs)** - Touch-based mobile controls
+- **[BrandingManager.cs](NewportHustleGame/Scripts/UI/BrandingManager.cs)** - App store assets and branding
+
+**🎮 Want to Run It Yourself?**
+
+1. **Clone this repository**
+2. **Install Unity Hub** and Unity 2021.3 LTS
+3. **Open the project** in Unity
+4. **Press Play** to see the game in action!
+
+📖 **[Full Setup Instructions →](UNITY_SETUP_GUIDE.md)**
+
+### �🎯 **Development Skills Demonstrated**
+
 - Mobile game architecture and optimization
 - Complex physics and AI systems
 - JSON-based configuration management
 - Professional code organization and documentation
+- Complete UI/UX implementation with mobile-first design
 
 ---
 
