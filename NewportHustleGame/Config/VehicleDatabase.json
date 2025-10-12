@@ -1,0 +1,605 @@
+{
+  "vehicles": {
+    "sedans": [
+      {
+        "id": "box_chevy_caprice",
+        "displayName": "Riverside Classic",
+        "realWorldBasis": "Box Chevy Caprice",
+        "year": "1980-1985",
+        "type": "Sedan",
+        "class": "Mid",
+        "stats": {
+          "maxSpeed": 180,
+          "acceleration": 1200,
+          "handling": 65,
+          "braking": 70,
+          "durability": 85
+        },
+        "description": "A classic American sedan with that distinctive boxy style. Perfect for cruising Newport's historic streets.",
+        "price": 3500,
+        "availability": "Common"
+      },
+      {
+        "id": "cutlass_supreme_84",
+        "displayName": "Newport Supreme",
+        "realWorldBasis": "1984 Cutlass Supreme",
+        "year": "1984",
+        "type": "Sedan",
+        "class": "Mid",
+        "stats": {
+          "maxSpeed": 175,
+          "acceleration": 1100,
+          "handling": 70,
+          "braking": 75,
+          "durability": 80
+        },
+        "description": "The quintessential '80s cruiser. Smooth ride with classic American muscle styling.",
+        "price": 4200,
+        "availability": "Uncommon"
+      }
+    ],
+    "suvs": [
+      {
+        "id": "chevy_tahoe",
+        "displayName": "Arkansas Explorer",
+        "realWorldBasis": "Chevy Tahoe/Suburban",
+        "year": "2000-2020",
+        "type": "SUV",
+        "class": "Mid",
+        "stats": {
+          "maxSpeed": 160,
+          "acceleration": 1000,
+          "handling": 55,
+          "braking": 65,
+          "durability": 95
+        },
+        "description": "Big, reliable SUV perfect for navigating Newport's rural roads and carrying cargo.",
+        "price": 12000,
+        "availability": "Common"
+      },
+      {
+        "id": "navigator_luxury",
+        "displayName": "White River Navigator",
+        "realWorldBasis": "Lincoln Navigator",
+        "year": "2010-2022",
+        "type": "SUV",
+        "class": "Luxury",
+        "stats": {
+          "maxSpeed": 190,
+          "acceleration": 1400,
+          "handling": 60,
+          "braking": 80,
+          "durability": 90
+        },
+        "description": "Luxury SUV with all the amenities. Show up in style to any Newport social gathering.",
+        "price": 35000,
+        "availability": "Rare"
+      },
+      {
+        "id": "lexus_crossover",
+        "displayName": "River Crossover",
+        "realWorldBasis": "Lexus RX 350",
+        "year": "2015-2023",
+        "type": "SUV",
+        "class": "Luxury",
+        "stats": {
+          "maxSpeed": 185,
+          "acceleration": 1300,
+          "handling": 75,
+          "braking": 85,
+          "durability": 85
+        },
+        "description": "Refined crossover SUV combining luxury with practicality. Popular among Newport professionals.",
+        "price": 28000,
+        "availability": "Uncommon"
+      }
+    ],
+    "sports": [
+      {
+        "id": "muscle_coupe",
+        "displayName": "Arkansas Thunder",
+        "realWorldBasis": "Modern Muscle Car",
+        "year": "2015-2023",
+        "type": "Sports",
+        "class": "Super",
+        "stats": {
+          "maxSpeed": 280,
+          "acceleration": 2000,
+          "handling": 90,
+          "braking": 95,
+          "durability": 70
+        },
+        "description": "Pure American muscle with modern performance. The fastest way around Newport's streets.",
+        "price": 75000,
+        "availability": "Very Rare"
+      },
+      {
+        "id": "import_tuner",
+        "displayName": "Street Rocket",
+        "realWorldBasis": "Import Sport Coupe",
+        "year": "2010-2020",
+        "type": "Sports",
+        "class": "Super",
+        "stats": {
+          "maxSpeed": 260,
+          "acceleration": 1800,
+          "handling": 95,
+          "braking": 90,
+          "durability": 65
+        },
+        "description": "Lightweight, agile sports car. Perfect for the winding roads around the White River.",
+        "price": 45000,
+        "availability": "Rare"
+      }
+    ],
+    "motorcycles": [
+      {
+        "id": "cruiser_bike",
+        "displayName": "Newport Cruiser",
+        "realWorldBasis": "Harley-Davidson Style Cruiser",
+        "year": "2000-2023",
+        "type": "Motorcycle",
+        "class": "Mid",
+        "stats": {
+          "maxSpeed": 200,
+          "acceleration": 1500,
+          "handling": 85,
+          "braking": 80,
+          "durability": 75
+        },
+        "description": "Classic American cruiser. Feel the wind as you ride along the scenic White River.",
+        "price": 8500,
+        "availability": "Common"
+      },
+      {
+        "id": "sport_bike",
+        "displayName": "River Rocket",
+        "realWorldBasis": "Sport Motorcycle",
+        "year": "2015-2023",
+        "type": "Motorcycle",
+        "class": "Super",
+        "stats": {
+          "maxSpeed": 320,
+          "acceleration": 2500,
+          "handling": 100,
+          "braking": 95,
+          "durability": 60
+        },
+        "description": "High-performance sport bike. The ultimate machine for speed enthusiasts.",
+        "price": 15000,
+        "availability": "Uncommon"
+      }
+    ],
+    "police": [
+      {
+        "id": "crown_victoria_police",
+        "displayName": "Newport Patrol Unit",
+        "realWorldBasis": "Crown Victoria Police Interceptor",
+        "year": "2000-2011",
+        "type": "Police",
+        "class": "Emergency",
+        "stats": {
+          "maxSpeed": 200,
+          "acceleration": 1400,
+          "handling": 75,
+          "braking": 85,
+          "durability": 90
+        },
+        "description": "Standard Newport Police patrol vehicle. Reliable and pursuit-capable.",
+        "price": 0,
+        "availability": "Police Only",
+        "features": ["Siren", "Emergency Lights", "Radio", "Push Bars"]
+      },
+      {
+        "id": "grand_marquis_detective",
+        "displayName": "Newport Detective Unit",
+        "realWorldBasis": "Grand Marquis Police",
+        "year": "2005-2011",
+        "type": "Police",
+        "class": "Emergency",
+        "stats": {
+          "maxSpeed": 190,
+          "acceleration": 1300,
+          "handling": 70,
+          "braking": 80,
+          "durability": 85
+        },
+        "description": "Unmarked detective vehicle used by Newport Police investigators.",
+        "price": 0,
+        "availability": "Police Only",
+        "features": ["Hidden Siren", "Concealed Lights", "Radio"]
+      }
+    ],
+    "trucks": [
+      {
+        "id": "pickup_work",
+        "displayName": "Arkansas Hauler",
+        "realWorldBasis": "Full-Size Pickup Truck",
+        "year": "2000-2023",
+        "type": "Truck",
+        "class": "Mid",
+        "stats": {
+          "maxSpeed": 170,
+          "acceleration": 1100,
+          "handling": 60,
+          "braking": 70,
+          "durability": 95
+        },
+        "description": "Reliable work truck. Perfect for hauling equipment around Newport's construction sites.",
+        "price": 15000,
+        "availability": "Common"
+      }
+    ]
+  },
+  "vehicleSpawning": {
+    "commonSpawnRate": 70,
+    "uncommonSpawnRate": 20,
+    "rareSpawnRate": 8,
+    "veryRareSpawnRate": 2,
+    "spawnLocations": {
+      "residential": ["box_chevy_caprice", "chevy_tahoe", "pickup_work"],
+      "downtown": ["cutlass_supreme_84", "lexus_crossover", "cruiser_bike"],
+      "luxury": ["navigator_luxury", "lexus_crossover", "muscle_coupe"],
+      "industrial": ["pickup_work", "chevy_tahoe", "arkansas_explorer"],
+      "riverside": ["cruiser_bike", "newport_cruiser", "cutlass_supreme_84"]
+    },
+    "policeSpawnZones": {
+      "downtown": "crown_victoria_police",
+      "highway": "crown_victoria_police",
+      "residential": "grand_marquis_detective"
+    }
+  },
+  "vehicleCustomization": {
+    "paintJobs": [
+      {
+        "name": "Classic White",
+        "cost": 0,
+        "availability": "Default"
+      },
+      {
+        "name": "Newport Blue",
+        "cost": 500,
+        "availability": "All"
+      },
+      {
+        "name": "Arkansas Red",
+        "cost": 500,
+        "availability": "All"
+      },
+      {
+        "name": "Matte Black",
+        "cost": 1000,
+        "availability": "Sports/Luxury"
+      },
+      {
+        "name": "Pearl White",
+        "cost": 1500,
+        "availability": "Luxury"
+      },
+      {
+        "name": "Chrome",
+        "cost": 5000,
+        "availability": "Super"
+      }
+    ],
+    "wheels": [
+      {
+        "name": "Stock",
+        "cost": 0,
+        "availability": "Default"
+      },
+      {
+        "name": "Classic Chrome",
+        "cost": 800,
+        "availability": "All"
+      },
+      {
+        "name": "Sport Alloy",
+        "cost": 1200,
+        "availability": "Sports/Super"
+      },
+      {
+        "name": "Off-Road",
+        "cost": 1000,
+        "availability": "SUV/Truck"
+      }
+    ],
+    "performance": [
+      {
+        "name": "Engine Tune",
+        "cost": 2000,
+        "effect": "+10% acceleration",
+        "availability": "All"
+      },
+      {
+        "name": "Turbo Kit",
+        "cost": 5000,
+        "effect": "+20% acceleration, +10% top speed",
+        "availability": "Sports/Super"
+      },
+      {
+        "name": "Racing Suspension",
+        "cost": 3000,
+        "effect": "+15% handling",
+        "availability": "Sports/Super"
+      },
+      {
+        "name": "Performance Brakes",
+        "cost": 1500,
+        "effect": "+20% braking",
+        "availability": "All"
+      }
+    ]
+  },
+  "dealerships": {
+    "newportMotors": {
+      "name": "Newport Motors",
+      "location": "Downtown Newport",
+      "specialty": "American Classics",
+      "inventory": ["box_chevy_caprice", "cutlass_supreme_84", "chevy_tahoe", "pickup_work"],
+      "description": "Family-owned dealership specializing in classic American vehicles."
+    },
+    "luxuryAuto": {
+      "name": "White River Luxury Auto",
+      "location": "Upscale District",
+      "specialty": "Luxury Vehicles",
+      "inventory": ["navigator_luxury", "lexus_crossover", "muscle_coupe"],
+      "description": "Premium dealership for discerning Newport residents."
+    },
+    "speedDemon": {
+      "name": "Speed Demon Motors",
+      "location": "Industrial Area",
+      "specialty": "Performance Vehicles",
+      "inventory": ["muscle_coupe", "import_tuner", "sport_bike"],
+      "description": "High-performance vehicles for adrenaline seekers."
+    },
+    "bikeBarn": {
+      "name": "The Bike Barn",
+      "location": "Riverside",
+      "specialty": "Motorcycles",
+      "inventory": ["cruiser_bike", "sport_bike"],
+      "description": "Newport's premier motorcycle dealership."
+    }
+  },
+  "mechanics": {
+    "autoRepair": {
+      "name": "Joe's Auto Repair",
+      "location": "Main Street",
+      "services": ["Repair", "Basic Customization", "Paint Jobs"],
+      "specialty": "General Repairs",
+      "description": "Honest mechanic who's been serving Newport for 30 years."
+    },
+    "performanceShop": {
+      "name": "Arkansas Performance",
+      "location": "Industrial District", 
+      "services": ["Performance Mods", "Tuning", "Custom Builds"],
+      "specialty": "Performance Enhancement",
+      "description": "High-end performance shop for serious car enthusiasts."
+    },
+    "bodyShop": {
+      "name": "Newport Body Works",
+      "location": "Highway 67",
+      "services": ["Body Repair", "Paint", "Collision Repair"],
+      "specialty": "Cosmetic Restoration",
+      "description": "Expert body work and paint jobs."
+    }
+  },
+  "fuelStations": {
+    "locations": [
+      {
+        "name": "Jordan's Gas Station",
+        "location": "Highway 67 & Main Street",
+        "services": ["Fuel", "Basic Repairs", "Snacks", "Local Favorites"],
+        "fuelPrice": 3.25,
+        "description": "Popular local gas station known for friendly service and community gathering spot."
+      },
+      {
+        "name": "Riverside Fuel",
+        "location": "Riverfront District",
+        "services": ["Fuel", "Car Wash"],
+        "fuelPrice": 3.30
+      },
+      {
+        "name": "Newport Station",
+        "location": "Downtown",
+        "services": ["Fuel", "Premium Gas", "Oil Change"],
+        "fuelPrice": 3.35
+      }
+    ]
+  },
+  "localBusinesses": {
+    "restaurants": [
+      {
+        "name": "Lackey Tamale Shop",
+        "location": "Main Street, Downtown Newport",
+        "type": "Restaurant",
+        "specialty": "Authentic Tamales",
+        "services": ["Hot Tamales", "Mexican Food", "Local Favorite"],
+        "description": "Famous Newport tamale shop serving authentic homemade tamales. A true local institution!",
+        "operatingHours": "Monday-Saturday",
+        "gameFeatures": ["Save Location", "Food Vendor", "Community Gathering Spot"]
+      }
+    ],
+    "stores": [
+      {
+        "name": "The Yella Store",
+        "location": "Downtown Newport",
+        "type": "Tobacco Shop",
+        "specialty": "Tobacco Products",
+        "services": ["Cigarettes", "Tobacco", "Convenience Items", "Local Goods"],
+        "description": "Distinctive yellow-colored tobacco shop that's been a Newport landmark for years.",
+        "visualDesign": {
+          "buildingColor": "Bright Yellow",
+          "signage": "Bold Black Text on Yellow Background",
+          "landmark": true
+        },
+        "gameFeatures": ["Visual Landmark", "Shopping Location", "Navigation Reference Point"]
+      }
+    ]
+  },
+  "wantedSystem": {
+    "levels": [
+      {
+        "level": 1,
+        "name": "Minor Violation",
+        "description": "Small infractions - running red lights, speeding",
+        "policeResponse": "Single patrol car",
+        "duration": 60,
+        "fine": 250
+      },
+      {
+        "level": 2,
+        "name": "Misdemeanor",
+        "description": "Reckless driving, minor property damage",
+        "policeResponse": "2-3 patrol cars",
+        "duration": 120,
+        "fine": 500
+      },
+      {
+        "level": 3,
+        "name": "Felony",
+        "description": "Major accidents, fleeing police",
+        "policeResponse": "Multiple units, roadblocks",
+        "duration": 180,
+        "fine": 1000
+      },
+      {
+        "level": 4,
+        "name": "High Priority",
+        "description": "Dangerous driving, multiple violations",
+        "policeResponse": "SWAT, helicopters, spike strips",
+        "duration": 300,
+        "fine": 2500
+      }
+    ],
+    "escapeZones": [
+      "Underground Parking",
+      "Paint Shop",
+      "Mechanic Garage",
+      "Private Property"
+    ]
+  },
+  "streetCharacters": {
+    "description": "Authentic Newport street life - the real characters that make the city colorful",
+    "npcTypes": [
+      {
+        "type": "snitch",
+        "displayName": "Neighborhood Informant",
+        "description": "Always knows what's happening on the block. Rides a beat-up bike and somehow appears everywhere.",
+        "behavior": {
+          "transportation": "Old BMX Bike",
+          "spawnsNear": ["Police Station", "Community Center", "Corner Stores"],
+          "activities": ["Watching traffic", "Taking notes", "Talking to police"],
+          "dialogue": [
+            "I seen everything that happened over there",
+            "You didn't hear this from me but...",
+            "The police been asking about you",
+            "I keep my eyes open, you know what I'm saying"
+          ]
+        },
+        "gameplayImpact": {
+          "wantedLevelIncrease": "Reports player crimes to police",
+          "informationSource": "Provides tips about police locations",
+          "reputation": "Interacting affects community trust"
+        }
+      },
+      {
+        "type": "wino",
+        "displayName": "Neighborhood Philosopher",
+        "description": "Local wine enthusiast with deep thoughts about life. Prefers slower transportation methods.",
+        "behavior": {
+          "transportation": "Rusty Beach Cruiser Bike",
+          "spawnsNear": ["The Yella Store", "Gas Stations", "Park Benches"],
+          "activities": ["Philosophical discussions", "Sharing life wisdom", "Slow bike riding"],
+          "dialogue": [
+            "Life's like riding a bike, sometimes you wobble",
+            "You know what your problem is? You moving too fast",
+            "Back in my day, we had time to appreciate things",
+            "This town ain't what it used to be, but it's still home"
+          ]
+        },
+        "gameplayImpact": {
+          "wisdom": "Provides cryptic but useful game tips",
+          "slowPaced": "Creates authentic small-town atmosphere",
+          "stories": "Shares Newport history and local lore"
+        }
+      },
+      {
+        "type": "bum",
+        "displayName": "Traveling Entrepreneur",
+        "description": "Always on the move, knows every shortcut in town. Expert at making something from nothing.",
+        "behavior": {
+          "transportation": "Multi-Speed Mountain Bike with Basket",
+          "spawnsNear": ["Dumpsters", "Recycling Centers", "Behind Businesses"],
+          "activities": ["Collecting recyclables", "Taking shortcuts", "Trading items"],
+          "dialogue": [
+            "You got any spare change? Gas money, you know",
+            "I know a shortcut that'll save you 10 minutes",
+            "One man's trash is another man's treasure",
+            "This bike gets better mileage than your car"
+          ]
+        },
+        "gameplayImpact": {
+          "shortcuts": "Reveals hidden paths and routes",
+          "trading": "Exchanges useful items for small amounts",
+          "environmental": "Shows recycling and sustainability themes"
+        }
+      }
+    ],
+    "bicycles": [
+      {
+        "id": "snitch_bmx",
+        "displayName": "Informant Special",
+        "description": "Beat-up BMX bike, perfect for quick getaways and corner surveillance",
+        "stats": {
+          "maxSpeed": 25,
+          "acceleration": 800,
+          "handling": 90,
+          "stealth": 95,
+          "durability": 40
+        },
+        "specialAbilities": ["Silent travel", "Fits through narrow spaces", "Quick dismount"]
+      },
+      {
+        "id": "wino_cruiser",
+        "displayName": "Philosopher's Ride",
+        "description": "Rusty beach cruiser that's seen better days but still rolls smooth",
+        "stats": {
+          "maxSpeed": 15,
+          "acceleration": 400,
+          "handling": 60,
+          "comfort": 85,
+          "durability": 30
+        },
+        "specialAbilities": ["Smooth ride", "Good for contemplation", "Classic style"]
+      },
+      {
+        "id": "bum_mountain_bike",
+        "displayName": "Hustler's Wheels",
+        "description": "Multi-speed mountain bike with basket and bags - perfect for entrepreneurial activities",
+        "stats": {
+          "maxSpeed": 30,
+          "acceleration": 600,
+          "handling": 80,
+          "storage": 90,
+          "durability": 60
+        },
+        "specialAbilities": ["Large storage capacity", "All-terrain capable", "Quiet operation"]
+      }
+    ],
+    "gameplayMechanics": {
+      "bikePhysics": {
+        "noPetrolRequired": "Bikes run on pedal power",
+        "weatherEffects": "Rain makes bikes slower, wind affects handling",
+        "maintenance": "Basic repairs available at community centers",
+        "parking": "Can be parked anywhere, sometimes stolen"
+      },
+      "characterInteractions": {
+        "reputation": "How NPCs treat you based on your actions",
+        "information": "Street characters provide local knowledge",
+        "atmosphere": "Creates authentic small-town character diversity",
+        "humor": "Dialogue designed for local insider jokes"
+      }
+    }
+  }
+}

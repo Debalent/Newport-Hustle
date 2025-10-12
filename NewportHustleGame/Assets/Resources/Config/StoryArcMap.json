@@ -1,0 +1,251 @@
+{
+  "story_structure": {
+    "title": "Newport Hustle",
+    "subtitle": "A Mobile GTA-Style Adventure in Small-Town Arkansas",
+    "theme": "Finding your place in a community while building respect and success",
+    "setting": "Newport, Arkansas - A small river town with big personalities",
+    "tone": "Character-driven drama with humor and heart"
+  },
+  "story_arcs": {
+    "main_arc": {
+      "title": "The Prodigal Returns",
+      "description": "Player returns to Newport and must rebuild their life and reputation",
+      "progression": [
+        {
+          "phase": "Homecoming",
+          "missions": ["mission_01_welcome_back"],
+          "themes": ["redemption", "nostalgia", "community"],
+          "character_development": "Player reconnects with roots and faces past"
+        },
+        {
+          "phase": "Proving Ground",
+          "missions": ["mission_02_the_cut"],
+          "themes": ["skill", "tradition", "respect"],
+          "character_development": "Player demonstrates value and earns place in community"
+        },
+        {
+          "phase": "Complications", 
+          "missions": ["mission_03_spa_secrets"],
+          "themes": ["change", "conflict", "moral_choices"],
+          "character_development": "Player navigates competing interests and loyalties"
+        },
+        {
+          "phase": "Resolution",
+          "missions": ["mission_04_riverfront_reckoning"],
+          "themes": ["legacy", "leadership", "community_unity"],
+          "character_development": "Player takes leadership role and shapes Newport's future"
+        }
+      ]
+    },
+    "character_arcs": {
+      "mentor_arc": {
+        "character": "character_01_mentor",
+        "progression": [
+          {
+            "phase": "Guide",
+            "description": "Helps player get established, shares wisdom"
+          },
+          {
+            "phase": "Supporter", 
+            "description": "Provides resources and encouragement during challenges"
+          },
+          {
+            "phase": "Advisor",
+            "description": "Offers counsel during complex decisions"
+          },
+          {
+            "phase": "Proud_Elder",
+            "description": "Sees player succeed and steps back with pride"
+          }
+        ]
+      },
+      "rival_arc": {
+        "character": "character_02_rival",
+        "progression": [
+          {
+            "phase": "Antagonist",
+            "description": "Opposes player's efforts, represents outside interests"
+          },
+          {
+            "phase": "Competitor",
+            "description": "Direct business competition and social rivalry"
+          },
+          {
+            "phase": "Complicated_Enemy",
+            "description": "Revealed motivations make them more sympathetic"
+          },
+          {
+            "phase": "Reluctant_Ally",
+            "description": "Circumstances force cooperation, potential redemption"
+          }
+        ]
+      },
+      "community_arc": {
+        "description": "Collective character representing Newport as a whole",
+        "progression": [
+          {
+            "phase": "Suspicious",
+            "description": "Community unsure about player's return and intentions"
+          },
+          {
+            "phase": "Testing",
+            "description": "Community gives player chances to prove themselves"
+          },
+          {
+            "phase": "Accepting",
+            "description": "Community begins to trust and include player"
+          },
+          {
+            "phase": "Embracing",
+            "description": "Community fully accepts player as valued member and leader"
+          }
+        ]
+      }
+    }
+  },
+  "narrative_branches": {
+    "reputation_path": {
+      "description": "Player's choices affect their reputation and standing in Newport",
+      "branches": [
+        {
+          "name": "Traditional_Respected",
+          "condition": "High respect with old-timers, traditional choices",
+          "outcomes": "Leadership in established community structures"
+        },
+        {
+          "name": "Modern_Innovator", 
+          "condition": "High respect with new businesses, progressive choices",
+          "outcomes": "Leadership in Newport's modernization efforts"
+        },
+        {
+          "name": "Community_Bridge",
+          "condition": "Balanced respect across all groups",
+          "outcomes": "Unifying leadership role bridging old and new Newport"
+        },
+        {
+          "name": "Outsider_Success",
+          "condition": "Business success despite low community respect",
+          "outcomes": "Financial success but social isolation"
+        }
+      ]
+    },
+    "business_path": {
+      "description": "Player's business choices affect their role in Newport's economy",
+      "branches": [
+        {
+          "name": "Service_Professional",
+          "condition": "Focus on barbershop and personal services",
+          "outcomes": "Respected craftsperson with steady income"
+        },
+        {
+          "name": "Wellness_Entrepreneur",
+          "condition": "Partner with spa and wellness businesses", 
+          "outcomes": "Modern business owner bringing change to Newport"
+        },
+        {
+          "name": "Community_Organizer",
+          "condition": "Focus on bringing community together",
+          "outcomes": "Social leader with broad influence but moderate income"
+        },
+        {
+          "name": "Diversified_Mogul",
+          "condition": "Multiple business interests across sectors",
+          "outcomes": "Economic power and influence across all of Newport"
+        }
+      ]
+    }
+  },
+  "key_themes": {
+    "community_vs_individualism": {
+      "description": "Balancing personal success with community responsibility",
+      "exploration": "Player must choose between personal gain and community benefit",
+      "resolution": "Best outcomes come from finding ways to succeed while helping others"
+    },
+    "tradition_vs_progress": {
+      "description": "Navigating change while respecting established ways",
+      "exploration": "Tension between preserving Newport's character and embracing growth",
+      "resolution": "Progress works best when it builds on rather than replaces tradition"
+    },
+    "redemption_and_second_chances": {
+      "description": "Everyone deserves opportunity to prove themselves",
+      "exploration": "Player and other characters overcome past mistakes or prejudices",
+      "resolution": "Growth comes through understanding, effort, and community support"
+    },
+    "small_town_complexity": {
+      "description": "Small towns have deep, complex social dynamics",
+      "exploration": "Surface simplicity hides layers of history, relationships, and secrets",
+      "resolution": "Understanding community complexity is key to belonging and success"
+    }
+  },
+  "story_dependencies": {
+    "mission_flow": {
+      "linear_progression": [
+        "mission_01_welcome_back",
+        "mission_02_the_cut", 
+        "mission_03_spa_secrets",
+        "mission_04_riverfront_reckoning"
+      ],
+      "branching_points": [
+        {
+          "mission": "mission_02_the_cut",
+          "choice": "barbershop_alliance", 
+          "affects": ["mission_03_spa_secrets", "character_relationships"]
+        },
+        {
+          "mission": "mission_03_spa_secrets",
+          "choice": "spa_dilemma_resolution",
+          "affects": ["mission_04_riverfront_reckoning", "community_standing"]
+        }
+      ]
+    },
+    "character_relationships": {
+      "mentor_relationship": {
+        "affects": ["mission_accessibility", "dialogue_options", "story_revelations"],
+        "influenced_by": ["player_choices", "mission_outcomes", "community_respect"]
+      },
+      "rival_relationship": {
+        "affects": ["business_opportunities", "community_conflicts", "endgame_options"],
+        "influenced_by": ["competitive_outcomes", "moral_choices", "community_standing"]
+      },
+      "community_standing": {
+        "affects": ["mission_support", "business_success", "story_ending"],
+        "influenced_by": ["all_major_choices", "side_quest_completion", "daily_interactions"]
+      }
+    }
+  },
+  "newport_authenticity": {
+    "real_elements": {
+      "geography": "White River, real street names, geographic accuracy",
+      "culture": "Arkansas small-town values, river culture, community traditions",
+      "economy": "Mix of traditional and modern businesses, tourism potential",
+      "history": "References to real Newport history and Arkansas heritage"
+    },
+    "fictional_elements": {
+      "characters": "All characters are fictional or placeholder pending consent",
+      "businesses": "Specific businesses are fictional but representative of real types",
+      "events": "Dramatic events are fictional but grounded in realistic scenarios",
+      "scale": "Compressed geography and accelerated timeline for gameplay"
+    }
+  },
+  "player_agency": {
+    "meaningful_choices": [
+      "How to approach business relationships",
+      "Whether to embrace tradition or drive change", 
+      "How to handle community conflicts",
+      "What kind of leader to become"
+    ],
+    "consequence_system": {
+      "immediate": "Direct dialogue and relationship changes",
+      "medium_term": "Mission availability and difficulty changes",
+      "long_term": "Different story endings and community outcomes"
+    },
+    "multiple_solutions": {
+      "description": "Most challenges have multiple valid approaches",
+      "examples": [
+        "Barbershop conflict can be resolved through skill, diplomacy, or innovation",
+        "Spa secrets can be handled through exposure, protection, or mediation",
+        "Community leadership can be achieved through various specializations"
+      ]
+    }
+  }
+}

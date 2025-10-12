@@ -1,0 +1,416 @@
+{
+  "customization_categories": {
+    "appearance": {
+      "skin_tones": [
+        {
+          "name": "Fair",
+          "description": "Light skin tone",
+          "unlock_condition": "default"
+        },
+        {
+          "name": "Medium",
+          "description": "Medium skin tone",
+          "unlock_condition": "default"
+        },
+        {
+          "name": "Olive",
+          "description": "Olive skin tone",
+          "unlock_condition": "default"
+        },
+        {
+          "name": "Tan",
+          "description": "Tan skin tone",
+          "unlock_condition": "default"
+        },
+        {
+          "name": "Deep",
+          "description": "Dark skin tone",
+          "unlock_condition": "default"
+        }
+      ],
+      "body_types": [
+        {
+          "name": "Lean",
+          "description": "Athletic, lean build",
+          "unlock_condition": "default"
+        },
+        {
+          "name": "Average",
+          "description": "Average build",
+          "unlock_condition": "default"
+        },
+        {
+          "name": "Sturdy",
+          "description": "Broader, stronger build",
+          "unlock_condition": "default"
+        }
+      ],
+      "height_range": {
+        "min": 0.85,
+        "max": 1.15,
+        "default": 1.0,
+        "description": "Character height relative to standard"
+      }
+    },
+    "hair_styles": {
+      "classic_cuts": [
+        {
+          "name": "Traditional Side Part",
+          "description": "Classic barbershop style",
+          "unlock_condition": "default",
+          "newport_connection": "Popular at Thompson's Traditional Cuts"
+        },
+        {
+          "name": "Clean Buzz",
+          "description": "Short, practical cut",
+          "unlock_condition": "default",
+          "newport_connection": "Favored by river workers"
+        },
+        {
+          "name": "Pompadour",
+          "description": "Vintage-inspired style",
+          "unlock_condition": "barbershop_respect_25",
+          "newport_connection": "Classic Newport gentleman look"
+        }
+      ],
+      "modern_styles": [
+        {
+          "name": "Textured Crop",
+          "description": "Contemporary casual style",
+          "unlock_condition": "spa_district_access",
+          "newport_connection": "Popular in the spa district"
+        },
+        {
+          "name": "Undercut Fade",
+          "description": "Modern trendy cut",
+          "unlock_condition": "young_crowd_respect_20",
+          "newport_connection": "Worn by Newport's younger professionals"
+        },
+        {
+          "name": "Messy Quiff",
+          "description": "Casual, effortless style",
+          "unlock_condition": "mission_02_complete",
+          "newport_connection": "Relaxed Newport lifestyle"
+        }
+      ],
+      "specialty_styles": [
+        {
+          "name": "River Casual",
+          "description": "Wind-swept, natural look",
+          "unlock_condition": "riverfront_activities_10",
+          "newport_connection": "Perfect for White River activities"
+        },
+        {
+          "name": "Business Professional",
+          "description": "Sharp, executive style",
+          "unlock_condition": "business_success_high",
+          "newport_connection": "Downtown Newport business look"
+        }
+      ]
+    },
+    "hair_colors": [
+      {
+        "name": "Natural Black",
+        "unlock_condition": "default"
+      },
+      {
+        "name": "Dark Brown",
+        "unlock_condition": "default"
+      },
+      {
+        "name": "Medium Brown",
+        "unlock_condition": "default"
+      },
+      {
+        "name": "Light Brown",
+        "unlock_condition": "default"
+      },
+      {
+        "name": "Dirty Blonde",
+        "unlock_condition": "default"
+      },
+      {
+        "name": "Blonde",
+        "unlock_condition": "default"
+      },
+      {
+        "name": "Auburn",
+        "unlock_condition": "default"
+      },
+      {
+        "name": "Red",
+        "unlock_condition": "default"
+      },
+      {
+        "name": "Gray",
+        "unlock_condition": "respect_level_high"
+      },
+      {
+        "name": "Silver",
+        "unlock_condition": "elder_respect_50"
+      }
+    ],
+    "clothing_styles": {
+      "casual_wear": [
+        {
+          "name": "Newport Casual",
+          "description": "Comfortable jeans and t-shirt",
+          "pieces": ["basic_jeans", "newport_tee", "casual_sneakers"],
+          "unlock_condition": "default",
+          "style_points": 3
+        },
+        {
+          "name": "River Ready",
+          "description": "Practical clothes for outdoor activities",
+          "pieces": ["cargo_shorts", "moisture_wicking_shirt", "boat_shoes"],
+          "unlock_condition": "riverfront_access",
+          "style_points": 4
+        },
+        {
+          "name": "Weekend Comfort",
+          "description": "Relaxed weekend attire",
+          "pieces": ["comfortable_khakis", "polo_shirt", "loafers"],
+          "unlock_condition": "residential_respect_15",
+          "style_points": 5
+        }
+      ],
+      "work_wear": [
+        {
+          "name": "Barbershop Professional",
+          "description": "Clean, professional barbering attire",
+          "pieces": ["dress_pants", "button_shirt", "barber_vest", "dress_shoes"],
+          "unlock_condition": "mission_02_complete",
+          "style_points": 8,
+          "special_effect": "customer_confidence_boost"
+        },
+        {
+          "name": "Spa Wellness",
+          "description": "Modern, relaxed professional look",
+          "pieces": ["tailored_slacks", "wellness_polo", "comfortable_flats"],
+          "unlock_condition": "spa_partnership",
+          "style_points": 7,
+          "special_effect": "wellness_credibility"
+        },
+        {
+          "name": "Business Formal",
+          "description": "Sharp business attire",
+          "pieces": ["business_suit", "dress_shirt", "tie", "oxford_shoes"],
+          "unlock_condition": "business_success_medium",
+          "style_points": 10,
+          "special_effect": "negotiation_bonus"
+        }
+      ],
+      "special_occasion": [
+        {
+          "name": "Newport Formal",
+          "description": "Dressed up for community events",
+          "pieces": ["formal_suit", "dress_shirt", "local_tie", "polished_shoes"],
+          "unlock_condition": "community_respect_high",
+          "style_points": 12,
+          "special_effect": "community_event_bonus"
+        },
+        {
+          "name": "Arkansas Pride",
+          "description": "Local pride attire",
+          "pieces": ["arkansas_jacket", "regional_shirt", "pride_accessories"],
+          "unlock_condition": "local_history_knowledge",
+          "style_points": 6,
+          "special_effect": "local_connection_bonus"
+        }
+      ]
+    },
+    "accessories": [
+      {
+        "name": "Classic Watch",
+        "description": "Reliable timepiece",
+        "unlock_condition": "default",
+        "effect": "time_awareness_bonus"
+      },
+      {
+        "name": "Newport Baseball Cap",
+        "description": "Local team support",
+        "unlock_condition": "sports_interest",
+        "effect": "casual_conversation_starter"
+      },
+      {
+        "name": "River Fishing Hat",
+        "description": "Practical for outdoor activities",
+        "unlock_condition": "fishing_skill_basic",
+        "effect": "outdoor_activity_bonus"
+      },
+      {
+        "name": "Business Portfolio",
+        "description": "Professional document carrier",
+        "unlock_condition": "business_meetings_5",
+        "effect": "professional_credibility"
+      },
+      {
+        "name": "Community Service Pin",
+        "description": "Shows community involvement",
+        "unlock_condition": "volunteer_hours_20",
+        "effect": "community_respect_visible"
+      }
+    ]
+  },
+  "customization_presets": {
+    "newport_natives": [
+      {
+        "name": "River Town Regular",
+        "description": "Looks like you've lived by the White River your whole life",
+        "appearance": {
+          "skin_tone": "tan",
+          "hair_style": "traditional_side_part",
+          "hair_color": "medium_brown",
+          "body_type": "average",
+          "height": 0.95
+        },
+        "clothing": "newport_casual",
+        "accessories": ["classic_watch", "newport_baseball_cap"]
+      },
+      {
+        "name": "Downtown Professional",
+        "description": "Business-minded Newport resident",
+        "appearance": {
+          "skin_tone": "medium",
+          "hair_style": "business_professional",
+          "hair_color": "dark_brown",
+          "body_type": "lean",
+          "height": 1.05
+        },
+        "clothing": "business_formal",
+        "accessories": ["classic_watch", "business_portfolio"]
+      },
+      {
+        "name": "Outdoor Enthusiast",
+        "description": "Lives for White River adventures",
+        "appearance": {
+          "skin_tone": "tan",
+          "hair_style": "river_casual",
+          "hair_color": "dirty_blonde",
+          "body_type": "sturdy",
+          "height": 1.0
+        },
+        "clothing": "river_ready",
+        "accessories": ["river_fishing_hat", "classic_watch"]
+      }
+    ],
+    "regional_styles": [
+      {
+        "name": "Arkansas Classic",
+        "description": "Timeless Arkansas style",
+        "appearance": {
+          "skin_tone": "fair",
+          "hair_style": "pompadour",
+          "hair_color": "auburn",
+          "body_type": "average",
+          "height": 1.0
+        },
+        "clothing": "arkansas_pride",
+        "accessories": ["community_service_pin"]
+      },
+      {
+        "name": "Southern Gentleman",
+        "description": "Refined Southern charm",
+        "appearance": {
+          "skin_tone": "olive",
+          "hair_style": "traditional_side_part",
+          "hair_color": "gray",
+          "body_type": "lean",
+          "height": 1.08
+        },
+        "clothing": "newport_formal",
+        "accessories": ["classic_watch", "business_portfolio"]
+      }
+    ]
+  },
+  "unlock_system": {
+    "progression_based": {
+      "mission_unlocks": {
+        "mission_01_complete": ["weekend_comfort", "newport_baseball_cap"],
+        "mission_02_complete": ["barbershop_professional", "pompadour"],
+        "mission_03_complete": ["spa_wellness", "textured_crop"],
+        "mission_04_complete": ["business_formal", "business_professional"]
+      },
+      "respect_unlocks": {
+        "community_respect_25": ["community_service_pin", "undercut_fade"],
+        "community_respect_50": ["newport_formal", "arkansas_pride"],
+        "community_respect_75": ["silver_hair_color", "community_leader_preset"]
+      },
+      "skill_unlocks": {
+        "barbering_skill_advanced": ["master_barber_vest", "precision_tools_accessory"],
+        "business_skill_advanced": ["executive_suit", "success_watch"],
+        "social_skill_advanced": ["charisma_accessories", "networker_outfit"]
+      }
+    },
+    "discovery_based": {
+      "location_discoveries": {
+        "riverfront_exploration": ["river_casual", "boat_shoes"],
+        "historic_newport_tour": ["vintage_accessories", "heritage_clothing"],
+        "spa_district_familiarity": ["wellness_attire", "modern_styles"]
+      },
+      "relationship_discoveries": {
+        "barber_friendship": ["traditional_tools", "classic_cuts"],
+        "spa_owner_alliance": ["wellness_accessories", "modern_health_focused_styles"],
+        "mentor_bond": ["family_heirloom_accessory", "wisdom_inspired_clothing"]
+      }
+    }
+  },
+  "customization_effects": {
+    "social_reactions": {
+      "formal_wear": {
+        "business_interactions": "+15% success rate",
+        "casual_interactions": "-5% relatability"
+      },
+      "casual_wear": {
+        "community_interactions": "+10% acceptance",
+        "professional_meetings": "-10% credibility"
+      },
+      "work_appropriate": {
+        "job_performance": "+20% efficiency",
+        "customer_satisfaction": "+15% rating"
+      }
+    },
+    "gameplay_bonuses": {
+      "athletic_wear": {
+        "movement_speed": "+5%",
+        "stamina_recovery": "+10%"
+      },
+      "professional_attire": {
+        "negotiation_success": "+10%",
+        "business_income": "+5%"
+      },
+      "local_style": {
+        "community_acceptance": "+15%",
+        "local_knowledge_bonus": "+10%"
+      }
+    }
+  },
+  "character_expressions": {
+    "personality_traits": [
+      {
+        "name": "Confident",
+        "facial_expression": "slight_smile",
+        "posture": "upright_shoulders",
+        "walk_style": "purposeful_stride"
+      },
+      {
+        "name": "Humble",
+        "facial_expression": "gentle_demeanor",
+        "posture": "relaxed_shoulders", 
+        "walk_style": "measured_pace"
+      },
+      {
+        "name": "Ambitious",
+        "facial_expression": "determined_look",
+        "posture": "forward_lean",
+        "walk_style": "quick_steps"
+      },
+      {
+        "name": "Friendly",
+        "facial_expression": "warm_smile",
+        "posture": "open_stance",
+        "walk_style": "approachable_gait"
+      }
+    ]
+  }
+}

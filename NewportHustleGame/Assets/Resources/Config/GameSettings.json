@@ -1,0 +1,278 @@
+{
+  "game_settings": {
+    "version": "1.0.0",
+    "platform_settings": {
+      "mobile": {
+        "target_framerate": 60,
+        "vsync": false,
+        "auto_graphics_quality": true,
+        "touch_controls": true,
+        "accelerometer_controls": false,
+        "haptic_feedback": true
+      },
+      "desktop": {
+        "target_framerate": 60,
+        "vsync": true,
+        "auto_graphics_quality": false,
+        "touch_controls": false,
+        "keyboard_mouse": true,
+        "controller_support": true
+      }
+    }
+  },
+  "graphics_settings": {
+    "quality_levels": {
+      "low": {
+        "texture_quality": "quarter",
+        "shadow_quality": "disabled",
+        "anti_aliasing": "disabled",
+        "post_processing": "minimal",
+        "particle_effects": "reduced",
+        "view_distance": "short"
+      },
+      "medium": {
+        "texture_quality": "half",
+        "shadow_quality": "low",
+        "anti_aliasing": "fxaa",
+        "post_processing": "standard",
+        "particle_effects": "standard",
+        "view_distance": "medium"
+      },
+      "high": {
+        "texture_quality": "full",
+        "shadow_quality": "medium",
+        "anti_aliasing": "msaa_2x",
+        "post_processing": "high",
+        "particle_effects": "full",
+        "view_distance": "far"
+      },
+      "ultra": {
+        "texture_quality": "full",
+        "shadow_quality": "high",
+        "anti_aliasing": "msaa_4x",
+        "post_processing": "ultra",
+        "particle_effects": "enhanced",
+        "view_distance": "maximum"
+      }
+    }
+  },
+  "audio_settings": {
+    "master_volume": 1.0,
+    "music_volume": 0.8,
+    "sfx_volume": 0.9,
+    "voice_volume": 1.0,
+    "ambient_volume": 0.7,
+    "audio_quality": {
+      "sample_rate": 44100,
+      "bit_depth": 16,
+      "compression": "mp3",
+      "spatial_audio": true
+    },
+    "newport_audio": {
+      "river_ambience": true,
+      "small_town_atmosphere": true,
+      "arkansas_accents": true,
+      "period_appropriate_music": true
+    }
+  },
+  "control_settings": {
+    "mobile_controls": {
+      "virtual_joystick": {
+        "enabled": true,
+        "size": "medium",
+        "opacity": 0.8,
+        "position": "bottom_left",
+        "dead_zone": 0.1
+      },
+      "touch_buttons": {
+        "jump": {
+          "enabled": true,
+          "position": "bottom_right",
+          "size": "large"
+        },
+        "interact": {
+          "enabled": true,
+          "position": "center_right",
+          "size": "medium"
+        },
+        "sprint": {
+          "enabled": true,
+          "position": "bottom_center",
+          "size": "medium"
+        },
+        "menu": {
+          "enabled": true,
+          "position": "top_right",
+          "size": "small"
+        }
+      },
+      "touch_sensitivity": {
+        "look": 2.0,
+        "move": 1.0,
+        "ui": 1.0
+      },
+      "haptic_feedback": {
+        "enabled": true,
+        "intensity": 0.7,
+        "events": ["button_press", "collision", "pickup", "notification"]
+      }
+    },
+    "keyboard_controls": {
+      "movement": {
+        "forward": "W",
+        "backward": "S", 
+        "left": "A",
+        "right": "D",
+        "jump": "Space",
+        "sprint": "LeftShift",
+        "walk": "LeftControl"
+      },
+      "interaction": {
+        "interact": "E",
+        "alternative_interact": "F",
+        "menu": "Escape",
+        "inventory": "Tab",
+        "map": "M"
+      },
+      "camera": {
+        "mouse_sensitivity": 2.0,
+        "invert_y": false,
+        "smooth_mouse": true
+      }
+    }
+  },
+  "gameplay_settings": {
+    "difficulty": {
+      "story_mode": {
+        "combat_difficulty": "easy",
+        "economic_pressure": "low",
+        "time_pressure": "relaxed",
+        "skill_requirements": "forgiving"
+      },
+      "normal": {
+        "combat_difficulty": "medium",
+        "economic_pressure": "medium",
+        "time_pressure": "moderate",
+        "skill_requirements": "standard"
+      },
+      "realistic": {
+        "combat_difficulty": "hard",
+        "economic_pressure": "high",
+        "time_pressure": "strict",
+        "skill_requirements": "demanding"
+      }
+    },
+    "accessibility": {
+      "colorblind_support": true,
+      "subtitle_options": {
+        "enabled": true,
+        "size": "medium",
+        "background": true,
+        "speaker_names": true
+      },
+      "ui_scaling": {
+        "enabled": true,
+        "options": ["small", "medium", "large", "extra_large"]
+      },
+      "button_remapping": true,
+      "hold_to_toggle": true,
+      "simplified_controls": false
+    },
+    "auto_save": {
+      "enabled": true,
+      "frequency": 300,
+      "max_saves": 5,
+      "save_on_mission_complete": true,
+      "save_on_zone_change": true
+    }
+  },
+  "newport_specific_settings": {
+    "local_features": {
+      "arkansas_dialect": {
+        "enabled": true,
+        "intensity": "moderate",
+        "vocabulary": "authentic",
+        "pronunciation": "subtle"
+      },
+      "seasonal_changes": {
+        "enabled": true,
+        "weather_patterns": "arkansas_climate",
+        "river_conditions": "realistic",
+        "tourist_seasons": true
+      },
+      "time_cycle": {
+        "day_length_minutes": 24,
+        "weather_frequency": "moderate",
+        "business_hours": "realistic",
+        "community_events": true
+      }
+    },
+    "cultural_authenticity": {
+      "southern_hospitality": true,
+      "small_town_gossip": true,
+      "community_involvement": "high",
+      "family_connections": "emphasized",
+      "local_pride": true
+    }
+  },
+  "monetization": {
+    "model": "premium",
+    "price_point": "$4.99",
+    "dlc_planned": false,
+    "cosmetic_options": {
+      "character_customization": "included",
+      "clothing_options": "earned_ingame",
+      "vehicle_customization": "basic_included"
+    },
+    "no_pay_to_win": true,
+    "no_energy_systems": true,
+    "no_loot_boxes": true
+  },
+  "performance_targets": {
+    "mobile": {
+      "min_fps": 30,
+      "target_fps": 60,
+      "max_ram_usage": "1GB",
+      "battery_efficiency": "optimized",
+      "loading_times": "under_10_seconds"
+    },
+    "desktop": {
+      "min_fps": 60,
+      "target_fps": 60,
+      "max_ram_usage": "2GB",
+      "loading_times": "under_5_seconds"
+    }
+  },
+  "save_data": {
+    "cloud_save": {
+      "enabled": true,
+      "platform": "platform_specific",
+      "encryption": true,
+      "sync_frequency": "on_close"
+    },
+    "local_save": {
+      "backup_count": 3,
+      "compression": true,
+      "validation": true
+    },
+    "data_categories": {
+      "progress": "missions, character_stats, unlocks",
+      "preferences": "settings, customization, keybinds",
+      "social": "relationships, reputation, community_standing",
+      "world": "discovered_locations, completed_events, time_state"
+    }
+  },
+  "privacy_settings": {
+    "data_collection": {
+      "analytics": "opt_in",
+      "crash_reports": "anonymous_only",
+      "user_preferences": "local_only",
+      "no_personal_data": true
+    },
+    "third_party": {
+      "advertising": false,
+      "social_features": "optional",
+      "cloud_services": "platform_only"
+    }
+  }
+}
