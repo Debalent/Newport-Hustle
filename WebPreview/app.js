@@ -1,5 +1,5 @@
-﻿/**
- * Newport Hustle ΓÇö UI Engine
+/**
+ * Newport Hustle — UI Engine
  * -------------------------------------------------------
  * Responsibilities:
  *   1. Screen navigation (transition system)
@@ -37,9 +37,11 @@
      DOM REFS
   ------------------------------------------------------- */
   const muteBtn = document.getElementById('mute-btn');
+  const bgMusic = document.getElementById('bg-music');
 
   /* -------------------------------------------------------
-     WEB AUDIO MUSIC SYSTEM  (no audio files needed)
+     WEB AUDIO FALLBACK SYSTEM
+     Used only if the actual audio file fails to load.
   ------------------------------------------------------- */
   var audioCtx    = null;
   var masterGain  = null;
@@ -206,17 +208,24 @@
   function startMusic() {
     if (state.musicStarted) return;
     state.musicStarted = true;
-    _initAudio();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    nextBarTime = audioCtx.currentTime + 0.05;
-    barIndex    = 0;
-    loopTimer   = setInterval(_scheduler, 100);
-    _scheduler();
+    if (bgMusic) {
+      // Primary: play the actual audio file
+      bgMusic.volume = state.musicMuted ? 0 : state.musicVolume;
+      bgMusic.play().catch(() => {
+        // File failed (e.g. local dev) — fall back to synthesizer
+        _startSynth();
+      });
+    } else {
+      _startSynth();
+    }
   }
 
   function toggleMute() {
     state.musicMuted = !state.musicMuted;
-    if (masterGain) {
+    if (bgMusic) {
+      bgMusic.volume = state.musicMuted ? 0 : state.musicVolume;
+    }
+    if (masterGain && audioCtx) {
       masterGain.gain.setTargetAtTime(
         state.musicMuted ? 0 : state.musicVolume * 0.5,
         audioCtx.currentTime, 0.15
@@ -226,8 +235,18 @@
     updateMuteBtn();
   }
 
+  // Web Audio fallback (synth beat)
+  function _startSynth() {
+    _initAudio();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    nextBarTime = audioCtx.currentTime + 0.05;
+    barIndex    = 0;
+    loopTimer   = setInterval(_scheduler, 100);
+    _scheduler();
+  }
+
   function updateMuteBtn() {
-    muteBtn.textContent = state.musicMuted ? '≡ƒöç' : '≡ƒöè';
+    muteBtn.textContent = state.musicMuted ? '🔇' : '🔊';
     muteBtn.setAttribute('aria-label', state.musicMuted ? 'Unmute Music' : 'Mute Music');
   }
 
@@ -235,9 +254,9 @@
      SPLASH BOOT TEXT
   ------------------------------------------------------- */
   const BOOT_LINES = [
-    'HustleOSΓäó v4.20 ΓÇö Initializing...',
+    'HustleOS™ v4.20 — Initializing...',
     'Loading street credentials...',
-    'Validating sidewalk license... Γ£ô',
+    'Validating sidewalk license... ✔',
     'Checking respect levels: ZERO',
     'Installing swagger patches...',
     'WARNING: Side-hustle detected.',
@@ -427,8 +446,8 @@
     if (head)   head.style.background = state.character.skin;
     if (outfit) {
       outfit.style.background = state.character.outfitColor;
-      const icons = { hustler: '≡ƒöÑ', corporate: '≡ƒÆ╝', influencer: '≡ƒô▒', chaos: '≡ƒÆÑ' };
-      outfit.textContent = icons[state.character.outfit] ?? '≡ƒöÑ';
+      const icons = { hustler: '🔥', corporate: '💼', influencer: '📱', chaos: '💥' };
+      outfit.textContent = icons[state.character.outfit] ?? '🔥';
     }
     if (nameEl)  nameEl.textContent  = state.character.name  || 'Your Name';
     if (traitEl) traitEl.textContent = state.character.trait || 'Pick Your Vibe';
@@ -446,7 +465,7 @@
      SETTINGS
   ------------------------------------------------------- */
   function initSettings() {
-    // Range sliders ΓÇö live value display
+    // Range sliders — live value display
     const sliders = [
       { inputId: 'vol-master', valueId: 'val-master' },
       { inputId: 'vol-music',  valueId: 'val-music' },
@@ -459,10 +478,11 @@
       if (!input || !label) return;
       input.addEventListener('input', () => {
         label.textContent = input.value;
-        if (inputId === 'vol-music' && music) {
-          music.volume = input.value / 100;
-          state.musicVolume = music.volume;
-          localStorage.setItem('nh_vol', String(music.volume));
+        if (inputId === 'vol-music' && bgMusic) {
+          const vol = input.value / 100;
+          state.musicVolume = vol;
+          bgMusic.volume = state.musicMuted ? 0 : vol;
+          localStorage.setItem('nh_vol', String(vol));
         }
       });
     });

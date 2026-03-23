@@ -1,5 +1,5 @@
-﻿/* =============================================================
-   NEWPORT HUSTLE ΓÇö DESIGN SYSTEM
+/* =============================================================
+   NEWPORT HUSTLE — DESIGN SYSTEM
    Mobile-first. Urban Comic-Book Satire.
    ============================================================= */
 
@@ -14,7 +14,7 @@
   --bg-card:       #18181d;
   --bg-raised:     #222228;
   --bg-elevated:   #2c2c34;
-  --accent-lime:   #e8ff42;     /* Electric Lime ΓÇö primary CTA */
+  --accent-lime:   #e8ff42;     /* Electric Lime — primary CTA */
   --accent-cyan:   #4ecdc4;     /* Corporate teal */
   --accent-pink:   #ff6b9d;     /* Influencer pink */
   --accent-red:    #f94144;     /* Danger / Chaos */
@@ -97,7 +97,7 @@ body {
 #app {
   width: 100%;
   max-width: 440px;
-  height: 100dvh;         /* dvh = dynamic viewport height ΓÇö best for mobile */
+  height: 100dvh;         /* dvh = dynamic viewport height — best for mobile */
   max-height: 900px;
   background: var(--bg-base);
   position: relative;
@@ -329,7 +329,7 @@ body {
   animation: fadeIn 1.2s ease;
 }
 
-/* SVG logo ΓÇö replaces the plain text h1 logo */
+/* SVG logo — replaces the plain text h1 logo */
 .logo-svg {
   width: 100%;
   max-width: 300px;
@@ -438,7 +438,7 @@ body {
   flex-shrink: 0;
 }
 
-/* Primary ΓÇö Lime CTA */
+/* Primary — Lime CTA */
 .btn--primary {
   background: var(--accent-lime);
   color: #000;
@@ -504,13 +504,13 @@ body {
   line-height: 1.5;
 }
 
-/* Mobile-only primary CTA ΓÇö hidden on desktop */
+/* Mobile-only primary CTA — hidden on desktop */
 .menu-cta {
   max-width: 340px;
   width: 100%;
 }
 
-/* Hamburger button ΓÇö mobile only, hidden on desktop via media query */
+/* Hamburger button — mobile only, hidden on desktop via media query */
 .hamburger-btn {
   position: absolute;
   top: var(--space-md);
@@ -774,7 +774,7 @@ body {
 }
 
 .list-item--selected .list-item__title::before {
-  content: 'Γû╢';
+  content: '▶';
   font-size: 0.7rem;
   color: var(--accent-lime);
 }
@@ -916,7 +916,7 @@ body {
 .swatch:hover     { transform: scale(1.15); }
 .swatch--active   { border-color: var(--text-primary) !important; transform: scale(1.15); box-shadow: 0 0 10px rgba(255,255,255,0.4); }
 
-/* Skin tone palette ΓÇö defined in CSS, referenced via data-skin in JS */
+/* Skin tone palette — defined in CSS, referenced via data-skin in JS */
 .swatch--skin-1 { background: #f5cba7; }
 .swatch--skin-2 { background: #e8a87c; }
 .swatch--skin-3 { background: #c68642; }
@@ -1297,7 +1297,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 /* ---------------------------------------------------------------
-   MOBILE (small phone ΓÇö full bleed)
+   MOBILE (small phone — full bleed)
 --------------------------------------------------------------- */
 @media (max-width: 480px) {
   body { padding: 0; align-items: stretch; }
@@ -1317,7 +1317,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 /* ---------------------------------------------------------------
-   TABLET ΓÇö 768px+
+   TABLET — 768px+
    Show #app as a centered phone-like card
 --------------------------------------------------------------- */
 @media (min-width: 768px) {
@@ -1346,7 +1346,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 /* ---------------------------------------------------------------
-   DESKTOP ΓÇö 1024px+
+   DESKTOP — 1024px+
    Split layout: left sidebar branding + right content panel
 --------------------------------------------------------------- */
 @media (min-width: 1024px) {
@@ -1503,7 +1503,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 /* ---------------------------------------------------------------
-   WIDE DESKTOP ΓÇö 1440px+
+   WIDE DESKTOP — 1440px+
 --------------------------------------------------------------- */
 @media (min-width: 1440px) {
   #app {

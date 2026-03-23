@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -13,7 +13,7 @@
   <div id="app">
 
     <!-- ============================================================
-         SVG DEFS ΓÇö Logo symbol reused on Splash + Menu
+         SVG DEFS — Logo symbol reused on Splash + Menu
     ============================================================ -->
     <svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
       <defs>
@@ -43,26 +43,26 @@
     </svg>
 
     <!-- ============================================================
-         MOBILE NAV DRAWER (global overlay ΓÇö above all screens)
+         MOBILE NAV DRAWER (global overlay — above all screens)
     ============================================================ -->
     <div class="nav-drawer" id="nav-drawer" aria-hidden="true">
       <div class="nav-drawer__backdrop" id="nav-drawer-backdrop"></div>
       <div class="nav-drawer__panel">
         <div class="nav-drawer__header">
           <span class="nav-drawer__title">Where to?</span>
-          <button class="nav-drawer__close" id="nav-drawer-close" aria-label="Close Menu" title="Close Menu">Γ£ò</button>
+          <button class="nav-drawer__close" id="nav-drawer-close" aria-label="Close Menu" title="Close Menu">✕</button>
         </div>
         <nav class="nav-drawer__nav" aria-label="Game Navigation">
           <button class="btn btn--xl" data-target="screen-character-creator" title="Character Creator">
-            <span class="btn__icon" aria-hidden="true">≡ƒºæ</span>
+            <span class="btn__icon" aria-hidden="true">🧑</span>
             <span class="btn__label">Character Creator</span>
           </button>
           <button class="btn btn--xl" data-target="screen-story-select" title="Story Mode">
-            <span class="btn__icon" aria-hidden="true">≡ƒôû</span>
+            <span class="btn__icon" aria-hidden="true">📖</span>
             <span class="btn__label">Story Mode</span>
           </button>
           <button class="btn btn--xl" data-target="screen-settings" title="Settings">
-            <span class="btn__icon" aria-hidden="true">ΓÜÖ∩╕Å</span>
+            <span class="btn__icon" aria-hidden="true">⚙️</span>
             <span class="btn__label">Settings</span>
           </button>
         </nav>
@@ -95,10 +95,10 @@
           <svg class="logo-svg" aria-label="Newport Hustle" role="img"><use href="#logo-symbol"/></svg>
           <p class="logo-subline">The City Don't Sleep. Neither Do You.</p>
         </div>
-        <p class="tagline" id="boot-text">HustleOSΓäó v4.20 ΓÇö Initializing...</p>
+        <p class="tagline" id="boot-text">HustleOS™ v4.20 — Initializing...</p>
         <button class="btn btn--primary btn--xl" data-target="screen-main-menu" title="Begin">
           <span class="btn__label">Tap to Begin</span>
-          <span class="btn__icon" aria-hidden="true">Γû╢</span>
+          <span class="btn__icon" aria-hidden="true">▶</span>
         </button>
       </div>
     </section>
@@ -111,7 +111,7 @@
         <div class="menu-bg__city"></div>
       </div>
 
-      <!-- Hamburger ΓÇö visible on mobile only, controlled via CSS -->
+      <!-- Hamburger — visible on mobile only, controlled via CSS -->
       <button class="hamburger-btn" id="hamburger-btn" aria-label="Open Menu" aria-expanded="false" title="Open Menu">
         <span class="hamburger-btn__bar"></span>
         <span class="hamburger-btn__bar"></span>
@@ -121,36 +121,36 @@
       <div class="screen__content screen__content--center">
         <div class="logo-block logo-block--compact">
           <svg class="logo-svg" aria-label="Newport Hustle" role="img"><use href="#logo-symbol"/></svg>
-          <p class="logo-subline">Newport, AR ΓÇö Population: Your Problem</p>
+          <p class="logo-subline">Newport, AR — Population: Your Problem</p>
         </div>
 
         <!-- Mobile only: single primary CTA (hamburger handles the rest) -->
         <button class="btn btn--primary btn--xl menu-cta" data-target="screen-missions" title="Start Game">
-          <span class="btn__icon" aria-hidden="true">≡ƒÄ«</span>
+          <span class="btn__icon" aria-hidden="true">🎮</span>
           <span class="btn__label">Start Game</span>
         </button>
 
         <!-- Desktop only: full nav stack -->
         <nav class="menu-nav" aria-label="Main Menu">
           <button class="btn btn--primary btn--xl" data-target="screen-missions" title="Start Game">
-            <span class="btn__icon" aria-hidden="true">≡ƒÄ«</span>
+            <span class="btn__icon" aria-hidden="true">🎮</span>
             <span class="btn__label">Start Game</span>
           </button>
           <button class="btn btn--xl" data-target="screen-character-creator" title="Create Your Character">
-            <span class="btn__icon" aria-hidden="true">≡ƒºæ</span>
+            <span class="btn__icon" aria-hidden="true">🧑</span>
             <span class="btn__label">Character Creator</span>
           </button>
           <button class="btn btn--xl" data-target="screen-story-select" title="Choose Your Story">
-            <span class="btn__icon" aria-hidden="true">≡ƒôû</span>
+            <span class="btn__icon" aria-hidden="true">📖</span>
             <span class="btn__label">Story Mode</span>
           </button>
           <button class="btn btn--xl" data-target="screen-settings" title="Settings">
-            <span class="btn__icon" aria-hidden="true">ΓÜÖ∩╕Å</span>
+            <span class="btn__icon" aria-hidden="true">⚙️</span>
             <span class="btn__label">Settings</span>
           </button>
         </nav>
 
-        <p class="menu-footer-text" aria-label="Warning">ΓÜá∩╕Å Side effects of playing include: overconfidence, accidental swagger, and calling people "fam".</p>
+        <p class="menu-footer-text" aria-label="Warning">⚠️ Side effects of playing include: overconfidence, accidental swagger, and calling people "fam".</p>
       </div>
     </section>
 
@@ -160,7 +160,7 @@
     <section class="screen" id="screen-character-creator">
       <header class="top-bar">
         <button class="top-bar__back" data-target="screen-main-menu" aria-label="Back to Main Menu" title="Back">
-          <span aria-hidden="true">ΓåÉ</span>
+          <span aria-hidden="true">←</span>
         </button>
         <h2 class="top-bar__title">Character Creator</h2>
         <button class="btn btn--sm btn--accent" id="btn-save-character" title="Save Character" aria-label="Save Character">Done</button>
@@ -207,19 +207,19 @@
             <legend class="creator-section__title">Outfit</legend>
             <div class="outfit-grid" id="outfit-swatches" role="radiogroup" aria-label="Outfit">
               <button class="outfit-card outfit-card--active" data-outfit="hustler" data-color="#e8ff42" title="Street Hustler" aria-label="Street Hustler outfit">
-                <span class="outfit-card__icon">≡ƒöÑ</span>
+                <span class="outfit-card__icon">🔥</span>
                 <span class="outfit-card__label">Hustler</span>
               </button>
               <button class="outfit-card" data-outfit="corporate" data-color="#4ecdc4" title="Corporate" aria-label="Corporate outfit">
-                <span class="outfit-card__icon">≡ƒÆ╝</span>
+                <span class="outfit-card__icon">💼</span>
                 <span class="outfit-card__label">Corporate</span>
               </button>
               <button class="outfit-card" data-outfit="influencer" data-color="#ff6b9d" title="Influencer" aria-label="Influencer outfit">
-                <span class="outfit-card__icon">≡ƒô▒</span>
+                <span class="outfit-card__icon">📱</span>
                 <span class="outfit-card__label">Influencer</span>
               </button>
               <button class="outfit-card" data-outfit="chaos" data-color="#f94144" title="Chaos Agent" aria-label="Chaos Agent outfit">
-                <span class="outfit-card__icon">≡ƒÆÑ</span>
+                <span class="outfit-card__icon">💥</span>
                 <span class="outfit-card__label">Chaos</span>
               </button>
             </div>
@@ -248,7 +248,7 @@
     <section class="screen" id="screen-story-select">
       <header class="top-bar">
         <button class="top-bar__back" data-target="screen-main-menu" aria-label="Back to Main Menu" title="Back">
-          <span aria-hidden="true">ΓåÉ</span>
+          <span aria-hidden="true">←</span>
         </button>
         <h2 class="top-bar__title">Choose Your Path</h2>
       </header>
@@ -258,7 +258,7 @@
         <div class="story-grid" id="story-grid" role="list" aria-label="Story Modes">
 
           <article class="story-card story-card--active" data-story="hustler" role="listitem" tabindex="0" aria-label="Street Hustler story">
-            <div class="story-card__badge" aria-hidden="true">≡ƒöÑ</div>
+            <div class="story-card__badge" aria-hidden="true">🔥</div>
             <div class="story-card__body">
               <h3 class="story-card__title">Street Hustler</h3>
               <p class="story-card__desc">Work corners, stack paper, and learn that family is complicated. A classic coming-up story with questionable decisions.</p>
@@ -267,7 +267,7 @@
           </article>
 
           <article class="story-card" data-story="corporate" role="listitem" tabindex="0" aria-label="Corporate Snake story">
-            <div class="story-card__badge" aria-hidden="true">≡ƒÆ╝</div>
+            <div class="story-card__badge" aria-hidden="true">💼</div>
             <div class="story-card__body">
               <h3 class="story-card__title">Corporate Snake</h3>
               <p class="story-card__desc">Take the legal route. Wear khakis. Attend meetings. Slowly sell your soul at a competitive market rate.</p>
@@ -276,7 +276,7 @@
           </article>
 
           <article class="story-card" data-story="influencer" role="listitem" tabindex="0" aria-label="Influencer Gone Wrong story">
-            <div class="story-card__badge" aria-hidden="true">≡ƒô▒</div>
+            <div class="story-card__badge" aria-hidden="true">📱</div>
             <div class="story-card__body">
               <h3 class="story-card__title">Influencer Gone Wrong</h3>
               <p class="story-card__desc">Go viral or go home. Build a brand, accept sponsorships from suspicious companies, and keep smiling for the camera.</p>
@@ -285,7 +285,7 @@
           </article>
 
           <article class="story-card" data-story="chaos" role="listitem" tabindex="0" aria-label="Chaos Mode story">
-            <div class="story-card__badge" aria-hidden="true">≡ƒÆÑ</div>
+            <div class="story-card__badge" aria-hidden="true">💥</div>
             <div class="story-card__body">
               <h3 class="story-card__title">Chaos Mode</h3>
               <p class="story-card__desc">No plan. No rules. No regrets. Maximum yield on disorder. NPCs will fear you. The police will question their career choices.</p>
@@ -296,7 +296,7 @@
         </div>
       </div>
       <footer class="screen__footer">
-        <button class="btn btn--primary btn--xl" id="btn-confirm-story" data-target="screen-missions" title="Confirm Story Choice">Lock It In Γ£à</button>
+        <button class="btn btn--primary btn--xl" id="btn-confirm-story" data-target="screen-missions" title="Confirm Story Choice">Lock It In ✅</button>
       </footer>
     </section>
 
@@ -306,7 +306,7 @@
     <section class="screen" id="screen-missions">
       <header class="top-bar">
         <button class="top-bar__back" data-target="screen-main-menu" aria-label="Back to Main Menu" title="Back">
-          <span aria-hidden="true">ΓåÉ</span>
+          <span aria-hidden="true">←</span>
         </button>
         <h2 class="top-bar__title">Missions</h2>
       </header>
@@ -317,7 +317,7 @@
         </ul>
       </div>
       <footer class="screen__footer">
-        <button class="btn btn--primary btn--xl" data-target="screen-hud" title="Start Mission" id="btn-start-mission">Start Hustlin' ≡ƒÜÇ</button>
+        <button class="btn btn--primary btn--xl" data-target="screen-hud" title="Start Mission" id="btn-start-mission">Start Hustlin' 🚀</button>
       </footer>
     </section>
 
@@ -327,7 +327,7 @@
     <section class="screen" id="screen-settings">
       <header class="top-bar">
         <button class="top-bar__back" data-target="screen-main-menu" aria-label="Back to Main Menu" title="Back">
-          <span aria-hidden="true">ΓåÉ</span>
+          <span aria-hidden="true">←</span>
         </button>
         <h2 class="top-bar__title">Settings</h2>
       </header>
@@ -376,7 +376,7 @@
 
         <div class="settings-group">
           <h3 class="settings-group__title">Data</h3>
-          <button class="btn btn--danger btn--sm" id="btn-reset-game" title="Reset All Game Data" aria-label="Reset game data">ΓÜá∩╕Å Reset All Data</button>
+          <button class="btn btn--danger btn--sm" id="btn-reset-game" title="Reset All Game Data" aria-label="Reset game data">⚠️ Reset All Data</button>
         </div>
 
       </div>
@@ -390,18 +390,18 @@
       <!-- HUD: Top Bar -->
       <div class="hud-bar hud-bar--top">
         <div class="hud-stat" aria-label="Cash">
-          <span class="hud-stat__icon" aria-hidden="true">≡ƒÆ░</span>
+          <span class="hud-stat__icon" aria-hidden="true">💰</span>
           <span class="hud-stat__value" id="hud-money">$325</span>
         </div>
         <div class="wanted-stars" aria-label="Heat Level: 3 stars">
-          <span class="star star--lit" aria-hidden="true">Γÿà</span>
-          <span class="star star--lit" aria-hidden="true">Γÿà</span>
-          <span class="star star--lit" aria-hidden="true">Γÿà</span>
-          <span class="star" aria-hidden="true">Γÿà</span>
-          <span class="star" aria-hidden="true">Γÿà</span>
+          <span class="star star--lit" aria-hidden="true">★</span>
+          <span class="star star--lit" aria-hidden="true">★</span>
+          <span class="star star--lit" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
         </div>
         <div class="hud-stat" aria-label="Respect">
-          <span class="hud-stat__icon" aria-hidden="true">Γ¡É</span>
+          <span class="hud-stat__icon" aria-hidden="true">⭐</span>
           <span class="hud-stat__value" id="hud-respect">Rep: 10</span>
         </div>
       </div>
@@ -409,14 +409,14 @@
       <!-- HUD: Center (fake world) -->
       <div class="hud-world" aria-hidden="true">
         <div class="hud-world__text">[ IN-GAME VIEW ]</div>
-        <div class="hud-world__subtext">Newport, AR ΓÇö Open World Loading...</div>
+        <div class="hud-world__subtext">Newport, AR — Open World Loading...</div>
       </div>
 
       <!-- HUD: Bottom Bar -->
       <div class="hud-bar hud-bar--bottom">
-        <button class="hud-btn" data-target="screen-map" aria-label="Open Map" title="Map">≡ƒù║∩╕Å</button>
-        <button class="hud-btn hud-btn--center" data-target="screen-missions" aria-label="Missions" title="Missions">≡ƒôï</button>
-        <button class="hud-btn" data-target="screen-pause" aria-label="Pause" title="Pause">ΓÅ╕</button>
+        <button class="hud-btn" data-target="screen-map" aria-label="Open Map" title="Map">🗺️</button>
+        <button class="hud-btn hud-btn--center" data-target="screen-missions" aria-label="Missions" title="Missions">📋</button>
+        <button class="hud-btn" data-target="screen-pause" aria-label="Pause" title="Pause">⏸</button>
       </div>
 
     </section>
@@ -428,10 +428,10 @@
       <div class="screen__content screen__content--center">
         <h2 class="logo logo--pause">Paused</h2>
         <p class="tagline">The streets can wait. Five minutes.</p>
-        <button class="btn btn--primary btn--xl" data-target="screen-hud" title="Resume Game">Γû╢ Resume</button>
-        <button class="btn btn--xl" data-target="screen-missions" title="Mission Select">≡ƒôï Missions</button>
-        <button class="btn btn--xl" data-target="screen-settings" title="Settings">ΓÜÖ∩╕Å Settings</button>
-        <button class="btn btn--danger btn--xl" data-target="screen-main-menu" title="Quit to Menu">≡ƒÜ¬ Quit to Menu</button>
+        <button class="btn btn--primary btn--xl" data-target="screen-hud" title="Resume Game">▶ Resume</button>
+        <button class="btn btn--xl" data-target="screen-missions" title="Mission Select">📋 Missions</button>
+        <button class="btn btn--xl" data-target="screen-settings" title="Settings">⚙️ Settings</button>
+        <button class="btn btn--danger btn--xl" data-target="screen-main-menu" title="Quit to Menu">🚪 Quit to Menu</button>
       </div>
     </section>
 
@@ -441,13 +441,13 @@
     <section class="screen" id="screen-map">
       <header class="top-bar">
         <button class="top-bar__back" data-target="screen-hud" aria-label="Back to Game" title="Back">
-          <span aria-hidden="true">ΓåÉ</span>
+          <span aria-hidden="true">←</span>
         </button>
         <h2 class="top-bar__title">Newport Map</h2>
       </header>
       <div class="screen__content screen__content--center">
         <div class="map-placeholder" aria-label="Map Placeholder">
-          <div class="map-placeholder__icon" aria-hidden="true">≡ƒù║∩╕Å</div>
+          <div class="map-placeholder__icon" aria-hidden="true">🗺️</div>
           <p class="map-placeholder__text">Full map coming in next update.<br>For now, just wander. That's authentic.</p>
         </div>
       </div>
@@ -455,12 +455,19 @@
 
   </div><!-- /#app -->
 
+  <!-- ============================================================
+       AUDIO — "And We Outside" produced by the developer
+  ============================================================ -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="audio/and-we-outside.wav" type="audio/wav">
+  </audio>
+
   <!-- Embedded Mission + Story Data -->
   <script>
     window.NH_MISSIONS = {
       main_story_missions: [
         { missionID: "m01", title: "Welcome Back to Newport", description: "Reacquaint yourself with the city. Try not to cause an incident in the first five minutes.", objectives: ["Explore downtown", "Meet your mentor", "Find a place to stay"] },
-        { missionID: "m02", title: "The Cut", description: "Prove yourself at Barber's Row. Cut hair. Stack tips. Earn respect ΓÇö or at least $50.", objectives: ["Visit Barber's Row", "Complete 3 test haircuts", "Earn $50 in tips"] },
+        { missionID: "m02", title: "The Cut", description: "Prove yourself at Barber's Row. Cut hair. Stack tips. Earn respect — or at least $50.", objectives: ["Visit Barber's Row", "Complete 3 test haircuts", "Earn $50 in tips"] },
         { missionID: "m03", title: "Spa Secrets", description: "The spa district is hiding something. Organic facials don't fund a Ferrari.", objectives: ["Explore the spa district", "Discover the truth about spa finances", "Decide: help or expose?"] },
         { missionID: "m04", title: "Riverfront Reckoning", description: "Everything converges at the White River. Family. History. Factions. Choose your legacy.", objectives: ["Uncover your family's legacy", "Unite Newport factions", "Decide your future role"] }
       ]
