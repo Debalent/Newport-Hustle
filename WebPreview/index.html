@@ -3,165 +3,407 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Newport Hustle – UI Redesign</title>
+  <title>Newport Hustle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div id="app">
+
+    <!-- ============================================================
+         GLOBAL OVERLAYS
+    ============================================================ -->
+
+    <!-- Noise texture overlay for depth -->
+    <div class="noise-overlay" aria-hidden="true"></div>
+
     <!-- Global Audio Controls -->
-    <div class="audio-controls">
-      <button id="mute-btn" class="audio-btn" aria-label="Mute Audio">
-        <!-- SVG will be injected by JS -->
-      </button>
+    <div class="audio-controls" id="audio-controls">
+      <button id="mute-btn" class="audio-btn" aria-label="Toggle Music"></button>
     </div>
 
-    <!-- Splash Screen -->
-    <section class="screen screen--active" id="screen-splash">
+    <!-- ============================================================
+         SCREEN 1: SPLASH
+    ============================================================ -->
+    <section class="screen screen--active" id="screen-splash" role="main">
+      <div class="splash-bg" aria-hidden="true">
+        <div class="splash-bg__grid"></div>
+        <div class="splash-bg__glow"></div>
+      </div>
       <div class="screen__content screen__content--center">
-        <h1 class="logo">Newport Hustle</h1>
-        <p class="tagline">HustleOS™ v4.20 Starting...</p>
-        <button class="btn btn--primary" data-target="screen-main-menu">Tap to Begin</button>
+        <div class="logo-block">
+          <p class="logo-eyebrow">Welcome to</p>
+          <h1 class="logo">Newport<br>Hustle</h1>
+          <p class="logo-subline">The City Don't Sleep. Neither Do You.</p>
+        </div>
+        <p class="tagline" id="boot-text">HustleOS™ v4.20 — Initializing...</p>
+        <button class="btn btn--primary btn--xl" data-target="screen-main-menu" title="Begin">
+          <span class="btn__label">Tap to Begin</span>
+          <span class="btn__icon" aria-hidden="true">▶</span>
+        </button>
       </div>
     </section>
 
-    <!-- Main Menu -->
+    <!-- ============================================================
+         SCREEN 2: MAIN MENU
+    ============================================================ -->
     <section class="screen" id="screen-main-menu">
+      <div class="menu-bg" aria-hidden="true">
+        <div class="menu-bg__city"></div>
+      </div>
       <div class="screen__content screen__content--center">
-        <h1 class="logo">Newport Hustle</h1>
-        <button class="btn btn--primary" data-target="screen-missions">Continue</button>
-        <button class="btn" data-target="screen-missions">New Game</button>
-        <button class="btn" data-target="screen-settings">Settings</button>
+        <div class="logo-block logo-block--compact">
+          <h1 class="logo logo--menu">Newport Hustle</h1>
+          <p class="logo-subline">Newport, AR — Population: Your Problem</p>
+        </div>
+        <nav class="menu-nav" aria-label="Main Menu">
+          <button class="btn btn--primary btn--xl" data-target="screen-missions" title="Start Game">
+            <span class="btn__icon" aria-hidden="true">🎮</span>
+            <span class="btn__label">Start Game</span>
+          </button>
+          <button class="btn btn--xl" data-target="screen-character-creator" title="Create Your Character">
+            <span class="btn__icon" aria-hidden="true">🧑</span>
+            <span class="btn__label">Character Creator</span>
+          </button>
+          <button class="btn btn--xl" data-target="screen-story-select" title="Choose Your Story">
+            <span class="btn__icon" aria-hidden="true">📖</span>
+            <span class="btn__label">Story Mode</span>
+          </button>
+          <button class="btn btn--xl" data-target="screen-settings" title="Settings">
+            <span class="btn__icon" aria-hidden="true">⚙️</span>
+            <span class="btn__label">Settings</span>
+          </button>
+        </nav>
+        <p class="menu-footer-text" aria-label="Warning">⚠️ Side effects of playing include: overconfidence, accidental swagger, and calling people "fam".</p>
       </div>
     </section>
 
-    <!-- Mission Select -->
+    <!-- ============================================================
+         SCREEN 3: CHARACTER CREATOR
+    ============================================================ -->
+    <section class="screen" id="screen-character-creator">
+      <header class="top-bar">
+        <button class="top-bar__back" data-target="screen-main-menu" aria-label="Back to Main Menu" title="Back">
+          <span aria-hidden="true">←</span>
+        </button>
+        <h2 class="top-bar__title">Character Creator</h2>
+        <button class="btn btn--sm btn--accent" id="btn-save-character" title="Save Character" aria-label="Save Character">Done</button>
+      </header>
+
+      <div class="screen__content creator-layout">
+
+        <!-- Left / Top: Preview -->
+        <div class="creator-preview" id="creator-preview">
+          <div class="avatar-display" id="avatar-display" aria-label="Character Preview">
+            <div class="avatar-body" id="avatar-body">
+              <div class="avatar-head" id="avatar-head"></div>
+              <div class="avatar-outfit" id="avatar-outfit"></div>
+            </div>
+          </div>
+          <div class="creator-preview__name" id="preview-name">Your Name</div>
+          <div class="creator-preview__trait" id="preview-trait">Pick Your Vibe</div>
+        </div>
+
+        <!-- Right / Bottom: Options -->
+        <div class="creator-options">
+
+          <!-- Name -->
+          <fieldset class="creator-section">
+            <legend class="creator-section__title">Street Name</legend>
+            <input type="text" id="char-name" class="creator-input" placeholder="e.g. Big Hustle Dave" maxlength="20" aria-label="Enter character name" />
+          </fieldset>
+
+          <!-- Skin Tone -->
+          <fieldset class="creator-section">
+            <legend class="creator-section__title">Complexion</legend>
+            <div class="swatch-grid" id="skin-swatches" role="radiogroup" aria-label="Skin Tone">
+              <button class="swatch swatch--skin swatch--skin-1 swatch--active" data-skin="#f5cba7" title="Light" aria-label="Light skin"></button>
+              <button class="swatch swatch--skin swatch--skin-2" data-skin="#e8a87c" title="Tan" aria-label="Tan skin"></button>
+              <button class="swatch swatch--skin swatch--skin-3" data-skin="#c68642" title="Medium" aria-label="Medium skin"></button>
+              <button class="swatch swatch--skin swatch--skin-4" data-skin="#8d5524" title="Brown" aria-label="Brown skin"></button>
+              <button class="swatch swatch--skin swatch--skin-5" data-skin="#4a2c0a" title="Deep" aria-label="Deep skin"></button>
+              <button class="swatch swatch--skin swatch--skin-6" data-skin="#1a0a00" title="Ebony" aria-label="Ebony skin"></button>
+            </div>
+          </fieldset>
+
+          <!-- Outfit -->
+          <fieldset class="creator-section">
+            <legend class="creator-section__title">Outfit</legend>
+            <div class="outfit-grid" id="outfit-swatches" role="radiogroup" aria-label="Outfit">
+              <button class="outfit-card outfit-card--active" data-outfit="hustler" data-color="#e8ff42" title="Street Hustler" aria-label="Street Hustler outfit">
+                <span class="outfit-card__icon">🔥</span>
+                <span class="outfit-card__label">Hustler</span>
+              </button>
+              <button class="outfit-card" data-outfit="corporate" data-color="#4ecdc4" title="Corporate" aria-label="Corporate outfit">
+                <span class="outfit-card__icon">💼</span>
+                <span class="outfit-card__label">Corporate</span>
+              </button>
+              <button class="outfit-card" data-outfit="influencer" data-color="#ff6b9d" title="Influencer" aria-label="Influencer outfit">
+                <span class="outfit-card__icon">📱</span>
+                <span class="outfit-card__label">Influencer</span>
+              </button>
+              <button class="outfit-card" data-outfit="chaos" data-color="#f94144" title="Chaos Agent" aria-label="Chaos Agent outfit">
+                <span class="outfit-card__icon">💥</span>
+                <span class="outfit-card__label">Chaos</span>
+              </button>
+            </div>
+          </fieldset>
+
+          <!-- Personality -->
+          <fieldset class="creator-section">
+            <legend class="creator-section__title">Personality Trait</legend>
+            <div class="trait-grid" id="trait-swatches" role="radiogroup" aria-label="Personality Trait">
+              <button class="trait-pill trait-pill--active" data-trait="Big Talker" title="Big Talker" aria-label="Big Talker">Big Talker</button>
+              <button class="trait-pill" data-trait="Too Smooth" title="Too Smooth" aria-label="Too Smooth">Too Smooth</button>
+              <button class="trait-pill" data-trait="Naively Brave" title="Naively Brave" aria-label="Naively Brave">Naively Brave</button>
+              <button class="trait-pill" data-trait="Professionally Messy" title="Professionally Messy" aria-label="Professionally Messy">Prof. Messy</button>
+              <button class="trait-pill" data-trait="Chaotic Good" title="Chaotic Good" aria-label="Chaotic Good">Chaotic Good</button>
+              <button class="trait-pill" data-trait="Just Vibing" title="Just Vibing" aria-label="Just Vibing">Just Vibing</button>
+            </div>
+          </fieldset>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SCREEN 4: STORY MODE SELECT
+    ============================================================ -->
+    <section class="screen" id="screen-story-select">
+      <header class="top-bar">
+        <button class="top-bar__back" data-target="screen-main-menu" aria-label="Back to Main Menu" title="Back">
+          <span aria-hidden="true">←</span>
+        </button>
+        <h2 class="top-bar__title">Choose Your Path</h2>
+      </header>
+
+      <div class="screen__content">
+        <p class="screen__subtitle">Every hustle starts with a choice. Pick wrong and it's *your* fault.</p>
+        <div class="story-grid" id="story-grid" role="list" aria-label="Story Modes">
+
+          <article class="story-card story-card--active" data-story="hustler" role="listitem" tabindex="0" aria-label="Street Hustler story">
+            <div class="story-card__badge" aria-hidden="true">🔥</div>
+            <div class="story-card__body">
+              <h3 class="story-card__title">Street Hustler</h3>
+              <p class="story-card__desc">Work corners, stack paper, and learn that family is complicated. A classic coming-up story with questionable decisions.</p>
+              <div class="story-card__tone tone--gritty">Tone: Gritty & Funny</div>
+            </div>
+          </article>
+
+          <article class="story-card" data-story="corporate" role="listitem" tabindex="0" aria-label="Corporate Snake story">
+            <div class="story-card__badge" aria-hidden="true">💼</div>
+            <div class="story-card__body">
+              <h3 class="story-card__title">Corporate Snake</h3>
+              <p class="story-card__desc">Take the legal route. Wear khakis. Attend meetings. Slowly sell your soul at a competitive market rate.</p>
+              <div class="story-card__tone tone--satirical">Tone: Satirical & Dry</div>
+            </div>
+          </article>
+
+          <article class="story-card" data-story="influencer" role="listitem" tabindex="0" aria-label="Influencer Gone Wrong story">
+            <div class="story-card__badge" aria-hidden="true">📱</div>
+            <div class="story-card__body">
+              <h3 class="story-card__title">Influencer Gone Wrong</h3>
+              <p class="story-card__desc">Go viral or go home. Build a brand, accept sponsorships from suspicious companies, and keep smiling for the camera.</p>
+              <div class="story-card__tone tone--absurd">Tone: Absurd Comedy</div>
+            </div>
+          </article>
+
+          <article class="story-card" data-story="chaos" role="listitem" tabindex="0" aria-label="Chaos Mode story">
+            <div class="story-card__badge" aria-hidden="true">💥</div>
+            <div class="story-card__body">
+              <h3 class="story-card__title">Chaos Mode</h3>
+              <p class="story-card__desc">No plan. No rules. No regrets. Maximum yield on disorder. NPCs will fear you. The police will question their career choices.</p>
+              <div class="story-card__tone tone--danger">Tone: Pure Mayhem</div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+      <footer class="screen__footer">
+        <button class="btn btn--primary btn--xl" id="btn-confirm-story" data-target="screen-missions" title="Confirm Story Choice">Lock It In ✅</button>
+      </footer>
+    </section>
+
+    <!-- ============================================================
+         SCREEN 5: MISSION SELECT
+    ============================================================ -->
     <section class="screen" id="screen-missions">
       <header class="top-bar">
-        <button class="top-bar__back" data-target="screen-main-menu">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
+        <button class="top-bar__back" data-target="screen-main-menu" aria-label="Back to Main Menu" title="Back">
+          <span aria-hidden="true">←</span>
         </button>
         <h2 class="top-bar__title">Missions</h2>
       </header>
       <div class="screen__content">
-        <ul class="list" id="mission-list">
+        <p class="screen__subtitle" id="mission-context-text">Choose your next move, boss.</p>
+        <ul class="list" id="mission-list" aria-label="Mission List">
           <!-- Populated by app.js -->
         </ul>
       </div>
       <footer class="screen__footer">
-        <button class="btn btn--primary" data-target="screen-hud">Start Hustlin'</button>
+        <button class="btn btn--primary btn--xl" data-target="screen-hud" title="Start Mission" id="btn-start-mission">Start Hustlin' 🚀</button>
       </footer>
     </section>
 
-    <!-- Settings -->
+    <!-- ============================================================
+         SCREEN 6: SETTINGS
+    ============================================================ -->
     <section class="screen" id="screen-settings">
       <header class="top-bar">
-        <button class="top-bar__back" data-target="screen-main-menu">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
+        <button class="top-bar__back" data-target="screen-main-menu" aria-label="Back to Main Menu" title="Back">
+          <span aria-hidden="true">←</span>
         </button>
         <h2 class="top-bar__title">Settings</h2>
       </header>
       <div class="screen__content">
-        <div class="setting-row">
-          <label for="vol-master">Master Volume</label>
-          <input id="vol-master" type="range" min="0" max="100" value="80" title="Master Volume" />
+
+        <div class="settings-group">
+          <h3 class="settings-group__title">Audio</h3>
+          <div class="setting-row">
+            <label class="setting-row__label" for="vol-master">Master Volume</label>
+            <div class="setting-row__control">
+              <input id="vol-master" type="range" min="0" max="100" value="80" title="Master Volume" aria-label="Master Volume" />
+              <span class="setting-row__value" id="val-master">80</span>
+            </div>
+          </div>
+          <div class="setting-row">
+            <label class="setting-row__label" for="vol-music">Music Volume</label>
+            <div class="setting-row__control">
+              <input id="vol-music" type="range" min="0" max="100" value="70" title="Music Volume" aria-label="Music Volume" />
+              <span class="setting-row__value" id="val-music">70</span>
+            </div>
+          </div>
+          <div class="setting-row">
+            <label class="setting-row__label" for="vol-sfx">SFX Volume</label>
+            <div class="setting-row__control">
+              <input id="vol-sfx" type="range" min="0" max="100" value="90" title="SFX Volume" aria-label="SFX Volume" />
+              <span class="setting-row__value" id="val-sfx">90</span>
+            </div>
+          </div>
         </div>
-        <div class="setting-row">
-          <label for="vol-music">Music Volume</label>
-          <input id="vol-music" type="range" min="0" max="100" value="70" title="Music Volume" />
+
+        <div class="settings-group">
+          <h3 class="settings-group__title">Game</h3>
+          <div class="setting-row setting-row--toggle">
+            <label class="setting-row__label" for="toggle-vibration">Controller Vibration</label>
+            <button class="toggle-btn toggle-btn--on" id="toggle-vibration" role="switch" aria-checked="true" aria-label="Toggle Vibration" title="Toggle Vibration">ON</button>
+          </div>
+          <div class="setting-row setting-row--toggle">
+            <label class="setting-row__label" for="toggle-hints">HUD Hints</label>
+            <button class="toggle-btn toggle-btn--on" id="toggle-hints" role="switch" aria-checked="true" aria-label="Toggle HUD Hints" title="Toggle HUD Hints">ON</button>
+          </div>
+          <div class="setting-row setting-row--toggle">
+            <label class="setting-row__label" for="toggle-satire">Satire Mode</label>
+            <button class="toggle-btn toggle-btn--on" id="toggle-satire" role="switch" aria-checked="true" aria-label="Toggle Satire Mode" title="Toggle Satire Mode">MAX</button>
+          </div>
         </div>
-        <div class="setting-row">
-          <label for="vol-sfx">SFX Volume</label>
-          <input id="vol-sfx" type="range" min="0" max="100" value="90" title="SFX Volume" />
+
+        <div class="settings-group">
+          <h3 class="settings-group__title">Data</h3>
+          <button class="btn btn--danger btn--sm" id="btn-reset-game" title="Reset All Game Data" aria-label="Reset game data">⚠️ Reset All Data</button>
         </div>
+
       </div>
     </section>
 
-    <!-- HUD Preview -->
+    <!-- ============================================================
+         SCREEN 7: HUD (In-Game)
+    ============================================================ -->
     <section class="screen" id="screen-hud">
+
+      <!-- HUD: Top Bar -->
       <div class="hud-bar hud-bar--top">
-        <div class="hud-stat">
+        <div class="hud-stat" aria-label="Cash">
+          <span class="hud-stat__icon" aria-hidden="true">💰</span>
           <span class="hud-stat__value" id="hud-money">$325</span>
         </div>
-        <div class="wanted-stars" aria-label="Heat Level">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        <div class="wanted-stars" aria-label="Heat Level: 3 stars">
+          <span class="star star--lit" aria-hidden="true">★</span>
+          <span class="star star--lit" aria-hidden="true">★</span>
+          <span class="star star--lit" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
         </div>
-        <div class="hud-stat">
-          <span class="hud-stat__value" id="hud-respect">Respect: 10</span>
+        <div class="hud-stat" aria-label="Respect">
+          <span class="hud-stat__icon" aria-hidden="true">⭐</span>
+          <span class="hud-stat__value" id="hud-respect">Rep: 10</span>
         </div>
       </div>
 
+      <!-- HUD: Center (fake world) -->
+      <div class="hud-world" aria-hidden="true">
+        <div class="hud-world__text">[ IN-GAME VIEW ]</div>
+        <div class="hud-world__subtext">Newport, AR — Open World Loading...</div>
+      </div>
+
+      <!-- HUD: Bottom Bar -->
       <div class="hud-bar hud-bar--bottom">
-        <div class="hud-actions">
-          <button class="hud-btn" data-target="screen-map" aria-label="Open Map">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.8242C12 20.8242 19.5 16.3242 19.5 10.3242C19.5 6.32422 16.125 3.32422 12 3.32422C7.875 3.32422 4.5 6.32422 4.5 10.3242C4.5 16.3242 12 20.8242 12 20.8242ZM12 12.8242C13.3807 12.8242 14.5 11.7049 14.5 10.3242C14.5 8.94355 13.3807 7.82422 12 7.82422C10.6193 7.82422 9.5 8.94355 9.5 10.3242C9.5 11.7049 10.6193 12.8242 12 12.8242Z"></path></svg>
-          </button>
-        </div>
-        <div class="hud-actions">
-          <button class="hud-btn" data-target="screen-pause" aria-label="Pause">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 5H8V19H6V5ZM16 5H18V19H16V5Z"></path></svg>
-          </button>
+        <button class="hud-btn" data-target="screen-map" aria-label="Open Map" title="Map">🗺️</button>
+        <button class="hud-btn hud-btn--center" data-target="screen-missions" aria-label="Missions" title="Missions">📋</button>
+        <button class="hud-btn" data-target="screen-pause" aria-label="Pause" title="Pause">⏸</button>
+      </div>
+
+    </section>
+
+    <!-- ============================================================
+         SCREEN 8: PAUSE MENU
+    ============================================================ -->
+    <section class="screen" id="screen-pause">
+      <div class="screen__content screen__content--center">
+        <h2 class="logo logo--pause">Paused</h2>
+        <p class="tagline">The streets can wait. Five minutes.</p>
+        <button class="btn btn--primary btn--xl" data-target="screen-hud" title="Resume Game">▶ Resume</button>
+        <button class="btn btn--xl" data-target="screen-missions" title="Mission Select">📋 Missions</button>
+        <button class="btn btn--xl" data-target="screen-settings" title="Settings">⚙️ Settings</button>
+        <button class="btn btn--danger btn--xl" data-target="screen-main-menu" title="Quit to Menu">🚪 Quit to Menu</button>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SCREEN 9: MAP (Placeholder)
+    ============================================================ -->
+    <section class="screen" id="screen-map">
+      <header class="top-bar">
+        <button class="top-bar__back" data-target="screen-hud" aria-label="Back to Game" title="Back">
+          <span aria-hidden="true">←</span>
+        </button>
+        <h2 class="top-bar__title">Newport Map</h2>
+      </header>
+      <div class="screen__content screen__content--center">
+        <div class="map-placeholder" aria-label="Map Placeholder">
+          <div class="map-placeholder__icon" aria-hidden="true">🗺️</div>
+          <p class="map-placeholder__text">Full map coming in next update.<br>For now, just wander. That's authentic.</p>
         </div>
       </div>
     </section>
-    
-    <!-- Other screens remain the same for now -->
 
-  </div>
+  </div><!-- /#app -->
 
-  <audio id="bg-music" loop src="../NewportHustleGame/Assets/Audio/Music/And we outside.wav"></audio>
-  <audio id="sfx-click" src="path/to/your/click.wav"></audio>
-  <audio id="sfx-whoosh" src="path/to/your/whoosh.wav"></audio>
+  <!-- ============================================================
+       AUDIO (hidden)
+  ============================================================ -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="../NewportHustleGame/Assets/Audio/Music/And we outside.wav" type="audio/wav">
+  </audio>
 
+  <!-- Embedded Mission + Story Data -->
   <script>
-    // Embedded mission data (mirrors Config/MissionData.json main_story_missions)
     window.NH_MISSIONS = {
       main_story_missions: [
-        {
-          missionID: "mission_01_welcome_back",
-          title: "Welcome Back to Newport",
-          description: "Return to Newport, Arkansas and reacquaint yourself with the town and its people.",
-          objectives: [
-            "Explore downtown Newport",
-            "Meet with your old mentor",
-            "Visit the White River waterfront",
-            "Find a place to stay"
-          ]
-        },
-        {
-          missionID: "mission_02_the_cut",
-          title: "The Cut",
-          description: "Prove yourself in Newport's barbershop scene by earning the respect of the community.",
-          objectives: [
-            "Visit Barber's Row on Main Street",
-            "Meet the head barber",
-            "Complete 3 test haircuts",
-            "Earn $50 in tips"
-          ]
-        },
-        {
-          missionID: "mission_03_spa_secrets",
-          title: "Spa Secrets",
-          description: "Navigate the modern wellness industry while uncovering secrets in Newport's spa district.",
-          objectives: [
-            "Explore the spa district",
-            "Meet the spa owner",
-            "Discover the truth about spa finances",
-            "Decide whether to help or expose the spa"
-          ]
-        },
-        {
-          missionID: "mission_04_riverfront_reckoning",
-          title: "Riverfront Reckoning",
-          description: "Climactic confrontation by the White River that shapes Newport's future.",
-          objectives: [
-            "Uncover the truth about your family's Newport legacy",
-            "Face the consequences of family history",
-            "Bring together different factions of Newport",
-            "Decide your role in Newport's future"
-          ]
-        }
+        { missionID: "m01", title: "Welcome Back to Newport", description: "Reacquaint yourself with the city. Try not to cause an incident in the first five minutes.", objectives: ["Explore downtown", "Meet your mentor", "Find a place to stay"] },
+        { missionID: "m02", title: "The Cut", description: "Prove yourself at Barber's Row. Cut hair. Stack tips. Earn respect — or at least $50.", objectives: ["Visit Barber's Row", "Complete 3 test haircuts", "Earn $50 in tips"] },
+        { missionID: "m03", title: "Spa Secrets", description: "The spa district is hiding something. Organic facials don't fund a Ferrari.", objectives: ["Explore the spa district", "Discover the truth about spa finances", "Decide: help or expose?"] },
+        { missionID: "m04", title: "Riverfront Reckoning", description: "Everything converges at the White River. Family. History. Factions. Choose your legacy.", objectives: ["Uncover your family's legacy", "Unite Newport factions", "Decide your future role"] }
       ]
     };
+    window.NH_STORIES = [
+      { id: "hustler",    title: "Street Hustler",        tone: "Gritty & Funny" },
+      { id: "corporate",  title: "Corporate Snake",        tone: "Satirical & Dry" },
+      { id: "influencer", title: "Influencer Gone Wrong",  tone: "Absurd Comedy" },
+      { id: "chaos",      title: "Chaos Mode",             tone: "Pure Mayhem" }
+    ];
   </script>
   <script src="app.js"></script>
 </body>

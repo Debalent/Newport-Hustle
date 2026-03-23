@@ -1,94 +1,227 @@
+/**
+ * Newport Hustle — UI Engine
+ * -------------------------------------------------------
+ * Responsibilities:
+ *   1. Screen navigation (transition system)
+ *   2. Background music (autoplay + localStorage prefs)
+ *   3. Ripple tap feedback
+ *   4. Character Creator (live preview)
+ *   5. Story Mode selection
+ *   6. Mission list rendering
+ *   7. Settings (sliders, toggles)
+ *   8. HUD simulation
+ */
 (function () {
-  const screens = document.querySelectorAll(".screen");
-  const music = document.getElementById("bg-music");
-  const sfxClick = document.getElementById("sfx-click");
-  const sfxWhoosh = document.getElementById("sfx-whoosh");
-  const muteBtn = document.getElementById("mute-btn");
-  let selectedMissionId = null;
-  let isMusicPlaying = false;
+  'use strict';
 
-  const ICONS = {
-    volume: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 3.00024L7.00006 8.00024H3.00006V16.0002H7.00006L13.0001 21.0002V3.00024ZM15.0001 12.0002C15.0001 10.1669 14.3039 8.49221 13.1717 7.24721L14.5859 5.833C16.0755 7.56403 17.0001 9.70053 17.0001 12.0002C17.0001 14.3 16.0755 16.4357 14.5859 18.1667L13.1717 16.7517C14.3039 15.5067 15.0001 13.832 15.0001 12.0002Z"></path></svg>`,
-    muted: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 3.00024L7.00006 8.00024H3.00006V16.0002H7.00006L13.0001 21.0002V3.00024ZM18.2427 12.0002L20.364 9.87891L18.9498 8.46469L16.8285 10.586L14.7072 8.46469L13.293 9.87891L15.4143 12.0002L13.293 14.1215L14.7072 15.5358L16.8285 13.4144L18.9498 15.5358L20.364 14.1215L18.2427 12.0002Z"></path></svg>`,
+  /* -------------------------------------------------------
+     STATE
+  ------------------------------------------------------- */
+  const state = {
+    currentScreen:   'screen-splash',
+    selectedMission: null,
+    selectedStory:   'hustler',
+    musicStarted:    false,
+    musicMuted:      JSON.parse(localStorage.getItem('nh_muted') ?? 'false'),
+    musicVolume:     parseFloat(localStorage.getItem('nh_vol')  ?? '0.5'),
+    character: {
+      name:    localStorage.getItem('nh_name')  ?? '',
+      skin:    localStorage.getItem('nh_skin')  ?? '#c68642',
+      outfit:  localStorage.getItem('nh_outfit')?? 'hustler',
+      outfitColor: localStorage.getItem('nh_outfit_color') ?? '#e8ff42',
+      trait:   localStorage.getItem('nh_trait') ?? 'Big Talker',
+    }
   };
 
-  function playSfx(sfx) {
-    if (sfx && !music.muted) {
-      sfx.currentTime = 0;
-      sfx.play();
-    }
-  }
+  /* -------------------------------------------------------
+     DOM REFS
+  ------------------------------------------------------- */
+  const music   = document.getElementById('bg-music');
+  const muteBtn = document.getElementById('mute-btn');
 
+  /* -------------------------------------------------------
+     UTILITY
+  ------------------------------------------------------- */
+  function qs(selector, scope = document) { return scope.querySelector(selector); }
+  function qsa(selector, scope = document) { return scope.querySelectorAll(selector); }
+
+  /* -------------------------------------------------------
+     SCREEN TRANSITIONS
+  ------------------------------------------------------- */
   function showScreen(id) {
-    let currentScreen = document.querySelector(".screen--active");
-    if (currentScreen) {
-      currentScreen.classList.remove("screen--active");
+    const incoming = document.getElementById(id);
+    if (!incoming || id === state.currentScreen) return;
+
+    const outgoing = document.getElementById(state.currentScreen);
+
+    if (outgoing) {
+      outgoing.classList.add('screen--exit');
+      outgoing.classList.remove('screen--active');
+      // Clean up exit class after animation finishes
+      outgoing.addEventListener('transitionend', () => {
+        outgoing.classList.remove('screen--exit');
+      }, { once: true });
     }
 
-    const newScreen = document.getElementById(id);
-    if (newScreen) {
-      newScreen.classList.add("screen--active");
-      playSfx(sfxWhoosh);
+    incoming.classList.add('screen--active');
+    state.currentScreen = id;
+
+    // Run any screen-specific initialization
+    onScreenEnter(id);
+  }
+
+  /* Called once every time a screen becomes active */
+  function onScreenEnter(id) {
+    switch (id) {
+      case 'screen-missions':        renderMissions(); break;
+      case 'screen-character-creator': syncCreatorPreview(); break;
+      case 'screen-hud':             initHudSim(); break;
+      default: break;
     }
   }
 
-  function startMusic() {
-    if (music && !isMusicPlaying) {
-      music.play().then(() => {
-        isMusicPlaying = true;
-      }).catch(error => {
-        console.error("Audio playback failed:", error);
-      });
-    }
-  }
-
-  function toggleMute() {
-    if (!music) return;
-    music.muted = !music.muted;
-    muteBtn.innerHTML = music.muted ? ICONS.muted : ICONS.volume;
-    muteBtn.setAttribute("aria-label", music.muted ? "Unmute Audio" : "Mute Audio");
-  }
-
+  /* -------------------------------------------------------
+     NAVIGATION (event delegation)
+  ------------------------------------------------------- */
   function initNavigation() {
-    document.body.addEventListener("click", (event) => {
+    document.body.addEventListener('click', (e) => {
+      // Start music on first human interaction
       startMusic();
 
-      const target = event.target.closest("[data-target]");
-      if (target) {
-        playSfx(sfxClick);
-        const screenId = target.getAttribute("data-target");
-        if (screenId === "screen-hud" && !selectedMissionId) {
-          return;
+      // Ripple
+      const btn = e.target.closest('.btn, .hud-btn, .top-bar__back');
+      if (btn) spawnRipple(btn, e);
+
+      // Screen navigation
+      const navTarget = e.target.closest('[data-target]');
+      if (navTarget) {
+        const targetId = navTarget.getAttribute('data-target');
+        showScreen(targetId);
+      }
+    });
+
+    // Keyboard navigation: Enter/Space trigger click on focused data-target
+    document.body.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const focused = document.activeElement;
+        if (focused && focused.hasAttribute('data-target')) {
+          e.preventDefault();
+          focused.click();
         }
-        showScreen(screenId);
       }
     });
   }
 
+  /* -------------------------------------------------------
+     RIPPLE FEEDBACK
+  ------------------------------------------------------- */
+  function spawnRipple(el, e) {
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    const rect = el.getBoundingClientRect();
+    ripple.style.left = `${e.clientX - rect.left}px`;
+    ripple.style.top  = `${e.clientY - rect.top}px`;
+    el.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove(), { once: true });
+  }
+
+  /* -------------------------------------------------------
+     MUSIC SYSTEM
+  ------------------------------------------------------- */
+  function startMusic() {
+    if (state.musicStarted || !music) return;
+    music.volume = state.musicVolume;
+    music.muted  = state.musicMuted;
+    music.play().then(() => {
+      state.musicStarted = true;
+    }).catch(() => {
+      // Autoplay blocked; will retry on next interaction (already handled)
+    });
+  }
+
+  function toggleMute() {
+    if (!music) return;
+    state.musicMuted = !state.musicMuted;
+    music.muted = state.musicMuted;
+    localStorage.setItem('nh_muted', JSON.stringify(state.musicMuted));
+    updateMuteBtn();
+  }
+
+  function updateMuteBtn() {
+    muteBtn.textContent = state.musicMuted ? '🔇' : '🔊';
+    muteBtn.setAttribute('aria-label', state.musicMuted ? 'Unmute Music' : 'Mute Music');
+  }
+
+  /* -------------------------------------------------------
+     SPLASH BOOT TEXT
+  ------------------------------------------------------- */
+  const BOOT_LINES = [
+    'HustleOS™ v4.20 — Initializing...',
+    'Loading street credentials...',
+    'Validating sidewalk license... ✓',
+    'Checking respect levels: ZERO',
+    'Installing swagger patches...',
+    'WARNING: Side-hustle detected.',
+    'System ready. Let\'s get it.'
+  ];
+
+  function animateBootText() {
+    const el = document.getElementById('boot-text');
+    if (!el) return;
+    let i = 0;
+    const interval = setInterval(() => {
+      el.textContent = BOOT_LINES[i % BOOT_LINES.length];
+      i++;
+      if (i >= BOOT_LINES.length) clearInterval(interval);
+    }, 600);
+  }
+
+  /* -------------------------------------------------------
+     MISSIONS
+  ------------------------------------------------------- */
   function renderMissions() {
-    const list = document.getElementById("mission-list");
+    const list = document.getElementById('mission-list');
     if (!list || !window.NH_MISSIONS) return;
 
     const missions = window.NH_MISSIONS.main_story_missions || [];
-    list.innerHTML = "";
 
+    // Set context text based on story
+    const ctxEl = document.getElementById('mission-context-text');
+    if (ctxEl) {
+      const storyMap = {
+        hustler:    'Your story is just getting started, fam.',
+        corporate:  'Calendar blocked. Hustle anyway.',
+        influencer: 'Content doesn\'t make itself. Or does it?',
+        chaos:      'Why have a plan when chaos is free?'
+      };
+      ctxEl.textContent = storyMap[state.selectedStory] ?? 'Choose your next move, boss.';
+    }
+
+    // Only re-render if needed
+    if (list.children.length === missions.length) return;
+
+    list.innerHTML = '';
     missions.forEach((mission, index) => {
-      const li = document.createElement("li");
-      li.className = "list-item";
+      const li = document.createElement('li');
+      li.className = 'list-item';
+      li.setAttribute('role', 'option');
+      li.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
       li.dataset.missionId = mission.missionID;
-      if (index === 0) {
-        li.classList.add("list-item--selected");
-        selectedMissionId = mission.missionID;
+
+      if (index === 0 && !state.selectedMission) {
+        li.classList.add('list-item--selected');
+        state.selectedMission = mission.missionID;
       }
 
       li.innerHTML = `<div class="list-item__title">${mission.title}</div>
-        <div class="list-item__subtitle">${mission.description}</div>`;
+                      <div class="list-item__subtitle">${mission.description}</div>`;
 
-      li.addEventListener("click", () => {
-        playSfx(sfxClick);
-        selectedMissionId = mission.missionID;
-        document.querySelectorAll(".list-item").forEach((el) => {
-          el.classList.toggle("list-item--selected", el === li);
+      li.addEventListener('click', () => {
+        state.selectedMission = mission.missionID;
+        qsa('.list-item').forEach(el => {
+          const isThis = el === li;
+          el.classList.toggle('list-item--selected', isThis);
+          el.setAttribute('aria-selected', String(isThis));
         });
       });
 
@@ -96,18 +229,250 @@
     });
   }
 
-  function init() {
-    muteBtn.innerHTML = music.muted ? ICONS.muted : ICONS.volume;
-    muteBtn.addEventListener("click", (e) => {
-        e.stopPropagation(); // prevent navigation
-        playSfx(sfxClick);
-        toggleMute();
+  /* -------------------------------------------------------
+     STORY SELECTION
+  ------------------------------------------------------- */
+  function initStorySelect() {
+    const grid = document.getElementById('story-grid');
+    if (!grid) return;
+
+    grid.addEventListener('click', (e) => {
+      const card = e.target.closest('.story-card');
+      if (!card) return;
+
+      state.selectedStory = card.dataset.story;
+      qsa('.story-card', grid).forEach(c => {
+        c.classList.toggle('story-card--active', c === card);
+      });
     });
-    
-    initNavigation();
-    renderMissions();
-    showScreen("screen-splash");
+
+    // Keyboard: Enter/Space on story card
+    grid.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const card = e.target.closest('.story-card');
+        if (card) { e.preventDefault(); card.click(); }
+      }
+    });
   }
 
-  document.addEventListener("DOMContentLoaded", init);
+  /* -------------------------------------------------------
+     CHARACTER CREATOR
+  ------------------------------------------------------- */
+  function initCharacterCreator() {
+    const nameInput  = document.getElementById('char-name');
+    const skinGroup  = document.getElementById('skin-swatches');
+    const outfitGroup= document.getElementById('outfit-swatches');
+    const traitGroup = document.getElementById('trait-swatches');
+    const saveBtn    = document.getElementById('btn-save-character');
+
+    if (!nameInput) return;
+
+    // Restore saved values
+    nameInput.value = state.character.name;
+
+    // Activate saved selections
+    activateSwatch(skinGroup,   '[data-skin="'   + state.character.skin   + '"]');
+    activateSwatch(outfitGroup, '[data-outfit="' + state.character.outfit + '"]');
+    activateTrait(traitGroup, state.character.trait);
+
+    // Name input
+    nameInput.addEventListener('input', () => {
+      state.character.name = nameInput.value.trim();
+      syncCreatorPreview();
+    });
+
+    // Skin
+    skinGroup.addEventListener('click', (e) => {
+      const sw = e.target.closest('.swatch--skin');
+      if (!sw) return;
+      state.character.skin = sw.dataset.skin;
+      qsa('.swatch--skin', skinGroup).forEach(s => s.classList.remove('swatch--active'));
+      sw.classList.add('swatch--active');
+      syncCreatorPreview();
+    });
+
+    // Outfit
+    outfitGroup.addEventListener('click', (e) => {
+      const card = e.target.closest('.outfit-card');
+      if (!card) return;
+      state.character.outfit      = card.dataset.outfit;
+      state.character.outfitColor = card.dataset.color;
+      qsa('.outfit-card', outfitGroup).forEach(c => c.classList.remove('outfit-card--active'));
+      card.classList.add('outfit-card--active');
+      syncCreatorPreview();
+    });
+
+    // Trait
+    traitGroup.addEventListener('click', (e) => {
+      const pill = e.target.closest('.trait-pill');
+      if (!pill) return;
+      state.character.trait = pill.dataset.trait;
+      qsa('.trait-pill', traitGroup).forEach(p => p.classList.remove('trait-pill--active'));
+      pill.classList.add('trait-pill--active');
+      syncCreatorPreview();
+    });
+
+    // Save
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        saveCharacter();
+        showScreen('screen-main-menu');
+      });
+    }
+
+    syncCreatorPreview();
+  }
+
+  function activateSwatch(group, selector) {
+    if (!group) return;
+    const el = qs(selector, group);
+    if (el) {
+      qsa('.swatch--skin, .outfit-card, .trait-pill', group).forEach(s => s.classList.remove('swatch--active', 'outfit-card--active', 'trait-pill--active'));
+      el.classList.add('swatch--active');
+    }
+  }
+
+  function activateTrait(group, trait) {
+    if (!group) return;
+    qsa('.trait-pill', group).forEach(p => {
+      p.classList.toggle('trait-pill--active', p.dataset.trait === trait);
+    });
+  }
+
+  function syncCreatorPreview() {
+    const head    = document.getElementById('avatar-head');
+    const outfit  = document.getElementById('avatar-outfit');
+    const nameEl  = document.getElementById('preview-name');
+    const traitEl = document.getElementById('preview-trait');
+
+    if (head)   head.style.background = state.character.skin;
+    if (outfit) {
+      outfit.style.background = state.character.outfitColor;
+      const icons = { hustler: '🔥', corporate: '💼', influencer: '📱', chaos: '💥' };
+      outfit.textContent = icons[state.character.outfit] ?? '🔥';
+    }
+    if (nameEl)  nameEl.textContent  = state.character.name  || 'Your Name';
+    if (traitEl) traitEl.textContent = state.character.trait || 'Pick Your Vibe';
+  }
+
+  function saveCharacter() {
+    localStorage.setItem('nh_name',         state.character.name);
+    localStorage.setItem('nh_skin',         state.character.skin);
+    localStorage.setItem('nh_outfit',       state.character.outfit);
+    localStorage.setItem('nh_outfit_color', state.character.outfitColor);
+    localStorage.setItem('nh_trait',        state.character.trait);
+  }
+
+  /* -------------------------------------------------------
+     SETTINGS
+  ------------------------------------------------------- */
+  function initSettings() {
+    // Range sliders — live value display
+    const sliders = [
+      { inputId: 'vol-master', valueId: 'val-master' },
+      { inputId: 'vol-music',  valueId: 'val-music' },
+      { inputId: 'vol-sfx',    valueId: 'val-sfx' }
+    ];
+
+    sliders.forEach(({ inputId, valueId }) => {
+      const input = document.getElementById(inputId);
+      const label = document.getElementById(valueId);
+      if (!input || !label) return;
+      input.addEventListener('input', () => {
+        label.textContent = input.value;
+        if (inputId === 'vol-music' && music) {
+          music.volume = input.value / 100;
+          state.musicVolume = music.volume;
+          localStorage.setItem('nh_vol', String(music.volume));
+        }
+      });
+    });
+
+    // Toggle buttons
+    const toggles = ['toggle-vibration', 'toggle-hints', 'toggle-satire'];
+    toggles.forEach(id => {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const isOn = btn.getAttribute('aria-checked') === 'true';
+        btn.setAttribute('aria-checked', String(!isOn));
+        btn.textContent = !isOn ? 'ON' : 'OFF';
+        btn.classList.toggle('toggle-btn--off', isOn);
+      });
+    });
+
+    // Reset
+    const resetBtn = document.getElementById('btn-reset-game');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (window.confirm('Reset all game data? This is irreversible.')) {
+          localStorage.clear();
+          window.location.reload();
+        }
+      });
+    }
+  }
+
+  /* -------------------------------------------------------
+     HUD SIMULATION
+  ------------------------------------------------------- */
+  function initHudSim() {
+    // Simple animated money counter to feel alive
+    const moneyEl   = document.getElementById('hud-money');
+    const respectEl = document.getElementById('hud-respect');
+    if (!moneyEl || !respectEl) return;
+
+    let cash = 325;
+    let rep  = 10;
+
+    const ticker = setInterval(() => {
+      cash += Math.floor(Math.random() * 15) - 3;
+      rep   = Math.min(rep + (Math.random() > 0.8 ? 1 : 0), 999);
+      moneyEl.textContent   = `$${cash.toLocaleString()}`;
+      respectEl.textContent = `Rep: ${rep}`;
+    }, 2000);
+
+    // Stop when we leave the HUD screen
+    const observer = new MutationObserver(() => {
+      const hudScreen = document.getElementById('screen-hud');
+      if (!hudScreen.classList.contains('screen--active')) {
+        clearInterval(ticker);
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.getElementById('screen-hud'), { attributes: true, attributeFilter: ['class'] });
+  }
+
+  /* -------------------------------------------------------
+     INIT
+  ------------------------------------------------------- */
+  function init() {
+    // Mute button
+    updateMuteBtn();
+    muteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMute();
+    });
+
+    // Attempt autoplay immediately (may be blocked; first click will unblock)
+    if (music) {
+      music.volume = state.musicVolume;
+      music.muted  = state.musicMuted;
+      music.play().then(() => { state.musicStarted = true; }).catch(() => {});
+    }
+
+    // Boot splash animation
+    animateBootText();
+
+    // Wire up all subsystems
+    initNavigation();
+    initCharacterCreator();
+    initStorySelect();
+    initSettings();
+
+    // Ensure splash is visible
+    showScreen('screen-splash');
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
 })();
