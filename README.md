@@ -123,6 +123,21 @@ Want to see the game interface? Check out the complete UI implementation:
 - **[Joystick.cs](NewportHustleGame/Scripts/UI/Joystick.cs)** - Touch-based mobile controls
 - **[BrandingManager.cs](NewportHustleGame/Scripts/UI/BrandingManager.cs)** - App store assets and branding
 
+#### 🌐 Web UI Preview (GitHub Pages Ready)
+
+A static, mobile-style preview of the Newport Hustle UI is available in the repository:
+
+- [WebPreview/index.html](WebPreview/index.html) – splash screen → main menu → mission select → HUD mock, using the real mission titles from Config/MissionData.json.
+
+To host this on GitHub Pages:
+
+1. Push this repository to GitHub.
+2. In GitHub, go to **Settings → Pages** for your repo.
+3. Under **Source**, select the `main` (or default) branch and the **root** folder, then save.
+4. Once the Pages site is built, open: `https://<your-username>.github.io/<your-repo>/WebPreview/` in a mobile browser to explore the UI.
+
+This preview is static (no gameplay), but it matches the mobile menu flow and HUD layout for portfolio and review purposes.
+
 **🎮 Want to Run It Yourself?**
 
 1. **Clone this repository**

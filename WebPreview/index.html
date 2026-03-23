@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newport Hustle – UI Preview</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Splash Screen -->
+    <section class="screen screen--active" id="screen-splash">
+      <div class="screen__content screen__content--center">
+        <h1 class="logo-text">Newport Hustle</h1>
+        <p class="tagline">Small-town chaos. Big-time hustle.</p>
+        <button class="btn btn--primary" data-target="screen-main-menu">Tap to Start</button>
+      </div>
+    </section>
+
+    <!-- Main Menu -->
+    <section class="screen" id="screen-main-menu">
+      <header class="top-bar">
+        <span class="top-bar__title">Main Menu</span>
+      </header>
+      <div class="screen__content">
+        <button class="btn btn--primary" data-target="screen-missions">Continue Story</button>
+        <button class="btn btn--secondary" data-target="screen-missions">New Game</button>
+        <button class="btn" data-target="screen-settings">Settings</button>
+      </div>
+      <footer class="bottom-bar">
+        <span class="bottom-bar__label">UI Preview – Not Gameplay</span>
+      </footer>
+    </section>
+
+    <!-- Mission Select -->
+    <section class="screen" id="screen-missions">
+      <header class="top-bar">
+        <button class="top-bar__back" data-target="screen-main-menu">◀</button>
+        <span class="top-bar__title">Story Missions</span>
+      </header>
+      <div class="screen__content">
+        <ul class="list" id="mission-list">
+          <!-- Populated by app.js from embedded JSON -->
+        </ul>
+      </div>
+      <footer class="bottom-bar">
+        <button class="btn btn--primary" data-target="screen-hud">Start Selected</button>
+      </footer>
+    </section>
+
+    <!-- Settings -->
+    <section class="screen" id="screen-settings">
+      <header class="top-bar">
+        <button class="top-bar__back" data-target="screen-main-menu">◀</button>
+        <span class="top-bar__title">Settings</span>
+      </header>
+      <div class="screen__content">
+        <div class="setting-row">
+          <span>Master Volume</span>
+          <input type="range" min="0" max="100" value="80" />
+        </div>
+        <div class="setting-row">
+          <span>Music</span>
+          <input type="range" min="0" max="100" value="70" />
+        </div>
+        <div class="setting-row">
+          <span>SFX</span>
+          <input type="range" min="0" max="100" value="90" />
+        </div>
+        <div class="setting-row">
+          <span>Graphics</span>
+          <select>
+            <option>Auto</option>
+            <option>High</option>
+            <option>Medium</option>
+            <option>Low</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- HUD Preview -->
+    <section class="screen" id="screen-hud">
+      <header class="hud-bar hud-bar--top">
+        <div class="hud-bar__left">
+          <span class="hud-pill">Respect: <strong>10</strong></span>
+        </div>
+        <div class="hud-bar__right">
+          <span class="hud-pill">$ <strong>325</strong></span>
+        </div>
+      </header>
+
+      <main class="hud-world">
+        <div class="hud-world__label">Downtown Newport – White River Front</div>
+        <div class="hud-world__map">Map / world view placeholder</div>
+        <aside class="hud-objectives">
+          <h2 class="hud-objectives__title">Current Objectives</h2>
+          <ul class="hud-objectives__list" id="hud-objectives-list">
+            <!-- Populated based on selected mission -->
+          </ul>
+        </aside>
+      </main>
+
+      <footer class="hud-bar hud-bar--bottom">
+        <div class="joystick"></div>
+        <div class="hud-actions">
+          <button class="hud-btn">Action</button>
+          <button class="hud-btn">Interact</button>
+          <button class="hud-btn hud-btn--accent" data-target="screen-main-menu">Pause</button>
+        </div>
+      </footer>
+    </section>
+  </div>
+
+  <script>
+    // Embedded mission data (mirrors Config/MissionData.json main_story_missions)
+    window.NH_MISSIONS = {
+      main_story_missions: [
+        {
+          missionID: "mission_01_welcome_back",
+          title: "Welcome Back to Newport",
+          description: "Return to Newport, Arkansas and reacquaint yourself with the town and its people.",
+          objectives: [
+            "Explore downtown Newport",
+            "Meet with your old mentor",
+            "Visit the White River waterfront",
+            "Find a place to stay"
+          ]
+        },
+        {
+          missionID: "mission_02_the_cut",
+          title: "The Cut",
+          description: "Prove yourself in Newport's barbershop scene by earning the respect of the community.",
+          objectives: [
+            "Visit Barber's Row on Main Street",
+            "Meet the head barber",
+            "Complete 3 test haircuts",
+            "Earn $50 in tips"
+          ]
+        },
+        {
+          missionID: "mission_03_spa_secrets",
+          title: "Spa Secrets",
+          description: "Navigate the modern wellness industry while uncovering secrets in Newport's spa district.",
+          objectives: [
+            "Explore the spa district",
+            "Meet the spa owner",
+            "Discover the truth about spa finances",
+            "Decide whether to help or expose the spa"
+          ]
+        },
+        {
+          missionID: "mission_04_riverfront_reckoning",
+          title: "Riverfront Reckoning",
+          description: "Climactic confrontation by the White River that shapes Newport's future.",
+          objectives: [
+            "Uncover the truth about your family's Newport legacy",
+            "Face the consequences of family history",
+            "Bring together different factions of Newport",
+            "Decide your role in Newport's future"
+          ]
+        }
+      ]
+    };
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
