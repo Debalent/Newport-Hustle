@@ -1,73 +1,51 @@
 (function () {
   const screens = document.querySelectorAll(".screen");
+  const music = document.getElementById("bg-music");
+  const muteBtn = document.getElementById("mute-btn");
   let selectedMissionId = null;
+  let isMusicPlaying = false;
 
-  const SCREEN_LABELS = {
-    "screen-splash":    "Splash",
-    "screen-main-menu": "Menu",
-    "screen-missions":  "Missions",
-    "screen-hud":       "HUD",
-    "screen-pause":     "Pause",
-    "screen-map":       "Map",
-    "screen-dialogue":  "Dialogue",
-    "screen-character": "Character",
-    "screen-wanted":    "Wanted",
-    "screen-settings":  "Settings",
+  const ICONS = {
+    volume: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 3.00024L7.00006 8.00024H3.00006V16.0002H7.00006L13.0001 21.0002V3.00024ZM15.0001 12.0002C15.0001 10.1669 14.3039 8.49221 13.1717 7.24721L14.5859 5.833C16.0755 7.56403 17.0001 9.70053 17.0001 12.0002C17.0001 14.3 16.0755 16.4357 14.5859 18.1667L13.1717 16.7517C14.3039 15.5067 15.0001 13.832 15.0001 12.0002Z"></path></svg>`,
+    muted: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 3.00024L7.00006 8.00024H3.00006V16.0002H7.00006L13.0001 21.0002V3.00024ZM18.2427 12.0002L20.364 9.87891L18.9498 8.46469L16.8285 10.586L14.7072 8.46469L13.293 9.87891L15.4143 12.0002L13.293 14.1215L14.7072 15.5358L16.8285 13.4144L18.9498 15.5358L20.364 14.1215L18.2427 12.0002Z"></path></svg>`,
   };
 
   function showScreen(id) {
     screens.forEach((s) => {
       s.classList.toggle("screen--active", s.id === id);
     });
-    updateNav(id);
   }
 
-  function buildNav() {
-    const nav = document.getElementById("screen-nav");
-    if (!nav) return;
-    Object.entries(SCREEN_LABELS).forEach(([id, label]) => {
-      const a = document.createElement("a");
-      a.textContent = label;
-      a.dataset.target = id;
-      a.setAttribute("role", "button");
-      a.setAttribute("tabindex", "0");
-      nav.appendChild(a);
-    });
+  function startMusic() {
+    if (music && !isMusicPlaying) {
+      music.play().then(() => {
+        isMusicPlaying = true;
+      }).catch(error => {
+        console.error("Audio playback failed:", error);
+      });
+    }
   }
 
-  function updateNav(activeId) {
-    const nav = document.getElementById("screen-nav");
-    if (!nav) return;
-    nav.querySelectorAll("a").forEach((a) => {
-      a.classList.toggle("active", a.dataset.target === activeId);
-    });
+  function toggleMute() {
+    if (!music) return;
+    music.muted = !music.muted;
+    muteBtn.innerHTML = music.muted ? ICONS.muted : ICONS.volume;
+    muteBtn.setAttribute("aria-label", music.muted ? "Unmute Audio" : "Mute Audio");
   }
 
   function initNavigation() {
-    document.addEventListener("click", (event) => {
+    document.body.addEventListener("click", (event) => {
+      // Start music on first interaction
+      startMusic();
+
       const target = event.target.closest("[data-target]");
-      if (!target) return;
-      const screenId = target.getAttribute("data-target");
-
-      if (screenId === "screen-hud" && !selectedMissionId) {
-        // Require a mission to be selected before entering HUD
-        return;
+      if (target) {
+        const screenId = target.getAttribute("data-target");
+        if (screenId === "screen-hud" && !selectedMissionId) {
+          return; // Block entering HUD without a mission
+        }
+        showScreen(screenId);
       }
-
-      showScreen(screenId);
-      if (screenId === "screen-hud") {
-        updateHudForSelectedMission();
-      }
-    });
-
-    // Pill toggle (character creator style / ride options)
-    document.addEventListener("click", (event) => {
-      const pill = event.target.closest(".pill");
-      if (!pill) return;
-      const group = pill.closest(".char-pills");
-      if (!group) return;
-      group.querySelectorAll(".pill").forEach((p) => p.classList.remove("pill--active"));
-      pill.classList.add("pill--active");
     });
   }
 
@@ -101,27 +79,15 @@
     });
   }
 
-  function updateHudForSelectedMission() {
-    const missions = window.NH_MISSIONS.main_story_missions || [];
-    const mission = missions.find((m) => m.missionID === selectedMissionId);
-    const objectivesList = document.getElementById("hud-objectives-list");
-    if (!objectivesList) return;
-    objectivesList.innerHTML = "";
-    if (!mission) return;
-    mission.objectives.forEach((obj) => {
-      const li = document.createElement("li");
-      li.className = "hud-objective";
-      li.textContent = obj;
-      objectivesList.appendChild(li);
-    });
-  }
-
   function init() {
-    buildNav();
+    // Set initial mute button icon
+    muteBtn.innerHTML = music.muted ? ICONS.muted : ICONS.volume;
+    muteBtn.addEventListener("click", toggleMute);
+    
     initNavigation();
     renderMissions();
+    showScreen("screen-splash"); // Ensure splash is the first screen
   }
 
   document.addEventListener("DOMContentLoaded", init);
 })();
-
