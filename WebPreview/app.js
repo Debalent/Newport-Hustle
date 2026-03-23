@@ -2,24 +2,55 @@
   const screens = document.querySelectorAll(".screen");
   let selectedMissionId = null;
 
+  const SCREEN_LABELS = {
+    "screen-splash":    "Splash",
+    "screen-main-menu": "Menu",
+    "screen-missions":  "Missions",
+    "screen-hud":       "HUD",
+    "screen-pause":     "Pause",
+    "screen-map":       "Map",
+    "screen-dialogue":  "Dialogue",
+    "screen-character": "Character",
+    "screen-wanted":    "Wanted",
+    "screen-settings":  "Settings",
+  };
+
   function showScreen(id) {
     screens.forEach((s) => {
-      if (s.id === id) {
-        s.classList.add("screen--active");
-      } else {
-        s.classList.remove("screen--active");
-      }
+      s.classList.toggle("screen--active", s.id === id);
+    });
+    updateNav(id);
+  }
+
+  function buildNav() {
+    const nav = document.getElementById("screen-nav");
+    if (!nav) return;
+    Object.entries(SCREEN_LABELS).forEach(([id, label]) => {
+      const a = document.createElement("a");
+      a.textContent = label;
+      a.dataset.target = id;
+      a.setAttribute("role", "button");
+      a.setAttribute("tabindex", "0");
+      nav.appendChild(a);
+    });
+  }
+
+  function updateNav(activeId) {
+    const nav = document.getElementById("screen-nav");
+    if (!nav) return;
+    nav.querySelectorAll("a").forEach((a) => {
+      a.classList.toggle("active", a.dataset.target === activeId);
     });
   }
 
   function initNavigation() {
-    document.body.addEventListener("click", (event) => {
+    document.addEventListener("click", (event) => {
       const target = event.target.closest("[data-target]");
       if (!target) return;
       const screenId = target.getAttribute("data-target");
 
       if (screenId === "screen-hud" && !selectedMissionId) {
-        // If no mission is selected, ignore starting HUD
+        // Require a mission to be selected before entering HUD
         return;
       }
 
@@ -27,6 +58,16 @@
       if (screenId === "screen-hud") {
         updateHudForSelectedMission();
       }
+    });
+
+    // Pill toggle (character creator style / ride options)
+    document.addEventListener("click", (event) => {
+      const pill = event.target.closest(".pill");
+      if (!pill) return;
+      const group = pill.closest(".char-pills");
+      if (!group) return;
+      group.querySelectorAll(".pill").forEach((p) => p.classList.remove("pill--active"));
+      pill.classList.add("pill--active");
     });
   }
 
@@ -46,10 +87,8 @@
         selectedMissionId = mission.missionID;
       }
 
-      li.innerHTML = `
-        <div class="list-item__title">${mission.title}</div>
-        <div class="list-item__subtitle">${mission.description}</div>
-      `;
+      li.innerHTML = `<div class="list-item__title">${mission.title}</div>
+        <div class="list-item__subtitle">${mission.description}</div>`;
 
       li.addEventListener("click", () => {
         selectedMissionId = mission.missionID;
@@ -66,12 +105,9 @@
     const missions = window.NH_MISSIONS.main_story_missions || [];
     const mission = missions.find((m) => m.missionID === selectedMissionId);
     const objectivesList = document.getElementById("hud-objectives-list");
-
     if (!objectivesList) return;
-
     objectivesList.innerHTML = "";
     if (!mission) return;
-
     mission.objectives.forEach((obj) => {
       const li = document.createElement("li");
       li.className = "hud-objective";
@@ -81,9 +117,11 @@
   }
 
   function init() {
+    buildNav();
     initNavigation();
     renderMissions();
   }
 
   document.addEventListener("DOMContentLoaded", init);
 })();
+

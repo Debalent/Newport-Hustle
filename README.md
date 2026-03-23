@@ -23,19 +23,23 @@ Ever wondered what Grand Theft Auto would look like if it took place in Newport,
 Because copyright lawyers are scarier than the Newport PD:
 
 ### Classic Rides
+
 - **Riverside Classic** *(Box Chevy Caprice)* - Floats like a boat, turns like a battleship
 - **Newport Supreme** *(1984 Cutlass Supreme)* - The car your dad wishes he still had
 - **Arkansas Explorer** *(Chevy Tahoe)* - Soccer mom special with room for the whole family
 
-### Luxury Options  
+### Luxury Options
+
 - **Presidential SUV** *(Lincoln Navigator)* - For when you need to feel important in a town of 7,000
 - **Luxury Crossover** *(Lexus RX)* - Because even small towns have people with taste
 
 ### Performance Cars
+
 - **Arkansas Thunder** - Loud enough to wake up the whole neighborhood
 - **Newport Lightning** - Faster than gossip spreading at the Dollar General
 
 ### Two-Wheelers
+
 - **Newport Cruiser** *(Harley-style)* - Middle-age crisis on two wheels
 - **Street Demon** *(Sport Bike)* - For when you need to outrun your responsibilities
 
@@ -43,21 +47,24 @@ Because copyright lawyers are scarier than the Newport PD:
 
 ## 👥 **Street Characters That Make Newport REAL**
 
-### The Holy Trinity of Small-Town Authenticity:
+### The Holy Trinity of Small-Town Authenticity
 
 #### 🕵️ **Snitches** - "Neighborhood Informants"
+
 - Rides: Beat-up BMX bikes
 - Superpower: Somehow knowing everyone's business
 - Dialogue: *"I seen everything that happened over there"*
 - **Warning:** They WILL call the cops on you
 
-#### 🍷 **Winos** - "Neighborhood Philosophers" 
+#### 🍷 **Winos** - "Neighborhood Philosophers"
+
 - Rides: Rusty beach cruiser bikes
 - Superpower: Deep life wisdom after 2 PM
 - Dialogue: *"Life's like riding a bike, sometimes you wobble"*
 - **Bonus:** Actually gives good advice (sometimes)
 
 #### 🚲 **Bums** - "Traveling Entrepreneurs"
+
 - Rides: Mountain bikes with baskets full of "treasures"
 - Superpower: Knows every shortcut in town
 - Dialogue: *"One man's trash is another man's treasure"*
@@ -74,13 +81,14 @@ The Newport PD operates on a sophisticated 4-star wanted system:
 ⭐⭐⭐ **Level 3:** Sheriff's department joins the party  
 ⭐⭐⭐⭐ **Level 4:** The whole county's involved (all 6 patrol cars)
 
-*Police Vehicles: "Authority Sedan" (Crown Vic) and "Patrol Classic" (Grand Marquis) - because they bought them at auction and they're LOUD*
+Police Vehicles: "Authority Sedan" (Crown Vic) and "Patrol Classic" (Grand Marquis) — because they bought them at auction and they're LOUD
 
 ---
 
 ## 🎯 **Game Features**
 
 ### ✅ **What We Got:**
+
 - **Authentic Newport Streets** - Drive down the REAL Main Street
 - **Mobile-Optimized Controls** - Touch steering that actually works
 - **Community-Driven Characters** - Based on real (consenting) Newport folks
@@ -89,6 +97,7 @@ The Newport PD operates on a sophisticated 4-star wanted system:
 - **GTA-Style Gameplay** - But with more politeness and sweet tea
 
 ### 🚧 **Coming Soon:**
+
 - Fishing mini-games at the White River
 - Annual Tractor Pull tournament mode
 - Walmart parking lot social events
@@ -99,21 +108,24 @@ The Newport PD operates on a sophisticated 4-star wanted system:
 ## 💼 **Portfolio Project - Source Code Available**
 
 ### 🔍 **This is a Development Showcase**
+
 This repository demonstrates Unity game development skills through a complete GTA-style mobile game implementation. All source code is available for review by potential employers or collaborators.
 
 ### 🛠️ **Technical Implementation**
+
 - **Engine**: Unity 2021.3 LTS
 - **Platform**: Mobile (Android/iOS)
 - **Languages**: C# (2000+ lines of game code)
 - **Architecture**: Modular system design with JSON configuration
 
 ### 📂 **Key Components to Review**
+
 - **[`Scripts/Vehicles/VehicleController.cs`](NewportHustleGame/Scripts/Vehicles/VehicleController.cs)** - Complete vehicle physics system
 - **[`Scripts/World/PoliceSystem.cs`](NewportHustleGame/Scripts/World/PoliceSystem.cs)** - AI behavior and wanted system
 - **[`Scripts/World/ZoneManager.cs`](NewportHustleGame/Scripts/World/ZoneManager.cs)** - Open-world city management
 - **[`Config/VehicleDatabase.json`](NewportHustleGame/Config/VehicleDatabase.json)** - Data-driven game configuration
 
-### � **View the UI/UX System**
+### 🎨 **View the UI/UX System**
 
 Want to see the game interface? Check out the complete UI implementation:
 
@@ -123,20 +135,28 @@ Want to see the game interface? Check out the complete UI implementation:
 - **[Joystick.cs](NewportHustleGame/Scripts/UI/Joystick.cs)** - Touch-based mobile controls
 - **[BrandingManager.cs](NewportHustleGame/Scripts/UI/BrandingManager.cs)** - App store assets and branding
 
-#### 🌐 Web UI Preview (GitHub Pages Ready)
+#### 🌐 Web UI Preview — Live on GitHub Pages
 
-A static, mobile-style preview of the Newport Hustle UI is available in the repository:
+A fully interactive, mobile-style preview of the Newport Hustle UI is available in the repository and hosted via GitHub Pages:
 
-- [WebPreview/index.html](WebPreview/index.html) – splash screen → main menu → mission select → HUD mock, using the real mission titles from Config/MissionData.json.
+**👉 [View Live UI Preview →](https://debalent.github.io/Newport-Hustle/WebPreview/)**
 
-To host this on GitHub Pages:
+The preview includes **10 navigable screens**:
 
-1. Push this repository to GitHub.
-2. In GitHub, go to **Settings → Pages** for your repo.
-3. Under **Source**, select the `main` (or default) branch and the **root** folder, then save.
-4. Once the Pages site is built, open: `https://<your-username>.github.io/<your-repo>/WebPreview/` in a mobile browser to explore the UI.
+| Screen | Description |
+| --- | --- |
+| Splash | Animated logo entry |
+| Main Menu | Continue / New Game / Settings |
+| Mission Select | All 4 story missions (real data from MissionData.json) |
+| HUD | In-game display with wanted stars, objectives, map button |
+| Pause Menu | Resume / Map / Character / Quit |
+| Map | Zones: Downtown, Barber's Row, Spa District, Residential, Diaz District, Riverfront |
+| Dialogue | NPC conversation with branching choices (Mentor: Marcus) |
+| Character Creator | Stats bars, style and ride selection |
+| Wanted Level | 4-star police alert with escape tips |
+| Settings | Volume sliders and graphics quality |
 
-This preview is static (no gameplay), but it matches the mobile menu flow and HUD layout for portfolio and review purposes.
+To re-deploy or fork on GitHub Pages: Settings → Pages → Source: `main` branch, root folder → Save.
 
 **🎮 Want to Run It Yourself?**
 
@@ -147,7 +167,7 @@ This preview is static (no gameplay), but it matches the mobile menu flow and HU
 
 📖 **[Full Setup Instructions →](UNITY_SETUP_GUIDE.md)**
 
-### �🎯 **Development Skills Demonstrated**
+### 🛠️🎯 **Development Skills Demonstrated**
 
 - Mobile game architecture and optimization
 - Complex physics and AI systems
@@ -162,19 +182,22 @@ This preview is static (no gameplay), but it matches the mobile menu flow and HU
 This game is a **concept project** and **development portfolio piece** created with love and respect for Newport, Arkansas.
 
 ### **Current Status:**
+
 - ✅ **Concept Development**: Complete game design and technical implementation
 - 🚧 **Community Outreach**: Planning to approach local businesses and community
 - 🎯 **Free Game**: Will be offered completely free to the community
 - 💼 **Portfolio Project**: Demonstrates game development capabilities
 
 ### **How We Plan to Keep It Real:**
+
 - 📧 Will contact all businesses for permission before any release
-- 🤝 Character development only with community consent  
+- 🤝 Character development only with community consent
 - 🆓 **100% Free Game** - no monetization, pure community gift
 - ❤️ **Respectful Representation** - celebrating Newport, not mocking it
 - 📈 **Developer Portfolio** - showcasing technical and creative skills
 
 ### **Want to Get Involved?**
+
 This is a **concept demonstration**. If you're a Newport business owner or community member interested in this becoming real:
 
 Email: **[community@newporthustle.game](mailto:community@newporthustle.game)**  
@@ -209,15 +232,18 @@ Email: **[community@newporthustle.game](mailto:community@newporthustle.game)**
 ## 📞 **Contact & Support**
 
 ### 🎮 **Game Questions:**
+
 - **Discord:** [Newport Hustle Community](https://discord.gg/newport-hustle)
 - **Email:** [support@newporthustle.game](mailto:support@newporthustle.game)
 - **Website:** [www.newporthustle.game](https://www.newporthustle.game)
 
 ### 🏪 **Local Business Inquiries:**
+
 - **Email:** [business@newporthustle.game](mailto:business@newporthustle.game)
 - **Phone:** (870) 555-GAME
 
 ### 🤝 **Community Relations:**
+
 - **Email:** [community@newporthustle.game](mailto:community@newporthustle.game)
 - **Office:** Newport Community Center (when we remember to show up)
 
@@ -256,7 +282,7 @@ Email: **[community@newporthustle.game](mailto:community@newporthustle.game)**
 
 ### 🚗💨 Ready to Become Newport's Most Wanted?
 
-**[► PLAY THE DEMO NOW ◄](https://demo.newporthustle.game)**
+**[► VIEW LIVE UI PREVIEW ◄](https://debalent.github.io/Newport-Hustle/WebPreview/)**
 
 *Warning: May cause excessive laughter, nostalgia for small-town life, and an irresistible urge to visit Newport, Arkansas.*
 

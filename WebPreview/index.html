@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Screen nav breadcrumb for desktop visitors -->
+  <nav class="screen-nav" id="screen-nav" aria-label="Preview screens"></nav>
   <div id="app">
     <!-- Splash Screen -->
     <section class="screen screen--active" id="screen-splash">
@@ -56,20 +58,20 @@
       </header>
       <div class="screen__content">
         <div class="setting-row">
-          <span>Master Volume</span>
-          <input type="range" min="0" max="100" value="80" />
+          <label for="vol-master">Master Volume</label>
+          <input id="vol-master" type="range" min="0" max="100" value="80" title="Master Volume" />
         </div>
         <div class="setting-row">
-          <span>Music</span>
-          <input type="range" min="0" max="100" value="70" />
+          <label for="vol-music">Music</label>
+          <input id="vol-music" type="range" min="0" max="100" value="70" title="Music Volume" />
         </div>
         <div class="setting-row">
-          <span>SFX</span>
-          <input type="range" min="0" max="100" value="90" />
+          <label for="vol-sfx">SFX</label>
+          <input id="vol-sfx" type="range" min="0" max="100" value="90" title="SFX Volume" />
         </div>
         <div class="setting-row">
-          <span>Graphics</span>
-          <select>
+          <label for="graphics-quality">Graphics</label>
+          <select id="graphics-quality" title="Graphics Quality">
             <option>Auto</option>
             <option>High</option>
             <option>Medium</option>
@@ -85,6 +87,11 @@
         <div class="hud-bar__left">
           <span class="hud-pill">Respect: <strong>10</strong></span>
         </div>
+        <div class="hud-bar__center">
+          <div class="wanted-stars" aria-label="Wanted level 1 of 4">
+            <span class="star star--lit">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+        </div>
         <div class="hud-bar__right">
           <span class="hud-pill">$ <strong>325</strong></span>
         </div>
@@ -92,7 +99,9 @@
 
       <main class="hud-world">
         <div class="hud-world__label">Downtown Newport – White River Front</div>
-        <div class="hud-world__map">Map / world view placeholder</div>
+        <div class="hud-world__map">
+          <button class="hud-map-btn" data-target="screen-map">🗺 Open Map</button>
+        </div>
         <aside class="hud-objectives">
           <h2 class="hud-objectives__title">Current Objectives</h2>
           <ul class="hud-objectives__list" id="hud-objectives-list">
@@ -102,14 +111,143 @@
       </main>
 
       <footer class="hud-bar hud-bar--bottom">
-        <div class="joystick"></div>
+        <div class="joystick" aria-label="Movement joystick"></div>
         <div class="hud-actions">
-          <button class="hud-btn">Action</button>
-          <button class="hud-btn">Interact</button>
-          <button class="hud-btn hud-btn--accent" data-target="screen-main-menu">Pause</button>
+          <button class="hud-btn" data-target="screen-dialogue">Talk</button>
+          <button class="hud-btn" data-target="screen-wanted">Wanted</button>
+          <button class="hud-btn hud-btn--accent" data-target="screen-pause">Pause</button>
         </div>
       </footer>
     </section>
+
+    <!-- Pause Menu -->
+    <section class="screen" id="screen-pause">
+      <div class="screen__content screen__content--center">
+        <h2 class="section-heading">Paused</h2>
+        <button class="btn btn--primary" data-target="screen-hud">▶ Resume</button>
+        <button class="btn btn--secondary" data-target="screen-map">🗺 Open Map</button>
+        <button class="btn" data-target="screen-character">👤 Character</button>
+        <button class="btn" data-target="screen-settings">⚙ Settings</button>
+        <button class="btn btn--danger" data-target="screen-main-menu">✕ Quit to Menu</button>
+      </div>
+    </section>
+
+    <!-- Map Screen -->
+    <section class="screen" id="screen-map">
+      <header class="top-bar">
+        <button class="top-bar__back" data-target="screen-hud">◀</button>
+        <span class="top-bar__title">Newport Map</span>
+      </header>
+      <div class="screen__content">
+        <div class="map-container" role="img" aria-label="Newport city zones map">
+          <div class="map-zone map-zone--downtown">
+            <span class="map-zone__label">Downtown</span>
+          </div>
+          <div class="map-zone map-zone--active map-zone--barbers">
+            <span class="map-zone__label">Barber's Row ●</span>
+          </div>
+          <div class="map-zone map-zone--spa">
+            <span class="map-zone__label">Spa District</span>
+          </div>
+          <div class="map-zone map-zone--residential">
+            <span class="map-zone__label">Residential</span>
+          </div>
+          <div class="map-zone map-zone--locked map-zone--diaz">
+            <span class="map-zone__label">🔒 Diaz District</span>
+          </div>
+          <div class="map-zone map-zone--riverfront">
+            <span class="map-zone__label">White River Front</span>
+          </div>
+          <div class="map-player" aria-label="Player position">YOU</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dialogue Screen -->
+    <section class="screen" id="screen-dialogue">
+      <header class="top-bar">
+        <button class="top-bar__back" data-target="screen-hud">◀</button>
+        <span class="top-bar__title">Conversation</span>
+      </header>
+      <div class="screen__content">
+        <div class="dialogue-portrait">
+          <div class="portrait-icon">👴</div>
+          <div class="portrait-info">
+            <div class="portrait-name">Marcus (Mentor)</div>
+            <div class="portrait-role">Old Friend · Barber's Row</div>
+          </div>
+        </div>
+        <div class="dialogue-bubble dialogue-bubble--npc">
+          <p>"Welcome back to Newport, kid. Town's changed a little, but it still got the same heart. Come on — let me show you Barber's Row."</p>
+        </div>
+        <div class="dialogue-choices">
+          <button class="dialogue-choice">"What happened while I was gone?"</button>
+          <button class="dialogue-choice">"Let's get to it. I need the money."</button>
+          <button class="dialogue-choice dialogue-choice--exit" data-target="screen-hud">[ Walk away ]</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Character Creator -->
+    <section class="screen" id="screen-character">
+      <header class="top-bar">
+        <button class="top-bar__back" data-target="screen-pause">◀</button>
+        <span class="top-bar__title">Character</span>
+      </header>
+      <div class="screen__content">
+        <div class="char-preview">
+          <div class="char-avatar">👤</div>
+          <div class="char-stats">
+            <div class="char-stat"><span>Respect</span><div class="stat-bar"><div class="stat-fill stat-val--35"></div></div></div>
+            <div class="char-stat"><span>Hustle</span><div class="stat-bar"><div class="stat-fill stat-fill--gold stat-val--60"></div></div></div>
+            <div class="char-stat"><span>Stealth</span><div class="stat-bar"><div class="stat-fill stat-fill--blue stat-val--20"></div></div></div>
+            <div class="char-stat"><span>Charisma</span><div class="stat-bar"><div class="stat-fill stat-fill--purple stat-val--75"></div></div></div>
+          </div>
+        </div>
+        <div class="char-options">
+          <div class="char-option-group">
+            <span class="char-label">Style</span>
+            <div class="char-pills">
+              <button class="pill pill--active">Street</button>
+              <button class="pill">Business</button>
+              <button class="pill">Classic</button>
+            </div>
+          </div>
+          <div class="char-option-group">
+            <span class="char-label">Ride</span>
+            <div class="char-pills">
+              <button class="pill pill--active">Box Chevy</button>
+              <button class="pill">Cutlass</button>
+              <button class="pill">Tahoe</button>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn--primary" data-target="screen-pause">Save Character</button>
+      </div>
+    </section>
+
+    <!-- Wanted Level Screen -->
+    <section class="screen" id="screen-wanted">
+      <header class="top-bar top-bar--danger">
+        <button class="top-bar__back" data-target="screen-hud">◀</button>
+        <span class="top-bar__title">⚠ WANTED</span>
+      </header>
+      <div class="screen__content screen__content--center">
+        <div class="wanted-display">
+          <div class="wanted-stars-large" aria-label="2 of 4 stars wanted">
+            <span class="star star--lit star--lg">★</span>
+            <span class="star star--lit star--lg">★</span>
+            <span class="star star--lg">★</span>
+            <span class="star star--lg">★</span>
+          </div>
+          <p class="wanted-detail">2 Newport PD Units Responding</p>
+          <p class="wanted-sub">Officer Davis is on his way… again.</p>
+        </div>
+        <div class="wanted-tip">Tip: Hide in an alley or drive to the Riverfront to lose them.</div>
+        <button class="btn btn--secondary" data-target="screen-hud">Back to Game</button>
+      </div>
+    </section>
+
   </div>
 
   <script>
