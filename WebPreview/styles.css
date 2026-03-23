@@ -297,6 +297,7 @@ input[type="range"]::-webkit-slider-thumb {
   align-items: center;
   padding: 0.5rem 1rem;
   background: rgba(26, 26, 29, 0.8);
+  -webkit-backdrop-filter: blur(5px); /* For Safari */
   backdrop-filter: blur(5px);
   border-radius: var(--radius);
   border: 1px solid var(--border-color);
@@ -413,5 +414,68 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 0;
     border: none;
     max-height: 100vh;
+  }
+}
+
+/* --- Desktop & Larger Screens --- */
+@media (min-width: 1024px) {
+  body {
+    padding: 2rem;
+  }
+
+  #app {
+    max-width: 1400px;
+    max-height: 800px;
+    height: 90vh;
+    border-radius: 1.5rem;
+  }
+
+  .screen {
+    padding: 3rem;
+    gap: 2rem;
+  }
+
+  .screen__content--center {
+    flex-grow: 0;
+    flex-basis: 50%;
+    max-width: 600px;
+  }
+
+  .logo {
+    font-size: 6rem;
+  }
+
+  .btn {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    max-width: 400px; /* Stop buttons from being excessively wide */
+  }
+
+  .top-bar__title {
+    font-size: 2.5rem;
+  }
+
+  .list-item {
+    padding: 1.5rem;
+  }
+
+  .list-item__title {
+    font-size: 1.25rem;
+  }
+
+  .setting-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+  }
+
+  .setting-row label {
+    font-size: 1rem;
+    flex-basis: 30%;
+  }
+
+  input[type="range"] {
+    flex-basis: 70%;
   }
 }
