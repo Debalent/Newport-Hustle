@@ -13,6 +13,63 @@
   <div id="app">
 
     <!-- ============================================================
+         SVG DEFS — Logo symbol reused on Splash + Menu
+    ============================================================ -->
+    <svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+      <defs>
+        <symbol id="logo-symbol" viewBox="0 0 340 120">
+          <!-- Subtle glow behind HUSTLE -->
+          <ellipse cx="170" cy="90" rx="140" ry="32" fill="#e8ff42" opacity="0.06"/>
+          <!-- NEWPORT -->
+          <text x="170" y="38" text-anchor="middle"
+            font-family="'Bebas Neue',cursive"
+            font-size="40" letter-spacing="10"
+            paint-order="stroke fill"
+            stroke="#000" stroke-width="3" stroke-linejoin="round"
+            fill="#f5f5f5">NEWPORT</text>
+          <!-- Divider line with diamond centre -->
+          <line x1="15" y1="48" x2="145" y2="48" stroke="#e8ff42" stroke-width="2" opacity="0.7"/>
+          <polygon points="170,42 176,48 170,54 164,48" fill="#e8ff42"/>
+          <line x1="195" y1="48" x2="325" y2="48" stroke="#e8ff42" stroke-width="2" opacity="0.7"/>
+          <!-- HUSTLE -->
+          <text x="170" y="107" text-anchor="middle"
+            font-family="'Bangers',cursive"
+            font-size="74" letter-spacing="5"
+            paint-order="stroke fill"
+            stroke="#000" stroke-width="5" stroke-linejoin="round"
+            fill="#e8ff42">HUSTLE</text>
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- ============================================================
+         MOBILE NAV DRAWER (global overlay — above all screens)
+    ============================================================ -->
+    <div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+      <div class="nav-drawer__backdrop" id="nav-drawer-backdrop"></div>
+      <div class="nav-drawer__panel">
+        <div class="nav-drawer__header">
+          <span class="nav-drawer__title">Where to?</span>
+          <button class="nav-drawer__close" id="nav-drawer-close" aria-label="Close Menu" title="Close Menu">✕</button>
+        </div>
+        <nav class="nav-drawer__nav" aria-label="Game Navigation">
+          <button class="btn btn--xl" data-target="screen-character-creator" title="Character Creator">
+            <span class="btn__icon" aria-hidden="true">🧑</span>
+            <span class="btn__label">Character Creator</span>
+          </button>
+          <button class="btn btn--xl" data-target="screen-story-select" title="Story Mode">
+            <span class="btn__icon" aria-hidden="true">📖</span>
+            <span class="btn__label">Story Mode</span>
+          </button>
+          <button class="btn btn--xl" data-target="screen-settings" title="Settings">
+            <span class="btn__icon" aria-hidden="true">⚙️</span>
+            <span class="btn__label">Settings</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+
+    <!-- ============================================================
          GLOBAL OVERLAYS
     ============================================================ -->
 
@@ -35,7 +92,7 @@
       <div class="screen__content screen__content--center">
         <div class="logo-block">
           <p class="logo-eyebrow">Welcome to</p>
-          <h1 class="logo">Newport<br>Hustle</h1>
+          <svg class="logo-svg" aria-label="Newport Hustle" role="img"><use href="#logo-symbol"/></svg>
           <p class="logo-subline">The City Don't Sleep. Neither Do You.</p>
         </div>
         <p class="tagline" id="boot-text">HustleOS™ v4.20 — Initializing...</p>
@@ -53,11 +110,27 @@
       <div class="menu-bg" aria-hidden="true">
         <div class="menu-bg__city"></div>
       </div>
+
+      <!-- Hamburger — visible on mobile only, controlled via CSS -->
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Open Menu" aria-expanded="false" title="Open Menu">
+        <span class="hamburger-btn__bar"></span>
+        <span class="hamburger-btn__bar"></span>
+        <span class="hamburger-btn__bar"></span>
+      </button>
+
       <div class="screen__content screen__content--center">
         <div class="logo-block logo-block--compact">
-          <h1 class="logo logo--menu">Newport Hustle</h1>
+          <svg class="logo-svg" aria-label="Newport Hustle" role="img"><use href="#logo-symbol"/></svg>
           <p class="logo-subline">Newport, AR — Population: Your Problem</p>
         </div>
+
+        <!-- Mobile only: single primary CTA (hamburger handles the rest) -->
+        <button class="btn btn--primary btn--xl menu-cta" data-target="screen-missions" title="Start Game">
+          <span class="btn__icon" aria-hidden="true">🎮</span>
+          <span class="btn__label">Start Game</span>
+        </button>
+
+        <!-- Desktop only: full nav stack -->
         <nav class="menu-nav" aria-label="Main Menu">
           <button class="btn btn--primary btn--xl" data-target="screen-missions" title="Start Game">
             <span class="btn__icon" aria-hidden="true">🎮</span>
@@ -76,6 +149,7 @@
             <span class="btn__label">Settings</span>
           </button>
         </nav>
+
         <p class="menu-footer-text" aria-label="Warning">⚠️ Side effects of playing include: overconfidence, accidental swagger, and calling people "fam".</p>
       </div>
     </section>
