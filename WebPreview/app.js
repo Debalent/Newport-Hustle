@@ -36,8 +36,9 @@
   /* -------------------------------------------------------
      DOM REFS
   ------------------------------------------------------- */
-  const muteBtn = document.getElementById('mute-btn');
-  const bgMusic = document.getElementById('bg-music');
+  const muteBtn  = document.getElementById('mute-btn');
+  const bgMusic   = document.getElementById('bg-music');
+  const bgMusic2  = document.getElementById('bg-music-2');
 
   /* -------------------------------------------------------
      WEB AUDIO FALLBACK SYSTEM
@@ -208,23 +209,37 @@
   function startMusic() {
     if (state.musicStarted) return;
     state.musicStarted = true;
-    if (bgMusic) {
-      // Primary: play the actual audio file
-      bgMusic.volume = state.musicMuted ? 0 : state.musicVolume;
-      bgMusic.play().catch(() => {
-        // File failed (e.g. local dev) — fall back to synthesizer
-        _startSynth();
-      });
-    } else {
-      _startSynth();
+    if (!bgMusic) { _startSynth(); return; }
+
+    // Build playlist: track 1 then track 2, cycling forever
+    var _playlist = [bgMusic, bgMusic2 || bgMusic];
+    var _playIdx  = 0;
+
+    function _applyVol(t) {
+      t.volume = state.musicMuted ? 0 : state.musicVolume;
     }
+
+    function _playNext() {
+      _playIdx = (_playIdx + 1) % _playlist.length;
+      var next = _playlist[_playIdx];
+      next.currentTime = 0;
+      _applyVol(next);
+      next.play().catch(function() {});
+    }
+
+    _playlist.forEach(function(t) {
+      _applyVol(t);
+      t.addEventListener('ended', _playNext);
+    });
+
+    _playlist[0].play().catch(function() { _startSynth(); });
   }
 
   function toggleMute() {
     state.musicMuted = !state.musicMuted;
-    if (bgMusic) {
-      bgMusic.volume = state.musicMuted ? 0 : state.musicVolume;
-    }
+    [bgMusic, bgMusic2].forEach(function(t) {
+      if (t) t.volume = state.musicMuted ? 0 : state.musicVolume;
+    });
     if (masterGain && audioCtx) {
       masterGain.gain.setTargetAtTime(
         state.musicMuted ? 0 : state.musicVolume * 0.5,
@@ -478,10 +493,12 @@
       if (!input || !label) return;
       input.addEventListener('input', () => {
         label.textContent = input.value;
-        if (inputId === 'vol-music' && bgMusic) {
+        if (inputId === 'vol-music') {
           const vol = input.value / 100;
           state.musicVolume = vol;
-          bgMusic.volume = state.musicMuted ? 0 : vol;
+          [bgMusic, bgMusic2].forEach(function(t) {
+            if (t) t.volume = state.musicMuted ? 0 : vol;
+          });
           localStorage.setItem('nh_vol', String(vol));
         }
       });
