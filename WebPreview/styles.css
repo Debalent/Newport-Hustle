@@ -76,18 +76,21 @@ body {
   padding: 1.5rem;
   opacity: 0;
   pointer-events: none;
-  transform: translateX(20px);
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  transform: translateX(30px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.screen.screen--exit {
+  transform: translateX(-30px);
 }
 
 .screen--active {
   opacity: 1;
   pointer-events: auto;
   transform: translateX(0);
-  transition: opacity 0.4s ease-in, transform 0.4s ease-in;
 }
 
 .screen__content {

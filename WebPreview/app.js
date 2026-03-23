@@ -1,6 +1,8 @@
 (function () {
   const screens = document.querySelectorAll(".screen");
   const music = document.getElementById("bg-music");
+  const sfxClick = document.getElementById("sfx-click");
+  const sfxWhoosh = document.getElementById("sfx-whoosh");
   const muteBtn = document.getElementById("mute-btn");
   let selectedMissionId = null;
   let isMusicPlaying = false;
@@ -10,10 +12,24 @@
     muted: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 3.00024L7.00006 8.00024H3.00006V16.0002H7.00006L13.0001 21.0002V3.00024ZM18.2427 12.0002L20.364 9.87891L18.9498 8.46469L16.8285 10.586L14.7072 8.46469L13.293 9.87891L15.4143 12.0002L13.293 14.1215L14.7072 15.5358L16.8285 13.4144L18.9498 15.5358L20.364 14.1215L18.2427 12.0002Z"></path></svg>`,
   };
 
+  function playSfx(sfx) {
+    if (sfx && !music.muted) {
+      sfx.currentTime = 0;
+      sfx.play();
+    }
+  }
+
   function showScreen(id) {
-    screens.forEach((s) => {
-      s.classList.toggle("screen--active", s.id === id);
-    });
+    let currentScreen = document.querySelector(".screen--active");
+    if (currentScreen) {
+      currentScreen.classList.remove("screen--active");
+    }
+
+    const newScreen = document.getElementById(id);
+    if (newScreen) {
+      newScreen.classList.add("screen--active");
+      playSfx(sfxWhoosh);
+    }
   }
 
   function startMusic() {
@@ -35,14 +51,14 @@
 
   function initNavigation() {
     document.body.addEventListener("click", (event) => {
-      // Start music on first interaction
       startMusic();
 
       const target = event.target.closest("[data-target]");
       if (target) {
+        playSfx(sfxClick);
         const screenId = target.getAttribute("data-target");
         if (screenId === "screen-hud" && !selectedMissionId) {
-          return; // Block entering HUD without a mission
+          return;
         }
         showScreen(screenId);
       }
@@ -69,6 +85,7 @@
         <div class="list-item__subtitle">${mission.description}</div>`;
 
       li.addEventListener("click", () => {
+        playSfx(sfxClick);
         selectedMissionId = mission.missionID;
         document.querySelectorAll(".list-item").forEach((el) => {
           el.classList.toggle("list-item--selected", el === li);
@@ -80,13 +97,16 @@
   }
 
   function init() {
-    // Set initial mute button icon
     muteBtn.innerHTML = music.muted ? ICONS.muted : ICONS.volume;
-    muteBtn.addEventListener("click", toggleMute);
+    muteBtn.addEventListener("click", (e) => {
+        e.stopPropagation(); // prevent navigation
+        playSfx(sfxClick);
+        toggleMute();
+    });
     
     initNavigation();
     renderMissions();
-    showScreen("screen-splash"); // Ensure splash is the first screen
+    showScreen("screen-splash");
   }
 
   document.addEventListener("DOMContentLoaded", init);
