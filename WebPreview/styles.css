@@ -329,6 +329,16 @@ body {
   animation: fadeIn 1.2s ease;
 }
 
+/* SVG logo — replaces the plain text h1 logo */
+.logo-svg {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+  animation: logo-stamp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  overflow: visible; /* needed for SVG stroke effects */
+}
+
 .tagline {
   font-size: 0.85rem;
   color: var(--accent-lime);
@@ -492,6 +502,162 @@ body {
   font-style: italic;
   max-width: 300px;
   line-height: 1.5;
+}
+
+/* Mobile-only primary CTA — hidden on desktop */
+.menu-cta {
+  max-width: 340px;
+  width: 100%;
+}
+
+/* Hamburger button — mobile only, hidden on desktop via media query */
+.hamburger-btn {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-md);
+  z-index: 25;
+  width: var(--touch-min);
+  height: var(--touch-min);
+  background: rgba(24,24,29,0.85);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.hamburger-btn:hover {
+  border-color: var(--accent-lime);
+  box-shadow: 0 0 12px var(--glow-lime);
+}
+
+.hamburger-btn__bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+  transform-origin: center;
+}
+
+/* Animate bars into an X when open */
+.hamburger-btn.is-open .hamburger-btn__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger-btn.is-open .hamburger-btn__bar:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+
+.hamburger-btn.is-open .hamburger-btn__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ---------------------------------------------------------------
+   MOBILE NAV DRAWER (bottom sheet)
+--------------------------------------------------------------- */
+.nav-drawer {
+  position: absolute;
+  inset: 0;
+  z-index: 80; /* above screens, below audio controls */
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav-drawer.nav-drawer--open {
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.nav-drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.nav-drawer--open .nav-drawer__backdrop {
+  opacity: 1;
+}
+
+.nav-drawer__panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-top: 2px solid var(--accent-lime);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Drag handle hint */
+}
+
+.nav-drawer__panel::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 4px;
+  background: var(--border-subtle);
+  border-radius: var(--radius-pill);
+  margin: 0 auto var(--space-md);
+}
+
+.nav-drawer--open .nav-drawer__panel {
+  transform: translateY(0);
+}
+
+.nav-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xs);
+}
+
+.nav-drawer__title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+}
+
+.nav-drawer__close {
+  background: transparent;
+  border: 2px solid var(--border-subtle);
+  color: var(--text-secondary);
+  width: var(--touch-min);
+  height: var(--touch-min);
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.nav-drawer__close:hover {
+  color: var(--accent-lime);
+  border-color: var(--accent-lime);
+}
+
+.nav-drawer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
 /* ---------------------------------------------------------------
@@ -1145,6 +1311,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
     border-radius: 0;
     border: none;
   }
+
+  /* show hamburger + mobile CTA; hide full nav links */
+  .hamburger-btn { display: flex; }
+  .menu-cta      { display: flex; }
+  .menu-nav      { display: none; }
 }
 
 /* ---------------------------------------------------------------
@@ -1152,6 +1323,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
    Show #app as a centered phone-like card
 --------------------------------------------------------------- */
 @media (min-width: 768px) {
+  /* tablet/desktop: full nav links; hide mobile-only controls */
+  .hamburger-btn { display: none; }
+  .menu-cta      { display: none; }
+  .nav-drawer    { display: none; }
+
   body {
     padding: 2rem;
     background:

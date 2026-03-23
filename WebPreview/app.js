@@ -444,6 +444,45 @@
   }
 
   /* -------------------------------------------------------
+     HAMBURGER NAV DRAWER
+  ------------------------------------------------------- */
+  function initHamburger() {
+    var hamburgerBtn = document.getElementById('hamburger-btn');
+    var drawer       = document.getElementById('nav-drawer');
+    var backdrop     = document.getElementById('nav-drawer-backdrop');
+    var closeBtn     = document.getElementById('nav-drawer-close');
+    if (!hamburgerBtn || !drawer) return;
+
+    function openDrawer() {
+      drawer.classList.add('nav-drawer--open');
+      drawer.setAttribute('aria-hidden', 'false');
+      hamburgerBtn.setAttribute('aria-expanded', 'true');
+      hamburgerBtn.classList.add('is-open');
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('nav-drawer--open');
+      drawer.setAttribute('aria-hidden', 'true');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+      hamburgerBtn.classList.remove('is-open');
+    }
+
+    hamburgerBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      startMusic();
+      openDrawer();
+    });
+
+    if (closeBtn)  closeBtn.addEventListener('click', closeDrawer);
+    if (backdrop)  backdrop.addEventListener('click', closeDrawer);
+
+    // Close drawer when a nav item inside it is tapped
+    drawer.addEventListener('click', function (e) {
+      if (e.target.closest('[data-target]')) closeDrawer();
+    });
+  }
+
+  /* -------------------------------------------------------
      INIT
   ------------------------------------------------------- */
   function init() {
@@ -466,6 +505,7 @@
 
     // Wire up all subsystems
     initNavigation();
+    initHamburger();
     initCharacterCreator();
     initStorySelect();
     initSettings();
