@@ -1150,6 +1150,14 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 /* ---------------------------------------------------------------
+   MAP SCREEN — fill edge to edge
+--------------------------------------------------------------- */
+#screen-map {
+  padding: 0;
+  gap: 0;
+}
+
+/* ---------------------------------------------------------------
    HUD
 --------------------------------------------------------------- */
 .hud-bar {
@@ -1174,25 +1182,216 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .hud-world {
   position: absolute;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-sm);
+  overflow: hidden;
   z-index: 1;
+  background: #0a1a0e;
 }
 
-.hud-world__text {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  letter-spacing: 3px;
-  color: rgba(255,255,255,0.1);
+/* Sky */
+.hw-sky {
+  position: absolute;
+  inset: 0 0 40% 0;
+  background: linear-gradient(180deg, #0d1f3c 0%, #1a3a5c 60%, #2c5f3e 100%);
+  animation: dayCycle 40s linear infinite;
+}
+@keyframes dayCycle {
+  0%   { background: linear-gradient(180deg,#0d1f3c 0%,#1a3a5c 60%,#2c5f3e 100%); }
+  25%  { background: linear-gradient(180deg,#f4a261 0%,#e76f51 40%,#2d6a4f 100%); }
+  50%  { background: linear-gradient(180deg,#219ebc 0%,#8ecae6 50%,#3a7d44 100%); }
+  75%  { background: linear-gradient(180deg,#f4a261 0%,#e76f51 40%,#2d6a4f 100%); }
+  100% { background: linear-gradient(180deg,#0d1f3c 0%,#1a3a5c 60%,#2c5f3e 100%); }
 }
 
-.hud-world__subtext {
+/* Buildings silhouette */
+.hw-buildings {
+  position: absolute;
+  bottom: 40%;
+  left: 0; right: 0;
+  height: 55%;
+  pointer-events: none;
+}
+.hw-bld {
+  position: absolute;
+  bottom: 0;
+  background: rgba(10,10,14,0.85);
+  border-radius: 2px 2px 0 0;
+}
+
+/* Ground */
+.hw-ground {
+  position: absolute;
+  inset: 60% 0 0 0;
+  background: #1a1a1f;
+}
+
+/* Roads */
+.hw-road {
+  position: absolute;
+  background: #2a2a32;
+}
+.hw-road--h { left:0; right:0; height: 18%; }
+.hw-road--v { top:0; bottom:0; width: 14%; }
+
+/* Center dashes */
+.hw-centerline {
+  position: absolute;
+  background: repeating-linear-gradient(
+    to right,
+    #ffd700 0px, #ffd700 14px,
+    transparent 14px, transparent 28px
+  );
+  opacity: 0.5;
+}
+.hw-centerline--h {
+  left: 0; right: 0;
+  height: 2px;
+}
+.hw-centerline--v {
+  top: 0; bottom: 0;
+  width: 2px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #ffd700 0px, #ffd700 14px,
+    transparent 14px, transparent 28px
+  );
+}
+
+/* Street lights */
+.hw-light {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #ffe066;
+  box-shadow: 0 0 12px 4px rgba(255,224,102,0.5);
+  animation: lightFlicker 3s ease-in-out infinite;
+}
+@keyframes lightFlicker {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0.75; }
+}
+
+/* Cars */
+.hw-car {
+  position: absolute;
+  font-size: 1.1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+.hw-car--1 {
+  top: 32%;
+  animation: carMoveR 9s linear infinite;
+}
+.hw-car--2 {
+  top: 37%;
+  animation: carMoveL 12s linear infinite;
+  transform: scaleX(-1);
+}
+.hw-car--3 {
+  top: 63%;
+  animation: carMoveR 7s 2s linear infinite;
+}
+.hw-car--4 {
+  top: 68%;
+  animation: carMoveL 10s 4s linear infinite;
+  transform: scaleX(-1);
+}
+@keyframes carMoveR {
+  from { left: -6%; }
+  to   { left: 106%; }
+}
+@keyframes carMoveL {
+  from { right: -6%; left: auto; }
+  to   { right: 106%; left: auto; }
+}
+
+/* NPC dots */
+.hw-npc {
+  position: absolute;
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.08);
+  animation: npcWander 6s ease-in-out infinite alternate;
+}
+.hw-npc:nth-child(odd)  { animation-duration: 5s; }
+.hw-npc:nth-child(even) { animation-duration: 7s; animation-delay: 1s; }
+@keyframes npcWander {
+  0%   { transform: translate(0,0); }
+  33%  { transform: translate(12px,-6px); }
+  66%  { transform: translate(-8px,10px); }
+  100% { transform: translate(6px,-4px); }
+}
+
+/* Player */
+.hw-player {
+  position: absolute;
+  font-size: 1.4rem;
+  left: 46%;
+  top:  44%;
+  animation: playerBob 1.4s ease-in-out infinite alternate;
+  z-index: 5;
+  filter: drop-shadow(0 0 6px rgba(232,255,66,0.6));
+}
+@keyframes playerBob {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-4px); }
+}
+
+/* Mission objective ticker */
+.hw-objective {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.7);
+  border: 1px solid var(--accent-lime);
+  border-radius: var(--radius-pill);
+  padding: 0.2rem 0.75rem;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 0.65rem;
+  max-width: 90%;
+}
+.hw-obj-label {
+  font-family: var(--font-heading);
+  color: var(--accent-lime);
+  letter-spacing: 1px;
+  font-size: 0.7rem;
+}
+.hw-obj-text {
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+/* LIVE badge */
+.hw-live {
+  position: absolute;
+  top: 18%;
+  right: 5%;
+  background: var(--accent-red);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
   letter-spacing: 2px;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  animation: livePulse 1.5s ease-in-out infinite;
+}
+@keyframes livePulse {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0.6; }
+}
+
+/* Location tag */
+.hw-location {
+  position: absolute;
+  bottom: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.35);
+  white-space: nowrap;
 }
 
 .hud-stat {
@@ -1255,25 +1454,118 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 /* ---------------------------------------------------------------
-   MAP PLACEHOLDER
+   NEWPORT MAP
 --------------------------------------------------------------- */
-.map-placeholder {
+.map-wrap {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-md);
-  padding: var(--space-xl);
-  border: 2px dashed var(--border-subtle);
-  border-radius: var(--radius-lg);
-  text-align: center;
+  align-items: stretch;
 }
 
-.map-placeholder__icon { font-size: 4rem; }
+.newport-map {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
 
-.map-placeholder__text {
-  font-size: 0.9rem;
+.map-zone {
+  cursor: pointer;
+  transition: fill-opacity 0.2s, stroke-width 0.2s;
+}
+.map-zone:hover,
+.map-zone:focus  { fill-opacity: 0.35; stroke-width: 3; }
+.map-zone--locked { cursor: not-allowed; }
+
+.map-zone-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  pointer-events: none;
+}
+
+.player-dot {
+  animation: playerPulse 1.6s ease-in-out infinite alternate;
+}
+@keyframes playerPulse {
+  from { opacity: 0.9; }
+  to   { opacity: 0.6; }
+}
+
+/* Zone popup */
+.map-popup {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  min-width: 180px;
+  max-width: 260px;
+  z-index: 20;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.map-popup.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) scale(1);
+}
+.map-popup__close {
+  position: absolute;
+  top: 6px; right: 8px;
+  background: none;
+  border: none;
   color: var(--text-secondary);
-  line-height: 1.6;
+  cursor: pointer;
+  font-size: 0.8rem;
+  line-height: 1;
+  padding: 2px 4px;
+}
+.map-popup__name {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+.map-popup__tag {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.3rem;
+}
+.map-popup__missions {
+  font-size: 0.72rem;
+  color: var(--accent-lime);
+  font-weight: 700;
+}
+
+/* Map legend */
+.map-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem var(--space-md);
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+.map-legend__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
 }
 
 /* ---------------------------------------------------------------

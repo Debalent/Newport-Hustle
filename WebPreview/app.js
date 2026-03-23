@@ -151,9 +151,10 @@
   /* Called once every time a screen becomes active */
   function onScreenEnter(id) {
     switch (id) {
-      case 'screen-missions':        renderMissions(); break;
+      case 'screen-missions':          renderMissions(); break;
       case 'screen-character-creator': syncCreatorPreview(); break;
-      case 'screen-hud':             initHudSim(); break;
+      case 'screen-hud':               initHudSim(); break;
+      case 'screen-map':               initMap(); break;
       default: break;
     }
   }
@@ -533,7 +534,6 @@
      HUD SIMULATION
   ------------------------------------------------------- */
   function initHudSim() {
-    // Simple animated money counter to feel alive
     const moneyEl   = document.getElementById('hud-money');
     const respectEl = document.getElementById('hud-respect');
     if (!moneyEl || !respectEl) return;
@@ -548,15 +548,104 @@
       respectEl.textContent = `Rep: ${rep}`;
     }, 2000);
 
-    // Stop when we leave the HUD screen
+    // Cycle active mission objective text
+    var objectives = [
+      "Head to Barber's Row",
+      "Meet your mentor downtown",
+      "Earn $50 in tips",
+      "Talk to the Spa Owner",
+      "Start a side hustle",
+      "Avoid police heat",
+      "Explore the Riverfront",
+    ];
+    var objEl = document.getElementById('hw-obj-text');
+    var objIdx = 0;
+    var objTimer = setInterval(function() {
+      objIdx = (objIdx + 1) % objectives.length;
+      if (objEl) objEl.textContent = objectives[objIdx];
+    }, 5000);
+
+    // Stop timers when we leave the HUD screen
     const observer = new MutationObserver(() => {
       const hudScreen = document.getElementById('screen-hud');
       if (!hudScreen.classList.contains('screen--active')) {
         clearInterval(ticker);
+        clearInterval(objTimer);
         observer.disconnect();
       }
     });
     observer.observe(document.getElementById('screen-hud'), { attributes: true, attributeFilter: ['class'] });
+  }
+
+  /* -------------------------------------------------------
+     MAP — Zone tap interactions
+  ------------------------------------------------------- */
+  var _mapInited = false;
+  function initMap() {
+    if (_mapInited) return;
+    _mapInited = true;
+
+    var popup     = document.getElementById('map-popup');
+    var popupName = document.getElementById('map-popup-name');
+    var popupTag  = document.getElementById('map-popup-tag');
+    var popupMissions = document.getElementById('map-popup-missions');
+    var popupClose = document.getElementById('map-popup-close');
+    var popupGo   = document.getElementById('map-popup-go');
+    if (!popup) return;
+
+    var zoneColors = {
+      downtown:    '#e8ff42',
+      riverfront:  '#4ecdc4',
+      barbersrow:  '#e8ff42',
+      strip:       '#ff6b9d',
+      spa:         '#4ecdc4',
+      residential: '#aaa',
+      diaz:        '#f94144',
+      airport:     '#f94144',
+    };
+
+    function openPopup(el) {
+      var name     = el.getAttribute('data-name');
+      var tag      = el.getAttribute('data-tag');
+      var missions = parseInt(el.getAttribute('data-missions'), 10);
+      var zone     = el.getAttribute('data-zone');
+      var color    = zoneColors[zone] || '#fff';
+      popupName.textContent = name;
+      popupName.style.color = color;
+      popupTag.textContent  = tag;
+      popupMissions.textContent = missions > 0
+        ? missions + ' active mission' + (missions === 1 ? '' : 's')
+        : 'No missions available yet';
+      popupMissions.style.color = missions > 0 ? '#e8ff42' : '#888';
+      popupGo.style.display = missions > 0 ? 'inline-block' : 'none';
+      popup.classList.add('is-visible');
+    }
+
+    document.querySelectorAll('.map-zone').forEach(function(zone) {
+      zone.addEventListener('click', function(e) {
+        e.stopPropagation();
+        openPopup(this);
+      });
+    });
+
+    if (popupClose) {
+      popupClose.addEventListener('click', function() {
+        popup.classList.remove('is-visible');
+      });
+    }
+
+    // Tapping outside the popup closes it
+    document.getElementById('screen-map').addEventListener('click', function() {
+      popup.classList.remove('is-visible');
+    });
+
+    if (popupGo) {
+      popupGo.addEventListener('click', function(e) {
+        e.stopPropagation();
+        popup.classList.remove('is-visible');
+        showScreen('screen-missions');
+      });
+    }
   }
 
   /* -------------------------------------------------------
