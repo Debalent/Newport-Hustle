@@ -19,7 +19,7 @@
       <defs>
         <symbol id="logo-symbol" viewBox="0 0 340 120">
           <!-- Subtle glow behind HUSTLE -->
-          <ellipse cx="170" cy="90" rx="140" ry="32" fill="#e8ff42" opacity="0.06"/>
+          <ellipse cx="170" cy="90" rx="140" ry="32" fill="#FF7A00" opacity="0.06"/>
           <!-- NEWPORT -->
           <text x="170" y="38" text-anchor="middle"
             font-family="'Bebas Neue',cursive"
@@ -28,16 +28,16 @@
             stroke="#000" stroke-width="3" stroke-linejoin="round"
             fill="#f5f5f5">NEWPORT</text>
           <!-- Divider line with diamond centre -->
-          <line x1="15" y1="48" x2="145" y2="48" stroke="#e8ff42" stroke-width="2" opacity="0.7"/>
-          <polygon points="170,42 176,48 170,54 164,48" fill="#e8ff42"/>
-          <line x1="195" y1="48" x2="325" y2="48" stroke="#e8ff42" stroke-width="2" opacity="0.7"/>
+          <line x1="15" y1="48" x2="145" y2="48" stroke="#FF7A00" stroke-width="2" opacity="0.7"/>
+          <polygon points="170,42 176,48 170,54 164,48" fill="#FF7A00"/>
+          <line x1="195" y1="48" x2="325" y2="48" stroke="#FF7A00" stroke-width="2" opacity="0.7"/>
           <!-- HUSTLE -->
           <text x="170" y="107" text-anchor="middle"
             font-family="'Bangers',cursive"
             font-size="74" letter-spacing="5"
             paint-order="stroke fill"
             stroke="#000" stroke-width="5" stroke-linejoin="round"
-            fill="#e8ff42">HUSTLE</text>
+            fill="#FF7A00">HUSTLE</text>
         </symbol>
       </defs>
     </svg>
@@ -81,6 +81,9 @@
       <button id="mute-btn" class="audio-btn" aria-label="Toggle Music"></button>
     </div>
 
+    <!-- TOAST NOTIFICATION CONTAINER (global overlay) -->
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="false"></div>
+
     <!-- ============================================================
          SCREEN 1: SPLASH
     ============================================================ -->
@@ -90,9 +93,8 @@
         <div class="splash-bg__glow"></div>
       </div>
       <div class="screen__content screen__content--center">
-        <div class="logo-block">
-          <p class="logo-eyebrow">Welcome to</p>
-          <svg class="logo-svg" aria-label="Newport Hustle" role="img"><use href="#logo-symbol"/></svg>
+        <div class="logo-block splash-logo-block">
+          <img src="./assets/hustlin-main.png" class="splash-logo-img" alt="Newport Hustle" />
           <p class="logo-subline">The City Don't Sleep. Neither Do You.</p>
         </div>
         <p class="tagline" id="boot-text">HustleOS™ v4.20 — Initializing...</p>
@@ -120,7 +122,7 @@
 
       <div class="screen__content screen__content--center">
         <div class="logo-block logo-block--compact">
-          <svg class="logo-svg" aria-label="Newport Hustle" role="img"><use href="#logo-symbol"/></svg>
+          <img src="./assets/hustlin-secondary.png" class="secondary-logo-img" alt="Newport Hustle" />
           <p class="logo-subline">Newport, AR — Population: Your Problem</p>
         </div>
 
@@ -162,6 +164,7 @@
         <button class="top-bar__back" data-target="screen-main-menu" aria-label="Back to Main Menu" title="Back">
           <span aria-hidden="true">←</span>
         </button>
+        <img src="./assets/hustlin-secondary.png" class="top-bar__logo" alt="Newport Hustle" />
         <h2 class="top-bar__title">Character Creator</h2>
         <button class="btn btn--sm btn--accent" id="btn-save-character" title="Save Character" aria-label="Save Character">Done</button>
       </header>
@@ -206,7 +209,7 @@
           <fieldset class="creator-section">
             <legend class="creator-section__title">Outfit</legend>
             <div class="outfit-grid" id="outfit-swatches" role="radiogroup" aria-label="Outfit">
-              <button class="outfit-card outfit-card--active" data-outfit="hustler" data-color="#e8ff42" title="Street Hustler" aria-label="Street Hustler outfit">
+              <button class="outfit-card outfit-card--active" data-outfit="hustler" data-color="#FF7A00" title="Street Hustler" aria-label="Street Hustler outfit">
                 <span class="outfit-card__icon">🔥</span>
                 <span class="outfit-card__label">Hustler</span>
               </button>
@@ -250,6 +253,7 @@
         <button class="top-bar__back" data-target="screen-main-menu" aria-label="Back to Main Menu" title="Back">
           <span aria-hidden="true">←</span>
         </button>
+        <img src="./assets/hustlin-secondary.png" class="top-bar__logo" alt="Newport Hustle" />
         <h2 class="top-bar__title">Choose Your Path</h2>
       </header>
 
@@ -308,6 +312,7 @@
         <button class="top-bar__back" data-target="screen-main-menu" aria-label="Back to Main Menu" title="Back">
           <span aria-hidden="true">←</span>
         </button>
+        <img src="./assets/hustlin-secondary.png" class="top-bar__logo" alt="Newport Hustle" />
         <h2 class="top-bar__title">Missions</h2>
       </header>
       <div class="screen__content">
@@ -329,6 +334,7 @@
         <button class="top-bar__back" data-target="screen-main-menu" aria-label="Back to Main Menu" title="Back">
           <span aria-hidden="true">←</span>
         </button>
+        <img src="./assets/hustlin-secondary.png" class="top-bar__logo" alt="Newport Hustle" />
         <h2 class="top-bar__title">Settings</h2>
       </header>
       <div class="screen__content">
@@ -383,97 +389,737 @@
     </section>
 
     <!-- ============================================================
-         SCREEN 7: HUD (In-Game)
+         SCREEN 7: HUD (In-Game) — GTA V-inspired cinematic HUD
     ============================================================ -->
     <section class="screen" id="screen-hud">
 
-      <!-- HUD: Top Bar -->
-      <div class="hud-bar hud-bar--top">
-        <div class="hud-stat" aria-label="Cash">
-          <span class="hud-stat__icon" aria-hidden="true">💰</span>
-          <span class="hud-stat__value" id="hud-money">$325</span>
-        </div>
-        <div class="wanted-stars" aria-label="Heat Level: 3 stars">
-          <span class="star star--lit" aria-hidden="true">★</span>
-          <span class="star star--lit" aria-hidden="true">★</span>
-          <span class="star star--lit" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-        </div>
-        <div class="hud-stat" aria-label="Respect">
-          <span class="hud-stat__icon" aria-hidden="true">⭐</span>
-          <span class="hud-stat__value" id="hud-respect">Rep: 10</span>
-        </div>
-      </div>
+      <!-- ── CITY WORLD (top-down SVG canvas — full bleed) ── -->
+      <div class="hud-world" aria-hidden="true" id="hud-world">
+        <svg id="city-svg" class="city-svg" viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <!-- Sunset sky gradient -->
+            <linearGradient id="sky-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"   stop-color="#0d1520"/>
+              <stop offset="40%"  stop-color="#1a2a40" id="sky-mid"/>
+              <stop offset="75%"  stop-color="#c05a2c" id="sky-warm"/>
+              <stop offset="100%" stop-color="#e07830" id="sky-horizon"/>
+            </linearGradient>
+            <!-- Asphalt texture gradient -->
+            <linearGradient id="asphalt" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"  stop-color="#1e1e26"/>
+              <stop offset="100%" stop-color="#151518"/>
+            </linearGradient>
+            <!-- Sidewalk gradient -->
+            <linearGradient id="sidewalk" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"  stop-color="#2a2a34"/>
+              <stop offset="100%" stop-color="#1f1f28"/>
+            </linearGradient>
+            <!-- Building glass reflections -->
+            <linearGradient id="glass-blue" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="#1b3a5c"/>
+              <stop offset="50%" stop-color="#2560a0" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="#0e1e35"/>
+            </linearGradient>
+            <linearGradient id="glass-warm" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="#3a2010"/>
+              <stop offset="60%" stop-color="#c07030" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#1a0e08"/>
+            </linearGradient>
+            <linearGradient id="brick-red" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"  stop-color="#4a2010"/>
+              <stop offset="100%" stop-color="#2a1008"/>
+            </linearGradient>
+            <linearGradient id="concrete-grey" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%"  stop-color="#353540"/>
+              <stop offset="100%" stop-color="#1e1e28"/>
+            </linearGradient>
+            <!-- Headlight cone -->
+            <radialGradient id="headlight" cx="50%" cy="100%" r="80%" fx="50%" fy="100%">
+              <stop offset="0%"  stop-color="#fff9e8" stop-opacity="0.85"/>
+              <stop offset="100%" stop-color="#fff9e8" stop-opacity="0"/>
+            </radialGradient>
+            <!-- Streetlight corona -->
+            <radialGradient id="streetglow">
+              <stop offset="0%"  stop-color="#ffe8a0" stop-opacity="0.9"/>
+              <stop offset="40%" stop-color="#ffd060" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#ffd060" stop-opacity="0"/>
+            </radialGradient>
+            <!-- Bloom filter -->
+            <filter id="bloom" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+              <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+            </filter>
+            <!-- Motion blur -->
+            <filter id="motion-blur-h">
+              <feGaussianBlur stdDeviation="3 0.5"/>
+            </filter>
+            <filter id="motion-blur-v">
+              <feGaussianBlur stdDeviation="0.5 3"/>
+            </filter>
+            <!-- Shadow drop -->
+            <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.7"/>
+            </filter>
+            <!-- Subtle fog -->
+            <filter id="fog-blur">
+              <feGaussianBlur stdDeviation="1.2"/>
+            </filter>
+          </defs>
 
-      <!-- HUD: Center (animated gameplay preview) -->
-      <div class="hud-world" aria-hidden="true">
+          <!-- ══════════════════════════════════
+               BACKGROUND: CITY SKYLINE (horizon)
+          ══════════════════════════════════ -->
+          <!-- Sky fill -->
+          <rect x="0" y="0" width="420" height="560" fill="url(#sky-grad)"/>
 
-        <!-- Sky gradient -->
-        <div class="hw-sky" id="hw-sky"></div>
+          <!-- Distant city silhouette -->
+          <g id="skyline" opacity="0.9">
+            <!-- Tall glass tower left -->
+            <rect x="10"  y="28" width="38" height="90" fill="url(#glass-blue)" rx="2"/>
+            <rect x="12"  y="28" width="6"  height="90" fill="#2a5080" opacity="0.4"/>
+            <rect x="20"  y="28" width="6"  height="90" fill="#2a5080" opacity="0.4"/>
+            <rect x="28"  y="28" width="6"  height="90" fill="#2a5080" opacity="0.4"/>
+            <!-- Antenna -->
+            <line x1="29" y1="28" x2="29" y2="14" stroke="#6090c0" stroke-width="1.2"/>
+            <circle cx="29" cy="13" r="1.5" fill="#f94144" opacity="0.8">
+              <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite"/>
+            </circle>
 
-        <!-- Buildings silhouette (background) -->
-        <div class="hw-buildings">
-          <div class="hw-bld" style="left:2%;width:9%;height:38%"></div>
-          <div class="hw-bld" style="left:12%;width:7%;height:28%"></div>
-          <div class="hw-bld" style="left:20%;width:11%;height:45%"></div>
-          <div class="hw-bld" style="left:33%;width:8%;height:32%"></div>
-          <div class="hw-bld" style="left:60%;width:10%;height:40%"></div>
-          <div class="hw-bld" style="left:72%;width:8%;height:30%"></div>
-          <div class="hw-bld" style="left:82%;width:12%;height:48%"></div>
-        </div>
+            <!-- Mid-rise brick left -->
+            <rect x="54"  y="52" width="28" height="66" fill="url(#brick-red)" rx="1"/>
+            <rect x="56"  y="56" width="5" height="7" fill="#ffe090" opacity="0.6"/>
+            <rect x="64"  y="56" width="5" height="7" fill="#ffe090" opacity="0.6"/>
+            <rect x="72"  y="56" width="5" height="7" fill="#ffe090" opacity="0.3"/>
+            <rect x="56"  y="68" width="5" height="7" fill="#ffe090" opacity="0.5"/>
+            <rect x="64"  y="68" width="5" height="7" fill="#ffe090" opacity="0.6"/>
 
-        <!-- Ground / road grid -->
-        <div class="hw-ground">
-          <!-- sidewalk lines -->
-          <div class="hw-road hw-road--h" style="top:30%"></div>
-          <div class="hw-road hw-road--h" style="top:62%"></div>
-          <div class="hw-road hw-road--v" style="left:28%"></div>
-          <div class="hw-road hw-road--v" style="left:68%"></div>
-          <!-- center lines -->
-          <div class="hw-centerline hw-centerline--h" style="top:46%"></div>
-          <div class="hw-centerline hw-centerline--v" style="left:48%"></div>
-        </div>
+            <!-- Concrete tower centre-left -->
+            <rect x="88"  y="18" width="44" height="100" fill="url(#concrete-grey)" rx="2"/>
+            <rect x="90"  y="22" width="8"  height="10" fill="#2060b0" opacity="0.5"/>
+            <rect x="102" y="22" width="8"  height="10" fill="#2060b0" opacity="0.5"/>
+            <rect x="114" y="22" width="8"  height="10" fill="#2060b0" opacity="0.5"/>
+            <rect x="90"  y="38" width="8"  height="10" fill="#2060b0" opacity="0.4"/>
+            <rect x="102" y="38" width="8"  height="10" fill="#f4a261" opacity="0.4"/>
+            <rect x="114" y="38" width="8"  height="10" fill="#2060b0" opacity="0.5"/>
+            <rect x="90"  y="54" width="8"  height="10" fill="#2060b0" opacity="0.3"/>
+            <rect x="102" y="54" width="8"  height="10" fill="#2060b0" opacity="0.4"/>
 
-        <!-- Street lights -->
-        <div class="hw-light" style="left:27%;top:28%"></div>
-        <div class="hw-light" style="left:27%;top:60%"></div>
-        <div class="hw-light" style="left:67%;top:28%"></div>
-        <div class="hw-light" style="left:67%;top:60%"></div>
+            <!-- Warm glass tower centre -->
+            <rect x="196" y="10" width="52" height="108" fill="url(#glass-warm)" rx="2"/>
+            <rect x="198" y="14" width="8"  height="12" fill="#f4a261" opacity="0.45"/>
+            <rect x="210" y="14" width="8"  height="12" fill="#f4a261" opacity="0.55"/>
+            <rect x="222" y="14" width="8"  height="12" fill="#f4a261" opacity="0.35"/>
+            <rect x="234" y="14" width="8"  height="12" fill="#f4a261" opacity="0.5"/>
+            <rect x="198" y="32" width="8"  height="12" fill="#f4a261" opacity="0.4"/>
+            <rect x="222" y="32" width="8"  height="12" fill="#ffe0a0" opacity="0.5"/>
+            <!-- Rooftop edge / crown -->
+            <rect x="196" y="8"  width="52" height="4"  fill="#4a3020" rx="1"/>
+            <!-- Antenna top -->
+            <line x1="222" y1="8" x2="222" y2="-4" stroke="#c0a080" stroke-width="1.5"/>
 
-        <!-- Moving cars -->
-        <div class="hw-car hw-car--1" id="hw-car1">🚗</div>
-        <div class="hw-car hw-car--2" id="hw-car2">🚙</div>
-        <div class="hw-car hw-car--3" id="hw-car3">🚕</div>
-        <div class="hw-car hw-car--4" id="hw-car4">🚓</div>
+            <!-- Low concrete right-centre -->
+            <rect x="268" y="50" width="30" height="68" fill="url(#concrete-grey)" rx="1"/>
+            <rect x="270" y="54" width="6" height="8" fill="#a0c8f0" opacity="0.4"/>
+            <rect x="280" y="54" width="6" height="8" fill="#a0c8f0" opacity="0.5"/>
+            <rect x="270" y="68" width="6" height="8" fill="#a0c8f0" opacity="0.3"/>
+            <rect x="280" y="68" width="6" height="8" fill="#ffe090" opacity="0.5"/>
 
-        <!-- NPC pedestrians -->
-        <div class="hw-npc" id="hw-npc1" style="left:35%;top:38%">👤</div>
-        <div class="hw-npc" id="hw-npc2" style="left:58%;top:55%">👤</div>
-        <div class="hw-npc" id="hw-npc3" style="left:20%;top:50%">👤</div>
+            <!-- Tall glass tower far right -->
+            <rect x="318" y="30" width="42" height="88" fill="url(#glass-blue)" rx="2"/>
+            <rect x="320" y="34" width="7" height="10" fill="#c0e0ff" opacity="0.4"/>
+            <rect x="330" y="34" width="7" height="10" fill="#c0e0ff" opacity="0.5"/>
+            <rect x="340" y="34" width="7" height="10" fill="#c0e0ff" opacity="0.3"/>
+            <rect x="350" y="34" width="7" height="10" fill="#c0e0ff" opacity="0.4"/>
+            <rect x="320" y="50" width="7" height="10" fill="#c0e0ff" opacity="0.35"/>
+            <rect x="340" y="50" width="7" height="10" fill="#ffe090" opacity="0.55"/>
+            <!-- Lit antenna -->
+            <line x1="339" y1="30" x2="339" y2="16" stroke="#8090c0" stroke-width="1.2"/>
+            <circle cx="339" cy="15" r="1.5" fill="#f94144" opacity="0.9">
+              <animate attributeName="opacity" values="0.9;0.2;0.9" dur="1.6s" begin="0.4s" repeatCount="indefinite"/>
+            </circle>
 
-        <!-- Player character (centre) -->
-        <div class="hw-player" id="hw-player">🧍</div>
+            <!-- Far right low building -->
+            <rect x="368" y="56" width="52" height="62" fill="url(#brick-red)" rx="1"/>
+            <rect x="370" y="60" width="5" height="7" fill="#ffe090" opacity="0.4"/>
+            <rect x="378" y="60" width="5" height="7" fill="#ffe090" opacity="0.6"/>
+            <rect x="386" y="60" width="5" height="7" fill="#ffe090" opacity="0.3"/>
+          </g>
 
-        <!-- Mission objective ticker -->
-        <div class="hw-objective" id="hw-objective">
-          <span class="hw-obj-label">ACTIVE:</span>
-          <span class="hw-obj-text" id="hw-obj-text">Head to Barber's Row</span>
-        </div>
+          <!-- Sunset haze at horizon line -->
+          <rect x="0" y="112" width="420" height="12" fill="#c05a2c" opacity="0.25" filter="url(#fog-blur)"/>
 
-        <!-- LIVE badge -->
-        <div class="hw-live">● LIVE</div>
+          <!-- ══════════════════════════════════
+               GROUND PLANE: TOP-DOWN CITY GRID
+          ══════════════════════════════════ -->
 
+          <!-- Base ground fill -->
+          <rect x="0" y="118" width="420" height="442" fill="#18181f"/>
+
+          <!-- ── City blocks (building footprints) ── -->
+          <!-- North-west block -->
+          <rect x="0"   y="120" width="108" height="96" fill="#22222c" rx="2"/>
+          <!-- Window texture NW block -->
+          <rect x="8"   y="128" width="10" height="14" fill="#2a4060" opacity="0.6" rx="1"/>
+          <rect x="22"  y="128" width="10" height="14" fill="#3a5070" opacity="0.5" rx="1"/>
+          <rect x="36"  y="128" width="10" height="14" fill="#2a4060" opacity="0.7" rx="1"/>
+          <rect x="50"  y="128" width="10" height="14" fill="#ffe090" opacity="0.35" rx="1"/>
+          <rect x="64"  y="128" width="10" height="14" fill="#2a4060" opacity="0.6" rx="1"/>
+          <rect x="8"   y="148" width="10" height="14" fill="#ffe090" opacity="0.4" rx="1"/>
+          <rect x="22"  y="148" width="10" height="14" fill="#2a4060" opacity="0.5" rx="1"/>
+          <rect x="36"  y="148" width="10" height="14" fill="#3a5070" opacity="0.6" rx="1"/>
+          <rect x="50"  y="148" width="10" height="14" fill="#2a4060" opacity="0.4" rx="1"/>
+          <rect x="64"  y="148" width="10" height="14" fill="#ffe090" opacity="0.5" rx="1"/>
+          <!-- Rooftop details NW -->
+          <rect x="4"   y="120" width="100" height="4" fill="#2e2e3e" rx="1"/>
+          <rect x="8"   y="168" width="20" height="10" fill="#1e2030" rx="1"/>
+          <rect x="34"  y="168" width="30" height="8"  fill="#1e2030" rx="1"/>
+
+          <!-- North-east block -->
+          <rect x="194" y="120" width="226" height="90" fill="#20202a" rx="2"/>
+          <rect x="200" y="128" width="10" height="14" fill="#2a4060" opacity="0.55" rx="1"/>
+          <rect x="214" y="128" width="10" height="14" fill="#ffe090" opacity="0.45" rx="1"/>
+          <rect x="228" y="128" width="10" height="14" fill="#2a4060" opacity="0.6" rx="1"/>
+          <rect x="248" y="128" width="10" height="14" fill="#3a5070" opacity="0.5" rx="1"/>
+          <rect x="264" y="128" width="10" height="14" fill="#ffe090" opacity="0.55" rx="1"/>
+          <rect x="280" y="128" width="10" height="14" fill="#2a4060" opacity="0.4" rx="1"/>
+          <rect x="296" y="128" width="10" height="14" fill="#ffe090" opacity="0.5" rx="1"/>
+          <rect x="200" y="148" width="10" height="14" fill="#3a5070" opacity="0.45" rx="1"/>
+          <rect x="228" y="148" width="10" height="14" fill="#ffe090" opacity="0.4" rx="1"/>
+          <rect x="248" y="148" width="10" height="14" fill="#2a4060" opacity="0.55" rx="1"/>
+          <rect x="270" y="148" width="10" height="14" fill="#2a4060" opacity="0.5" rx="1"/>
+          <rect x="290" y="148" width="10" height="14" fill="#ffe090" opacity="0.45" rx="1"/>
+          <!-- Rooftop NE -->
+          <rect x="194" y="120" width="226" height="4" fill="#2c2c3c" rx="1"/>
+          <rect x="200" y="168" width="40" height="8"  fill="#1e2030" rx="1"/>
+          <rect x="252" y="166" width="35" height="10" fill="#1e2030" rx="1"/>
+          <rect x="300" y="168" width="25" height="8"  fill="#1e2030" rx="1"/>
+
+          <!-- South-west block -->
+          <rect x="0"   y="384" width="108" height="176" fill="#1e1e28" rx="2"/>
+          <rect x="6"   y="392" width="10" height="14" fill="#2a4060" opacity="0.5" rx="1"/>
+          <rect x="20"  y="392" width="10" height="14" fill="#ffe090" opacity="0.6" rx="1"/>
+          <rect x="34"  y="392" width="10" height="14" fill="#2a4060" opacity="0.45" rx="1"/>
+          <rect x="48"  y="392" width="10" height="14" fill="#3a5070" opacity="0.55" rx="1"/>
+          <rect x="62"  y="392" width="10" height="14" fill="#ffe090" opacity="0.4" rx="1"/>
+          <rect x="6"   y="412" width="10" height="14" fill="#ffe090" opacity="0.55" rx="1"/>
+          <rect x="20"  y="412" width="10" height="14" fill="#2a4060" opacity="0.5" rx="1"/>
+          <rect x="48"  y="412" width="10" height="14" fill="#ffe090" opacity="0.45" rx="1"/>
+          <rect x="62"  y="412" width="10" height="14" fill="#2a4060" opacity="0.6" rx="1"/>
+
+          <!-- South-east block -->
+          <rect x="194" y="384" width="226" height="176" fill="#1e1e28" rx="2"/>
+          <rect x="200" y="392" width="10" height="14" fill="#2a4060" opacity="0.5" rx="1"/>
+          <rect x="214" y="392" width="10" height="14" fill="#ffe090" opacity="0.55" rx="1"/>
+          <rect x="232" y="392" width="10" height="14" fill="#3a5070" opacity="0.45" rx="1"/>
+          <rect x="248" y="392" width="10" height="14" fill="#ffe090" opacity="0.5" rx="1"/>
+          <rect x="268" y="392" width="10" height="14" fill="#2a4060" opacity="0.6" rx="1"/>
+          <rect x="284" y="392" width="10" height="14" fill="#ffe090" opacity="0.4" rx="1"/>
+          <rect x="300" y="392" width="10" height="14" fill="#2a4060" opacity="0.55" rx="1"/>
+          <rect x="200" y="412" width="10" height="14" fill="#ffe090" opacity="0.45" rx="1"/>
+          <rect x="220" y="412" width="10" height="14" fill="#2a4060" opacity="0.5" rx="1"/>
+          <rect x="248" y="412" width="10" height="14" fill="#2a4060" opacity="0.55" rx="1"/>
+          <rect x="270" y="412" width="10" height="14" fill="#ffe090" opacity="0.5" rx="1"/>
+
+          <!-- ── SIDEWALKS ── -->
+          <!-- Horizontal sidewalks -->
+          <rect x="0"   y="216" width="420" height="10" fill="url(#sidewalk)" rx="1"/>
+          <rect x="0"   y="374" width="420" height="10" fill="url(#sidewalk)" rx="1"/>
+          <!-- Vertical sidewalks -->
+          <rect x="108" y="118" width="10"  height="442" fill="url(#sidewalk)" rx="1"/>
+          <rect x="194" y="118" width="10"  height="442" fill="url(#sidewalk)" rx="1"/>
+
+          <!-- Sidewalk wear: small cracks/lines -->
+          <line x1="12"  y1="218" x2="18"  y2="224" stroke="#1a1a22" stroke-width="0.6" opacity="0.6"/>
+          <line x1="60"  y1="219" x2="65"  y2="225" stroke="#1a1a22" stroke-width="0.6" opacity="0.6"/>
+          <line x1="240" y1="217" x2="246" y2="223" stroke="#1a1a22" stroke-width="0.6" opacity="0.6"/>
+          <line x1="310" y1="219" x2="318" y2="222" stroke="#1a1a22" stroke-width="0.6" opacity="0.6"/>
+
+          <!-- ── ROADS ── -->
+          <!-- Horizontal main road -->
+          <rect x="0"   y="226" width="420" height="148" fill="url(#asphalt)"/>
+          <!-- Vertical main road -->
+          <rect x="118" y="118" width="76"  height="442" fill="url(#asphalt)"/>
+
+          <!-- Road texture: subtle grain lines -->
+          <line x1="0"   y1="240" x2="420" y2="240" stroke="#222230" stroke-width="0.5" opacity="0.5"/>
+          <line x1="0"   y1="260" x2="420" y2="260" stroke="#222230" stroke-width="0.5" opacity="0.5"/>
+          <line x1="0"   y1="300" x2="420" y2="300" stroke="#222230" stroke-width="0.5" opacity="0.5"/>
+          <line x1="0"   y1="340" x2="420" y2="340" stroke="#222230" stroke-width="0.5" opacity="0.5"/>
+          <line x1="0"   y1="360" x2="420" y2="360" stroke="#222230" stroke-width="0.5" opacity="0.5"/>
+          <line x1="130" y1="118" x2="130" y2="560" stroke="#222230" stroke-width="0.5" opacity="0.5"/>
+          <line x1="150" y1="118" x2="150" y2="560" stroke="#222230" stroke-width="0.5" opacity="0.5"/>
+          <line x1="172" y1="118" x2="172" y2="560" stroke="#222230" stroke-width="0.5" opacity="0.5"/>
+
+          <!-- ── LANE MARKINGS ── -->
+          <!-- Centre divider H road -->
+          <line x1="0" y1="300" x2="108" y2="300" stroke="#ffd700" stroke-width="2" stroke-dasharray="0"/>
+          <line x1="194" y1="300" x2="420" y2="300" stroke="#ffd700" stroke-width="2" stroke-dasharray="0"/>
+          <!-- Lane dashes H road upper -->
+          <line x1="0"   y1="254" x2="108" y2="254" stroke="#e8e8e8" stroke-width="1.2" stroke-dasharray="18 12" opacity="0.55"/>
+          <line x1="194" y1="254" x2="420" y2="254" stroke="#e8e8e8" stroke-width="1.2" stroke-dasharray="18 12" opacity="0.55"/>
+          <!-- Lane dashes H road lower -->
+          <line x1="0"   y1="346" x2="108" y2="346" stroke="#e8e8e8" stroke-width="1.2" stroke-dasharray="18 12" opacity="0.55"/>
+          <line x1="194" y1="346" x2="420" y2="346" stroke="#e8e8e8" stroke-width="1.2" stroke-dasharray="18 12" opacity="0.55"/>
+          <!-- Centre divider V road -->
+          <line x1="156" y1="118" x2="156" y2="226" stroke="#ffd700" stroke-width="2"/>
+          <line x1="156" y1="374" x2="156" y2="560" stroke="#ffd700" stroke-width="2"/>
+          <!-- Lane dashes V road -->
+          <line x1="132" y1="118" x2="132" y2="226" stroke="#e8e8e8" stroke-width="1.2" stroke-dasharray="18 12" opacity="0.55"/>
+          <line x1="180" y1="118" x2="180" y2="226" stroke="#e8e8e8" stroke-width="1.2" stroke-dasharray="18 12" opacity="0.55"/>
+          <line x1="132" y1="374" x2="132" y2="560" stroke="#e8e8e8" stroke-width="1.2" stroke-dasharray="18 12" opacity="0.55"/>
+          <line x1="180" y1="374" x2="180" y2="560" stroke="#e8e8e8" stroke-width="1.2" stroke-dasharray="18 12" opacity="0.55"/>
+
+          <!-- Intersection box (yellow hatching) -->
+          <rect x="118" y="226" width="76" height="148" fill="#ffd700" fill-opacity="0.04"/>
+          <line x1="118" y1="226" x2="194" y2="374" stroke="#ffd700" stroke-width="0.8" opacity="0.2"/>
+          <line x1="194" y1="226" x2="118" y2="374" stroke="#ffd700" stroke-width="0.8" opacity="0.2"/>
+
+          <!-- Stop lines -->
+          <line x1="108" y1="230" x2="108" y2="370" stroke="#ffffff" stroke-width="2.5" opacity="0.7"/>
+          <line x1="194" y1="230" x2="194" y2="370" stroke="#ffffff" stroke-width="2.5" opacity="0.7"/>
+          <line x1="122" y1="216" x2="190" y2="216" stroke="#ffffff" stroke-width="2.5" opacity="0.7"/>
+          <line x1="122" y1="374" x2="190" y2="374" stroke="#ffffff" stroke-width="2.5" opacity="0.7"/>
+
+          <!-- ── CROSSWALKS ── -->
+          <g opacity="0.65">
+            <!-- Crosswalk N (above intersection) -->
+            <rect x="120" y="206" width="8" height="10" fill="#e8e8e8" rx="0.5"/>
+            <rect x="132" y="206" width="8" height="10" fill="#e8e8e8" rx="0.5"/>
+            <rect x="144" y="206" width="8" height="10" fill="#e8e8e8" rx="0.5"/>
+            <rect x="156" y="206" width="8" height="10" fill="#e8e8e8" rx="0.5"/>
+            <rect x="168" y="206" width="8" height="10" fill="#e8e8e8" rx="0.5"/>
+            <rect x="180" y="206" width="8" height="10" fill="#e8e8e8" rx="0.5"/>
+            <!-- Crosswalk S (below intersection) -->
+            <rect x="120" y="374" width="8" height="10" fill="#e8e8e8" rx="0.5"/>
+            <rect x="132" y="374" width="8" height="10" fill="#e8e8e8" rx="0.5"/>
+            <rect x="144" y="374" width="8" height="10" fill="#e8e8e8" rx="0.5"/>
+            <rect x="156" y="374" width="8" height="10" fill="#e8e8e8" rx="0.5"/>
+            <rect x="168" y="374" width="8" height="10" fill="#e8e8e8" rx="0.5"/>
+            <rect x="180" y="374" width="8" height="10" fill="#e8e8e8" rx="0.5"/>
+            <!-- Crosswalk W (left of intersection) -->
+            <rect x="98" y="228" width="10" height="8" fill="#e8e8e8" rx="0.5"/>
+            <rect x="98" y="242" width="10" height="8" fill="#e8e8e8" rx="0.5"/>
+            <rect x="98" y="256" width="10" height="8" fill="#e8e8e8" rx="0.5"/>
+            <rect x="98" y="270" width="10" height="8" fill="#e8e8e8" rx="0.5"/>
+            <rect x="98" y="284" width="10" height="8" fill="#e8e8e8" rx="0.5"/>
+            <rect x="98" y="298" width="10" height="8" fill="#e8e8e8" rx="0.5"/>
+            <!-- Crosswalk E (right of intersection) -->
+            <rect x="194" y="228" width="10" height="8" fill="#e8e8e8" rx="0.5"/>
+            <rect x="194" y="242" width="10" height="8" fill="#e8e8e8" rx="0.5"/>
+            <rect x="194" y="256" width="10" height="8" fill="#e8e8e8" rx="0.5"/>
+            <rect x="194" y="270" width="10" height="8" fill="#e8e8e8" rx="0.5"/>
+            <rect x="194" y="284" width="10" height="8" fill="#e8e8e8" rx="0.5"/>
+            <rect x="194" y="298" width="10" height="8" fill="#e8e8e8" rx="0.5"/>
+          </g>
+
+          <!-- ── STREET FURNITURE ── -->
+          <!-- Streetlight posts NW corner -->
+          <g filter="url(#drop-shadow)">
+            <rect x="105" y="212" width="3" height="18" fill="#3a3a48" rx="1"/>
+            <rect x="102" y="210" width="9"  height="3" fill="#5a5a68" rx="1"/>
+            <ellipse cx="106.5" cy="210" rx="5" ry="5" fill="url(#streetglow)" filter="url(#bloom)"/>
+          </g>
+          <!-- Streetlight NE corner -->
+          <g filter="url(#drop-shadow)">
+            <rect x="196" y="212" width="3" height="18" fill="#3a3a48" rx="1"/>
+            <rect x="193" y="210" width="9" height="3" fill="#5a5a68" rx="1"/>
+            <ellipse cx="197.5" cy="210" rx="5" ry="5" fill="url(#streetglow)" filter="url(#bloom)"/>
+          </g>
+          <!-- Streetlight SW corner -->
+          <g filter="url(#drop-shadow)">
+            <rect x="105" y="370" width="3" height="18" fill="#3a3a48" rx="1"/>
+            <rect x="102" y="368" width="9"  height="3" fill="#5a5a68" rx="1"/>
+            <ellipse cx="106.5" cy="368" rx="5" ry="5" fill="url(#streetglow)" filter="url(#bloom)"/>
+          </g>
+          <!-- Streetlight SE corner -->
+          <g filter="url(#drop-shadow)">
+            <rect x="196" y="370" width="3" height="18" fill="#3a3a48" rx="1"/>
+            <rect x="193" y="368" width="9" height="3" fill="#5a5a68" rx="1"/>
+            <ellipse cx="197.5" cy="368" rx="5" ry="5" fill="url(#streetglow)" filter="url(#bloom)"/>
+          </g>
+
+          <!-- ── TRAFFIC SIGNALS ── -->
+          <!-- Signal NW -->
+          <rect x="112" y="218" width="5" height="12" fill="#2a2a36" rx="1"/>
+          <circle cx="114.5" cy="221" r="1.8" fill="#f94144">
+            <animate attributeName="fill" values="#f94144;#1a0a0a;#f94144" dur="6s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="114.5" cy="226" r="1.8" fill="#ffd700">
+            <animate attributeName="fill" values="#1a1500;#ffd700;#1a1500" dur="6s" begin="5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="114.5" cy="231" r="1.8" fill="#1a3a1a">
+            <animate attributeName="fill" values="#1a3a1a;#4de94c;#1a3a1a" dur="6s" begin="2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Signal NE -->
+          <rect x="188" y="218" width="5" height="12" fill="#2a2a36" rx="1"/>
+          <circle cx="190.5" cy="221" r="1.8" fill="#1a0a0a">
+            <animate attributeName="fill" values="#f94144;#1a0a0a;#f94144" dur="6s" begin="3s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="190.5" cy="226" r="1.8" fill="#1a1500">
+            <animate attributeName="fill" values="#1a1500;#ffd700;#1a1500" dur="6s" begin="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="190.5" cy="231" r="1.8" fill="#4de94c">
+            <animate attributeName="fill" values="#1a3a1a;#4de94c;#1a3a1a" dur="6s" begin="0s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- ── PARKED CARS ── -->
+          <!-- Parked car NW sidewalk -->
+          <g filter="url(#drop-shadow)" transform="translate(14,222)">
+            <rect x="0" y="0" width="28" height="14" fill="#1c3a5e" rx="3"/>
+            <rect x="3" y="1" width="10" height="5" fill="#3a80c0" opacity="0.7" rx="1"/>
+            <rect x="15" y="1" width="10" height="5" fill="#3a80c0" opacity="0.7" rx="1"/>
+            <circle cx="5"  cy="13" r="2.5" fill="#111" stroke="#333" stroke-width="0.8"/>
+            <circle cx="23" cy="13" r="2.5" fill="#111" stroke="#333" stroke-width="0.8"/>
+          </g>
+          <!-- Parked car NE sidewalk -->
+          <g filter="url(#drop-shadow)" transform="translate(230,222)">
+            <rect x="0" y="0" width="28" height="14" fill="#3a1a1a" rx="3"/>
+            <rect x="3" y="1" width="10" height="5" fill="#c06040" opacity="0.6" rx="1"/>
+            <rect x="15" y="1" width="10" height="5" fill="#c06040" opacity="0.6" rx="1"/>
+            <circle cx="5"  cy="13" r="2.5" fill="#111" stroke="#333" stroke-width="0.8"/>
+            <circle cx="23" cy="13" r="2.5" fill="#111" stroke="#333" stroke-width="0.8"/>
+          </g>
+          <!-- Parked car S sidewalk left -->
+          <g filter="url(#drop-shadow)" transform="translate(20,375)">
+            <rect x="0" y="0" width="28" height="14" fill="#1a3a1a" rx="3"/>
+            <rect x="3" y="1" width="10" height="5" fill="#60c060" opacity="0.5" rx="1"/>
+            <rect x="15" y="1" width="10" height="5" fill="#60c060" opacity="0.5" rx="1"/>
+            <circle cx="5"  cy="13" r="2.5" fill="#111" stroke="#333" stroke-width="0.8"/>
+            <circle cx="23" cy="13" r="2.5" fill="#111" stroke="#333" stroke-width="0.8"/>
+          </g>
+          <!-- Parked car S sidewalk right -->
+          <g filter="url(#drop-shadow)" transform="translate(260,375)">
+            <rect x="0" y="0" width="28" height="14" fill="#2a2a1a" rx="3"/>
+            <rect x="3" y="1" width="10" height="5" fill="#c0c040" opacity="0.5" rx="1"/>
+            <rect x="15" y="1" width="10" height="5" fill="#c0c040" opacity="0.5" rx="1"/>
+            <circle cx="5"  cy="13" r="2.5" fill="#111" stroke="#333" stroke-width="0.8"/>
+            <circle cx="23" cy="13" r="2.5" fill="#111" stroke="#333" stroke-width="0.8"/>
+          </g>
+
+          <!-- ── TREES / URBAN GREENERY ── -->
+          <circle cx="56"  cy="220" r="7" fill="#1a3a18" stroke="#0e2010" stroke-width="1" opacity="0.9"/>
+          <circle cx="56"  cy="220" r="4" fill="#254a22" opacity="0.7"/>
+          <circle cx="360" cy="220" r="7" fill="#1a3a18" stroke="#0e2010" stroke-width="1" opacity="0.9"/>
+          <circle cx="360" cy="220" r="4" fill="#254a22" opacity="0.7"/>
+          <circle cx="56"  cy="378" r="7" fill="#1a3a18" stroke="#0e2010" stroke-width="1" opacity="0.9"/>
+          <circle cx="56"  cy="378" r="4" fill="#254a22" opacity="0.7"/>
+          <circle cx="360" cy="378" r="7" fill="#1a3a18" stroke="#0e2010" stroke-width="1" opacity="0.9"/>
+          <circle cx="360" cy="378" r="4" fill="#254a22" opacity="0.7"/>
+
+          <!-- ── MOVING VEHICLES ── -->
+          <!-- Car 1: westbound upper lane (right-to-left) — sedan, dark blue -->
+          <g id="c-car1" filter="url(#motion-blur-h)">
+            <rect x="-36" y="238" width="34" height="16" fill="#1a2a4a" rx="4">
+              <animateTransform attributeName="transform" type="translate" from="456 0" to="-40 0" dur="7s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="-33" y="240" width="12" height="6" fill="#3060a0" opacity="0.75" rx="1">
+              <animateTransform attributeName="transform" type="translate" from="456 0" to="-40 0" dur="7s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="-21" y="240" width="10" height="6" fill="#3060a0" opacity="0.75" rx="1">
+              <animateTransform attributeName="transform" type="translate" from="456 0" to="-40 0" dur="7s" repeatCount="indefinite"/>
+            </rect>
+            <!-- Taillights -->
+            <rect x="-4"  y="239" width="3" height="4" fill="#f94144" rx="1" filter="url(#bloom)">
+              <animateTransform attributeName="transform" type="translate" from="456 0" to="-40 0" dur="7s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="-4"  y="247" width="3" height="4" fill="#f94144" rx="1" filter="url(#bloom)">
+              <animateTransform attributeName="transform" type="translate" from="456 0" to="-40 0" dur="7s" repeatCount="indefinite"/>
+            </rect>
+          </g>
+
+          <!-- Car 2: eastbound lower lane (left-to-right) — white SUV -->
+          <g id="c-car2" filter="url(#motion-blur-h)">
+            <rect x="0" y="334" width="36" height="17" fill="#d0c8b8" rx="4">
+              <animateTransform attributeName="transform" type="translate" from="-420 0" to="456 0" dur="10s" begin="2s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="3" y="336" width="13" height="7" fill="#f0f0e8" opacity="0.65" rx="1">
+              <animateTransform attributeName="transform" type="translate" from="-420 0" to="456 0" dur="10s" begin="2s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="19" y="336" width="11" height="7" fill="#f0f0e8" opacity="0.65" rx="1">
+              <animateTransform attributeName="transform" type="translate" from="-420 0" to="456 0" dur="10s" begin="2s" repeatCount="indefinite"/>
+            </rect>
+            <!-- Headlights -->
+            <ellipse cx="36" cy="338" rx="6" ry="5" fill="url(#headlight)" filter="url(#bloom)">
+              <animateTransform attributeName="transform" type="translate" from="-420 0" to="456 0" dur="10s" begin="2s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="36" cy="348" rx="6" ry="5" fill="url(#headlight)" filter="url(#bloom)">
+              <animateTransform attributeName="transform" type="translate" from="-420 0" to="456 0" dur="10s" begin="2s" repeatCount="indefinite"/>
+            </ellipse>
+          </g>
+
+          <!-- Car 3: southbound left lane (top-to-bottom) — yellow taxi -->
+          <g id="c-car3" filter="url(#motion-blur-v)">
+            <rect x="122" y="0" width="16" height="32" fill="#d4a820" rx="4">
+              <animateTransform attributeName="transform" type="translate" from="0 -420" to="0 620" dur="9s" begin="1s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="124" y="3" width="5"  height="10" fill="#ffe060" opacity="0.65" rx="1">
+              <animateTransform attributeName="transform" type="translate" from="0 -420" to="0 620" dur="9s" begin="1s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="131" y="3" width="5"  height="10" fill="#ffe060" opacity="0.65" rx="1">
+              <animateTransform attributeName="transform" type="translate" from="0 -420" to="0 620" dur="9s" begin="1s" repeatCount="indefinite"/>
+            </rect>
+            <!-- Headlights (front = bottom) -->
+            <ellipse cx="124" cy="32" rx="5" ry="5" fill="url(#headlight)" filter="url(#bloom)">
+              <animateTransform attributeName="transform" type="translate" from="0 -420" to="0 620" dur="9s" begin="1s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="136" cy="32" rx="5" ry="5" fill="url(#headlight)" filter="url(#bloom)">
+              <animateTransform attributeName="transform" type="translate" from="0 -420" to="0 620" dur="9s" begin="1s" repeatCount="indefinite"/>
+            </ellipse>
+          </g>
+
+          <!-- Car 4: northbound right lane (bottom-to-top) — police cruiser -->
+          <g id="c-car4" filter="url(#motion-blur-v)">
+            <rect x="168" y="0" width="16" height="32" fill="#1a1a2a" rx="4">
+              <animateTransform attributeName="transform" type="translate" from="0 620" to="0 -40" dur="11s" begin="4s" repeatCount="indefinite"/>
+            </rect>
+            <!-- Police light bar -->
+            <rect x="168" y="12" width="7" height="3" fill="#f94144" rx="1" filter="url(#bloom)">
+              <animate attributeName="fill" values="#f94144;#111;#f94144" dur="0.6s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" from="0 620" to="0 -40" dur="11s" begin="4s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="177" y="12" width="7" height="3" fill="#4488ff" rx="1" filter="url(#bloom)">
+              <animate attributeName="fill" values="#111;#4488ff;#111" dur="0.6s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" from="0 620" to="0 -40" dur="11s" begin="4s" repeatCount="indefinite"/>
+            </rect>
+            <!-- Windows -->
+            <rect x="170" y="3"  width="5" height="8" fill="#2a4060" opacity="0.8" rx="1">
+              <animateTransform attributeName="transform" type="translate" from="0 620" to="0 -40" dur="11s" begin="4s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="177" y="3"  width="5" height="8" fill="#2a4060" opacity="0.8" rx="1">
+              <animateTransform attributeName="transform" type="translate" from="0 620" to="0 -40" dur="11s" begin="4s" repeatCount="indefinite"/>
+            </rect>
+          </g>
+
+          <!-- Car 5: westbound lower lane — red coupe -->
+          <g id="c-car5" filter="url(#motion-blur-h)">
+            <rect x="-32" y="316" width="30" height="15" fill="#8a1010" rx="4">
+              <animateTransform attributeName="transform" type="translate" from="456 0" to="-40 0" dur="8s" begin="3.5s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="-29" y="318" width="10" height="5" fill="#c04040" opacity="0.6" rx="1">
+              <animateTransform attributeName="transform" type="translate" from="456 0" to="-40 0" dur="8s" begin="3.5s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="-18" y="318" width="8"  height="5" fill="#c04040" opacity="0.6" rx="1">
+              <animateTransform attributeName="transform" type="translate" from="456 0" to="-40 0" dur="8s" begin="3.5s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="-2"  y="317" width="3" height="4" fill="#f94144" rx="1" filter="url(#bloom)">
+              <animateTransform attributeName="transform" type="translate" from="456 0" to="-40 0" dur="8s" begin="3.5s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="-2"  y="323" width="3" height="4" fill="#f94144" rx="1" filter="url(#bloom)">
+              <animateTransform attributeName="transform" type="translate" from="456 0" to="-40 0" dur="8s" begin="3.5s" repeatCount="indefinite"/>
+            </rect>
+          </g>
+
+          <!-- ── NPC PEDESTRIANS (realistic silhouettes) ── -->
+          <!-- NPC 1: west sidewalk walking south -->
+          <g id="c-npc1">
+            <ellipse cx="60" cy="278" rx="5" ry="5" fill="#c68642"><!-- head -->
+              <animateTransform attributeName="transform" type="translate" from="0 -60" to="0 60" dur="8s" repeatCount="indefinite"/>
+            </ellipse>
+            <rect x="56" cy="284" width="8" height="14" fill="#2a3a5a" rx="2"><!-- torso -->
+              <animateTransform attributeName="transform" type="translate" from="0 -60" to="0 60" dur="8s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="56" cy="298" width="3" height="10" fill="#1a2a40" rx="1"><!-- leg L -->
+              <animateTransform attributeName="transform" type="translate" from="0 -60" to="0 60" dur="8s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="61" cy="298" width="3" height="10" fill="#1a2a40" rx="1"><!-- leg R -->
+              <animateTransform attributeName="transform" type="translate" from="0 -60" to="0 60" dur="8s" repeatCount="indefinite"/>
+            </rect>
+          </g>
+          <!-- NPC 2: east sidewalk walking north -->
+          <g id="c-npc2">
+            <ellipse cx="360" cy="310" rx="4.5" ry="4.5" fill="#8d5524">
+              <animateTransform attributeName="transform" type="translate" from="0 50" to="0 -60" dur="10s" begin="1s" repeatCount="indefinite"/>
+            </ellipse>
+            <rect x="356" cy="315" width="9" height="13" fill="#3a2010" rx="2">
+              <animateTransform attributeName="transform" type="translate" from="0 50" to="0 -60" dur="10s" begin="1s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="356" cy="328" width="3" height="9" fill="#2a1808" rx="1">
+              <animateTransform attributeName="transform" type="translate" from="0 50" to="0 -60" dur="10s" begin="1s" repeatCount="indefinite"/>
+            </rect>
+            <rect x="361" cy="328" width="3" height="9" fill="#2a1808" rx="1">
+              <animateTransform attributeName="transform" type="translate" from="0 50" to="0 -60" dur="10s" begin="1s" repeatCount="indefinite"/>
+            </rect>
+          </g>
+          <!-- NPC 3: south sidewalk standing -->
+          <g id="c-npc3" transform="translate(280,385)">
+            <ellipse cx="0" cy="0"  rx="4.5" ry="4.5" fill="#f5cba7"/>
+            <rect x="-4" y="5" width="8"  height="12" fill="#4a2a8a" rx="2"/>
+            <rect x="-4" y="17" width="3" height="8"  fill="#2a1a60" rx="1"/>
+            <rect x="1"  y="17" width="3" height="8"  fill="#2a1a60" rx="1"/>
+          </g>
+
+          <!-- ── PLAYER CHARACTER (top-down silhouette, centre) ── -->
+          <g id="city-player" filter="url(#drop-shadow)">
+            <!-- Player shadow halo -->
+            <ellipse cx="210" cy="312" rx="14" ry="8" fill="#000" opacity="0.35"/>
+            <!-- Player glow ring -->
+            <ellipse cx="210" cy="300" rx="16" ry="16" fill="none" stroke="#FF7A00" stroke-width="2" opacity="0.6" filter="url(#bloom)">
+              <animate attributeName="opacity" values="0.6;0.2;0.6" dur="1.8s" repeatCount="indefinite"/>
+              <animate attributeName="r"       values="16;20;16"   dur="1.8s" repeatCount="indefinite" attributeName="rx"/>
+            </ellipse>
+            <!-- Body (top-down oval) -->
+            <ellipse cx="210" cy="300" rx="8" ry="10" fill="#FF7A00"/>
+            <!-- Head -->
+            <ellipse cx="210" cy="292" rx="5.5" ry="5.5" fill="#c68642" stroke="#000" stroke-width="0.8"/>
+            <!-- Direction indicator (triangle pointing down = heading south) -->
+            <polygon points="210,310 206,303 214,303" fill="#FF7A00" opacity="0.9"/>
+          </g>
+
+          <!-- ── AMBIENT LIGHT POOLS (streetlight glow on ground) ── -->
+          <ellipse cx="106.5" cy="240" rx="22" ry="10" fill="#ffe8a0" opacity="0.08" filter="url(#fog-blur)"/>
+          <ellipse cx="197.5" cy="240" rx="22" ry="10" fill="#ffe8a0" opacity="0.08" filter="url(#fog-blur)"/>
+          <ellipse cx="106.5" cy="368" rx="22" ry="10" fill="#ffe8a0" opacity="0.08" filter="url(#fog-blur)"/>
+          <ellipse cx="197.5" cy="368" rx="22" ry="10" fill="#ffe8a0" opacity="0.08" filter="url(#fog-blur)"/>
+
+        </svg>
+
+        <!-- Atmospheric fog layer -->
+        <div class="hw-fog-layer" aria-hidden="true"></div>
+        <!-- Cinematic colour grade overlay -->
+        <div class="hw-grade" aria-hidden="true"></div>
         <!-- Location tag -->
-        <div class="hw-location">Newport, AR — Downtown</div>
-
+        <div class="hw-location">NEWPORT, AR — DOWNTOWN</div>
       </div>
 
-      <!-- HUD: Bottom Bar -->
-      <div class="hud-bar hud-bar--bottom">
-        <button class="hud-btn" data-target="screen-map" aria-label="Open Map" title="Map">🗺️</button>
-        <button class="hud-btn hud-btn--center" data-target="screen-missions" aria-label="Missions" title="Missions">📋</button>
-        <button class="hud-btn" data-target="screen-pause" aria-label="Pause" title="Pause">⏸</button>
+      <!-- ═══════════════════════════════════════════════
+           GTA V-STYLE HUD OVERLAY
+      ═══════════════════════════════════════════════ -->
+
+      <!-- Screen-edge vignette -->
+      <div class="gta-vignette" aria-hidden="true"></div>
+
+      <!-- TOP-RIGHT: Cash counter -->
+      <div class="gta-cash" id="hud-money" role="status" aria-label="Cash">$325</div>
+
+      <!-- TOP-RIGHT: Pause button (below cash) -->
+      <button class="gta-nav-btn gta-nav-btn--pause" data-target="screen-pause" aria-label="Pause" title="Pause">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+          <rect x="6" y="4" width="4" height="16" rx="1"/>
+          <rect x="14" y="4" width="4" height="16" rx="1"/>
+        </svg>
+      </button>
+
+      <!-- TOP-LEFT: Active mission objective -->
+      <div class="gta-objective" id="gta-objective" aria-live="polite">
+        <div class="gta-obj-header">
+          <span class="gta-obj-tick" aria-hidden="true"></span>
+          <span class="gta-obj-label">ACTIVE MISSION</span>
+        </div>
+        <div class="gta-obj-text" id="hw-obj-text">Meet your mentor downtown</div>
+      </div>
+
+      <!-- BOTTOM-LEFT: Radar / minimap -->
+      <div class="gta-radar-wrap" aria-label="Radar map">
+        <svg class="gta-radar-svg" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="gta-radar-clip"><circle cx="55" cy="55" r="51"/></clipPath>
+            <radialGradient id="radar-bg" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stop-color="#1e2a3c"/>
+              <stop offset="100%" stop-color="#0c111c"/>
+            </radialGradient>
+          </defs>
+          <circle cx="55" cy="55" r="51" fill="url(#radar-bg)"/>
+          <g clip-path="url(#gta-radar-clip)">
+            <!-- Main roads -->
+            <rect x="0"  y="48" width="110" height="14" fill="#252c3e"/>
+            <rect x="48" y="0"  width="14"  height="110" fill="#252c3e"/>
+            <!-- Secondary roads -->
+            <rect x="0"  y="24" width="110" height="7" fill="#1c2130" opacity="0.9"/>
+            <rect x="0"  y="79" width="110" height="7" fill="#1c2130" opacity="0.9"/>
+            <rect x="24" y="0"  width="7"   height="110" fill="#1c2130" opacity="0.9"/>
+            <rect x="79" y="0"  width="7"   height="110" fill="#1c2130" opacity="0.9"/>
+            <!-- Road centre dashes -->
+            <line x1="0"  y1="55" x2="110" y2="55" stroke="#363c52" stroke-width="0.7" stroke-dasharray="3,3"/>
+            <line x1="55" y1="0"  x2="55"  y2="110" stroke="#363c52" stroke-width="0.7" stroke-dasharray="3,3"/>
+            <!-- City blocks -->
+            <rect x="3"  y="3"  width="19" height="19" fill="#182038" rx="1"/>
+            <rect x="3"  y="33" width="13" height="13" fill="#182038" rx="1"/>
+            <rect x="3"  y="64" width="19" height="19" fill="#182038" rx="1"/>
+            <rect x="33" y="3"  width="13" height="19" fill="#182038" rx="1"/>
+            <rect x="64" y="3"  width="19" height="19" fill="#182038" rx="1"/>
+            <rect x="88" y="3"  width="19" height="19" fill="#182038" rx="1"/>
+            <rect x="88" y="33" width="19" height="13" fill="#182038" rx="1"/>
+            <rect x="88" y="64" width="19" height="19" fill="#182038" rx="1"/>
+            <rect x="33" y="88" width="13" height="19" fill="#182038" rx="1"/>
+            <rect x="64" y="88" width="19" height="19" fill="#182038" rx="1"/>
+            <!-- Objective blip (red, pulsing) -->
+            <circle cx="19" cy="14" r="3.5" fill="#f94144">
+              <animate attributeName="opacity" values="1;0.25;1" dur="0.9s" repeatCount="indefinite"/>
+            </circle>
+            <!-- NPC / contact blips (cyan) -->
+            <circle cx="70" cy="58" r="2.5" fill="#4ecdc4" opacity="0.85"/>
+            <circle cx="42" cy="74" r="2.5" fill="#4ecdc4" opacity="0.70"/>
+            <circle cx="83" cy="40" r="2"   fill="#4ecdc4" opacity="0.60"/>
+          </g>
+          <!-- Outer border rings -->
+          <circle cx="55" cy="55" r="51" fill="none" stroke="#080c14" stroke-width="5"/>
+          <circle cx="55" cy="55" r="51" fill="none" stroke="rgba(255,255,255,0.20)" stroke-width="1"/>
+          <!-- North indicator -->
+          <text x="55" y="9" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="7" font-family="Lato,sans-serif" font-weight="700">N</text>
+          <!-- Player blip (white triangle pointing up) -->
+          <polygon points="55,44 61,58 55,53 49,58" fill="#fff"/>
+        </svg>
+        <div class="gta-location">DOWNTOWN NEWPORT</div>
+      </div>
+
+      <!-- BOTTOM-LEFT: Map button (above radar) -->
+      <button class="gta-nav-btn gta-nav-btn--map" data-target="screen-map" aria-label="Open Map" title="Map">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+        </svg>
+      </button>
+
+      <!-- BOTTOM-RIGHT: Weapon · Wanted · Health / Armor / Rep -->
+      <div class="gta-stats" role="status" aria-label="Player stats">
+        <!-- Weapon / ammo count -->
+        <div class="gta-weapon" aria-label="Current weapon">
+          <svg class="gta-weapon-svg" viewBox="0 0 44 22" aria-hidden="true">
+            <rect x="2"   y="8"   width="26" height="5"   rx="1"   fill="rgba(255,255,255,0.70)"/>
+            <rect x="24"  y="5"   width="14" height="3.5" rx="1"   fill="rgba(255,255,255,0.70)"/>
+            <rect x="6"   y="13"  width="7"  height="7"   rx="1.5" fill="rgba(255,255,255,0.70)"/>
+            <rect x="2"   y="8.5" width="3"  height="3"   rx="0.5" fill="rgba(255,255,255,0.25)"/>
+          </svg>
+          <span class="gta-ammo"><span id="hud-ammo">12</span><span class="gta-ammo-sep"> | </span>48</span>
+        </div>
+        <!-- Wanted stars -->
+        <div class="gta-wanted" aria-label="Heat level 3 of 5">
+          <span class="gta-star gta-star--on" aria-hidden="true">★</span>
+          <span class="gta-star gta-star--on" aria-hidden="true">★</span>
+          <span class="gta-star gta-star--on" aria-hidden="true">★</span>
+          <span class="gta-star"              aria-hidden="true">★</span>
+          <span class="gta-star"              aria-hidden="true">★</span>
+        </div>
+        <!-- Health bar (green) -->
+        <div class="gta-bar-row">
+          <div class="gta-bar gta-bar--hp"><div class="gta-bar-fill" id="hud-hp" style="width:80%"></div></div>
+        </div>
+        <!-- Armor bar (blue) -->
+        <div class="gta-bar-row">
+          <div class="gta-bar gta-bar--ar"><div class="gta-bar-fill" id="hud-ar" style="width:55%"></div></div>
+        </div>
+        <!-- Rep / Special bar (purple) -->
+        <div class="gta-bar-row">
+          <div class="gta-bar gta-bar--sp"><div class="gta-bar-fill" id="hud-rep-fill" style="width:30%"></div></div>
+        </div>
+      </div>
+
+      <!-- BOTTOM-CENTER: Missions shortcut -->
+      <button class="gta-nav-btn gta-nav-btn--missions" data-target="screen-missions" aria-label="Missions" title="Missions">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </button>
+
+      <!-- MISSION INTRO CINEMATIC OVERLAY -->
+      <div class="mission-intro" id="mission-intro" aria-live="assertive" aria-hidden="true">
+        <div class="mission-intro__bar mission-intro__bar--top"></div>
+        <div class="mission-intro__bar mission-intro__bar--bottom"></div>
+        <div class="mission-intro__content">
+          <div class="mission-intro__label">MISSION</div>
+          <div class="mission-intro__title" id="mission-intro-title">Welcome Back</div>
+          <div class="mission-intro__subtitle" id="mission-intro-subtitle">Meet your mentor downtown</div>
+        </div>
       </div>
 
     </section>
@@ -482,13 +1128,30 @@
          SCREEN 8: PAUSE MENU
     ============================================================ -->
     <section class="screen" id="screen-pause">
+      <div class="pause-bg" aria-hidden="true"></div>
       <div class="screen__content screen__content--center">
-        <h2 class="logo logo--pause">Paused</h2>
-        <p class="tagline">The streets can wait. Five minutes.</p>
-        <button class="btn btn--primary btn--xl" data-target="screen-hud" title="Resume Game">▶ Resume</button>
-        <button class="btn btn--xl" data-target="screen-missions" title="Mission Select">📋 Missions</button>
-        <button class="btn btn--xl" data-target="screen-settings" title="Settings">⚙️ Settings</button>
-        <button class="btn btn--danger btn--xl" data-target="screen-main-menu" title="Quit to Menu">🚪 Quit to Menu</button>
+        <div class="pause-logo-wrap">
+          <img src="./assets/hustlin-secondary.png" class="pause-logo-img" alt="Newport Hustle" />
+        </div>
+        <p class="pause-tagline">The streets can wait.</p>
+        <nav class="pause-nav" aria-label="Pause Menu">
+          <button class="btn btn--primary btn--xl pause-btn" data-target="screen-hud" title="Resume Game">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Resume
+          </button>
+          <button class="btn btn--xl pause-btn" data-target="screen-missions" title="Mission Select">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Missions
+          </button>
+          <button class="btn btn--xl pause-btn" data-target="screen-settings" title="Settings">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Settings
+          </button>
+          <button class="btn btn--danger btn--xl pause-btn" data-target="screen-main-menu" title="Quit to Menu">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Quit to Menu
+          </button>
+        </nav>
       </div>
     </section>
 
@@ -500,6 +1163,7 @@
         <button class="top-bar__back" data-target="screen-hud" aria-label="Back to Game" title="Back">
           <span aria-hidden="true">←</span>
         </button>
+        <img src="./assets/hustlin-secondary.png" class="top-bar__logo" alt="Newport Hustle" />
         <h2 class="top-bar__title">Newport, AR</h2>
       </header>
 
@@ -551,9 +1215,9 @@
           <rect class="map-zone" id="zone-downtown"
                 data-zone="downtown" data-name="Downtown" data-tag="Main Story Hub" data-missions="2"
                 x="130" y="145" width="110" height="90" rx="8"
-                fill="#e8ff42" fill-opacity="0.18" stroke="#e8ff42" stroke-width="2"/>
-          <text class="map-zone-label" x="185" y="193" text-anchor="middle" fill="#e8ff42">DOWNTOWN</text>
-          <text x="185" y="205" text-anchor="middle" fill="#e8ff42" font-size="8" font-family="Lato,sans-serif" opacity="0.7">Story Hub</text>
+                fill="#FF7A00" fill-opacity="0.18" stroke="#FF7A00" stroke-width="2"/>
+          <text class="map-zone-label" x="185" y="193" text-anchor="middle" fill="#FF7A00">DOWNTOWN</text>
+          <text x="185" y="205" text-anchor="middle" fill="#FF7A00" font-size="8" font-family="Lato,sans-serif" opacity="0.7">Story Hub</text>
 
           <!-- 2. White River Front (east) -->
           <rect class="map-zone" id="zone-riverfront"
@@ -567,9 +1231,9 @@
           <rect class="map-zone" id="zone-barbersrow"
                 data-zone="barbersrow" data-name="Barber's Row" data-tag="Character Progression" data-missions="1"
                 x="140" y="325" width="90" height="65" rx="6"
-                fill="#e8ff42" fill-opacity="0.15" stroke="#e8ff42" stroke-width="1.5"/>
-          <text class="map-zone-label" x="185" y="354" text-anchor="middle" fill="#e8ff42" font-size="8">BARBER'S</text>
-          <text x="185" y="366" text-anchor="middle" fill="#e8ff42" font-size="7.5" font-family="Lato,sans-serif" opacity="0.7">Row</text>
+                fill="#FF7A00" fill-opacity="0.15" stroke="#FF7A00" stroke-width="1.5"/>
+          <text class="map-zone-label" x="185" y="354" text-anchor="middle" fill="#FF7A00" font-size="8">BARBER'S</text>
+          <text x="185" y="366" text-anchor="middle" fill="#FF7A00" font-size="7.5" font-family="Lato,sans-serif" opacity="0.7">Row</text>
 
           <!-- 4. The Strip / Night District (north of downtown) -->
           <rect class="map-zone" id="zone-strip"
@@ -613,9 +1277,9 @@
 
           <!-- ── Player marker (YOU) ── -->
           <circle class="player-dot" id="map-player-dot" cx="185" cy="188" r="8"
-                  fill="#e8ff42" opacity="0.9"/>
+                  fill="#FF7A00" opacity="0.9"/>
           <circle cx="185" cy="188" r="14"
-                  fill="none" stroke="#e8ff42" stroke-width="1.5" opacity="0.4">
+                  fill="none" stroke="#FF7A00" stroke-width="1.5" opacity="0.4">
             <animate attributeName="r" from="10" to="22" dur="1.8s" repeatCount="indefinite"/>
             <animate attributeName="opacity" from="0.6" to="0" dur="1.8s" repeatCount="indefinite"/>
           </circle>
@@ -630,7 +1294,7 @@
 
       <!-- Zone legend -->
       <div class="map-legend">
-        <span class="map-legend__dot" style="background:#e8ff42"></span>Story
+        <span class="map-legend__dot" style="background:#FF7A00"></span>Story
         <span class="map-legend__dot" style="background:#4ecdc4"></span>Hustle
         <span class="map-legend__dot" style="background:#ff6b9d"></span>Night
         <span class="map-legend__dot" style="background:#f94144"></span>Locked

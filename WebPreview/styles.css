@@ -11,10 +11,10 @@
 :root {
   /* Palette */
   --bg-base:       #0d0d0f;
-  --bg-card:       #18181d;
-  --bg-raised:     #222228;
-  --bg-elevated:   #2c2c34;
-  --accent-lime:   #e8ff42;     /* Electric Lime — primary CTA */
+  --bg-card:       #111113;
+  --bg-raised:     #1a1a1e;
+  --bg-elevated:   #242428;
+  --accent-lime:   #FF7A00;     /* Newport Orange — primary CTA */
   --accent-cyan:   #4ecdc4;     /* Corporate teal */
   --accent-pink:   #ff6b9d;     /* Influencer pink */
   --accent-red:    #f94144;     /* Danger / Chaos */
@@ -22,10 +22,15 @@
   --text-secondary:#9a9aaa;
   --text-muted:    #5a5a6a;
   --border-subtle: rgba(255,255,255,0.06);
-  --border-glow:   rgba(232,255,66,0.35);
+  --border-glow:   rgba(255,122,0,0.35);
   --shadow-deep:   rgba(0,0,0,0.7);
-  --glow-lime:     rgba(232,255,66,0.55);
+  --glow-lime:     rgba(255,122,0,0.55);
   --glow-red:      rgba(249,65,68,0.55);
+  /* Safe-area insets for notched/rounded phones */
+  --safe-top:    env(safe-area-inset-top,    0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left,   0px);
+  --safe-right:  env(safe-area-inset-right,  0px);
 
   /* Typography */
   --font-display:  'Bangers', cursive;
@@ -256,7 +261,38 @@ body {
 
 .top-bar__back:hover {
   color: var(--accent-lime);
-  background: rgba(232,255,66,0.08);
+  background: rgba(255,122,0,0.08);
+}
+
+/* Logo images */
+.top-bar__logo {
+  max-height: 30px;
+  width: auto;
+  max-width: 110px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.6));
+}
+
+.splash-logo-img {
+  display: block;
+  width: min(92vw, 360px);
+  height: auto;
+  object-fit: contain;
+  animation: logo-stamp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  filter: drop-shadow(0 0 32px rgba(255,122,0,0.45));
+  margin-bottom: var(--space-md);
+}
+
+.secondary-logo-img {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  object-fit: contain;
+  animation: logo-stamp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  filter: drop-shadow(0 0 18px rgba(255,122,0,0.35));
 }
 
 /* ---------------------------------------------------------------
@@ -669,7 +705,7 @@ body {
   pointer-events: none;
 }
 
-.screen__content, .top-bar, .screen__footer, .hud-bar {
+.screen__content, .top-bar, .screen__footer {
   position: relative;
   z-index: 1;
 }
@@ -678,8 +714,8 @@ body {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(232,255,66,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(232,255,66,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(255,122,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,122,0,0.04) 1px, transparent 1px);
   background-size: 40px 40px;
   animation: gridDrift 30s linear infinite;
 }
@@ -696,7 +732,7 @@ body {
   transform: translateX(-50%);
   width: 70%;
   height: 60%;
-  background: radial-gradient(ellipse, rgba(232,255,66,0.1) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(255,122,0,0.1) 0%, transparent 70%);
   animation: glowPulse 4s ease-in-out infinite;
 }
 
@@ -760,7 +796,7 @@ body {
 
 .list-item--selected {
   border-color: var(--accent-lime);
-  background: rgba(232,255,66,0.06);
+  background: rgba(255,122,0,0.06);
   box-shadow: 0 0 16px var(--glow-lime);
 }
 
@@ -892,7 +928,7 @@ body {
 
 .creator-input:focus {
   border-color: var(--accent-lime);
-  box-shadow: 0 0 0 3px rgba(232,255,66,0.15);
+  box-shadow: 0 0 0 3px rgba(255,122,0,0.15);
 }
 
 .creator-input::placeholder { color: var(--text-muted); }
@@ -940,7 +976,7 @@ body {
 }
 
 .outfit-card:hover        { transform: translateY(-2px); border-color: rgba(255,255,255,0.2); }
-.outfit-card--active      { border-color: var(--accent-lime); background: rgba(232,255,66,0.08); }
+.outfit-card--active      { border-color: var(--accent-lime); background: rgba(255,122,0,0.08); }
 
 .outfit-card__icon  { font-size: 1.4rem; }
 .outfit-card__label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); }
@@ -959,7 +995,7 @@ body {
 }
 
 .trait-pill:hover     { border-color: rgba(255,255,255,0.2); color: var(--text-primary); }
-.trait-pill--active   { border-color: var(--accent-lime); color: var(--accent-lime); background: rgba(232,255,66,0.08); }
+.trait-pill--active   { border-color: var(--accent-lime); color: var(--accent-lime); background: rgba(255,122,0,0.08); }
 
 /* ---------------------------------------------------------------
    STORY CARDS
@@ -995,7 +1031,7 @@ body {
 
 .story-card--active {
   border-color: var(--accent-lime);
-  background: rgba(232,255,66,0.05);
+  background: rgba(255,122,0,0.05);
   box-shadow: 0 0 18px var(--glow-lime);
 }
 
@@ -1138,7 +1174,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   border-radius: var(--radius-pill);
   border: 2px solid var(--accent-lime);
   color: var(--accent-lime);
-  background: rgba(232,255,66,0.08);
+  background: rgba(255,122,0,0.08);
   cursor: pointer;
   transition: all var(--transition-fast);
 }
@@ -1158,300 +1194,503 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 /* ---------------------------------------------------------------
-   HUD
+   HUD — GTA V-STYLE CORNER-ANCHORED OVERLAY
+   Elements sit directly on the world — no panels, no glassmorphism.
+   Everything is pinned to screen corners / edges.
 --------------------------------------------------------------- */
-.hud-bar {
-  position: absolute;
-  left: var(--space-md);
-  right: var(--space-md);
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.6rem var(--space-md);
-  background: rgba(13,13,15,0.85);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-}
 
-.hud-bar--top    { top: var(--space-md); }
-.hud-bar--bottom { bottom: var(--space-md); }
-
+/* ── City world canvas (full bleed) ── */
 .hud-world {
   position: absolute;
   inset: 0;
   overflow: hidden;
   z-index: 1;
-  background: #0a1a0e;
 }
 
-/* Sky */
-.hw-sky {
-  position: absolute;
-  inset: 0 0 40% 0;
-  background: linear-gradient(180deg, #0d1f3c 0%, #1a3a5c 60%, #2c5f3e 100%);
-  animation: dayCycle 40s linear infinite;
-}
-@keyframes dayCycle {
-  0%   { background: linear-gradient(180deg,#0d1f3c 0%,#1a3a5c 60%,#2c5f3e 100%); }
-  25%  { background: linear-gradient(180deg,#f4a261 0%,#e76f51 40%,#2d6a4f 100%); }
-  50%  { background: linear-gradient(180deg,#219ebc 0%,#8ecae6 50%,#3a7d44 100%); }
-  75%  { background: linear-gradient(180deg,#f4a261 0%,#e76f51 40%,#2d6a4f 100%); }
-  100% { background: linear-gradient(180deg,#0d1f3c 0%,#1a3a5c 60%,#2c5f3e 100%); }
+.city-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-/* Buildings silhouette */
-.hw-buildings {
+.hw-fog-layer {
   position: absolute;
-  bottom: 40%;
-  left: 0; right: 0;
-  height: 55%;
+  inset: 0;
   pointer-events: none;
-}
-.hw-bld {
-  position: absolute;
-  bottom: 0;
-  background: rgba(10,10,14,0.85);
-  border-radius: 2px 2px 0 0;
+  background:
+    radial-gradient(ellipse at 50% 20%,  rgba(192,90,44,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 80%,  rgba(14,30,60,0.18)  0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%,  rgba(14,30,60,0.18)  0%, transparent 60%);
 }
 
-/* Ground */
-.hw-ground {
+.hw-grade {
   position: absolute;
-  inset: 60% 0 0 0;
-  background: #1a1a1f;
-}
-
-/* Roads */
-.hw-road {
-  position: absolute;
-  background: #2a2a32;
-}
-.hw-road--h { left:0; right:0; height: 18%; }
-.hw-road--v { top:0; bottom:0; width: 14%; }
-
-/* Center dashes */
-.hw-centerline {
-  position: absolute;
-  background: repeating-linear-gradient(
-    to right,
-    #ffd700 0px, #ffd700 14px,
-    transparent 14px, transparent 28px
-  );
-  opacity: 0.5;
-}
-.hw-centerline--h {
-  left: 0; right: 0;
-  height: 2px;
-}
-.hw-centerline--v {
-  top: 0; bottom: 0;
-  width: 2px;
-  background: repeating-linear-gradient(
-    to bottom,
-    #ffd700 0px, #ffd700 14px,
-    transparent 14px, transparent 28px
-  );
-}
-
-/* Street lights */
-.hw-light {
-  position: absolute;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: #ffe066;
-  box-shadow: 0 0 12px 4px rgba(255,224,102,0.5);
-  animation: lightFlicker 3s ease-in-out infinite;
-}
-@keyframes lightFlicker {
-  0%,100% { opacity: 1; }
-  50%      { opacity: 0.75; }
-}
-
-/* Cars */
-.hw-car {
-  position: absolute;
-  font-size: 1.1rem;
-  line-height: 1;
+  inset: 0;
   pointer-events: none;
-}
-.hw-car--1 {
-  top: 32%;
-  animation: carMoveR 9s linear infinite;
-}
-.hw-car--2 {
-  top: 37%;
-  animation: carMoveL 12s linear infinite;
-  transform: scaleX(-1);
-}
-.hw-car--3 {
-  top: 63%;
-  animation: carMoveR 7s 2s linear infinite;
-}
-.hw-car--4 {
-  top: 68%;
-  animation: carMoveL 10s 4s linear infinite;
-  transform: scaleX(-1);
-}
-@keyframes carMoveR {
-  from { left: -6%; }
-  to   { left: 106%; }
-}
-@keyframes carMoveL {
-  from { right: -6%; left: auto; }
-  to   { right: 106%; left: auto; }
+  mix-blend-mode: screen;
+  background: linear-gradient(180deg, rgba(192,100,40,0.05) 0%, transparent 40%, rgba(20,30,50,0.08) 100%);
 }
 
-/* NPC dots */
-.hw-npc {
-  position: absolute;
-  font-size: 0.8rem;
-  animation: npcWander 6s ease-in-out infinite alternate;
-}
-.hw-npc:nth-child(odd)  { animation-duration: 5s; }
-.hw-npc:nth-child(even) { animation-duration: 7s; animation-delay: 1s; }
-@keyframes npcWander {
-  0%   { transform: translate(0,0); }
-  33%  { transform: translate(12px,-6px); }
-  66%  { transform: translate(-8px,10px); }
-  100% { transform: translate(6px,-4px); }
-}
-
-/* Player */
-.hw-player {
-  position: absolute;
-  font-size: 1.4rem;
-  left: 46%;
-  top:  44%;
-  animation: playerBob 1.4s ease-in-out infinite alternate;
-  z-index: 5;
-  filter: drop-shadow(0 0 6px rgba(232,255,66,0.6));
-}
-@keyframes playerBob {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-4px); }
-}
-
-/* Mission objective ticker */
-.hw-objective {
-  position: absolute;
-  top: 18%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.7);
-  border: 1px solid var(--accent-lime);
-  border-radius: var(--radius-pill);
-  padding: 0.2rem 0.75rem;
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
-  white-space: nowrap;
-  font-size: 0.65rem;
-  max-width: 90%;
-}
-.hw-obj-label {
-  font-family: var(--font-heading);
-  color: var(--accent-lime);
-  letter-spacing: 1px;
-  font-size: 0.7rem;
-}
-.hw-obj-text {
-  color: var(--text-primary);
-  font-family: var(--font-body);
-}
-
-/* LIVE badge */
-.hw-live {
-  position: absolute;
-  top: 18%;
-  right: 5%;
-  background: var(--accent-red);
-  color: #fff;
-  font-family: var(--font-heading);
-  font-size: 0.6rem;
-  letter-spacing: 2px;
-  padding: 0.2rem 0.5rem;
-  border-radius: var(--radius-sm);
-  animation: livePulse 1.5s ease-in-out infinite;
-}
-@keyframes livePulse {
-  0%,100% { opacity: 1; }
-  50%      { opacity: 0.6; }
-}
-
-/* Location tag */
 .hw-location {
   position: absolute;
-  bottom: 28%;
+  bottom: 70px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 3;
   font-family: var(--font-heading);
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.35);
+  font-size: 0.58rem;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.12);
+  pointer-events: none;
   white-space: nowrap;
 }
 
-.hud-stat {
+/* ── Vignette (sits above city world, below HUD) ── */
+.gta-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, transparent 48%, rgba(0,0,0,0.52) 100%);
+}
+
+/* ═══════════════════════════════════════════════
+   TOP-RIGHT: Cash counter
+═══════════════════════════════════════════════ */
+.gta-cash {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #FF7A00;
+  text-shadow:
+    0 0 18px rgba(255,122,0,0.65),
+    0 1px 6px rgba(0,0,0,0.95);
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* ═══════════════════════════════════════════════
+   TOP-LEFT: Mission objective
+═══════════════════════════════════════════════ */
+.gta-objective {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+  pointer-events: none;
+  max-width: 200px;
+}
+
+.gta-obj-header {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 6px;
+  margin-bottom: 3px;
 }
 
-.hud-stat__icon { font-size: 1rem; }
-
-.hud-stat__value {
-  font-weight: 900;
-  font-size: 0.9rem;
-  color: var(--text-primary);
+.gta-obj-tick {
+  flex-shrink: 0;
+  width: 12px;
+  height: 2px;
+  background: #f4c842;
+  border-radius: 1px;
+  position: relative;
 }
 
-.wanted-stars {
+.gta-obj-tick::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 8px;
+  height: 2px;
+  background: #f4c842;
+  border-radius: 1px;
+}
+
+.gta-obj-label {
+  font-family: var(--font-heading);
+  font-size: 0.56rem;
+  letter-spacing: 2.5px;
+  color: #f4c842;
+  line-height: 1;
+}
+
+.gta-obj-text {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.92);
+  font-weight: 600;
+  line-height: 1.3;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.95);
+  transition: opacity 0.2s ease;
+}
+
+/* ═══════════════════════════════════════════════
+   BOTTOM-LEFT: Radar
+═══════════════════════════════════════════════ */
+.gta-radar-wrap {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  z-index: 10;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 4px;
 }
 
-.star {
-  font-size: 1rem;
-  color: rgba(255,255,255,0.15);
-  transition: color 0.3s, text-shadow 0.3s;
+.gta-radar-svg {
+  width: 100px;
+  height: 100px;
+  display: block;
+  filter: drop-shadow(0 2px 10px rgba(0,0,0,0.80));
 }
 
-.star--lit {
-  color: var(--accent-red);
-  text-shadow: 0 0 8px var(--glow-red);
+.gta-location {
+  font-family: var(--font-heading);
+  font-size: 0.50rem;
+  letter-spacing: 2.5px;
+  color: rgba(255,255,255,0.48);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.95);
+  white-space: nowrap;
+  pointer-events: none;
 }
 
-.hud-btn {
-  width: var(--touch-min);
-  height: var(--touch-min);
+/* ═══════════════════════════════════════════════
+   BOTTOM-RIGHT: Stats column (weapon · wanted · bars)
+═══════════════════════════════════════════════ */
+.gta-stats {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  pointer-events: none;
+}
+
+/* Weapon silhouette + ammo */
+.gta-weapon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.gta-weapon-svg {
+  width: 42px;
+  height: 21px;
+  opacity: 0.72;
+}
+
+.gta-ammo {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
+  color: rgba(255,255,255,0.78);
+  text-shadow: 0 1px 5px rgba(0,0,0,0.95);
+}
+
+.gta-ammo-sep {
+  color: rgba(255,255,255,0.28);
+}
+
+/* Wanted stars */
+.gta-wanted {
+  display: flex;
+  gap: 3px;
+}
+
+.gta-star {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.14);
+  line-height: 1;
+  transition: color 0.3s, filter 0.3s;
+}
+
+.gta-star--on {
+  color: #ffa31a;
+  filter: drop-shadow(0 0 4px rgba(255,163,26,0.70));
+}
+
+/* Health / Armor / Rep bars */
+.gta-bar-row {
+  display: flex;
+  align-items: center;
+}
+
+.gta-bar {
+  width: 96px;
+  height: 6px;
+  background: rgba(0,0,0,0.60);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+
+.gta-bar-fill {
+  height: 100%;
+  transition: width 1.2s ease;
+}
+
+.gta-bar--hp .gta-bar-fill { background: #2ecc40; box-shadow: 0 0 5px rgba(46,204,64,0.55); }
+.gta-bar--ar .gta-bar-fill { background: #7fdbff; box-shadow: 0 0 5px rgba(127,219,255,0.55); }
+.gta-bar--sp .gta-bar-fill { background: #b10dc9; box-shadow: 0 0 5px rgba(177,13,201,0.55); }
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION BUTTONS (minimal, corner-pinned)
+═══════════════════════════════════════════════ */
+.gta-nav-btn {
+  position: absolute;
+  z-index: 10;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  border: 2px solid var(--border-subtle);
-  background: var(--bg-raised);
-  font-size: 1.2rem;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(0,0,0,0.52);
+  color: rgba(255,255,255,0.62);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, color 0.2s, transform 0.1s;
+}
+.gta-nav-btn:hover  { background: rgba(20,20,30,0.78); color: rgba(255,255,255,0.95); }
+.gta-nav-btn:active { transform: scale(0.88); }
+
+/* Pause — top-right, just below cash */
+.gta-nav-btn--pause {
+  top: 52px;
+  right: 14px;
 }
 
-.hud-btn:hover  { background: var(--bg-elevated); border-color: rgba(255,255,255,0.2); }
-.hud-btn:active { transform: scale(0.9); }
-
-.hud-btn--center {
-  width: 52px;
-  height: 52px;
-  background: var(--accent-lime);
-  border-color: var(--accent-lime);
-  font-size: 1.3rem;
+/* Map — above radar (bottom-left) */
+.gta-nav-btn--map {
+  bottom: 128px;
+  left: 14px;
 }
 
-.hud-btn--center:hover {
-  box-shadow: 0 0 16px var(--glow-lime);
+/* Missions — bottom-center focal point */
+.gta-nav-btn--missions {
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 46px;
+  height: 46px;
+  border-color: rgba(255,122,0,0.42);
+  color: #FF7A00;
+  background: rgba(10,10,5,0.62);
+  box-shadow: 0 0 14px rgba(255,122,0,0.18);
 }
+.gta-nav-btn--missions:active {
+  transform: translateX(-50%) scale(0.88);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   MISSION INTRO — Cinematic slide-in overlay
+═══════════════════════════════════════════════════════════════ */
+.mission-intro {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  /* Hidden by default; JS adds .is-active */
+}
+
+.mission-intro.is-active {
+  pointer-events: auto;
+}
+
+.mission-intro__bar--top,
+.mission-intro__bar--bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: #000;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mission-intro__bar--top {
+  top: 0;
+  transform: translateY(-100%);
+}
+
+.mission-intro__bar--bottom {
+  bottom: 0;
+  transform: translateY(100%);
+}
+
+.mission-intro.is-active .mission-intro__bar--top { transform: translateY(0); }
+.mission-intro.is-active .mission-intro__bar--bottom { transform: translateY(0); }
+
+.mission-intro__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  transform: translateX(-60px);
+  opacity: 0;
+  transition: transform 0.4s 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity   0.4s 0.3s ease;
+}
+
+.mission-intro.is-active .mission-intro__content {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.mission-intro__label {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  letter-spacing: 5px;
+  color: rgba(255,122,0,0.75);
+  margin-bottom: 4px;
+}
+
+.mission-intro__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 3rem);
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+  letter-spacing: 2px;
+}
+
+.mission-intro__subtitle {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+}
+
+/* Orange stripe that slides in along the bottom of the bars */
+.mission-intro__bar--top::after,
+.mission-intro__bar--bottom::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #FF7A00;
+}
+
+.mission-intro__bar--top::after  { bottom: 0; }
+.mission-intro__bar--bottom::after { top: 0; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TOAST NOTIFICATIONS
+═══════════════════════════════════════════════════════════════ */
+.toast-container {
+  position: fixed;
+  bottom: max(80px, calc(80px + var(--safe-bottom)));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  pointer-events: none;
+  width: min(90vw, 360px);
+}
+
+.toast {
+  background: rgba(10,10,10,0.92);
+  border: 1px solid rgba(255,122,0,0.40);
+  border-left: 3px solid #FF7A00;
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  width: 100%;
+  text-align: center;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity   0.3s ease;
+  pointer-events: auto;
+}
+
+.toast.toast--show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PAUSE SCREEN — GTA-inspired black panel
+═══════════════════════════════════════════════════════════════ */
+#screen-pause {
+  background: #000;
+}
+
+.pause-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255,122,0,0.14) 0%, transparent 60%),
+    linear-gradient(180deg, #0d0d0f 0%, #000 100%);
+  pointer-events: none;
+}
+
+.pause-logo-wrap {
+  margin-bottom: var(--space-lg);
+}
+
+.pause-logo-img {
+  display: block;
+  width: min(80vw, 260px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 24px rgba(255,122,0,0.40));
+  animation: logo-stamp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.pause-tagline {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: var(--space-xl);
+}
+
+.pause-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+  max-width: 320px;
+}
+
+.pause-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
 
 /* ---------------------------------------------------------------
    NEWPORT MAP
@@ -1600,12 +1839,46 @@ input[type="range"]::-webkit-slider-thumb:hover {
     height: 100dvh;
     border-radius: 0;
     border: none;
+    /* Safe area insets for notched / rounded phones */
+    padding-top:    var(--safe-top);
+    padding-bottom: var(--safe-bottom);
+    padding-left:   var(--safe-left);
+    padding-right:  var(--safe-right);
   }
 
   /* show hamburger + mobile CTA; hide full nav links */
   .hamburger-btn { display: flex; }
   .menu-cta      { display: flex; }
   .menu-nav      { display: none; }
+
+  /* Ensure tap targets are always 44px+ */
+  .btn, .gta-nav-btn, .top-bar__back, .audio-btn, .swatch, .trait-pill {
+    min-height: var(--touch-min);
+    min-width: var(--touch-min);
+  }
+
+  /* Prevent overflow on inner content */
+  .screen__content { overflow-x: hidden; }
+}
+
+/* ---------------------------------------------------------------
+   LANDSCAPE — phones on their side during gameplay
+--------------------------------------------------------------- */
+@media (max-height: 500px) and (orientation: landscape) {
+  /* HUD corner elements compress vertically */
+  .gta-cash        { font-size: 1.2rem; top: 8px; right: 8px; }
+  .gta-objective   { top: 8px; left: 8px; }
+  .gta-radar-wrap  { bottom: 8px; left: 8px; }
+  .gta-radar-svg   { width: 72px; height: 72px; }
+  .gta-stats       { bottom: 8px; right: 8px; }
+  .gta-nav-btn--pause     { top: 36px; right: 8px; }
+  .gta-nav-btn--map       { bottom: 96px; left: 8px; }
+  .gta-nav-btn--missions  { bottom: 8px; }
+
+  /* Splash / menu: shorten vertical spacing */
+  .screen__content--center { gap: var(--space-sm); }
+  .logo-block { margin-bottom: var(--space-sm); }
+  .splash-logo-img { width: min(70vw, 240px); }
 }
 
 /* ---------------------------------------------------------------
@@ -1633,7 +1906,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     box-shadow:
       0 0 0 1px rgba(255,255,255,0.04),
       0 20px 80px rgba(0,0,0,0.8),
-      0 0 120px rgba(232,255,66,0.04);
+      0 0 120px rgba(255,122,0,0.04);
   }
 }
 
@@ -1683,6 +1956,13 @@ input[type="range"]::-webkit-slider-thumb:hover {
     align-items: center;
     justify-content: center;
     padding: var(--space-xl);
+  }
+
+  /* HUD screen: full-bleed, no sidebar grid, no padding (absolute children fill it) */
+  #screen-hud {
+    display: block !important;
+    grid-template-columns: unset;
+    padding: 0;
   }
 
   #screen-splash .screen__content--center,
@@ -1775,11 +2055,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
   .setting-row__label { flex-basis: 180px; flex-shrink: 0; }
   .setting-row__control { flex: 1; }
 
-  /* HUD desktop: wider bars, centered */
-  .hud-bar {
-    left: 340px; /* account for grid column */
-  }
-
   /* Mission list: 2 columns */
   .list {
     display: grid;
@@ -1808,6 +2083,4 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
   .top-bar { grid-column: 1; }
   .screen__content { grid-column: 2; }
-
-  .hud-bar { left: 400px; }
 }

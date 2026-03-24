@@ -28,7 +28,7 @@
       name:    localStorage.getItem('nh_name')  ?? '',
       skin:    localStorage.getItem('nh_skin')  ?? '#c68642',
       outfit:  localStorage.getItem('nh_outfit')?? 'hustler',
-      outfitColor: localStorage.getItem('nh_outfit_color') ?? '#e8ff42',
+      outfitColor: localStorage.getItem('nh_outfit_color') ?? '#FF7A00',
       trait:   localStorage.getItem('nh_trait') ?? 'Big Talker',
     }
   };
@@ -153,7 +153,10 @@
     switch (id) {
       case 'screen-missions':          renderMissions(); break;
       case 'screen-character-creator': syncCreatorPreview(); break;
-      case 'screen-hud':               initHudSim(); break;
+      case 'screen-hud':
+        initHudSim();
+        triggerMissionIntro('Welcome Back', 'Meet your mentor downtown');
+        break;
       case 'screen-map':               initMap(); break;
       default: break;
     }
@@ -168,7 +171,7 @@
       startMusic();
 
       // Ripple
-      const btn = e.target.closest('.btn, .hud-btn, .top-bar__back');
+      const btn = e.target.closest('.btn, .gta-nav-btn, .top-bar__back');
       if (btn) spawnRipple(btn, e);
 
       // Screen navigation
@@ -531,50 +534,110 @@
   }
 
   /* -------------------------------------------------------
-     HUD SIMULATION
+     TOAST NOTIFICATIONS
+  ------------------------------------------------------- */
+  function showToast(message, duration) {
+    if (duration === undefined) duration = 2800;
+    var container = document.getElementById('toast-container');
+    if (!container) return;
+    var toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    container.appendChild(toast);
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        toast.classList.add('toast--show');
+      });
+    });
+    setTimeout(function() {
+      toast.classList.remove('toast--show');
+      toast.addEventListener('transitionend', function() { toast.remove(); }, { once: true });
+    }, duration);
+  }
+
+  /* -------------------------------------------------------
+     MISSION INTRO — cinematic bar slide-in
+  ------------------------------------------------------- */
+  function triggerMissionIntro(title, subtitle) {
+    var overlay = document.getElementById('mission-intro');
+    if (!overlay) return;
+    var titleEl = document.getElementById('mission-intro-title');
+    var subEl   = document.getElementById('mission-intro-subtitle');
+    if (titleEl) titleEl.textContent = title    || 'Mission';
+    if (subEl)   subEl.textContent   = subtitle || '';
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.style.opacity = '1';
+    overlay.classList.add('is-active');
+    setTimeout(function() {
+      overlay.classList.remove('is-active');
+      setTimeout(function() {
+        overlay.style.opacity = '0';
+        overlay.setAttribute('aria-hidden', 'true');
+      }, 400);
+    }, 3400);
+  }
+
+  /* -------------------------------------------------------
+     HUD SIMULATION — GTA V Corner HUD
   ------------------------------------------------------- */
   function initHudSim() {
-    const moneyEl   = document.getElementById('hud-money');
-    const respectEl = document.getElementById('hud-respect');
-    if (!moneyEl || !respectEl) return;
+    const moneyEl  = document.getElementById('hud-money');
+    const repFill  = document.getElementById('hud-rep-fill');
+    const hpFill   = document.getElementById('hud-hp');
+    const arFill   = document.getElementById('hud-ar');
+    const objEl    = document.getElementById('hw-obj-text');
+    if (!moneyEl) return;
 
     let cash = 325;
-    let rep  = 10;
+    let rep  = 30;
+    let hp   = 80;
+    let ar   = 55;
+
+    if (objEl) objEl.style.transition = 'opacity 0.2s ease';
 
     const ticker = setInterval(() => {
-      cash += Math.floor(Math.random() * 15) - 3;
-      rep   = Math.min(rep + (Math.random() > 0.8 ? 1 : 0), 999);
-      moneyEl.textContent   = `$${cash.toLocaleString()}`;
-      respectEl.textContent = `Rep: ${rep}`;
+      cash += Math.floor(Math.random() * 18) - 4;
+      rep   = Math.min(100, rep + (Math.random() > 0.75 ? 1 : 0));
+      hp    = Math.max(35, Math.min(100, hp + (Math.random() > 0.88 ? -2 : 1)));
+      ar    = Math.max(0,  Math.min(100, ar + (Math.random() > 0.92 ? -3 : 0)));
+      moneyEl.textContent = '$' + cash.toLocaleString();
+      if (repFill) repFill.style.width = rep + '%';
+      if (hpFill)  hpFill.style.width  = hp  + '%';
+      if (arFill)  arFill.style.width  = ar  + '%';
     }, 2000);
 
     // Cycle active mission objective text
-    var objectives = [
+    const objectives = [
+      'Meet your mentor downtown',
       "Head to Barber's Row",
-      "Meet your mentor downtown",
-      "Earn $50 in tips",
-      "Talk to the Spa Owner",
-      "Start a side hustle",
-      "Avoid police heat",
-      "Explore the Riverfront",
+      'Earn $50 in tips',
+      'Talk to the Spa Owner',
+      'Start a side hustle',
+      'Avoid police heat',
+      'Explore the Riverfront',
     ];
-    var objEl = document.getElementById('hw-obj-text');
-    var objIdx = 0;
-    var objTimer = setInterval(function() {
+    let objIdx = 0;
+    const objTimer = setInterval(function() {
       objIdx = (objIdx + 1) % objectives.length;
-      if (objEl) objEl.textContent = objectives[objIdx];
+      if (objEl) {
+        objEl.style.opacity = '0';
+        setTimeout(() => {
+          objEl.textContent   = objectives[objIdx];
+          objEl.style.opacity = '1';
+        }, 200);
+      }
     }, 5000);
 
     // Stop timers when we leave the HUD screen
-    const observer = new MutationObserver(() => {
-      const hudScreen = document.getElementById('screen-hud');
+    const hudScreen = document.getElementById('screen-hud');
+    const observer  = new MutationObserver(() => {
       if (!hudScreen.classList.contains('screen--active')) {
         clearInterval(ticker);
         clearInterval(objTimer);
         observer.disconnect();
       }
     });
-    observer.observe(document.getElementById('screen-hud'), { attributes: true, attributeFilter: ['class'] });
+    observer.observe(hudScreen, { attributes: true, attributeFilter: ['class'] });
   }
 
   /* -------------------------------------------------------
@@ -594,9 +657,9 @@
     if (!popup) return;
 
     var zoneColors = {
-      downtown:    '#e8ff42',
+      downtown:    '#FF7A00',
       riverfront:  '#4ecdc4',
-      barbersrow:  '#e8ff42',
+      barbersrow:  '#FF7A00',
       strip:       '#ff6b9d',
       spa:         '#4ecdc4',
       residential: '#aaa',
@@ -616,7 +679,7 @@
       popupMissions.textContent = missions > 0
         ? missions + ' active mission' + (missions === 1 ? '' : 's')
         : 'No missions available yet';
-      popupMissions.style.color = missions > 0 ? '#e8ff42' : '#888';
+      popupMissions.style.color = missions > 0 ? '#FF7A00' : '#888';
       popupGo.style.display = missions > 0 ? 'inline-block' : 'none';
       popup.classList.add('is-visible');
     }
@@ -691,10 +754,19 @@
      INIT
   ------------------------------------------------------- */
   function init() {
-    // Mute button
+    // Mute button — respond to pointerdown for instant mobile response
     updateMuteBtn();
+    let _mutePointerFired = false;
+    muteBtn.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      _mutePointerFired = true;
+      toggleMute();
+    }, { passive: false });
+    // click handles keyboard (Enter/Space) without double-firing after pointerdown
     muteBtn.addEventListener('click', (e) => {
       e.stopPropagation();
+      if (_mutePointerFired) { _mutePointerFired = false; return; }
       toggleMute();
     });
 
