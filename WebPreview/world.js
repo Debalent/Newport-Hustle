@@ -96,6 +96,10 @@
   /* ═══════════════════════════════════════════
      INIT / DISPOSE
   ═══════════════════════════════════════════ */
+  // Get canvas dimensions, falling back to parent or window when canvas hasn't laid out yet
+  function _canvasW(c) { return c.clientWidth  || (c.parentElement && c.parentElement.clientWidth)  || window.innerWidth; }
+  function _canvasH(c) { return c.clientHeight || (c.parentElement && c.parentElement.clientHeight) || window.innerHeight; }
+
   function initWorld(canvas) {
     if (!window.THREE) {
       console.error('[NHWorld] Three.js not loaded.');
@@ -107,10 +111,13 @@
     _canvas = canvas;
     clock   = new THREE.Clock();
 
+    var W = _canvasW(canvas);
+    var H = _canvasH(canvas);
+
     // Renderer
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    renderer.setSize(W, H);
     renderer.shadowMap.enabled  = true;
     renderer.shadowMap.type     = THREE.PCFSoftShadowMap;
     renderer.toneMapping        = THREE.ACESFilmicToneMapping;
@@ -122,7 +129,7 @@
     scene.fog = new THREE.FogExp2(0x0d1520, 0.022);
 
     // Camera
-    camera = new THREE.PerspectiveCamera(68, canvas.clientWidth / canvas.clientHeight, 0.1, 350);
+    camera = new THREE.PerspectiveCamera(68, W / H, 0.1, 350);
 
     buildLighting();
     buildCity();
@@ -143,11 +150,15 @@
     // Resize handler
     window._nhResize = function () {
       if (!renderer) return;
-      renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      var W = _canvasW(canvas);
+      var H = _canvasH(canvas);
+      renderer.setSize(W, H);
+      camera.aspect = W / H;
       camera.updateProjectionMatrix();
     };
     window.addEventListener('resize', window._nhResize);
+    // One-shot resize after first frame to catch any late layout
+    requestAnimationFrame(function() { if (window._nhResize) window._nhResize(); });
 
     isRunning = true;
     animate();

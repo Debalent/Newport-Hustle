@@ -1338,6 +1338,25 @@ input[type="range"]::-webkit-slider-thumb:hover {
   letter-spacing: 0.5px;
 }
 
+/* ── Demo build badge ── */
+.nh-demo-badge {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 12;
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  letter-spacing: 2.5px;
+  color: rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 3px 12px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
 /* ── Vignette (sits above city world, below HUD) ── */
 .gta-vignette {
   position: absolute;

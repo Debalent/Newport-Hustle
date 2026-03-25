@@ -156,26 +156,30 @@
       case 'screen-hud':
         initHudSim();
         triggerMissionIntro('Welcome Back', 'Meet your mentor downtown');
-        // Boot the Three.js world the first time we enter the HUD screen
+        // Boot the Three.js world (defer 2 rAFs so CSS layout is paint-complete)
         if (window.NHWorld) {
           var threeCanvas = document.getElementById('three-canvas');
+          var lockPrompt  = document.getElementById('fps-lock-prompt');
           if (threeCanvas && !window.NHWorld._inited) {
             window.NHWorld._inited = true;
-            window.NHWorld.init(threeCanvas);
-            window.NHWorld.onNPCInteract(function(npcId, name) {
-              showToast('Talking to ' + name + '...');
-              showScreen('screen-missions');
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() {
+                window.NHWorld.init(threeCanvas);
+                window.NHWorld.onNPCInteract(function(npcId, name) {
+                  showToast('Talking to ' + name + '...');
+                  showScreen('screen-missions');
+                });
+                // Dismiss click-to-play prompt on first canvas touch
+                if (lockPrompt) {
+                  threeCanvas.addEventListener('pointerdown', function dismiss() {
+                    lockPrompt.classList.add('is-hidden');
+                    threeCanvas.removeEventListener('pointerdown', dismiss);
+                  }, { once: true });
+                }
+              });
             });
           } else if (threeCanvas) {
             window.NHWorld.resume();
-          }
-          // Dismiss click-to-play prompt when user first interacts
-          var lockPrompt = document.getElementById('fps-lock-prompt');
-          if (lockPrompt) {
-            threeCanvas.addEventListener('pointerdown', function dismiss() {
-              lockPrompt.classList.add('is-hidden');
-              threeCanvas.removeEventListener('pointerdown', dismiss);
-            }, { once: true });
           }
         }
         break;
