@@ -8,7 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.min.js"></script>
+  <!-- Three.js r168 — bundled locally (UMD global build dropped in r148+) -->
+  <script type="module">
+    import * as THREE from './three.module.min.js';
+    window.THREE = THREE;
+  </script>
 </head>
 <body>
   <div id="app">
