@@ -1207,42 +1207,135 @@ input[type="range"]::-webkit-slider-thumb:hover {
   z-index: 1;
 }
 
-.city-svg {
+/* ── Three.js canvas ── */
+.three-canvas {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   display: block;
+  cursor: grab;
 }
+.three-canvas:active { cursor: grabbing; }
 
-.hw-fog-layer {
+/* ── Click-to-play overlay ── */
+.fps-lock-prompt {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 50% 20%,  rgba(192,90,44,0.10) 0%, transparent 55%),
-    radial-gradient(ellipse at 20% 80%,  rgba(14,30,60,0.18)  0%, transparent 60%),
-    radial-gradient(ellipse at 80% 80%,  rgba(14,30,60,0.18)  0%, transparent 60%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 6;
+  background: rgba(0,0,0,0.62);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  transition: opacity 0.35s;
+  cursor: pointer;
+}
+.fps-lock-prompt.is-hidden { opacity: 0; pointer-events: none; }
+.fps-lock-prompt__inner   { text-align: center; }
+.fps-lock-prompt__icon    { font-size: 3rem; margin-bottom: 8px; }
+.fps-lock-prompt__title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: #FF7A00;
+  letter-spacing: 3px;
+}
+.fps-lock-prompt__sub {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 1px;
+  margin-top: 6px;
 }
 
-.hw-grade {
+/* ── Crosshair (mobile only) ── */
+.fps-crosshair {
   position: absolute;
-  inset: 0;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 7;
   pointer-events: none;
-  mix-blend-mode: screen;
-  background: linear-gradient(180deg, rgba(192,100,40,0.05) 0%, transparent 40%, rgba(20,30,50,0.08) 100%);
+  display: none;
+}
+@media (pointer: coarse) { .fps-crosshair { display: block; } }
+.fps-crosshair__h,
+.fps-crosshair__v { position: absolute; background: rgba(255,255,255,0.78); }
+.fps-crosshair__h { width: 16px; height: 2px;  top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.fps-crosshair__v { width: 2px;  height: 16px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+/* ── Dual joysticks (mobile only) ── */
+.fps-joystick {
+  position: absolute;
+  bottom: 110px;
+  width: 98px; height: 98px;
+  z-index: 8;
+  display: none;
+  touch-action: none;
+}
+@media (pointer: coarse) { .fps-joystick { display: block; } }
+.fps-joystick--move { left: 18px; }
+.fps-joystick--look { right: 18px; }
+.fps-joystick__ring {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.22);
+  background: rgba(0,0,0,0.3);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.fps-joystick__knob {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(255,122,0,0.72);
+  border: 2px solid rgba(255,122,0,0.9);
+  box-shadow: 0 0 14px rgba(255,122,0,0.45);
+  pointer-events: none;
 }
 
-.hw-location {
+/* ── Interact prompt ── */
+.fps-interact {
   position: absolute;
-  bottom: 70px;
+  bottom: 182px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 3;
-  font-family: var(--font-heading);
-  font-size: 0.58rem;
-  letter-spacing: 4px;
-  color: rgba(255,255,255,0.12);
-  pointer-events: none;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0,0,0,0.68);
+  border: 1px solid rgba(255,122,0,0.5);
+  border-radius: 26px;
+  padding: 8px 20px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  min-height: 44px;
+  animation: fps-pulse 1.6s ease-in-out infinite;
   white-space: nowrap;
+}
+@keyframes fps-pulse {
+  0%,100% { box-shadow: 0 0 8px rgba(255,122,0,0.25); }
+  50%      { box-shadow: 0 0 20px rgba(255,122,0,0.7); }
+}
+.fps-interact__key {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: #FF7A00;
+  background: rgba(255,122,0,0.15);
+  border: 1px solid rgba(255,122,0,0.55);
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.fps-interact__label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
 }
 
 /* ── Vignette (sits above city world, below HUD) ── */

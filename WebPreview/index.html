@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/three@0.168.0/build/three.min.js"></script>
 </head>
 <body>
   <div id="app">
@@ -393,9 +394,42 @@
     ============================================================ -->
     <section class="screen" id="screen-hud">
 
-      <!-- ── CITY WORLD (top-down SVG canvas — full bleed) ── -->
+      <!-- ── CITY WORLD (Three.js FPS — full bleed) ── -->
       <div class="hud-world" aria-hidden="true" id="hud-world">
-        <svg id="city-svg" class="city-svg" viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <canvas id="three-canvas" class="three-canvas"></canvas>
+
+        <!-- Pointer-lock prompt (desktop) -->
+        <div class="fps-lock-prompt" id="fps-lock-prompt">
+          <div class="fps-lock-prompt__inner">
+            <div class="fps-lock-prompt__icon">🎮</div>
+            <div class="fps-lock-prompt__title">Click to Play</div>
+            <div class="fps-lock-prompt__sub">WASD · Mouse-look · ESC to pause</div>
+          </div>
+        </div>
+
+        <!-- Mobile crosshair (always visible on touch devices) -->
+        <div class="fps-crosshair" id="fps-crosshair" aria-hidden="true">
+          <div class="fps-crosshair__h"></div>
+          <div class="fps-crosshair__v"></div>
+        </div>
+
+        <!-- Mobile joystick (left = move, right = look) -->
+        <div class="fps-joystick fps-joystick--move" id="joy-move" aria-label="Move joystick">
+          <div class="fps-joystick__ring"></div>
+          <div class="fps-joystick__knob" id="joy-move-knob"></div>
+        </div>
+        <div class="fps-joystick fps-joystick--look" id="joy-look" aria-label="Look joystick">
+          <div class="fps-joystick__ring"></div>
+          <div class="fps-joystick__knob" id="joy-look-knob"></div>
+        </div>
+
+        <!-- NPC interaction prompt -->
+        <div class="fps-interact" id="fps-interact" aria-live="polite" hidden>
+          <span class="fps-interact__key">E</span>
+          <span class="fps-interact__label" id="fps-interact-label">Talk to Mentor</span>
+        </div>
+
+        <!-- LEGACY SVG placeholder removed — Three.js renders here -->
           <defs>
             <!-- Sunset sky gradient -->
             <linearGradient id="sky-grad" x1="0" y1="0" x2="0" y2="1">
@@ -1331,6 +1365,7 @@
       { id: "chaos",      title: "Chaos Mode",             tone: "Pure Mayhem" }
     ];
   </script>
+  <script src="world.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

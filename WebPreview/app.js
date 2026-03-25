@@ -156,6 +156,28 @@
       case 'screen-hud':
         initHudSim();
         triggerMissionIntro('Welcome Back', 'Meet your mentor downtown');
+        // Boot the Three.js world the first time we enter the HUD screen
+        if (window.NHWorld) {
+          var threeCanvas = document.getElementById('three-canvas');
+          if (threeCanvas && !window.NHWorld._inited) {
+            window.NHWorld._inited = true;
+            window.NHWorld.init(threeCanvas);
+            window.NHWorld.onNPCInteract(function(npcId, name) {
+              showToast('Talking to ' + name + '...');
+              showScreen('screen-missions');
+            });
+          } else if (threeCanvas) {
+            window.NHWorld.resume();
+          }
+          // Dismiss click-to-play prompt when user first interacts
+          var lockPrompt = document.getElementById('fps-lock-prompt');
+          if (lockPrompt) {
+            threeCanvas.addEventListener('pointerdown', function dismiss() {
+              lockPrompt.classList.add('is-hidden');
+              threeCanvas.removeEventListener('pointerdown', dismiss);
+            }, { once: true });
+          }
+        }
         break;
       case 'screen-map':               initMap(); break;
       default: break;
@@ -634,6 +656,7 @@
       if (!hudScreen.classList.contains('screen--active')) {
         clearInterval(ticker);
         clearInterval(objTimer);
+        if (window.NHWorld) window.NHWorld.pause();
         observer.disconnect();
       }
     });
@@ -782,6 +805,9 @@
 
     // Ensure splash is visible
     showScreen('screen-splash');
+
+    // Expose toast for cross-module use (world.js, etc.)
+    window.showToast = showToast;
   }
 
   document.addEventListener('DOMContentLoaded', init);
