@@ -137,7 +137,7 @@ namespace NewportHustle.Core
         
         public void UpdatePlayerMoney(float amount)
         {
-            playerMoney += amount;
+            playerMoney = Mathf.Max(0f, playerMoney + amount);
             OnPlayerMoneyChanged?.Invoke(playerMoney);
         }
         

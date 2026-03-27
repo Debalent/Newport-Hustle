@@ -45,6 +45,9 @@ namespace NewportHustle.Characters
         private bool isWorkingHours;
         private Vector3 workLocation;
         private Vector3 homeLocation;
+
+        // Cached component references (avoid FindObjectOfType every frame)
+        private TimeCycle cachedTimeCycle;
         
         void Start()
         {
@@ -68,7 +71,10 @@ namespace NewportHustle.Characters
             
             startPosition = transform.position;
             homeLocation = startPosition;
-            
+
+            // Cache TimeCycle once — FindObjectOfType is expensive per-frame
+            cachedTimeCycle = FindObjectOfType<TimeCycle>();
+
             // Set work location based on business type
             SetWorkLocation();
             
@@ -138,17 +144,20 @@ namespace NewportHustle.Characters
         {
             if (player != null)
             {
-                float distance = Vector3.Distance(transform.position, player.transform.position);
-                playerInRange = distance <= detectionRange;
-                
-                // Look at player when nearby
-                if (distance <= interactionRange && !isInteracting)
+                // Use sqrMagnitude instead of Distance — avoids a sqrt per NPC per frame
+                float sqrDist = (transform.position - player.transform.position).sqrMagnitude;
+                playerInRange = sqrDist <= detectionRange * detectionRange;
+
+                // Smooth look-at when player is in interaction range
+                if (sqrDist <= interactionRange * interactionRange && !isInteracting)
                 {
                     Vector3 lookDirection = player.transform.position - transform.position;
                     lookDirection.y = 0;
                     if (lookDirection != Vector3.zero)
                     {
-                        transform.rotation = Quaternion.LookRotation(lookDirection);
+                        Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+                        transform.rotation = Quaternion.RotateTowards(
+                            transform.rotation, targetRotation, 180f * Time.deltaTime);
                     }
                 }
             }
@@ -220,22 +229,21 @@ namespace NewportHustle.Characters
         private void HandleWorkingState()
         {
             agent.SetDestination(workLocation);
-            
-            if (Vector3.Distance(transform.position, workLocation) < 2f)
+
+            if ((transform.position - workLocation).sqrMagnitude < 4f) // 2f squared
             {
-                // Perform work animations
                 if (animator != null)
                 {
                     animator.SetBool("IsWorking", true);
                 }
             }
         }
-        
+
         private void HandleGoingHomeState()
         {
             agent.SetDestination(homeLocation);
-            
-            if (Vector3.Distance(transform.position, homeLocation) < 2f)
+
+            if ((transform.position - homeLocation).sqrMagnitude < 4f) // 2f squared
             {
                 ChangeState(NPCBehaviorState.Idle);
             }
@@ -249,12 +257,17 @@ namespace NewportHustle.Characters
         
         private void HandleFleeingState()
         {
-            Vector3 fleeDirection = transform.position - player.transform.position;
-            fleeDirection.Normalize();
+            if (player == null)
+            {
+                ChangeState(NPCBehaviorState.Idle);
+                return;
+            }
+
+            Vector3 fleeDirection = (transform.position - player.transform.position).normalized;
             Vector3 fleeTarget = transform.position + fleeDirection * 10f;
-            
+
             agent.SetDestination(fleeTarget);
-            
+
             if (!playerInRange)
             {
                 ChangeState(NPCBehaviorState.Idle);
@@ -264,11 +277,10 @@ namespace NewportHustle.Characters
         private void CheckSchedule()
         {
             if (dailySchedule.Count == 0) return;
-            
-            TimeCycle timeCycle = FindObjectOfType<TimeCycle>();
-            if (timeCycle == null) return;
-            
-            float currentTime = timeCycle.GetCurrentTime();
+
+            if (cachedTimeCycle == null) return;
+
+            float currentTime = cachedTimeCycle.GetCurrentTime();
             
             foreach (var entry in dailySchedule)
             {
@@ -285,15 +297,7 @@ namespace NewportHustle.Characters
         
         private void ChooseNewState()
         {
-            TimeCycle timeCycle = FindObjectOfType<TimeCycle>();
-            if (timeCycle != null && timeCycle.IsBusinessHours())
-            {
-                isWorkingHours = true;
-            }
-            else
-            {
-                isWorkingHours = false;
-            }
+            isWorkingHours = cachedTimeCycle != null && cachedTimeCycle.IsBusinessHours();
             
             // Choose state based on time and NPC type
             if (isWorkingHours && associatedBusiness != BusinessType.None)

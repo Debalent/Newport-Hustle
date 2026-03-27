@@ -239,9 +239,7 @@ namespace NewportHustle.World
             
             if (distanceToLastKnown < 15f)
             {
-                // Reached last known position, search around
-                patrolTimer += Time.deltaTime;
-                
+                // patrolTimer is already incremented in UpdatePoliceAI — no double-increment here
                 if (patrolTimer >= 10f) // Search for 10 seconds
                 {
                     SetState(PoliceState.Patrol);
@@ -334,9 +332,7 @@ namespace NewportHustle.World
         /// </summary>
         private void UpdateBlockedBehavior()
         {
-            // Try to find alternate route
-            patrolTimer += Time.deltaTime;
-            
+            // patrolTimer is already incremented in UpdatePoliceAI — no double-increment here
             if (patrolTimer >= 5f) // Try for 5 seconds
             {
                 SetState(PoliceState.Pursuing);
