@@ -217,6 +217,10 @@
           focused.click();
         }
       }
+      // ESC from HUD → Pause screen
+      if (e.key === 'Escape' && state.currentScreen === 'screen-hud') {
+        showScreen('screen-pause');
+      }
     });
   }
 

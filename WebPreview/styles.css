@@ -1205,6 +1205,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   inset: 0;
   overflow: hidden;
   z-index: 1;
+  pointer-events: none; /* HUD overlay buttons must always be reachable */
 }
 
 /* ── Three.js canvas ── */
@@ -1215,6 +1216,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   height: 100%;
   display: block;
   cursor: grab;
+  pointer-events: auto; /* re-enable for camera orbit / touch */
 }
 .three-canvas:active { cursor: grabbing; }
 
@@ -1231,6 +1233,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   backdrop-filter: blur(5px);
   transition: opacity 0.35s;
   cursor: pointer;
+  pointer-events: auto; /* re-enable: click-to-dismiss overlay */
 }
 .fps-lock-prompt.is-hidden { opacity: 0; pointer-events: none; }
 .fps-lock-prompt__inner   { text-align: center; }
@@ -1271,6 +1274,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   z-index: 8;
   display: none;
   touch-action: none;
+  pointer-events: auto; /* re-enable inside hud-world */
 }
 @media (pointer: coarse) { .fps-joystick { display: block; } }
 .fps-joystick--move { left: 18px; }
@@ -1313,6 +1317,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   backdrop-filter: blur(8px);
   cursor: pointer;
   min-height: 44px;
+  pointer-events: auto; /* re-enable inside hud-world */
   animation: fps-pulse 1.6s ease-in-out infinite;
   white-space: nowrap;
 }
@@ -1583,6 +1588,48 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .gta-nav-btn--pause {
   top: 52px;
   right: 14px;
+}
+
+/* ── Menu / Back button — top-left, always-visible escape route ── */
+.gta-menu-btn {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px 7px 10px;
+  background: rgba(10,10,15,0.72);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 6px;
+  color: rgba(255,255,255,0.9);
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, color 0.2s, transform 0.1s;
+  pointer-events: auto;
+}
+.gta-menu-btn:hover  { background: rgba(20,20,30,0.88); color: #fff; }
+.gta-menu-btn:active { transform: scale(0.92); }
+.gta-menu-btn__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+}
+.gta-menu-btn__bars span {
+  display: block;
+  width: 14px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+}
+.gta-menu-btn__label {
+  line-height: 1;
 }
 
 /* Map — above radar (bottom-left) */
@@ -1986,6 +2033,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   .gta-nav-btn--pause     { top: 36px; right: 8px; }
   .gta-nav-btn--map       { bottom: 96px; left: 8px; }
   .gta-nav-btn--missions  { bottom: 8px; }
+  .gta-menu-btn           { top: 8px; left: 8px; padding: 6px 10px 6px 8px; font-size: 0.62rem; }
 
   /* Splash / menu: shorten vertical spacing */
   .screen__content--center { gap: var(--space-sm); }
