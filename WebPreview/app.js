@@ -192,15 +192,17 @@
      NAVIGATION (event delegation)
   ------------------------------------------------------- */
   function initNavigation() {
-    document.body.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
       // Start music on first human interaction
       startMusic();
 
       // Ripple
-      const btn = e.target.closest('.btn, .gta-nav-btn, .top-bar__back');
+      const btn = e.target.closest('.btn, .gta-nav-btn, .top-bar__back, .gta-menu-btn');
       if (btn) spawnRipple(btn, e);
 
-      // Screen navigation
+      // Screen navigation — closest() finds nearest ancestor with data-target
+      // so inner elements (spans inside buttons) correctly resolve to their button,
+      // and tapping any bare area of the splash section resolves to the section itself.
       const navTarget = e.target.closest('[data-target]');
       if (navTarget) {
         const targetId = navTarget.getAttribute('data-target');

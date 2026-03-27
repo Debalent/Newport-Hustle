@@ -71,6 +71,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Eliminate 300ms tap delay on all interactive elements */
+button, a, [data-target], input, select, textarea, label {
+  touch-action: manipulation;
+}
+
 html {
   height: 100%;
   /* Ensure smooth scrolling inside panels */
