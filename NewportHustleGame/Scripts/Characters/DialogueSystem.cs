@@ -454,6 +454,290 @@ namespace NewportHustle.Characters
             DialogueData dialogue = new DialogueData();
             dialogue.dialogueID = dialogueID;
             
+            // Marcus DeVille intro dialogue for the "Welcome to the DeVille District" mission
+            if (dialogueID == "Marcus_WelcomeToDistrict")
+            {
+                DialogueNode marcusIntro1 = new DialogueNode
+                {
+                    nodeID = "start",
+                    speakerName = "Marcus DeVille",
+                    text = "Look at you. Fresh off the bus and already smelling like potential. Welcome to the DeVille District — where dreams come true and wallets go missing.",
+                    nextNodeID = "marcus_pitch"
+                };
+
+                DialogueNode marcusIntro2 = new DialogueNode
+                {
+                    nodeID = "marcus_pitch",
+                    speakerName = "Marcus DeVille",
+                    text = "My rivals stole my belts. My belts. A man without a belt is like a car without rims — technically functional, but embarrassing. You and Trix are gonna pay a visit to my friends in Diaz District and remind them whose logo runs this town.",
+                    responses = new List<DialogueResponse>
+                    {
+                        new DialogueResponse
+                        {
+                            text = "Sounds risky... but I'm in.",
+                            nextNodeID = "player_yes"
+                        },
+                        new DialogueResponse
+                        {
+                            text = "Why should I do this for you?",
+                            nextNodeID = "player_question"
+                        }
+                    }
+                };
+
+                DialogueNode playerYes = new DialogueNode
+                {
+                    nodeID = "player_yes",
+                    speakerName = "Trix",
+                    text = "That's the spirit. Worst case, we end up on a group chat we don't like.",
+                    nextNodeID = "end"
+                };
+
+                DialogueNode playerQuestion = new DialogueNode
+                {
+                    nodeID = "player_question",
+                    speakerName = "Marcus DeVille",
+                    text = "Because Newport already wrote you off. I'm giving you a chance to write back. You help me get what's mine, I make sure this city remembers your name.",
+                    nextNodeID = "end"
+                };
+
+                DialogueNode endNode = new DialogueNode
+                {
+                    nodeID = "end",
+                    speakerName = "Marcus DeVille",
+                    text = "Meet Trix by the car. Diaz District's waiting. Try not to scuff my inventory.",
+                    nextNodeID = null
+                };
+
+                dialogue.nodes.Add(marcusIntro1);
+                dialogue.nodes.Add(marcusIntro2);
+                dialogue.nodes.Add(playerYes);
+                dialogue.nodes.Add(playerQuestion);
+                dialogue.nodes.Add(endNode);
+
+                return dialogue;
+            }
+
+            if (dialogueID == "Lexi_WelcomeToAlgorithm")
+            {
+                DialogueNode lexiIntro = new DialogueNode
+                {
+                    nodeID = "start",
+                    speakerName = "Lexi Vance",
+                    text = "Five point two million followers. Not one of them sent me a decent fixer. Until now, apparently. Don't smile — I'll post it and it'll trend for the wrong reasons.",
+                    nextNodeID = "lexi_offer"
+                };
+
+                DialogueNode lexiOffer = new DialogueNode
+                {
+                    nodeID = "lexi_offer",
+                    speakerName = "Lexi Vance",
+                    text = "Someone's running bots against my engagement. They're deleting comments, flagging my sponsors, and — this is the part that really hurts — clipping me out of context. I need it stopped and I need footage I can use. You in?",
+                    responses = new List<DialogueResponse>
+                    {
+                        new DialogueResponse { text = "I'll handle it. What's the pay?",       nextNodeID = "lexi_yes" },
+                        new DialogueResponse { text = "Sounds like your problem, not mine.",    nextNodeID = "lexi_refuse" }
+                    }
+                };
+
+                DialogueNode lexiYes = new DialogueNode
+                {
+                    nodeID = "lexi_yes",
+                    speakerName = "Lexi Vance",
+                    text = "The Algorithm provides. I'll send the access codes to your phone. And if you do this right — and I mean CINEMATICALLY right — we talk about a longer arrangement.",
+                    nextNodeID = "lexi_end"
+                };
+
+                DialogueNode lexiRefuse = new DialogueNode
+                {
+                    nodeID = "lexi_refuse",
+                    speakerName = "Lexi Vance",
+                    text = "My camera drones are already filming you. Reconsider. There's a thumbnail opportunity here for both of us.",
+                    nextNodeID = "lexi_end"
+                };
+
+                DialogueNode lexiEnd = new DialogueNode
+                {
+                    nodeID = "lexi_end",
+                    speakerName = "Kai",
+                    text = "She's already drafting the caption. You might as well go.",
+                    nextNodeID = null
+                };
+
+                dialogue.nodes.Add(lexiIntro);
+                dialogue.nodes.Add(lexiOffer);
+                dialogue.nodes.Add(lexiYes);
+                dialogue.nodes.Add(lexiRefuse);
+                dialogue.nodes.Add(lexiEnd);
+
+                return dialogue;
+            }
+
+            if (dialogueID == "Rico_WelcomeToFleet")
+            {
+                DialogueNode ricoIntro = new DialogueNode
+                {
+                    nodeID = "start",
+                    speakerName = "Big Rico",
+                    text = "You see that rig right there? That's Deborah. You look at Deborah wrong, we got a problem. You touch Deborah, we got a bigger problem. Now — who sent you?",
+                    nextNodeID = "rico_territory"
+                };
+
+                DialogueNode ricoTerritory = new DialogueNode
+                {
+                    nodeID = "rico_territory",
+                    speakerName = "Big Rico",
+                    text = "Three of my best trucks are down. Cables cut, hydraulics drained. Somebody's hitting me intentional. You find out who — and you make it stop — I'll make sure your vehicle never gets towed in Newport. That's a lifestyle benefit, kid.",
+                    responses = new List<DialogueResponse>
+                    {
+                        new DialogueResponse { text = "Deal. I'll find your guy.",          nextNodeID = "rico_yes" },
+                        new DialogueResponse { text = "How do I know this isn't a setup?",  nextNodeID = "rico_question" }
+                    }
+                };
+
+                DialogueNode ricoYes = new DialogueNode
+                {
+                    nodeID = "rico_yes",
+                    speakerName = "Big Rico",
+                    text = "Smart kid. Elena'll walk you through the lot. Don't pet the dogs without asking.",
+                    nextNodeID = "rico_end"
+                };
+
+                DialogueNode ricoQuestion = new DialogueNode
+                {
+                    nodeID = "rico_question",
+                    speakerName = "Big Rico",
+                    text = "If it was a setup, Deborah would already be on your hood. Eat the quesadilla and get to work.",
+                    nextNodeID = "rico_end"
+                };
+
+                DialogueNode ricoEnd = new DialogueNode
+                {
+                    nodeID = "rico_end",
+                    speakerName = "Elena",
+                    text = "Don't mind him. He named the truck after his grandma. Come on, I'll show you where it happened.",
+                    nextNodeID = null
+                };
+
+                dialogue.nodes.Add(ricoIntro);
+                dialogue.nodes.Add(ricoTerritory);
+                dialogue.nodes.Add(ricoYes);
+                dialogue.nodes.Add(ricoQuestion);
+                dialogue.nodes.Add(ricoEnd);
+
+                return dialogue;
+            }
+
+            if (dialogueID == "Fable_WelcomeToEnlightenment")
+            {
+                DialogueNode fableIntro = new DialogueNode
+                {
+                    nodeID = "start",
+                    speakerName = "Dr. Fable",
+                    text = "The universe sent you here. Not the door. Not me. The universe. I want you to sit with that for a moment. ... Good. Now: there's a man named Chad who is about to destroy everything I've built.",
+                    nextNodeID = "fable_pitch"
+                };
+
+                DialogueNode fablePitch = new DialogueNode
+                {
+                    nodeID = "fable_pitch",
+                    speakerName = "Dr. Fable",
+                    text = "Chad was a member here. A beloved member. Now he's talking to journalists about my supplements. Totally out of context. Will you help me ensure Chad's narrative reaches a natural conclusion?",
+                    responses = new List<DialogueResponse>
+                    {
+                        new DialogueResponse { text = "I'll talk to him. No promises.",                     nextNodeID = "fable_yes" },
+                        new DialogueResponse { text = "I'm skeptical about all of this.",                  nextNodeID = "fable_skeptic" }
+                    }
+                };
+
+                DialogueNode fableYes = new DialogueNode
+                {
+                    nodeID = "fable_yes",
+                    speakerName = "Dr. Fable",
+                    text = "Perfect. Here — take an Inner Fire sample. It's just water, but it's water with intention. The energy you bring to Chad will determine the outcome.",
+                    nextNodeID = "fable_end"
+                };
+
+                DialogueNode fableSkeptic = new DialogueNode
+                {
+                    nodeID = "fable_skeptic",
+                    speakerName = "Dr. Fable",
+                    text = "Skepticism is just unexplored faith. I respect it. I also pay in cash. Five hundred. The supplements are unrelated.",
+                    nextNodeID = "fable_end"
+                };
+
+                DialogueNode fableEnd = new DialogueNode
+                {
+                    nodeID = "fable_end",
+                    speakerName = "Dr. Fable",
+                    text = "Chad is at Miss Pearl's Diner. He eats the same booth every Tuesday. The universe is very consistent with him.",
+                    nextNodeID = null
+                };
+
+                dialogue.nodes.Add(fableIntro);
+                dialogue.nodes.Add(fablePitch);
+                dialogue.nodes.Add(fableYes);
+                dialogue.nodes.Add(fableSkeptic);
+                dialogue.nodes.Add(fableEnd);
+
+                return dialogue;
+            }
+
+            if (dialogueID == "Mayor_PoliticalBriefing")
+            {
+                DialogueNode mayorIntro = new DialogueNode
+                {
+                    nodeID = "start",
+                    speakerName = "Mayor Bucksworth",
+                    text = "Close the door. I know who you are. I know who you've been working for. And before you reach for whatever's in your pocket — I don't need threats. I need a fixer.",
+                    nextNodeID = "mayor_offer"
+                };
+
+                DialogueNode mayorOffer = new DialogueNode
+                {
+                    nodeID = "mayor_offer",
+                    speakerName = "Mayor Bucksworth",
+                    text = "Patricia Dawn has a file. It connects me to some... ambitious infrastructure arrangements. I need that file gone before Election Day. You get it done quietly, Newport stays the same. You get it done loudly, Newport stays the same — but you won't be here to see it.",
+                    responses = new List<DialogueResponse>
+                    {
+                        new DialogueResponse { text = "I'll get it. But this clears my record.",   nextNodeID = "mayor_yes" },
+                        new DialogueResponse { text = "I don't work for people like you.",          nextNodeID = "mayor_refuse" }
+                    }
+                };
+
+                DialogueNode mayorYes = new DialogueNode
+                {
+                    nodeID = "mayor_yes",
+                    speakerName = "Mayor Bucksworth",
+                    text = "Your record? Son, I AM your record. Rodney will give you the address. Don't read the file.",
+                    nextNodeID = "mayor_end"
+                };
+
+                DialogueNode mayorRefuse = new DialogueNode
+                {
+                    nodeID = "mayor_refuse",
+                    speakerName = "Mayor Bucksworth",
+                    text = "You'd be surprised what people like me look like up close. Think about it overnight. Newport has long arms and they all bend my direction.",
+                    nextNodeID = "mayor_end"
+                };
+
+                DialogueNode mayorEnd = new DialogueNode
+                {
+                    nodeID = "mayor_end",
+                    speakerName = "Rodney",
+                    text = "... I'm sorry. I just — I work here. Please don't get me involved.",
+                    nextNodeID = null
+                };
+
+                dialogue.nodes.Add(mayorIntro);
+                dialogue.nodes.Add(mayorOffer);
+                dialogue.nodes.Add(mayorYes);
+                dialogue.nodes.Add(mayorRefuse);
+                dialogue.nodes.Add(mayorEnd);
+
+                return dialogue;
+            }
+
             // Sample Newport-themed dialogue
             DialogueNode node1 = new DialogueNode
             {

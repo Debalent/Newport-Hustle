@@ -1,375 +1,644 @@
 {
+  "version": "3.0",
   "main_story_missions": [
     {
       "missionID": "mission_01_welcome_back",
       "title": "Welcome Back to Newport",
-      "description": "Return to Newport, Arkansas and reacquaint yourself with the town and its people.",
+      "description": "Return to Newport, reacquaint yourself with Barbers Row, and reconnect with Mentor.",
       "story_act": 1,
+      "boss_arc": null,
       "estimated_duration": "15-20 minutes",
       "prerequisites": [],
       "unlocks": ["mission_02_the_cut"],
       "objectives": [
-        {
-          "id": "visit_downtown",
-          "description": "Explore downtown Newport",
-          "type": "location_visit",
-          "target": "downtown_area",
-          "optional": false
-        },
-        {
-          "id": "talk_to_mentor",
-          "description": "Meet with your old mentor",
-          "type": "character_interaction",
-          "target": "character_01_mentor",
-          "optional": false
-        },
-        {
-          "id": "explore_riverfront",
-          "description": "Visit the White River waterfront",
-          "type": "location_visit",
-          "target": "riverfront_area",
-          "optional": false
-        },
-        {
-          "id": "find_accommodation",
-          "description": "Find a place to stay",
-          "type": "location_visit",
-          "target": "accommodation_options",
-          "optional": false
-        }
+        { "id": "arrive_newport", "description": "Drive into Newport from the highway", "type": "location_visit", "target": "newport_entrance" },
+        { "id": "visit_barbers_row", "description": "Walk Barbers Row", "type": "location_visit", "target": "barbers_row" },
+        { "id": "talk_to_mentor", "description": "Meet with Mentor at Ace's Barbershop", "type": "character_interaction", "target": "mentor_npc" },
+        { "id": "find_safehouse", "description": "Claim the safehouse in Jacksonport", "type": "location_visit", "target": "player_safehouse" }
       ],
-      "rewards": {
-        "money": 100,
-        "respect": 10,
-        "items": [],
-        "unlocks": ["barbershop_access"]
-      },
-      "newport_elements": {
-        "featured_locations": ["Main Street", "White River", "Downtown Square"],
-        "local_flavor": "Introduction to Newport's small-town charm and river culture",
-        "historical_references": "Mentions of Newport's history and the player's family connections"
-      }
+      "rewards": { "money": 100, "respect": 10, "items": [], "unlocks": ["barbers_row_access"] },
+      "cutscene": "ACE_RETURNS — Ace's car rolls into Newport. Barbers Row at dusk. Mentor steps out of the shop.",
+      "newport_flavor": "White River visible at the end of Main Street. Old-timers on dominoes bench."
     },
     {
       "missionID": "mission_02_the_cut",
       "title": "The Cut",
-      "description": "Prove yourself in Newport's barbershop scene by earning the respect of the community.",
+      "description": "Prove yourself in the barbershop, earn community respect, and get Mentor's blessing.",
       "story_act": 1,
+      "boss_arc": null,
       "estimated_duration": "25-30 minutes",
       "prerequisites": ["mission_01_welcome_back"],
-      "unlocks": ["mission_03_spa_secrets"],
+      "unlocks": ["mission_03_deville_welcome", "mission_deville_trigger"],
       "objectives": [
-        {
-          "id": "visit_barber_district",
-          "description": "Visit Barber's Row on Main Street",
-          "type": "location_visit",
-          "target": "barber_district",
-          "optional": false
-        },
-        {
-          "id": "meet_barbershop_owner",
-          "description": "Meet the head barber",
-          "type": "character_interaction",
-          "target": "character_03_barbershop_owner",
-          "optional": false
-        },
-        {
-          "id": "complete_test_cuts",
-          "description": "Successfully complete 3 test haircuts",
-          "type": "skill_challenge",
-          "target": "haircut_minigame",
-          "optional": false
-        },
-        {
-          "id": "earn_tips",
-          "description": "Earn $50 in tips",
-          "type": "monetary_goal",
-          "target": 50,
-          "optional": false
-        },
-        {
-          "id": "gain_community_respect",
-          "description": "Improve relationships with local customers",
-          "type": "relationship_building",
-          "target": "community_npcs",
-          "optional": false
-        }
+        { "id": "meet_barbershop_owner", "description": "Introduce yourself to Mentor's shop clients", "type": "character_interaction", "target": "barbershop_clients" },
+        { "id": "complete_test_cuts", "description": "Complete 3 haircut minigames", "type": "skill_challenge", "target": "haircut_minigame" },
+        { "id": "earn_tips", "description": "Earn $50 in tips", "type": "monetary_goal", "target": 50 },
+        { "id": "gain_respect", "description": "Raise Barbers Row respect to 25", "type": "stat_threshold", "target": 25 }
       ],
-      "rewards": {
-        "money": 250,
-        "respect": 20,
-        "items": ["vintage_barber_tools"],
-        "unlocks": ["barbershop_job", "spa_district_access"]
-      },
-      "newport_elements": {
-        "featured_locations": ["Barber's Row", "Thompson's Traditional Cuts", "Main Street"],
-        "local_flavor": "Deep dive into Newport's barbershop culture and community traditions",
-        "historical_references": "Stories of Newport families and business traditions"
-      }
+      "rewards": { "money": 250, "respect": 20, "items": ["vintage_barber_tools"], "unlocks": ["barbershop_job", "deville_district_access"] },
+      "cutscene": "THE_CUT — Mentor watches Ace finish his last client. Slow nod. 'You still got it, boy.'",
+      "newport_flavor": "Mrs. Henderson pokes her head in from across the street. Local gossip triggers."
     },
     {
-      "missionID": "mission_03_spa_secrets",
-      "title": "Spa Secrets",
-      "description": "Navigate the modern wellness industry while uncovering secrets in Newport's spa district.",
-      "story_act": 2,
-      "estimated_duration": "30-35 minutes",
+      "missionID": "mission_03_deville_welcome",
+      "title": "Welcome to the DeVille District",
+      "description": "Marcus DeVille recruits Ace. Head to the warehouse with Trix, secure the belt shipment.",
+      "story_act": 1,
+      "boss_arc": "marcus_deville",
+      "estimated_duration": "30 minutes",
       "prerequisites": ["mission_02_the_cut"],
-      "unlocks": ["mission_04_riverfront_reckoning"],
+      "unlocks": ["mission_04_first_flip"],
       "objectives": [
-        {
-          "id": "investigate_spa_district",
-          "description": "Explore the spa district",
-          "type": "location_investigation",
-          "target": "spa_district",
-          "optional": false
-        },
-        {
-          "id": "meet_spa_owner",
-          "description": "Meet the spa owner",
-          "type": "character_interaction",
-          "target": "character_04_spa_owner",
-          "optional": false
-        },
-        {
-          "id": "uncover_business_secrets",
-          "description": "Discover the truth about spa finances",
-          "type": "investigation",
-          "target": "spa_financial_records",
-          "optional": false
-        },
-        {
-          "id": "choose_alliance",
-          "description": "Decide whether to help or expose the spa",
-          "type": "moral_choice",
-          "target": "spa_dilemma",
-          "optional": false
-        }
+        { "id": "meet_marcus", "description": "Meet Marcus DeVille at the Flagship", "type": "character_interaction", "target": "marcus_npc" },
+        { "id": "reach_warehouse", "description": "Drive to the warehouse with Trix", "type": "location_visit", "target": "warehouse_location" },
+        { "id": "secure_shipment", "description": "Clear rivals from the warehouse", "type": "combat", "target": "rival_crew", "enemy_count": 8 },
+        { "id": "load_belts", "description": "Load the belt crates into the van", "type": "interaction", "target": "belt_crates" },
+        { "id": "escape_warehouse", "description": "Get out before the police arrive — 2-star wanted level", "type": "escape", "wanted_stars": 2 },
+        { "id": "deliver_shipment", "description": "Deliver the crates to Marcus's block", "type": "delivery", "target": "deville_block" }
       ],
-      "rewards": {
-        "money": 300,
-        "respect": 15,
-        "items": ["spa_access_card"],
-        "unlocks": ["wellness_business_opportunities"]
-      },
-      "newport_elements": {
-        "featured_locations": ["Spa District", "White River Wellness", "Upscale Newport"],
-        "local_flavor": "Contrast between traditional Newport and modern wellness trends",
-        "historical_references": "Old Newport families vs. new business ventures"
-      }
+      "rewards": { "money": 500, "respect": 15, "items": ["deville_belt_prototype"], "unlocks": ["deville_district_missions"] },
+      "cutscene": "MARCUS_PITCH — Marcus in gold-trim Caddy. 'The DeVille brand needs a man with your particular skill set.'",
+      "newport_flavor": "Print shop running in the background. DeVille Coin kiosk outside."
     },
     {
-      "missionID": "mission_04_riverfront_reckoning",
-      "title": "Riverfront Reckoning",
-      "description": "Navigate family history and community politics in a climactic confrontation by the White River.",
-      "story_act": 3,
-      "estimated_duration": "40-45 minutes",
-      "prerequisites": ["mission_03_spa_secrets"],
-      "unlocks": ["endgame_choices"],
+      "missionID": "mission_04_first_flip",
+      "title": "First Flip",
+      "description": "Run Marcus's first street-level distribution job across three Newport districts.",
+      "story_act": 1,
+      "boss_arc": "marcus_deville",
+      "estimated_duration": "20 minutes",
+      "prerequisites": ["mission_03_deville_welcome"],
+      "unlocks": ["mission_05_block_party"],
       "objectives": [
+        { "id": "pickup_merch", "description": "Pick up merch from the print shop", "type": "location_visit", "target": "print_shop" },
+        { "id": "drop_barbers_row", "description": "Deliver to Barbers Row contact", "type": "delivery", "target": "barbers_row_contact" },
+        { "id": "drop_jacksonport", "description": "Deliver to Jacksonport contact", "type": "delivery", "target": "jacksonport_contact" },
+        { "id": "drop_riverfront", "description": "Deliver to Riverfront contact", "type": "delivery", "target": "riverfront_contact" },
+        { "id": "return_cash", "description": "Return with the collection to Marcus", "type": "delivery", "target": "marcus_npc" }
+      ],
+      "rewards": { "money": 350, "respect": 10, "items": [], "unlocks": ["block_party_area"] },
+      "cutscene": null,
+      "newport_flavor": "Trix gives directions via phone. Rico's tow trucks visible near Diaz."
+    },
+    {
+      "missionID": "mission_05_block_party",
+      "title": "Block Party",
+      "description": "Marcus throws a DeVille Block Party to announce Ace's arrival. Ends Act 1.",
+      "story_act": 1,
+      "boss_arc": "marcus_deville",
+      "estimated_duration": "20 minutes",
+      "prerequisites": ["mission_04_first_flip"],
+      "unlocks": ["mission_06_crypto_collapse", "mission_07_viral_warfare", "mission_08_tow_truck_takedown", "mission_09_wellness_gone_wrong"],
+      "objectives": [
+        { "id": "setup_party", "description": "Help set up the block — collect equipment from 3 spots", "type": "fetch_multi", "target_count": 3 },
+        { "id": "manage_crowd", "description": "Handle 2 crowd incidents during the party", "type": "event_response", "event_count": 2 },
+        { "id": "dj_set", "description": "Stand by Marcus for his speech", "type": "location_stay", "target": "party_stage", "duration": 30 },
+        { "id": "end_incident", "description": "Deal with Rico's crew crashing the party", "type": "combat_or_diplomacy", "target": "rico_crew" }
+      ],
+      "rewards": { "money": 200, "respect": 25, "items": ["deville_jacket"], "unlocks": ["act_2_missions"] },
+      "cutscene": "BLOCK_PARTY_END — Rico's tow truck siren in the distance. Marcus: 'Newport just got a little more gold.'",
+      "newport_flavor": "Community Center visible. Mrs. Henderson watches from her porch disapprovingly."
+    },
+    {
+      "missionID": "mission_06_crypto_collapse",
+      "title": "Crypto Collapse",
+      "description": "Someone is mining DeVille Coin. Track down the server farm and shut it down.",
+      "story_act": 2,
+      "boss_arc": "marcus_deville",
+      "estimated_duration": "30 minutes",
+      "prerequisites": ["mission_05_block_party"],
+      "unlocks": ["mission_10_the_leak"],
+      "objectives": [
+        { "id": "trace_ip", "description": "Visit Marcus's crypto guy to trace the IP", "type": "character_interaction", "target": "crypto_contact" },
+        { "id": "find_farm", "description": "Locate the basement server farm in Jacksonport", "type": "location_visit", "target": "server_farm" },
+        { "id": "clear_guards", "description": "Remove the 4 guards protecting the servers", "type": "combat_or_stealth", "enemy_count": 4 },
+        { "id": "destroy_servers", "description": "Smash or short-circuit all 6 server rigs", "type": "interaction_multi", "target_count": 6 },
+        { "id": "escape_police", "description": "Escape — 1-star wanted level from noise complaint", "type": "escape", "wanted_stars": 1 }
+      ],
+      "rewards": { "money": 600, "respect": 15, "items": ["server_hard_drive"], "unlocks": ["mission_10_the_leak"] },
+      "cutscene": "COIN_CRASH — Marcus stares at his phone. 'DeVille Coin is... negative?' Ace: 'Marcus...'",
+      "newport_flavor": "Jacksonport High School visible nearby. Pawn shop owner watches from doorway."
+    },
+    {
+      "missionID": "mission_07_viral_warfare",
+      "title": "Viral Warfare",
+      "description": "A bot farm is killing Lexi Vance's engagement. She wants it handled — and she wants footage.",
+      "story_act": 2,
+      "boss_arc": "lexi_vance",
+      "estimated_duration": "25 minutes",
+      "prerequisites": ["mission_05_block_party"],
+      "unlocks": ["mission_11_bot_swarm"],
+      "intro_character": "lexi_vance",
+      "objectives": [
+        { "id": "meet_lexi", "description": "Meet Lexi at her compound", "type": "character_interaction", "target": "lexi_npc" },
+        { "id": "locate_bot_farm", "description": "Follow the drone to the bot operator's apartment", "type": "escort_follow", "target": "lexi_drone" },
+        { "id": "intercept_operator", "description": "Confront the bot operator before he deletes everything", "type": "timed_chase", "time_limit": 90 },
+        { "id": "secure_evidence", "description": "Grab the router and laptop", "type": "item_pickup", "items": ["bot_router", "bot_laptop"] },
+        { "id": "deliver_to_lexi", "description": "Return everything to Lexi's compound", "type": "delivery", "target": "lexi_compound" }
+      ],
+      "rewards": { "money": 500, "respect": 10, "items": ["lexi_content_pass"], "unlocks": ["mission_11_bot_swarm", "downtown_access"] },
+      "cutscene": "LEXI_INTRO — Drone flies into frame. Lexi steps off an elevator. 'You're late. The Algorithm doesn't wait.'",
+      "newport_flavor": "Drone footage of Barbers Row plays on her monitor. She already knows who Ace is."
+    },
+    {
+      "missionID": "mission_08_tow_truck_takedown",
+      "title": "Tow-Truck Takedown",
+      "description": "Rico's fleet is being sabotaged. He wants Ace to find out who — and end it.",
+      "story_act": 2,
+      "boss_arc": "big_rico",
+      "estimated_duration": "30 minutes",
+      "prerequisites": ["mission_05_block_party"],
+      "unlocks": ["mission_12_industrial_sabotage"],
+      "intro_character": "big_rico",
+      "objectives": [
+        { "id": "meet_rico", "description": "Meet Big Rico at the compound", "type": "character_interaction", "target": "rico_npc" },
+        { "id": "inspect_trucks", "description": "Inspect the 3 sabotaged trucks", "type": "investigation_multi", "target_count": 3 },
+        { "id": "tail_suspect", "description": "Tail the suspect vehicle without being spotted", "type": "stealth_tail", "target": "suspect_car" },
+        { "id": "confront_saboteur", "description": "Box in the saboteur and force a stop", "type": "vehicle_intercept", "target": "saboteur_vehicle" },
+        { "id": "deliver_saboteur", "description": "Bring the saboteur back to Rico — driving or dragged", "type": "delivery", "target": "rico_compound" }
+      ],
+      "rewards": { "money": 750, "respect": 15, "items": ["ricos_parking_pass"], "unlocks": ["mission_12_industrial_sabotage", "diaz_district_access"] },
+      "cutscene": "RICO_INTRO — Rico eating a quesadilla next to Deborah. 'Someone's cutting my cables. I named her, kid. NOBODY cuts Deborah's cables.'",
+      "newport_flavor": "Compound dogs visible. Elena rolling her eyes in the background."
+    },
+    {
+      "missionID": "mission_09_wellness_gone_wrong",
+      "title": "Wellness Gone Wrong",
+      "description": "Chad is going public about Fable's supplements. Discredit him before he tanks the Center.",
+      "story_act": 2,
+      "boss_arc": "dr_fable",
+      "estimated_duration": "25 minutes",
+      "prerequisites": ["mission_05_block_party"],
+      "unlocks": ["mission_13_supplement_sabotage"],
+      "intro_character": "dr_fable",
+      "objectives": [
+        { "id": "meet_fable", "description": "Visit the Enlightenment Center and meet Dr. Fable", "type": "character_interaction", "target": "fable_npc" },
+        { "id": "find_chad", "description": "Track down Chad at Miss Pearl's Diner", "type": "location_visit", "target": "miss_pearls_diner" },
+        { "id": "discredit_chad", "description": "Bribe OR outargue Chad in front of diner witnesses", "type": "dialogue_choice", "options": ["bribe_250", "argument_check"] },
+        { "id": "collect_supplements", "description": "Retrieve Chad's supplement evidence bag", "type": "item_pickup", "items": ["chad_evidence_bag"] },
+        { "id": "return_to_fable", "description": "Report back to Fable", "type": "character_interaction", "target": "fable_npc" }
+      ],
+      "rewards": { "money": 400, "respect": 10, "items": ["center_membership_card"], "unlocks": ["mission_13_supplement_sabotage", "spa_district_access"] },
+      "cutscene": "FABLE_INTRO — Incense smoke. Fable in silk robe. 'The universe sent you. Also, Chad is a problem.'",
+      "newport_flavor": "Miss Pearl glaring at everyone. Chad's protest sign visible outside."
+    },
+    {
+      "missionID": "mission_10_the_leak",
+      "title": "The Leak",
+      "description": "Someone leaked Marcus's contracts. Trace the leak up the chain — and find the Mayor's fingerprints.",
+      "story_act": 2,
+      "boss_arc": "marcus_deville",
+      "estimated_duration": "35 minutes",
+      "prerequisites": ["mission_06_crypto_collapse"],
+      "unlocks": ["mission_14_brand_protection"],
+      "objectives": [
+        { "id": "follow_money", "description": "Investigate the Gazette for the source of the leak", "type": "location_visit", "target": "newport_gazette" },
+        { "id": "access_archives", "description": "Break into the Gazette archive room — stealth optional", "type": "infiltration", "wanted_on_caught": 2 },
+        { "id": "find_document", "description": "Find the leaked contract with City Hall letterhead", "type": "item_pickup", "items": ["leaked_contract"] },
+        { "id": "tail_contact", "description": "Follow the Gazette contact to City Hall", "type": "stealth_tail", "target": "gazette_contact" },
+        { "id": "photograph_meeting", "description": "Photograph the handoff between contact and the Mayor's aide", "type": "timed_photo", "time_limit": 60 }
+      ],
+      "rewards": { "money": 800, "respect": 20, "items": ["mayor_connection_photo"], "unlocks": ["mission_14_brand_protection", "mayor_revealed"] },
+      "cutscene": "THE_REVEAL — Ace shows Marcus the photo. Marcus stares. Long beat. 'The Mayor? He's been playing all of us.'",
+      "newport_flavor": "City Hall clock tower visible. Patricia Dawn seen entering the Gazette."
+    },
+    {
+      "missionID": "mission_11_bot_swarm",
+      "title": "Bot Swarm",
+      "description": "An AI clone of Lexi is outperforming her. Find the startup running it and kill the model.",
+      "story_act": 2,
+      "boss_arc": "lexi_vance",
+      "estimated_duration": "30 minutes",
+      "prerequisites": ["mission_07_viral_warfare"],
+      "unlocks": ["mission_15_lexxcon"],
+      "objectives": [
+        { "id": "locate_startup", "description": "Find the tech co-working space on Third Street", "type": "location_visit", "target": "tech_cowork" },
+        { "id": "infiltrate", "description": "Get inside the building without triggering alarms", "type": "stealth_infiltration", "alarm_tolerance": 1 },
+        { "id": "find_server_room", "description": "Navigate to the server room on floor 3", "type": "location_visit", "target": "server_room_floor3" },
+        { "id": "destroy_ai_model", "description": "Delete all training data and kill the AI", "type": "interaction_multi", "target_count": 4 },
+        { "id": "escape_building", "description": "Get out — security alert active", "type": "escape", "wanted_stars": 1 }
+      ],
+      "rewards": { "money": 700, "respect": 15, "items": ["ai_model_drive"], "unlocks": ["mission_15_lexxcon"] },
+      "cutscene": "CLONE_CONFRONTATION — Screen shows fake-Lexi's face. Lexi: 'She's not even using the right filter.'",
+      "newport_flavor": "Tech bros visible in cowork space. Newport Gazette visible through window."
+    },
+    {
+      "missionID": "mission_12_industrial_sabotage",
+      "title": "Industrial Sabotage",
+      "description": "Do three off-books emergency tow jobs for Rico to make up for Marcus's leak damaging his contracts.",
+      "story_act": 2,
+      "boss_arc": "big_rico",
+      "estimated_duration": "25 minutes",
+      "prerequisites": ["mission_08_tow_truck_takedown"],
+      "unlocks": ["mission_16_repo_rampage"],
+      "objectives": [
+        { "id": "tow_job_1", "description": "Tow the stalled truck from Fifth and Main — avoid police patrol", "type": "vehicle_tow", "target": "stalled_truck_1" },
+        { "id": "tow_job_2", "description": "Repossess the Caddy from East Newport — owner will resist", "type": "vehicle_tow_combat", "target": "repo_target_1" },
+        { "id": "tow_job_3", "description": "Move the rival company's truck blocking Rico's lot — make it unsalvageable", "type": "vehicle_destroy_tow", "target": "rival_truck" },
+        { "id": "return_to_compound", "description": "Return to Rico's compound before shift change", "type": "timed_delivery", "time_limit": 120 }
+      ],
+      "rewards": { "money": 900, "respect": 15, "items": ["tow_truck_key"], "unlocks": ["mission_16_repo_rampage"] },
+      "cutscene": null,
+      "newport_flavor": "Crown Vic patrol car loops Diaz District throughout. Elena watches from the garage."
+    },
+    {
+      "missionID": "mission_13_supplement_sabotage",
+      "title": "Supplement Sabotage",
+      "description": "The supplement line is dead. Help Fable launch 'Inner Fire Energy Water' across 5 stores before the lawsuits catch up.",
+      "story_act": 2,
+      "boss_arc": "dr_fable",
+      "estimated_duration": "25 minutes",
+      "prerequisites": ["mission_09_wellness_gone_wrong"],
+      "unlocks": ["mission_17_enlightenment_raid"],
+      "objectives": [
+        { "id": "pickup_water", "description": "Collect the water crates from Fable's lab", "type": "location_visit", "target": "fable_lab" },
+        { "id": "drop_store_1", "description": "Deliver to the corner store on Barbers Row", "type": "timed_delivery", "time_limit": 180 },
+        { "id": "drop_store_2", "description": "Deliver to the strip mall in Jacksonport", "type": "timed_delivery", "time_limit": 180 },
+        { "id": "drop_store_3", "description": "Deliver to the gas station near Diaz", "type": "timed_delivery", "time_limit": 180 },
+        { "id": "drop_store_4", "description": "Deliver to the downtown coffee shop", "type": "timed_delivery", "time_limit": 180 },
+        { "id": "drop_store_5", "description": "Deliver to the marina gift shop — avoid a process server", "type": "timed_delivery_stealth", "time_limit": 150 }
+      ],
+      "rewards": { "money": 600, "respect": 10, "items": ["inner_fire_sample"], "unlocks": ["mission_17_enlightenment_raid"] },
+      "cutscene": "WATER_PITCH — Fable holds up a bottle. 'It's water. But it's INTENTIONAL water.'",
+      "newport_flavor": "Process server NPC with clipboard spotted near the marina."
+    },
+    {
+      "missionID": "mission_14_brand_protection",
+      "title": "Brand Protection",
+      "description": "Kill the knockoff DeRille belt operation — and confront Marcus at the Flagship. Boss fight.",
+      "story_act": 3,
+      "boss_arc": "marcus_deville",
+      "boss_fight": true,
+      "estimated_duration": "40 minutes",
+      "prerequisites": ["mission_10_the_leak"],
+      "unlocks": ["mission_19_gathering_storm"],
+      "objectives": [
+        { "id": "find_supplier", "description": "Track the DeRille supplier to Main Street", "type": "investigation", "target": "main_street_vendor" },
+        { "id": "buy_out_stock", "description": "Confiscate all knockoff inventory — 5 vendors", "type": "interaction_multi", "target_count": 5 },
+        { "id": "find_print_source", "description": "Follow supply chain to the print source in Diaz", "type": "stealth_tail", "target": "supply_runner" },
+        { "id": "destroy_screens", "description": "Smash the silk-screen printing operation", "type": "destruction", "target_count": 4 },
+        { "id": "confront_marcus", "description": "Return to DeVille Flagship for the confrontation", "type": "location_visit", "target": "deville_flagship" },
+        { "id": "boss_fight_marcus", "description": "Boss fight — Marcus DeVille at the Flagship", "type": "boss_fight", "boss": "marcus_deville", "phases": 3 }
+      ],
+      "rewards": { "money": 1500, "respect": 30, "items": ["deville_crown"], "unlocks": ["marcus_alliance_or_exile"] },
+      "boss_fight_phases": [
+        { "phase": 1, "health_pct": 100, "behavior": "Belt buckle throws, Scepter melee. Trix assists." },
+        { "phase": 2, "health_pct": 60, "behavior": "Cadillac DeVille chase through the block. Ram attacks." },
+        { "phase": 3, "health_pct": 30, "behavior": "On foot. Pulls emergency gold reserves. Adrenaline sprint." }
+      ],
+      "mercy_choice": { "mercy": "Marcus rallies DeVille District for Act 4", "destroy": "DeVille District becomes neutral/hostile in Act 4" },
+      "cutscene": "MARCUS_FALL — Marcus on one knee. Gold buckle hits the floor. 'I built this, kid. Every belt. Every brick.'",
+      "newport_flavor": "DeVille brand reps watching from the street. Cardboard Marcus cutout falls over."
+    },
+    {
+      "missionID": "mission_15_lexxcon",
+      "title": "LexxCon",
+      "description": "Lexi's annual fan convention is cover for her real money-making operation. Expose her — or fight through it.",
+      "story_act": 3,
+      "boss_arc": "lexi_vance",
+      "boss_fight": true,
+      "estimated_duration": "40 minutes",
+      "prerequisites": ["mission_11_bot_swarm"],
+      "unlocks": ["mission_19_gathering_storm"],
+      "objectives": [
+        { "id": "infiltrate_lexxcon", "description": "Enter LexxCon disguised as an attendee", "type": "stealth_infiltration", "alarm_tolerance": 2 },
+        { "id": "find_control_room", "description": "Locate the content monetization control room", "type": "location_visit", "target": "lexxcon_control" },
+        { "id": "download_evidence", "description": "Copy the financial data while avoiding camera drones — 60 seconds", "type": "timed_interaction", "time_limit": 60 },
+        { "id": "survive_crowd", "description": "Lexi announces you — survive the fan mosh crowd", "type": "survival_wave", "wave_count": 3 },
+        { "id": "boss_fight_lexi", "description": "Boss fight — Lexi Vance at the LexxCon main stage", "type": "boss_fight", "boss": "lexi_vance", "phases": 3 }
+      ],
+      "rewards": { "money": 1500, "respect": 30, "items": ["lexi_platform_access"], "unlocks": ["lexi_alliance_or_exile"] },
+      "boss_fight_phases": [
+        { "phase": 1, "health_pct": 100, "behavior": "T-shirt cannon barrages. Drone swarm surveillance. Crowd manipulation." },
+        { "phase": 2, "health_pct": 60, "behavior": "Full drone attack swarm. Ring-light flashbangs. Kai and DJ Volt engage." },
+        { "phase": 3, "health_pct": 30, "behavior": "Lexi exposed — goes full manual. Raw desperation. Broadcast threats." }
+      ],
+      "mercy_choice": { "mercy": "Lexi broadcasts evidence against the Mayor in Act 4", "destroy": "No media support in Act 4" },
+      "cutscene": "LEXI_FALL — The crowd goes quiet. For the first time, no one is filming. Lexi: 'Don't you dare.'",
+      "newport_flavor": "Newport Elks Lodge. Convention banner reads 'LEXXCON VII: THE ALGORITHM LOVES YOU'."
+    },
+    {
+      "missionID": "mission_16_repo_rampage",
+      "title": "Repo Rampage",
+      "description": "Rico has locked down the city in response to Marcus's exposure. Stop the convoy and face the Repo King.",
+      "story_act": 3,
+      "boss_arc": "big_rico",
+      "boss_fight": true,
+      "estimated_duration": "40 minutes",
+      "prerequisites": ["mission_12_industrial_sabotage"],
+      "unlocks": ["mission_19_gathering_storm"],
+      "objectives": [
+        { "id": "survive_convoy", "description": "Evade or destroy 5 tow trucks in the rolling convoy", "type": "vehicle_combat", "enemy_count": 5 },
+        { "id": "breach_compound", "description": "Break through the compound gate", "type": "vehicle_destruction", "target": "compound_gate" },
+        { "id": "destroy_fleet", "description": "Disable 3 key fleet trucks inside the compound", "type": "destruction_multi", "target_count": 3 },
+        { "id": "boss_fight_rico", "description": "Boss fight — Big Rico in his monster truck", "type": "boss_fight", "boss": "big_rico", "phases": 3 }
+      ],
+      "rewards": { "money": 2000, "respect": 35, "items": ["compound_master_key"], "unlocks": ["rico_alliance_or_exile"] },
+      "boss_fight_phases": [
+        { "phase": 1, "health_pct": 100, "behavior": "Monster truck charges. Tow hook chain attacks. Deborah melee slams." },
+        { "phase": 2, "health_pct": 60, "behavior": "Releases all compound guard dogs. Calls Tank in backup truck." },
+        { "phase": 3, "health_pct": 30, "behavior": "On foot with Deborah. Rage mode — erratic, powerful, emotional." }
+      ],
+      "mercy_choice": { "mercy": "Rico's fleet joins the City Hall convoy in Act 4", "destroy": "Must approach City Hall without vehicle support" },
+      "cutscene": "RICO_FALL — Rico sets Deborah down gently on the ground. 'Take care of her.'",
+      "newport_flavor": "Compound guard dogs named after telenovela characters visible in kennels."
+    },
+    {
+      "missionID": "mission_17_enlightenment_raid",
+      "title": "Enlightenment Raid",
+      "description": "Storm the Enlightenment Center. Fight through waves of acolytes and corner Dr. Fable.",
+      "story_act": 3,
+      "boss_arc": "dr_fable",
+      "boss_fight": true,
+      "estimated_duration": "40 minutes",
+      "prerequisites": ["mission_13_supplement_sabotage"],
+      "unlocks": ["mission_19_gathering_storm"],
+      "objectives": [
+        { "id": "enter_center", "description": "Breach the Enlightenment Center — front door or loading bay", "type": "infiltration_choice" },
+        { "id": "fight_wave_1", "description": "Defeat the outer ring of acolytes — 10 combatants", "type": "combat_wave", "enemy_count": 10 },
+        { "id": "fight_wave_2", "description": "Fight through the Inner Circle — Brother Kai leads", "type": "combat_wave", "enemy_count": 6, "mini_boss": "brother_kai" },
+        { "id": "reach_meditation_chamber", "description": "Reach Fable's third-floor meditation chamber", "type": "location_visit", "target": "meditation_chamber" },
+        { "id": "boss_fight_fable", "description": "Boss fight — Dr. Fable in the main hall", "type": "boss_fight", "boss": "dr_fable", "phases": 3 }
+      ],
+      "rewards": { "money": 1800, "respect": 30, "items": ["center_chemical_notes"], "unlocks": ["fable_alliance_or_exile"] },
+      "boss_fight_phases": [
+        { "phase": 1, "health_pct": 100, "behavior": "Incense flashbangs. Acolyte human shields. PA system crowd control." },
+        { "phase": 2, "health_pct": 60, "behavior": "Chakra stone projectile barrage. Trapdoor traps. Fable very mobile." },
+        { "phase": 3, "health_pct": 30, "behavior": "Helicopter escape attempt on rooftop. Final chase." }
+      ],
+      "mercy_choice": { "mercy": "Fable's chemistry knowledge helps analyze Mayor evidence", "destroy": "Must find alternate evidence verification" },
+      "cutscene": "FABLE_FALL — Helicopter sputtering on the pad. Fable: 'I just wanted people to feel better.'",
+      "newport_flavor": "Chad at the entrance cheering. Sister Dawn weeping in the lobby."
+    },
+    {
+      "missionID": "mission_18_political_fixer",
+      "title": "Political Fixer",
+      "description": "The Mayor asks Ace to steal Patricia Dawn's file — a test. This is Ace's last chance to choose a side.",
+      "story_act": 3,
+      "boss_arc": "mayor_bucksworth",
+      "estimated_duration": "30 minutes",
+      "prerequisites": ["mission_14_brand_protection", "mission_15_lexxcon", "mission_16_repo_rampage", "mission_17_enlightenment_raid"],
+      "unlocks": ["mission_19_gathering_storm"],
+      "objectives": [
+        { "id": "meet_mayor", "description": "Meet the Mayor in City Hall", "type": "character_interaction", "target": "mayor_npc" },
+        { "id": "locate_office", "description": "Find Patricia Dawn's campaign office on Oak Street", "type": "location_visit", "target": "dawn_campaign_office" },
         {
-          "id": "investigate_family_history",
-          "description": "Uncover the truth about your family's Newport legacy",
-          "type": "investigation",
-          "target": "family_records",
-          "optional": false
-        },
-        {
-          "id": "confront_past",
-          "description": "Face the consequences of family history",
-          "type": "dramatic_sequence",
-          "target": "riverfront_confrontation",
-          "optional": false
-        },
-        {
-          "id": "unite_community",
-          "description": "Bring together different factions of Newport",
-          "type": "community_building",
-          "target": "all_major_npcs",
-          "optional": false
-        },
-        {
-          "id": "choose_future",
-          "description": "Decide your role in Newport's future",
-          "type": "major_choice",
-          "target": "endgame_path",
-          "optional": false
+          "id": "critical_choice",
+          "description": "CRITICAL CHOICE: Steal the file (Mayor's path) OR copy it and leave the original (Ace's path)",
+          "type": "moral_choice",
+          "options": [
+            { "id": "steal_file", "label": "Steal the file for the Mayor", "consequence": "Mayor trusts Ace. Patricia Dawn is weakened. Harder Act 4 — fewer community allies." },
+            { "id": "copy_file", "label": "Copy it, tip off Patricia Dawn", "consequence": "Mayor knows Ace betrayed him. Triggers Act 4 immediately. More community support." }
+          ]
         }
       ],
-      "rewards": {
-        "money": 500,
-        "respect": 30,
-        "items": ["family_heirloom"],
-        "unlocks": ["newport_leadership_role"]
-      },
-      "newport_elements": {
-        "featured_locations": ["White River Waterfront", "Historic Newport", "Community Gathering Spaces"],
-        "local_flavor": "Resolution of community tensions and family legacy",
-        "historical_references": "Deep Newport history and the player's family role in it"
-      }
+      "rewards": { "money": 2500, "respect_variable": true, "items": ["mayor_trust_OR_dawn_alliance"], "unlocks": ["mission_19_gathering_storm"] },
+      "cutscene": "FIXER_CHOICE — Patricia Dawn's file on the desk. Ace alone in the room. Clock ticking.",
+      "newport_flavor": "Rodney visible sweating outside. Patricia Dawn canvassing two blocks away."
+    },
+    {
+      "missionID": "mission_19_gathering_storm",
+      "title": "Gathering Storm",
+      "description": "Ace reaches out to every defeated boss. Who comes back depends on mercy shown.",
+      "story_act": 4,
+      "boss_arc": null,
+      "estimated_duration": "20 minutes",
+      "prerequisites": ["mission_18_political_fixer"],
+      "unlocks": ["mission_20_evidence_trail"],
+      "objectives": [
+        { "id": "visit_mentor", "description": "Brief Mentor at the barbershop", "type": "character_interaction", "target": "mentor_npc" },
+        { "id": "contact_allies", "description": "Contact each defeated boss — outcome depends on mercy/destroy choice", "type": "dynamic_ally_check", "boss_ids": ["marcus_deville", "lexi_vance", "big_rico", "dr_fable"] },
+        { "id": "meet_patricia", "description": "Meet Patricia Dawn at Miss Pearl's Diner — if copy path was taken", "type": "conditional_interaction", "condition": "copy_file_chosen" }
+      ],
+      "rewards": { "money": 500, "respect": 20, "items": [], "unlocks": ["mission_20_evidence_trail"] },
+      "cutscene": "STORM_BRIEF — Miss Pearl's Diner. Mentor, Trix, and whoever is allied around the table. 'Here's what we know.'",
+      "newport_flavor": "Miss Pearl refills coffee without asking. Wall of Regulars visible — Ace's photo now added."
+    },
+    {
+      "missionID": "mission_20_evidence_trail",
+      "title": "Evidence Trail",
+      "description": "Gather three pieces of evidence against the Mayor before Election Day.",
+      "story_act": 4,
+      "boss_arc": "mayor_bucksworth",
+      "estimated_duration": "35 minutes",
+      "prerequisites": ["mission_19_gathering_storm"],
+      "unlocks": ["mission_21_city_hall_siege"],
+      "objectives": [
+        { "id": "bank_records", "description": "Break into the First Newport Bank vault annex — stealth only", "type": "heist_stealth", "target": "bank_vault_annex" },
+        { "id": "contractor_files", "description": "Steal blueprints from the Riverfront contractor trailer", "type": "infiltration", "target": "contractor_trailer" },
+        { "id": "gazette_testimony", "description": "Secure Patricia Dawn's testimony at the Gazette — protect her from the Mayor's security", "type": "escort_defend", "target": "patricia_dawn_npc", "wave_count": 2 },
+        { "id": "verify_evidence", "description": "Have Fable (if allied) or a neutral lab verify the documents", "type": "conditional_delivery", "condition": "fable_allied" }
+      ],
+      "rewards": { "money": 1000, "respect": 25, "items": ["evidence_package"], "unlocks": ["mission_21_city_hall_siege"] },
+      "cutscene": "EVIDENCE_REVIEW — Ace spreads three documents on the table. Patricia Dawn: 'This is enough. This is more than enough.'",
+      "newport_flavor": "Shredder sound audible from City Hall two blocks away. Rodney spotted jogging away from the bank."
+    },
+    {
+      "missionID": "mission_21_city_hall_siege",
+      "title": "City Hall Siege",
+      "description": "Storm City Hall with your allied forces and confront the Mayor.",
+      "story_act": 4,
+      "boss_arc": "mayor_bucksworth",
+      "boss_fight": true,
+      "estimated_duration": "50 minutes",
+      "prerequisites": ["mission_20_evidence_trail"],
+      "unlocks": ["mission_22_election_day"],
+      "objectives": [
+        { "id": "breach_plaza", "description": "Fight through City Hall Plaza — Captain Briggs commands the defense", "type": "combat_wave", "enemy_count": 15, "mini_boss": "captain_briggs" },
+        { "id": "fight_through_hall", "description": "Clear City Hall floor by floor — security systems active", "type": "tactical_combat", "floors": 2 },
+        { "id": "find_mayor", "description": "Track the Mayor through the secret passages", "type": "investigation_chase" },
+        { "id": "boss_fight_mayor", "description": "Boss fight — Mayor Bucksworth in the main chamber", "type": "boss_fight", "boss": "mayor_bucksworth", "phases": 3 }
+      ],
+      "rewards": { "money": 3000, "respect": 50, "items": ["mayors_gavel", "mayoral_evidence_vault_key"], "unlocks": ["mission_22_election_day"] },
+      "boss_fight_phases": [
+        { "phase": 1, "health_pct": 100, "behavior": "Security detail swarms. Mayor throws law books and uses office as maze." },
+        { "phase": 2, "health_pct": 60, "behavior": "Secret passage chase — environmental traps, false walls, ancient stairways." },
+        { "phase": 3, "health_pct": 30, "behavior": "Balcony speech attempt — tries to sway crowd through microphone. Ace must reach him." }
+      ],
+      "mercy_choice": { "mercy": "Mayor resigns. Newport gets due process. Stable ending.", "destroy": "Mayor discredited entirely. Power vacuum — messier ending." },
+      "cutscene": "HALL_FALL — The gavel clatters across marble. The Mayor looks up from the floor at Ace. 'You think getting rid of me fixes this?'",
+      "newport_flavor": "City Hall clock tower visible through broken window. The fountain outside still running."
+    },
+    {
+      "missionID": "mission_22_election_day",
+      "title": "Election Day",
+      "description": "The final mission. Newport votes. The ending plays based on all prior choices.",
+      "story_act": 4,
+      "boss_arc": null,
+      "estimated_duration": "15 minutes",
+      "prerequisites": ["mission_21_city_hall_siege"],
+      "unlocks": [],
+      "objectives": [
+        { "id": "protect_polls", "description": "Stop the Mayor's last attempt to suppress voting — 3 polling locations", "type": "defend_multi", "target_count": 3 },
+        { "id": "final_speech", "description": "Ace addresses Newport at The Square", "type": "cutscene_trigger", "target": "the_square" }
+      ],
+      "rewards": { "money": 0, "respect": 100, "items": ["newport_key"], "unlocks": ["credits", "post_game_free_roam"] },
+      "ending_branches": [
+        { "id": "peoples_champion", "condition": "mercy_count >= 3 AND community_respect >= 70", "description": "Ace wins with full community support. Patricia Dawn elected. Newport unified." },
+        { "id": "lone_wolf", "condition": "mercy_count <= 1 AND personal_power >= 80", "description": "Ace wins alone. Newport fractured. Power without community." },
+        { "id": "new_machine", "condition": "deal_count >= 2 AND steal_file_chosen", "description": "Ace takes the Mayor's chair. Becomes what he fought against." }
+      ],
+      "cutscene": "ELECTION_DAY_END — Results come in. Ace at the barbershop watching the screen. Mentor beside him. The ending plays.",
+      "newport_flavor": "Every NPC in the game appears somewhere — at polling stations, on porches, at the diner. Newport alive."
     }
   ],
   "side_quests": [
     {
-      "questID": "side_quest_01_street_hustle",
-      "title": "Street Hustle",
-      "description": "Help Casey Brooks with their various business ventures around Newport.",
-      "estimated_duration": "10-15 minutes",
+      "questID": "side_01_miss_pearls_errands",
+      "title": "Miss Pearl's Errands",
+      "description": "Delivery and fetch missions for Miss Pearl's Diner. Repeatable. Builds community respect.",
+      "estimated_duration": "5-10 minutes",
       "prerequisites": ["mission_01_welcome_back"],
       "repeatable": true,
       "objectives": [
-        {
-          "id": "delivery_run",
-          "description": "Make deliveries around Newport",
-          "type": "fetch_quest",
-          "target": "various_locations"
-        }
+        { "id": "errand_run", "description": "Pick up supplies from the strip mall and return to the diner", "type": "fetch_delivery", "target": "strip_mall" }
       ],
-      "rewards": {
-        "money": 75,
-        "respect": 5,
-        "items": ["business_contacts"]
-      }
+      "rewards": { "money": 75, "respect": 8, "items": ["miss_pearls_favor"] }
     },
     {
-      "questID": "side_quest_02_salon_drama",
-      "title": "Salon Drama",
-      "description": "Navigate the social dynamics between traditional barbershops and modern spas.",
-      "estimated_duration": "20-25 minutes",
+      "questID": "side_02_barbershop_battles",
+      "title": "Barbershop Battles",
+      "description": "Competitive haircut challenge against other barbers. Win cash and build the Row's rep.",
+      "estimated_duration": "10 minutes",
       "prerequisites": ["mission_02_the_cut"],
-      "repeatable": false,
+      "repeatable": true,
       "objectives": [
-        {
-          "id": "mediate_conflict",
-          "description": "Help resolve tensions between old and new businesses",
-          "type": "diplomacy",
-          "target": "business_owners"
-        }
+        { "id": "battle", "description": "Win 3 timed haircut rounds against a rival barber", "type": "skill_vs_skill", "target": "rival_barber" }
       ],
-      "rewards": {
-        "money": 150,
-        "respect": 10,
-        "items": ["mediator_reputation"]
-      }
+      "rewards": { "money": 200, "respect": 10, "items": [] }
     },
     {
-      "questID": "side_quest_03_zen_survival",
-      "title": "Zen and Survival",
-      "description": "Learn outdoor skills while helping with White River activities.",
-      "estimated_duration": "15-20 minutes",
+      "questID": "side_03_trix_jobs",
+      "title": "Off-Books with Trix",
+      "description": "Trix has side work when Marcus isn't looking. Builds Trix relationship for Act 3 recruitment.",
+      "estimated_duration": "15 minutes",
+      "prerequisites": ["mission_03_deville_welcome"],
+      "repeatable": false,
+      "max_completions": 3,
+      "objectives": [
+        { "id": "trix_job", "description": "Complete Trix's current off-books job", "type": "variable_job", "job_types": ["delivery", "surveillance", "recovery"] }
+      ],
+      "rewards": { "money": 300, "respect": 5, "items": ["trix_loyalty_point"] }
+    },
+    {
+      "questID": "side_04_patricia_dawn",
+      "title": "Patricia Dawn: Information",
+      "description": "Patricia Dawn is investigating corruption. Feed her information to strengthen the Act 4 evidence case.",
+      "estimated_duration": "10 minutes",
+      "prerequisites": ["mission_10_the_leak"],
+      "repeatable": false,
+      "max_completions": 3,
+      "objectives": [
+        { "id": "deliver_tip", "description": "Deliver a piece of corruption evidence to Patricia's office", "type": "delivery", "target": "dawn_campaign_office" }
+      ],
+      "rewards": { "money": 0, "respect": 15, "items": ["dawn_evidence_piece"] }
+    },
+    {
+      "questID": "side_05_white_river_fishing",
+      "title": "River Morning",
+      "description": "Fish the White River for cash and rare items. Mentor joins occasionally for story dialogue.",
+      "estimated_duration": "10 minutes",
       "prerequisites": ["mission_01_welcome_back"],
       "repeatable": true,
       "objectives": [
-        {
-          "id": "fishing_challenge",
-          "description": "Catch fish in the White River",
-          "type": "skill_challenge",
-          "target": "fishing_minigame"
-        },
-        {
-          "id": "river_cleanup",
-          "description": "Help clean up the riverfront",
-          "type": "community_service",
-          "target": "environmental_task"
-        }
+        { "id": "fishing", "description": "Catch 3 fish at the White River", "type": "skill_challenge", "target": "fishing_minigame" }
       ],
-      "rewards": {
-        "money": 50,
-        "respect": 8,
-        "items": ["fishing_gear", "environmental_respect"]
-      }
+      "rewards": { "money": 50, "respect": 3, "items": ["river_catfish", "rare_lure"] }
     }
   ],
   "dynamic_events": [
     {
-      "eventID": "event_01_police_chase",
-      "title": "Police Chase",
-      "description": "A minor crime leads to excitement on Newport streets",
-      "trigger_conditions": {
-        "player_level": 2,
-        "time_of_day": "evening",
-        "location": "downtown"
-      },
-      "duration": "5 minutes",
-      "choices": [
-        {
-          "option": "Help police",
-          "consequence": "Gain police respect, some citizens suspicious"
-        },
-        {
-          "option": "Stay neutral",
-          "consequence": "No relationship changes"
-        },
-        {
-          "option": "Hinder police",
-          "consequence": "Lose police respect, gain street credibility"
-        }
+      "eventID": "event_01_crown_vic_chase",
+      "title": "Crown Vic Chase",
+      "description": "Police Crown Victorias pursue the player across districts. Evade or surrender.",
+      "trigger_conditions": { "wanted_stars": 1, "district": "any", "time_of_day": "any" },
+      "duration": "until_resolved",
+      "outcome_options": [
+        { "option": "Evade", "consequence": "Wanted level clears. Small respect gain." },
+        { "option": "Surrender", "consequence": "Small fine. Mission progress preserved." },
+        { "option": "Outrun", "consequence": "Wanted level clears after 2 stars. Vehicle damage." }
       ]
     },
     {
-      "eventID": "event_02_flash_mob",
-      "title": "Flash Mob",
-      "description": "Spontaneous community gathering in downtown Newport",
-      "trigger_conditions": {
-        "weather": "clear",
-        "time_of_day": "afternoon",
-        "community_mood": "positive"
-      },
+      "eventID": "event_02_parking_lot_wars",
+      "title": "Parking Lot Wars",
+      "description": "Rico's crew is booting vehicles in the player's area. Stop it or lose $50.",
+      "trigger_conditions": { "player_district": ["BarbersRow", "JacksonportArea"], "act": [1, 2] },
       "duration": "3 minutes",
-      "choices": [
-        {
-          "option": "Join in",
-          "consequence": "Gain community respect and fun memories"
-        },
-        {
-          "option": "Watch",
-          "consequence": "Small respect gain, observe community dynamics"
-        },
-        {
-          "option": "Leave",
-          "consequence": "No changes, miss community bonding"
-        }
+      "outcome_options": [
+        { "option": "Confront crew", "consequence": "Chase begins. Win to keep money." },
+        { "option": "Pay the boot fee", "consequence": "Lose $50. No conflict." },
+        { "option": "Call it in", "consequence": "Police respond. Brief chaos." }
       ]
     },
     {
-      "eventID": "event_03_power_outage",
-      "title": "Power Outage",
-      "description": "Newport loses power, community comes together",
-      "trigger_conditions": {
-        "weather": "storm",
-        "random_chance": 0.1
-      },
-      "duration": "10 minutes",
-      "choices": [
-        {
-          "option": "Help neighbors",
-          "consequence": "Significant respect gain, strengthen community bonds"
-        },
-        {
-          "option": "Focus on business",
-          "consequence": "Money gain but some respect loss"
-        },
-        {
-          "option": "Stay home",
-          "consequence": "Safe but missed opportunity for community building"
-        }
+      "eventID": "event_03_content_creator_chaos",
+      "title": "Content Creator Chaos",
+      "description": "Lexi's drones follow and film the player, drawing a crowd. Handle the public spectacle.",
+      "trigger_conditions": { "player_district": "Downtown", "act": 2 },
+      "duration": "2 minutes",
+      "outcome_options": [
+        { "option": "Play along", "consequence": "Lexi relationship +5. Crowd disperses happily." },
+        { "option": "Destroy drone", "consequence": "Lexi relationship -15. Small wanted level." },
+        { "option": "Ignore it", "consequence": "Crowd follows player for 30 seconds." }
+      ]
+    },
+    {
+      "eventID": "event_04_wellness_recruitment",
+      "title": "Wellness Recruitment Drive",
+      "description": "Fable's acolytes intercept the player with a pitch. Accept a free sample or decline.",
+      "trigger_conditions": { "player_district": "SpaDistrict", "act": [1, 2] },
+      "duration": "1 minute",
+      "outcome_options": [
+        { "option": "Accept the sample", "consequence": "Fable relationship +3. Small money offer later." },
+        { "option": "Decline politely", "consequence": "No effect." },
+        { "option": "Mock them", "consequence": "Fable relationship -10." }
+      ]
+    },
+    {
+      "eventID": "event_05_neighborhood_cookout",
+      "title": "Neighborhood Cookout",
+      "description": "Spontaneous community barbecue in the Residential District. Show up to gain respect.",
+      "trigger_conditions": { "player_district": "Residential", "time_of_day": "afternoon", "act": [1, 2, 3] },
+      "duration": "5 minutes",
+      "outcome_options": [
+        { "option": "Join in", "consequence": "Community respect +10. Full health restore." },
+        { "option": "Keep moving", "consequence": "No effect." }
+      ]
+    },
+    {
+      "eventID": "event_06_deborah_sighted",
+      "title": "Deborah on the Street",
+      "description": "Rico parks a tow truck outside any player-owned business as intimidation. Deal with it.",
+      "trigger_conditions": { "player_owned_business": true, "act": 2, "rico_relationship": "hostile" },
+      "duration": "5 minutes",
+      "outcome_options": [
+        { "option": "Move the truck", "consequence": "Rico relationship unchanged. Small cash fine avoided." },
+        { "option": "Call Rico directly", "consequence": "Opens dialogue. Triggers mission_08 if not started." },
+        { "option": "Damage the truck", "consequence": "Rico relationship -20. 1-star wanted level." }
       ]
     }
   ],
   "mission_flow": {
     "act_1": {
-      "theme": "Homecoming and Integration",
-      "missions": ["mission_01_welcome_back", "mission_02_the_cut"],
-      "goal": "Establish player in Newport community"
+      "theme": "Homecoming and the Come Up",
+      "missions": ["mission_01_welcome_back", "mission_02_the_cut", "mission_03_deville_welcome", "mission_04_first_flip", "mission_05_block_party"],
+      "goal": "Establish Ace in Newport, join Marcus's operation, and make a name"
     },
     "act_2": {
-      "theme": "Business and Secrets",
-      "missions": ["mission_03_spa_secrets"],
-      "goal": "Navigate complex community dynamics"
+      "theme": "The Grind — Bosses introduce, conflicts escalate",
+      "missions": ["mission_06_crypto_collapse", "mission_07_viral_warfare", "mission_08_tow_truck_takedown", "mission_09_wellness_gone_wrong", "mission_10_the_leak", "mission_11_bot_swarm", "mission_12_industrial_sabotage", "mission_13_supplement_sabotage"],
+      "goal": "Work for all four bosses while uncovering the Mayor's hidden control network"
     },
     "act_3": {
-      "theme": "Legacy and Future",
-      "missions": ["mission_04_riverfront_reckoning"],
-      "goal": "Resolve family history and choose community role"
+      "theme": "The War — Boss confrontations and the point of no return",
+      "missions": ["mission_14_brand_protection", "mission_15_lexxcon", "mission_16_repo_rampage", "mission_17_enlightenment_raid", "mission_18_political_fixer"],
+      "goal": "Defeat all four bosses. Choose which side of the political fixer mission you're on."
+    },
+    "act_4": {
+      "theme": "The Reckoning — Mayor, evidence, Election Day",
+      "missions": ["mission_19_gathering_storm", "mission_20_evidence_trail", "mission_21_city_hall_siege", "mission_22_election_day"],
+      "goal": "Unite Newport's forces, expose the Mayor, storm City Hall, and determine Newport's future"
     }
   }
 }

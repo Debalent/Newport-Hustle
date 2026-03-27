@@ -375,6 +375,17 @@ namespace NewportHustle.Missions.MainStory
                     mission03.UnlockMission();
                 }
             }
+
+            // Also unlock Marcus DeVille's intro mission so it becomes available in the world
+            GameObject devilleMissionObject = GameObject.Find("Mission_DeVille_WelcomeToDistrict");
+            if (devilleMissionObject != null)
+            {
+                Mission_DeVille_WelcomeToDistrict devilleMission = devilleMissionObject.GetComponent<Mission_DeVille_WelcomeToDistrict>();
+                if (devilleMission != null)
+                {
+                    devilleMission.UnlockMission();
+                }
+            }
         }
         
         private void CleanupObjectiveMarkers()
