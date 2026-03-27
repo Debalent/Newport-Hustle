@@ -3,9 +3,9 @@
     "sedans": [
       {
         "id": "box_chevy_caprice",
-        "displayName": "Riverside Classic",
-        "realWorldBasis": "Box Chevy Caprice",
-        "year": "1980-1985",
+        "displayName": "Box Chevy",
+        "realWorldBasis": "1984 Chevrolet Caprice",
+        "year": "1984",
         "type": "Sedan",
         "class": "Mid",
         "stats": {
@@ -15,14 +15,14 @@
           "braking": 70,
           "durability": 85
         },
-        "description": "A classic American sedan with that distinctive boxy style. Perfect for cruising Newport's historic streets.",
+        "description": "A classic 1984 Chevy Caprice box Chevy, perfect for cruising Newport's historic streets.",
         "price": 3500,
         "availability": "Common"
       },
       {
         "id": "cutlass_supreme_84",
-        "displayName": "Newport Supreme",
-        "realWorldBasis": "1984 Cutlass Supreme",
+        "displayName": "'84 Cutlass",
+        "realWorldBasis": "1984 Oldsmobile Cutlass Supreme",
         "year": "1984",
         "type": "Sedan",
         "class": "Mid",
@@ -33,8 +33,26 @@
           "braking": 75,
           "durability": 80
         },
-        "description": "The quintessential '80s cruiser. Smooth ride with classic American muscle styling.",
+        "description": "The quintessential '84 Oldsmobile Cutlass, a small-town classic with muscle-era styling.",
         "price": 4200,
+        "availability": "Uncommon"
+      },
+      {
+        "id": "cadillac_deville_95",
+        "displayName": "Caddy DeVille",
+        "realWorldBasis": "1995 Cadillac DeVille",
+        "year": "1995",
+        "type": "Sedan",
+        "class": "Luxury",
+        "stats": {
+          "maxSpeed": 185,
+          "acceleration": 1150,
+          "handling": 68,
+          "braking": 78,
+          "durability": 88
+        },
+        "description": "A comfortable 1995 Cadillac DeVille big body, floating through the streets of Newport.",
+        "price": 6500,
         "availability": "Uncommon"
       }
     ],
@@ -173,9 +191,9 @@
     "police": [
       {
         "id": "crown_victoria_police",
-        "displayName": "Newport Patrol Unit",
-        "realWorldBasis": "Crown Victoria Police Interceptor",
-        "year": "2000-2011",
+        "displayName": "Crown Vic Patrol",
+        "realWorldBasis": "Late-90s Ford Crown Victoria Police Interceptor",
+        "year": "1996-1999",
         "type": "Police",
         "class": "Emergency",
         "stats": {
@@ -185,16 +203,16 @@
           "braking": 85,
           "durability": 90
         },
-        "description": "Standard Newport Police patrol vehicle. Reliable and pursuit-capable.",
+        "description": "Late-90s Ford Crown Victoria patrol car, the classic Newport Police cruiser.",
         "price": 0,
         "availability": "Police Only",
         "features": ["Siren", "Emergency Lights", "Radio", "Push Bars"]
       },
       {
         "id": "grand_marquis_detective",
-        "displayName": "Newport Detective Unit",
-        "realWorldBasis": "Grand Marquis Police",
-        "year": "2005-2011",
+        "displayName": "Unmarked Crown Vic",
+        "realWorldBasis": "Late-90s Ford Crown Victoria Unmarked",
+        "year": "1996-1999",
         "type": "Police",
         "class": "Emergency",
         "stats": {
@@ -204,7 +222,7 @@
           "braking": 80,
           "durability": 85
         },
-        "description": "Unmarked detective vehicle used by Newport Police investigators.",
+        "description": "Unmarked late-90s Crown Victoria used by Newport Police detectives.",
         "price": 0,
         "availability": "Police Only",
         "features": ["Hidden Siren", "Concealed Lights", "Radio"]
@@ -213,20 +231,74 @@
     "trucks": [
       {
         "id": "pickup_work",
-        "displayName": "Arkansas Hauler",
-        "realWorldBasis": "Full-Size Pickup Truck",
-        "year": "2000-2023",
+        "displayName": "F-150",
+        "realWorldBasis": "1991 Ford F-150",
+        "year": "1991",
         "type": "Truck",
         "class": "Mid",
         "stats": {
-          "maxSpeed": 170,
-          "acceleration": 1100,
+          "maxSpeed": 165,
+          "acceleration": 1050,
           "handling": 60,
           "braking": 70,
           "durability": 95
         },
-        "description": "Reliable work truck. Perfect for hauling equipment around Newport's construction sites.",
-        "price": 15000,
+        "description": "A 1991 Ford F-150 set up as a reliable everyday work truck for hauling around Newport.",
+        "price": 9000,
+        "availability": "Common"
+      },
+      {
+        "id": "work_truck_f450_packer",
+        "displayName": "F-450 Trash Truck",
+        "realWorldBasis": "Ford F-450 Super Duty with rear packer body",
+        "year": "2005-2015",
+        "type": "Truck",
+        "class": "Heavy",
+        "stats": {
+          "maxSpeed": 140,
+          "acceleration": 900,
+          "handling": 55,
+          "braking": 80,
+          "durability": 98
+        },
+        "description": "Ford F-450 Super Duty fitted with a trash packer on the back for city garbage collection routes.",
+        "price": 35000,
+        "availability": "Common"
+      },
+      {
+        "id": "work_truck_f450_flatbed",
+        "displayName": "F-450 Flatbed Truck",
+        "realWorldBasis": "Ford F-450 Super Duty flatbed",
+        "year": "2005-2015",
+        "type": "Truck",
+        "class": "Heavy",
+        "stats": {
+          "maxSpeed": 145,
+          "acceleration": 950,
+          "handling": 58,
+          "braking": 78,
+          "durability": 97
+        },
+        "description": "Ford F-450 Super Duty with a flatbed for hauling materials, equipment, and larger loads.",
+        "price": 34000,
+        "availability": "Common"
+      },
+      {
+        "id": "work_truck_f450_dump",
+        "displayName": "F-450 Dump Truck",
+        "realWorldBasis": "Ford F-450 Super Duty dump bed",
+        "year": "2005-2015",
+        "type": "Truck",
+        "class": "Heavy",
+        "stats": {
+          "maxSpeed": 140,
+          "acceleration": 920,
+          "handling": 55,
+          "braking": 82,
+          "durability": 99
+        },
+        "description": "Ford F-450 Super Duty with a dump bed for building and construction work around Newport.",
+        "price": 36000,
         "availability": "Common"
       }
     ]
@@ -237,11 +309,11 @@
     "rareSpawnRate": 8,
     "veryRareSpawnRate": 2,
     "spawnLocations": {
-      "residential": ["box_chevy_caprice", "chevy_tahoe", "pickup_work"],
-      "downtown": ["cutlass_supreme_84", "lexus_crossover", "cruiser_bike"],
-      "luxury": ["navigator_luxury", "lexus_crossover", "muscle_coupe"],
-      "industrial": ["pickup_work", "chevy_tahoe", "arkansas_explorer"],
-      "riverside": ["cruiser_bike", "newport_cruiser", "cutlass_supreme_84"]
+      "residential": ["box_chevy_caprice", "cutlass_supreme_84", "cadillac_deville_95", "pickup_work"],
+      "downtown": ["cutlass_supreme_84", "cadillac_deville_95", "box_chevy_caprice"],
+      "luxury": ["cadillac_deville_95"],
+      "industrial": ["pickup_work", "work_truck_f450_packer", "work_truck_f450_flatbed", "work_truck_f450_dump"],
+      "riverside": ["box_chevy_caprice", "cutlass_supreme_84", "cadillac_deville_95"]
     },
     "policeSpawnZones": {
       "downtown": "crown_victoria_police",
@@ -336,7 +408,15 @@
       "name": "Newport Motors",
       "location": "Downtown Newport",
       "specialty": "American Classics",
-      "inventory": ["box_chevy_caprice", "cutlass_supreme_84", "chevy_tahoe", "pickup_work"],
+      "inventory": [
+        "box_chevy_caprice",
+        "cutlass_supreme_84",
+        "cadillac_deville_95",
+        "pickup_work",
+        "work_truck_f450_packer",
+        "work_truck_f450_flatbed",
+        "work_truck_f450_dump"
+      ],
       "description": "Family-owned dealership specializing in classic American vehicles."
     },
     "luxuryAuto": {
