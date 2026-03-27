@@ -1,227 +1,498 @@
 {
   "story_structure": {
-    "title": "Newport Hustle",
+    "title": "Hustlin: Newport Edition",
     "subtitle": "A Mobile GTA-Style Adventure in Small-Town Arkansas",
-    "theme": "Finding your place in a community while building respect and success",
-    "setting": "Newport, Arkansas - A small river town with big personalities",
-    "tone": "Character-driven drama with humor and heart"
+    "theme": "From barber's chair to city hall — hustle your way up through five bosses and reclaim Newport",
+    "setting": "Newport, Arkansas — 8 explorable districts, each controlled by a boss or faction",
+    "tone": "Character-driven drama with humor, heart, and escalating stakes across 4 acts"
+  },
+  "acts": {
+    "act_1": {
+      "title": "The Come Up",
+      "missions": [
+        "mission_01_welcome_back",
+        "mission_02_the_cut",
+        "mission_03_deville_welcome",
+        "mission_04_first_flip",
+        "mission_05_block_party"
+      ],
+      "themes": ["homecoming", "mentorship", "community roots", "proving yourself"],
+      "description": "Ace returns to Newport, reconnects with Mentor, earns Barbers Row respect, and enters Marcus DeVille's orbit. Ends with the Block Party that puts Ace on the map.",
+      "districts_active": ["BarbersRow", "DeVilleDistrict"],
+      "boss_introduced": "Marcus DeVille"
+    },
+    "act_2": {
+      "title": "The Grind",
+      "missions": [
+        "mission_06_crypto_collapse",
+        "mission_07_viral_warfare",
+        "mission_08_tow_truck_takedown",
+        "mission_09_wellness_gone_wrong",
+        "mission_10_the_leak",
+        "mission_11_bot_swarm",
+        "mission_12_industrial_sabotage",
+        "mission_13_supplement_sabotage"
+      ],
+      "themes": ["escalation", "betrayal", "alliances tested", "power dynamics"],
+      "description": "Ace is drawn into conflicts with all four mid-level bosses. Marcus's empire crumbles with the crypto collapse. Lexi, Rico, and Fable each challenge Ace. The Leak reveals the Mayor's hand behind everything.",
+      "districts_active": ["BarbersRow", "DeVilleDistrict", "SpaDistrict", "DiazDistrict", "Downtown"],
+      "bosses_active": ["Marcus DeVille", "Lexi Vance", "Big Rico", "Dr. Fable"]
+    },
+    "act_3": {
+      "title": "The War",
+      "missions": [
+        "mission_14_brand_protection",
+        "mission_15_lexxcon",
+        "mission_16_repo_rampage",
+        "mission_17_enlightenment_raid",
+        "mission_18_political_fixer"
+      ],
+      "themes": ["boss confrontations", "faction warfare", "moral choices", "alliances formed"],
+      "description": "Ace confronts each boss in their territory. Boss fights at DeVille Flagship, LexxCon, Rico's Compound, and the Enlightenment Center. The Mayor emerges as the true puppet master.",
+      "districts_active": ["all"],
+      "boss_fights": ["Marcus DeVille", "Lexi Vance", "Big Rico", "Dr. Fable"]
+    },
+    "act_4": {
+      "title": "The Reckoning",
+      "missions": [
+        "mission_19_gathering_storm",
+        "mission_20_evidence_trail",
+        "mission_21_city_hall_siege",
+        "mission_22_election_day"
+      ],
+      "themes": ["legacy", "leadership", "community unity", "justice"],
+      "description": "Ace rallies defeated bosses and the community against the Mayor. Gather evidence, storm City Hall, and face the final boss fight on Election Day. Three possible endings.",
+      "districts_active": ["all"],
+      "boss_fight": "Mayor Bucksworth"
+    }
   },
   "story_arcs": {
     "main_arc": {
-      "title": "The Prodigal Returns",
-      "description": "Player returns to Newport and must rebuild their life and reputation",
+      "title": "The Prodigal Hustler",
+      "description": "Ace returns to Newport and rises from barber to community leader by dismantling five power structures",
       "progression": [
         {
           "phase": "Homecoming",
-          "missions": ["mission_01_welcome_back"],
+          "act": 1,
+          "missions": ["mission_01_welcome_back", "mission_02_the_cut", "mission_03_deville_welcome"],
           "themes": ["redemption", "nostalgia", "community"],
-          "character_development": "Player reconnects with roots and faces past"
+          "character_development": "Ace reconnects with Mentor, earns the Row's trust, and joins Marcus's operation"
         },
         {
-          "phase": "Proving Ground",
-          "missions": ["mission_02_the_cut"],
-          "themes": ["skill", "tradition", "respect"],
-          "character_development": "Player demonstrates value and earns place in community"
+          "phase": "Escalation",
+          "act": 2,
+          "missions": ["mission_06_crypto_collapse", "mission_07_viral_warfare", "mission_08_tow_truck_takedown", "mission_09_wellness_gone_wrong", "mission_10_the_leak"],
+          "themes": ["betrayal", "power", "moral_choices"],
+          "character_development": "Ace discovers each boss's weakness and the Mayor's hidden control over Newport"
         },
         {
-          "phase": "Complications", 
-          "missions": ["mission_03_spa_secrets"],
-          "themes": ["change", "conflict", "moral_choices"],
-          "character_development": "Player navigates competing interests and loyalties"
+          "phase": "Confrontation",
+          "act": 3,
+          "missions": ["mission_14_brand_protection", "mission_15_lexxcon", "mission_16_repo_rampage", "mission_17_enlightenment_raid", "mission_18_political_fixer"],
+          "themes": ["boss_fights", "faction_war", "alliances"],
+          "character_development": "Ace defeats or allies with each boss, revealing the Mayor as the true antagonist"
         },
         {
-          "phase": "Resolution",
-          "missions": ["mission_04_riverfront_reckoning"],
+          "phase": "Reckoning",
+          "act": 4,
+          "missions": ["mission_19_gathering_storm", "mission_20_evidence_trail", "mission_21_city_hall_siege", "mission_22_election_day"],
           "themes": ["legacy", "leadership", "community_unity"],
-          "character_development": "Player takes leadership role and shapes Newport's future"
+          "character_development": "Ace unites Newport against the Mayor and determines the town's future"
         }
       ]
     },
-    "character_arcs": {
+    "boss_arcs": {
+      "marcus_deville_arc": {
+        "character": "Marcus DeVille",
+        "faction": "DeVille Brand",
+        "territory": "DeVille District",
+        "progression": [
+          {"phase": "Ally", "act": 1, "description": "Marcus recruits Ace. Charismatic mentor figure with flashy ambitions."},
+          {"phase": "Crumbling", "act": 2, "description": "Crypto collapse and leak expose Marcus's fragile empire."},
+          {"phase": "Boss_Fight", "act": 3, "description": "Confrontation at DeVille Flagship. Belt-buckle combat, Cadillac chase."},
+          {"phase": "Potential_Ally", "act": 4, "description": "Defeated Marcus can be rallied against the Mayor if player showed mercy."}
+        ]
+      },
+      "lexi_vance_arc": {
+        "character": "Lexi 'The Algorithm' Vance",
+        "faction": "The Algorithm",
+        "territory": "Digital / Downtown Adjacent",
+        "progression": [
+          {"phase": "Rival", "act": 1, "description": "Lexi films the player without consent, begins content rivalry."},
+          {"phase": "Escalation", "act": 2, "description": "Viral Warfare and Bot Swarm missions reveal her digital empire."},
+          {"phase": "Boss_Fight", "act": 3, "description": "LexxCon showdown. Drones, crowds, T-shirt cannons."},
+          {"phase": "Potential_Ally", "act": 4, "description": "Defeated Lexi can use her platform to expose the Mayor."}
+        ]
+      },
+      "big_rico_arc": {
+        "character": "Big Rico 'The Repo King'",
+        "faction": "Rico's Fleet",
+        "territory": "Diaz District",
+        "progression": [
+          {"phase": "Obstacle", "act": 1, "description": "Rico's tow trucks harass DeVille district. Border friction."},
+          {"phase": "Escalation", "act": 2, "description": "Tow-Truck Takedown and Industrial Sabotage missions."},
+          {"phase": "Boss_Fight", "act": 3, "description": "Repo Rampage at the impound compound. Monster truck, convoy, Deborah."},
+          {"phase": "Potential_Ally", "act": 4, "description": "Defeated Rico provides his fleet for the City Hall convoy."}
+        ]
+      },
+      "dr_fable_arc": {
+        "character": "Dr. Fable",
+        "faction": "The Enlightenment Center",
+        "territory": "Spa District",
+        "progression": [
+          {"phase": "Background", "act": 1, "description": "Wellness flyers and recruitment seen around town."},
+          {"phase": "Escalation", "act": 2, "description": "Wellness Gone Wrong and Supplement Sabotage missions."},
+          {"phase": "Boss_Fight", "act": 3, "description": "Enlightenment Raid. Acolyte swarms, incense traps, helicopter escape."},
+          {"phase": "Potential_Ally", "act": 4, "description": "Defeated Fable provides chemical knowledge for evidence gathering."}
+        ]
+      },
+      "mayor_bucksworth_arc": {
+        "character": "Mayor Harold T. Bucksworth III",
+        "faction": "The Bucksworth Machine",
+        "territory": "Downtown / City Hall",
+        "progression": [
+          {"phase": "Hidden", "act": 1, "description": "Referenced but unseen. Controls Newport from behind the scenes."},
+          {"phase": "Revealed", "act": 2, "description": "The Leak exposes the Mayor's connections to all four bosses."},
+          {"phase": "Political_Fixer", "act": 3, "description": "Player does the Mayor's dirty work OR gathers evidence against him."},
+          {"phase": "Final_Boss", "act": 4, "description": "City Hall Siege and Election Day. Secret passages, security detail, gavel combat, balcony speech."}
+        ]
+      }
+    },
+    "supporting_arcs": {
       "mentor_arc": {
-        "character": "character_01_mentor",
+        "character": "Mentor (OG Barber)",
         "progression": [
-          {
-            "phase": "Guide",
-            "description": "Helps player get established, shares wisdom"
-          },
-          {
-            "phase": "Supporter", 
-            "description": "Provides resources and encouragement during challenges"
-          },
-          {
-            "phase": "Advisor",
-            "description": "Offers counsel during complex decisions"
-          },
-          {
-            "phase": "Proud_Elder",
-            "description": "Sees player succeed and steps back with pride"
-          }
+          {"phase": "Guide", "act": 1, "description": "Teaches Ace the barbering craft and Newport's rules"},
+          {"phase": "Supporter", "act": 2, "description": "Provides wisdom during boss conflicts"},
+          {"phase": "Endangered", "act": 3, "description": "Mentor's shop threatened by faction warfare"},
+          {"phase": "Proud_Elder", "act": 4, "description": "Watches Ace take leadership of Newport"}
         ]
       },
-      "rival_arc": {
-        "character": "character_02_rival",
+      "trix_arc": {
+        "character": "Trix",
         "progression": [
-          {
-            "phase": "Antagonist",
-            "description": "Opposes player's efforts, represents outside interests"
-          },
-          {
-            "phase": "Competitor",
-            "description": "Direct business competition and social rivalry"
-          },
-          {
-            "phase": "Complicated_Enemy",
-            "description": "Revealed motivations make them more sympathetic"
-          },
-          {
-            "phase": "Reluctant_Ally",
-            "description": "Circumstances force cooperation, potential redemption"
-          }
+          {"phase": "Partner", "act": 1, "description": "Marcus assigns Trix as Ace's handler"},
+          {"phase": "Frustrated", "act": 2, "description": "Trix grows resentful of Marcus's ego"},
+          {"phase": "Turning_Point", "act": 3, "description": "Trix can be recruited away from Marcus"},
+          {"phase": "Loyal_Ally", "act": 4, "description": "Trix becomes Ace's most trusted lieutenant"}
         ]
       },
-      "community_arc": {
-        "description": "Collective character representing Newport as a whole",
+      "patricia_dawn_arc": {
+        "character": "Patricia Dawn",
         "progression": [
-          {
-            "phase": "Suspicious",
-            "description": "Community unsure about player's return and intentions"
-          },
-          {
-            "phase": "Testing",
-            "description": "Community gives player chances to prove themselves"
-          },
-          {
-            "phase": "Accepting",
-            "description": "Community begins to trust and include player"
-          },
-          {
-            "phase": "Embracing",
-            "description": "Community fully accepts player as valued member and leader"
-          }
+          {"phase": "Background", "act": 1, "description": "Mentioned in newspaper articles"},
+          {"phase": "Journalist", "act": 2, "description": "Investigating corruption, crosses paths with Ace"},
+          {"phase": "Candidate", "act": 3, "description": "Announces run against the Mayor"},
+          {"phase": "Partner", "act": 4, "description": "Works with Ace to expose the Mayor's machine"}
         ]
       }
     }
   },
   "narrative_branches": {
-    "reputation_path": {
-      "description": "Player's choices affect their reputation and standing in Newport",
+    "boss_defeat_choices": {
+      "description": "After each boss fight, player chooses mercy or destruction — affecting Act 4 alliances",
       "branches": [
         {
-          "name": "Traditional_Respected",
-          "condition": "High respect with old-timers, traditional choices",
-          "outcomes": "Leadership in established community structures"
+          "boss": "Marcus DeVille",
+          "mercy_outcome": "Marcus rallies his crew to support Ace in Act 4. DeVille District becomes allied territory.",
+          "destroy_outcome": "DeVille District falls into chaos. No support from Marcus's faction in Act 4."
         },
         {
-          "name": "Modern_Innovator", 
-          "condition": "High respect with new businesses, progressive choices",
-          "outcomes": "Leadership in Newport's modernization efforts"
+          "boss": "Lexi Vance",
+          "mercy_outcome": "Lexi uses her platform to broadcast evidence against the Mayor.",
+          "destroy_outcome": "No media support. Must find physical evidence for Election Day."
         },
         {
-          "name": "Community_Bridge",
-          "condition": "Balanced respect across all groups",
-          "outcomes": "Unifying leadership role bridging old and new Newport"
+          "boss": "Big Rico",
+          "mercy_outcome": "Rico's tow-truck fleet forms the convoy for the City Hall siege.",
+          "destroy_outcome": "No vehicle support. Must approach City Hall on foot."
         },
         {
-          "name": "Outsider_Success",
-          "condition": "Business success despite low community respect",
-          "outcomes": "Financial success but social isolation"
+          "boss": "Dr. Fable",
+          "mercy_outcome": "Fable's chemistry knowledge helps analyze evidence from the Mayor's vault.",
+          "destroy_outcome": "No lab support. Must find another way to verify evidence."
         }
       ]
     },
-    "business_path": {
-      "description": "Player's business choices affect their role in Newport's economy",
+    "ending_paths": {
+      "description": "Three possible endings based on boss alliances and player choices",
+      "endings": [
+        {
+          "name": "The People's Champion",
+          "condition": "Showed mercy to 3+ bosses AND helped community throughout",
+          "description": "Ace wins with full community support. United Newport. Optimistic future."
+        },
+        {
+          "name": "The Lone Wolf",
+          "condition": "Destroyed most bosses, relied on self",
+          "description": "Ace wins but Newport is fractured. Power vacuum. Bittersweet victory."
+        },
+        {
+          "name": "The New Machine",
+          "condition": "Made deals for power, compromised morals",
+          "description": "Ace replaces the Mayor but becomes what they fought against. Tragic irony."
+        }
+      ]
+    },
+    "reputation_path": {
+      "description": "Player's respect score affects dialogue, mission availability, and ending weight",
       "branches": [
         {
-          "name": "Service_Professional",
-          "condition": "Focus on barbershop and personal services",
-          "outcomes": "Respected craftsperson with steady income"
+          "name": "Street_Legend",
+          "condition": "High respect across all districts",
+          "outcomes": "Access to all boss alliance options in Act 4"
         },
         {
-          "name": "Wellness_Entrepreneur",
-          "condition": "Partner with spa and wellness businesses", 
-          "outcomes": "Modern business owner bringing change to Newport"
+          "name": "Rising_Hustler",
+          "condition": "Moderate respect, some enemies",
+          "outcomes": "Limited alliance options, some bosses refuse to help"
         },
         {
-          "name": "Community_Organizer",
-          "condition": "Focus on bringing community together",
-          "outcomes": "Social leader with broad influence but moderate income"
-        },
-        {
-          "name": "Diversified_Mogul",
-          "condition": "Multiple business interests across sectors",
-          "outcomes": "Economic power and influence across all of Newport"
+          "name": "Lone_Operator",
+          "condition": "Low community respect, high personal power",
+          "outcomes": "Must fight Act 4 with minimal support"
         }
       ]
     }
   },
+  "districts": {
+    "barbers_row": {
+      "id": "BarbersRow",
+      "name": "Barbers Row",
+      "faction": "neutral_community",
+      "vibe": "Blue-collar pride, barbershop culture, community backbone",
+      "key_npcs": ["Ace", "Mentor", "Mrs. Henderson"],
+      "landmarks": ["Aces Barbershop", "Community Center", "The Row", "Corner Store"]
+    },
+    "deville_district": {
+      "id": "DeVilleDistrict",
+      "name": "DeVille District",
+      "faction": "deville_brand",
+      "vibe": "Flashy counterfeit luxury, gold everything, cologne and ambition",
+      "key_npcs": ["Marcus DeVille", "Trix", "Benny the Printer"],
+      "landmarks": ["DeVille Flagship Store", "The Print Shop", "The Warehouse", "Marcus's Cadillac"]
+    },
+    "spa_district": {
+      "id": "SpaDistrict",
+      "name": "Spa District",
+      "faction": "enlightenment_center",
+      "vibe": "Artificially zen, incense fog, crystal shops, wellness pyramid",
+      "key_npcs": ["Dr. Fable", "Sister Dawn", "Brother Kai", "Chad"],
+      "landmarks": ["Enlightenment Center", "Crystal Shop", "Smoothie Bar", "Spa Row"]
+    },
+    "diaz_district": {
+      "id": "DiazDistrict",
+      "name": "Diaz District",
+      "faction": "ricos_fleet",
+      "vibe": "Industrial grit, tow trucks, chain-link fences, motor oil",
+      "key_npcs": ["Big Rico", "Elena", "Tank"],
+      "landmarks": ["Rico's Compound", "Impound Lot", "Diaz Auto Parts", "Taco Stand"]
+    },
+    "downtown": {
+      "id": "Downtown",
+      "name": "Downtown",
+      "faction": "bucksworth_machine",
+      "vibe": "Political power, old money, brick and bronze",
+      "key_npcs": ["Mayor Bucksworth", "Rodney", "Captain Briggs", "Patricia Dawn"],
+      "landmarks": ["City Hall", "The Square", "First Newport Bank", "The Gazette"]
+    },
+    "jacksonport": {
+      "id": "JacksonportArea",
+      "name": "Jacksonport Area",
+      "faction": "neutral_residential",
+      "vibe": "Residential edges, strip malls, suburban grit",
+      "key_npcs": ["Miss Pearl", "Ms. Mable"],
+      "landmarks": ["Miss Pearl's Diner", "Jacksonport High", "The Strip Mall", "The Church"]
+    },
+    "riverfront": {
+      "id": "Riverfront",
+      "name": "Riverfront",
+      "faction": "bucksworth_machine",
+      "vibe": "Half construction, half decay — the Mayor's pet project",
+      "key_npcs": ["Construction Foreman", "Yacht Crew"],
+      "landmarks": ["Riverfront Walk", "The Marina", "The Old Mill", "Bridge Overlook"]
+    },
+    "residential": {
+      "id": "Residential",
+      "name": "Residential District",
+      "faction": "neutral_residential",
+      "vibe": "Quiet streets, front porches, real Newport",
+      "key_npcs": ["Neighborhood Residents"],
+      "landmarks": ["Ace's Childhood Home", "The Park", "The Barbecue Pit", "The Apartments"]
+    }
+  },
+  "factions": {
+    "deville_brand": {
+      "leader": "Marcus DeVille",
+      "colors": ["gold", "black"],
+      "logo": "Stylized DV with crown",
+      "territory": "DeVilleDistrict",
+      "strengths": ["brand loyalty", "street presence", "charisma-driven recruitment"],
+      "weaknesses": ["ego-driven leadership", "crypto liability", "all image no substance"]
+    },
+    "the_algorithm": {
+      "leader": "Lexi Vance",
+      "colors": ["electric_blue", "white"],
+      "logo": "Eye inside play button",
+      "territory": "digital_downtown_adjacent",
+      "strengths": ["massive digital reach", "drone surveillance", "corporate funding"],
+      "weaknesses": ["tech-dependent", "fickle followers", "no physical fighters"]
+    },
+    "ricos_fleet": {
+      "leader": "Big Rico",
+      "colors": ["red", "chrome"],
+      "logo": "Tow hook wrapped around crown",
+      "territory": "DiazDistrict",
+      "strengths": ["vehicle superiority", "city-wide parking network", "physical intimidation"],
+      "weaknesses": ["emotional leader", "loud operations", "Deborah attachment exploitable"]
+    },
+    "enlightenment_center": {
+      "leader": "Dr. Fable",
+      "colors": ["purple", "silver"],
+      "logo": "Lotus with eye center",
+      "territory": "SpaDistrict",
+      "strengths": ["fanatical members", "fortress compound", "chemistry knowledge"],
+      "weaknesses": ["expose supplements to break loyalty", "leader is a coward", "Chad"]
+    },
+    "bucksworth_machine": {
+      "leader": "Mayor Bucksworth",
+      "colors": ["navy_blue", "gold"],
+      "logo": "City seal with hidden initials",
+      "territory": "Downtown",
+      "strengths": ["controls city infrastructure", "professional security", "institutional legitimacy"],
+      "weaknesses": ["public opinion vulnerability", "evidence of corruption", "aide cracks under pressure"]
+    }
+  },
+  "inter_faction_dynamics": {
+    "alliance_structure": "All four mid-level bosses unknowingly serve the Mayor through contracts, donations, and deals",
+    "conflicts": {
+      "deville_vs_rico": "Border disputes over DeVille District eastern edge",
+      "deville_vs_algorithm": "Content rivalry and brand competition",
+      "rico_vs_algorithm": "Parking disputes near Lexi's compound",
+      "fable_vs_algorithm": "Lexi threatens to expose Fable's supplements",
+      "fable_vs_deville": "Recruitment poaching in overlapping territories",
+      "mayor_controls_all": "Parking contracts (Rico), zoning protection (Fable), content deals (Lexi), licensing threats (Marcus)"
+    },
+    "neutral_zones": ["Miss Pearl's Diner", "Taco Stand", "The Church"]
+  },
   "key_themes": {
-    "community_vs_individualism": {
-      "description": "Balancing personal success with community responsibility",
-      "exploration": "Player must choose between personal gain and community benefit",
-      "resolution": "Best outcomes come from finding ways to succeed while helping others"
+    "hustle_and_ambition": {
+      "description": "Every character is hustling — legit or not. The game explores what separates ambition from exploitation.",
+      "exploration": "Each boss represents a different hustle taken too far",
+      "resolution": "True success comes from lifting the community, not just yourself"
     },
-    "tradition_vs_progress": {
-      "description": "Navigating change while respecting established ways",
-      "exploration": "Tension between preserving Newport's character and embracing growth",
-      "resolution": "Progress works best when it builds on rather than replaces tradition"
+    "community_vs_empire": {
+      "description": "Building community roots vs building personal empires",
+      "exploration": "Player must choose between quick power grabs and slow community investment",
+      "resolution": "Act 4 alliances reward community investment over empire building"
     },
-    "redemption_and_second_chances": {
-      "description": "Everyone deserves opportunity to prove themselves",
-      "exploration": "Player and other characters overcome past mistakes or prejudices",
-      "resolution": "Growth comes through understanding, effort, and community support"
+    "corruption_and_accountability": {
+      "description": "Power corrupts at every level — from belt buckles to ballot boxes",
+      "exploration": "The Mayor's hidden control reveals systemic corruption",
+      "resolution": "Player's ending depends on whether they fight corruption or become it"
     },
-    "small_town_complexity": {
-      "description": "Small towns have deep, complex social dynamics",
-      "exploration": "Surface simplicity hides layers of history, relationships, and secrets",
-      "resolution": "Understanding community complexity is key to belonging and success"
+    "identity_and_home": {
+      "description": "What does it mean to come home and find it changed — and change it yourself?",
+      "exploration": "Ace left Newport and returned to find every block claimed by someone else",
+      "resolution": "Home is what you fight for, not what you find"
     }
   },
   "story_dependencies": {
     "mission_flow": {
-      "linear_progression": [
+      "act_1_linear": [
         "mission_01_welcome_back",
-        "mission_02_the_cut", 
-        "mission_03_spa_secrets",
-        "mission_04_riverfront_reckoning"
+        "mission_02_the_cut",
+        "mission_03_deville_welcome",
+        "mission_04_first_flip",
+        "mission_05_block_party"
       ],
-      "branching_points": [
-        {
-          "mission": "mission_02_the_cut",
-          "choice": "barbershop_alliance", 
-          "affects": ["mission_03_spa_secrets", "character_relationships"]
-        },
-        {
-          "mission": "mission_03_spa_secrets",
-          "choice": "spa_dilemma_resolution",
-          "affects": ["mission_04_riverfront_reckoning", "community_standing"]
-        }
+      "act_2_branching": {
+        "marcus_chain": ["mission_06_crypto_collapse", "mission_10_the_leak"],
+        "lexi_chain": ["mission_07_viral_warfare", "mission_11_bot_swarm"],
+        "rico_chain": ["mission_08_tow_truck_takedown", "mission_12_industrial_sabotage"],
+        "fable_chain": ["mission_09_wellness_gone_wrong", "mission_13_supplement_sabotage"]
+      },
+      "act_3_boss_fights": [
+        "mission_14_brand_protection",
+        "mission_15_lexxcon",
+        "mission_16_repo_rampage",
+        "mission_17_enlightenment_raid",
+        "mission_18_political_fixer"
+      ],
+      "act_4_finale": [
+        "mission_19_gathering_storm",
+        "mission_20_evidence_trail",
+        "mission_21_city_hall_siege",
+        "mission_22_election_day"
       ]
     },
+    "boss_defeat_affects_act_4": true,
+    "mercy_vs_destroy_tracked": true,
+    "respect_score_affects_endings": true,
     "character_relationships": {
       "mentor_relationship": {
-        "affects": ["mission_accessibility", "dialogue_options", "story_revelations"],
-        "influenced_by": ["player_choices", "mission_outcomes", "community_respect"]
+        "affects": ["mission_accessibility", "dialogue_options", "emotional_beats"],
+        "influenced_by": ["player_choices", "community_respect"]
       },
-      "rival_relationship": {
-        "affects": ["business_opportunities", "community_conflicts", "endgame_options"],
-        "influenced_by": ["competitive_outcomes", "moral_choices", "community_standing"]
+      "trix_relationship": {
+        "affects": ["act_3_recruitment", "act_4_support", "combat_assistance"],
+        "influenced_by": ["treatment_of_marcus", "loyalty_shown"]
       },
-      "community_standing": {
-        "affects": ["mission_support", "business_success", "story_ending"],
-        "influenced_by": ["all_major_choices", "side_quest_completion", "daily_interactions"]
+      "boss_relationships": {
+        "affects": ["act_4_alliances", "ending_path", "available_resources"],
+        "influenced_by": ["mercy_vs_destroy_choice", "respect_earned"]
       }
     }
   },
+  "side_content": {
+    "side_quests": [
+      {
+        "id": "side_01_crown_vic_chase",
+        "name": "Crown Vic Chase",
+        "type": "dynamic_event",
+        "description": "Evade police Crown Victorias across multiple districts"
+      },
+      {
+        "id": "side_02_parking_lot_wars",
+        "name": "Parking Lot Wars",
+        "type": "dynamic_event",
+        "description": "Defend vehicles from Rico's tow trucks at random parking lots"
+      },
+      {
+        "id": "side_03_content_creator_chaos",
+        "name": "Content Creator Chaos",
+        "type": "dynamic_event",
+        "description": "Lexi's drones follow and film the player, drawing crowds and police"
+      },
+      {
+        "id": "side_04_wellness_recruitment",
+        "name": "Wellness Recruitment Drive",
+        "type": "dynamic_event",
+        "description": "Fable's acolytes try to recruit the player on the street"
+      },
+      {
+        "id": "side_05_barbershop_battles",
+        "name": "Barbershop Battles",
+        "type": "repeatable",
+        "description": "Competitive haircut minigame for cash and respect"
+      },
+      {
+        "id": "side_06_miss_pearls_errands",
+        "name": "Miss Pearl's Errands",
+        "type": "repeatable",
+        "description": "Delivery and help missions for Miss Pearl's Diner"
+      }
+    ]
+  },
   "newport_authenticity": {
     "real_elements": {
-      "geography": "White River, real street names, geographic accuracy",
-      "culture": "Arkansas small-town values, river culture, community traditions",
-      "economy": "Mix of traditional and modern businesses, tourism potential",
+      "geography": "White River, real street grid, Jackson County, AR geography",
+      "culture": "Arkansas small-town values, barbershop culture, river town identity",
+      "economy": "Mix of traditional services, small business, and modern ventures",
       "history": "References to real Newport history and Arkansas heritage"
     },
     "fictional_elements": {
-      "characters": "All characters are fictional or placeholder pending consent",
+      "characters": "All characters are fictional",
       "businesses": "Specific businesses are fictional but representative of real types",
       "events": "Dramatic events are fictional but grounded in realistic scenarios",
       "scale": "Compressed geography and accelerated timeline for gameplay"
@@ -229,23 +500,20 @@
   },
   "player_agency": {
     "meaningful_choices": [
-      "How to approach business relationships",
-      "Whether to embrace tradition or drive change", 
-      "How to handle community conflicts",
-      "What kind of leader to become"
+      "Which bosses to show mercy vs. destroy",
+      "Whether to ally with Marcus or break away early",
+      "How to handle the Mayor's political fixer mission",
+      "Which faction allies to recruit for the City Hall siege",
+      "Whether to pursue transparency or personal power"
     ],
     "consequence_system": {
-      "immediate": "Direct dialogue and relationship changes",
-      "medium_term": "Mission availability and difficulty changes",
-      "long_term": "Different story endings and community outcomes"
+      "immediate": "Dialogue changes, NPC reactions, district access",
+      "medium_term": "Boss alliance availability, mission difficulty, faction hostility",
+      "long_term": "Three distinct endings based on cumulative choices"
     },
-    "multiple_solutions": {
-      "description": "Most challenges have multiple valid approaches",
-      "examples": [
-        "Barbershop conflict can be resolved through skill, diplomacy, or innovation",
-        "Spa secrets can be handled through exposure, protection, or mediation",
-        "Community leadership can be achieved through various specializations"
-      ]
+    "boss_fight_outcomes": {
+      "description": "Each boss fight has mercy and destroy paths that directly affect Act 4",
+      "tracking": "mercy_count variable determines ending eligibility"
     }
   }
 }
