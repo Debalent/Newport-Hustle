@@ -300,6 +300,9 @@ namespace NewportHustle.UI
             {
                 hapticFeedbackToggle.isOn = PlayerPrefs.GetInt("HapticFeedback", 1) == 1;
             }
+
+            // Ensure audio listener reflects saved master volume and mute state
+            ApplyAudioSettings();
         }
         
         private void CheckSaveFileAvailability()
@@ -430,6 +433,9 @@ namespace NewportHustle.UI
         
         private void LoadGameScene()
         {
+            // Stop any menu/splash audio before entering gameplay
+            StopAllMenuAudio();
+
             // Load the main game scene
             SceneManager.LoadScene("NewportCity");
         }
@@ -469,14 +475,18 @@ namespace NewportHustle.UI
         
         private void OnMasterVolumeChanged(float value)
         {
-            AudioListener.volume = value;
             PlayerPrefs.SetFloat("MasterVolume", value);
+            ApplyAudioSettings();
         }
         
         private void OnMusicVolumeChanged(float value)
         {
             PlayerPrefs.SetFloat("MusicVolume", value);
-            // Apply to music audio sources
+            // Apply to music audio sources via the global MusicManager (if present)
+            if (MusicManager.Instance != null)
+            {
+                MusicManager.Instance.ApplyMusicVolume(value);
+            }
         }
         
         private void OnSFXVolumeChanged(float value)
@@ -493,8 +503,8 @@ namespace NewportHustle.UI
         
         private void OnMuteChanged(bool value)
         {
-            AudioListener.pause = value;
             PlayerPrefs.SetInt("Mute", value ? 1 : 0);
+            ApplyAudioSettings();
         }
         
         private void OnMouseSensitivityChanged(float value)
@@ -544,6 +554,34 @@ namespace NewportHustle.UI
             if (backgroundImage != null)
             {
                 // Load Newport-themed background
+            }
+        }
+
+        /// <summary>
+        /// Apply saved audio settings (master volume + mute) to the global listener.
+        /// This ensures the mute toggle works consistently on all platforms, including mobile.
+        /// </summary>
+        private void ApplyAudioSettings()
+        {
+            bool isMuted = PlayerPrefs.GetInt("Mute", 0) == 1;
+            float masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1.0f);
+
+            AudioListener.volume = isMuted ? 0f : masterVolume;
+        }
+
+        /// <summary>
+        /// Stop all currently playing AudioSources in the menu scene before loading gameplay.
+        /// This cuts off menu/splash music as soon as gameplay starts.
+        /// </summary>
+        private void StopAllMenuAudio()
+        {
+            AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
+            foreach (var source in audioSources)
+            {
+                if (source != null && source.isPlaying)
+                {
+                    source.Stop();
+                }
             }
         }
     }
