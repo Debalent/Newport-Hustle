@@ -71,8 +71,9 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Eliminate 300ms tap delay on all interactive elements */
-button, a, [data-target], input, select, textarea, label {
+button, [class*="btn"], [data-target], a {
+  -webkit-user-select: none;
+  user-select: none;
   touch-action: manipulation;
 }
 
@@ -209,6 +210,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  overflow: hidden; /* no scroll needed; prevents iOS treating it as scrollable which can swallow taps */
 }
 
 .screen__subtitle {

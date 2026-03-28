@@ -192,44 +192,42 @@
      NAVIGATION (event delegation)
   ------------------------------------------------------- */
   function initNavigation() {
-    var _skipNextClick = false;
+    // Unlock audio on very first gesture — must be inside a user-event handler
+    document.addEventListener('touchstart', function () { startMusic(); },
+      { once: true, passive: true });
+    document.addEventListener('mousedown', function () { startMusic(); },
+      { once: true });
 
-    // MOBILE PRIMARY: touchstart fires immediately (no 300ms delay),
-    // and preventDefault stops the synthesized click that follows.
-    // Only preventDefault when we're actually navigating so scrollable
-    // panels elsewhere are not affected.
-    document.addEventListener('touchstart', function(e) {
-      var navTarget = e.target.closest('[data-target]');
-      if (!navTarget) return;
-      e.preventDefault(); // block synthesized click
-      _skipNextClick = true;
-      startMusic();
-      showScreen(navTarget.getAttribute('data-target'));
-      var rippleTarget = e.target.closest('.btn, .gta-nav-btn, .top-bar__back, .gta-menu-btn');
-      var t = e.changedTouches && e.changedTouches[0];
-      if (rippleTarget && t) {
-        try { spawnRipple(rippleTarget, { clientX: t.clientX, clientY: t.clientY }); } catch (_) {}
-      }
-    }, { passive: false });
+    // Bind navigation DIRECTLY to every [data-target] element.
+    // Direct element binding is far more reliable on iOS Safari
+    // than document-level delegation.  querySelectorAll runs after
+    // DOMContentLoaded so every static element is available.
+    document.querySelectorAll('[data-target]').forEach(function (el) {
+      var dest = el.getAttribute('data-target');
 
-    // DESKTOP / KEYBOARD fallback
-    document.addEventListener('click', function(e) {
-      startMusic();
-      if (_skipNextClick) { _skipNextClick = false; return; }
-      var btn = e.target.closest('.btn, .gta-nav-btn, .top-bar__back, .gta-menu-btn');
-      try { if (btn) spawnRipple(btn, e); } catch (_) {}
-      var navTarget = e.target.closest('[data-target]');
-      if (navTarget) showScreen(navTarget.getAttribute('data-target'));
+      // touchend: fires immediately when finger lifts, passive so
+      // browser can still scroll other containers freely.
+      el.addEventListener('touchend', function () {
+        startMusic();
+        showScreen(dest);
+      }, { passive: true });
+
+      // click: handles desktop mouse + keyboard-activated buttons.
+      // showScreen guards against double-call (id === currentScreen check).
+      el.addEventListener('click', function (e) {
+        startMusic();
+        try { spawnRipple(el, e); } catch (_) {}
+        showScreen(dest);
+      });
     });
 
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        var focused = document.activeElement;
-        if (focused && focused.hasAttribute('data-target')) {
-          e.preventDefault();
-          focused.click();
-        }
+    // Keyboard: Enter/Space on focused nav element
+    document.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') &&
+          document.activeElement &&
+          document.activeElement.hasAttribute('data-target')) {
+        e.preventDefault();
+        document.activeElement.click();
       }
       if (e.key === 'Escape' && state.currentScreen === 'screen-hud') {
         showScreen('screen-pause');
