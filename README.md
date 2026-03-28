@@ -1,8 +1,174 @@
-# 🎮 Newport Hustle
+# Newport Hustle
 
-![Newport Hustle Logo](NewportHustleGame/Assets/UI/Branding/Newport_Hustle_Logo.png)
+> *From barber's chair to city hall — hustle your way up through five bosses and reclaim Newport.*
 
-## *The Most Ridiculous Small-Town Crime Simulator Ever Made*
+**[► Play the Live Demo ◄](https://debalent.github.io/Newport-Hustle/WebPreview/)**  
+Mobile-ready · Works in any browser · No install required
+
+---
+
+## What Is Newport Hustle?
+
+Newport Hustle is a GTA-style open-world mobile game set in the real city of Newport, Arkansas. You play as **Ace** — a prodigal hustler returning home — navigating eight explorable districts, clashing with five power factions, and ultimately deciding the fate of your hometown.
+
+It's character-driven drama with humor, heart, and escalating stakes across four acts. Think small-town politics, street-level economics, a crypto bro with a belt-buckle obsession, a self-help cult on the Spa District side of town, and a Mayor who's been pulling strings the whole time.
+
+---
+
+## The Story
+
+### Act 1 — The Come Up
+Ace rolls back into Newport and reconnects with **Mentor** at Ace's Barbershop on Barbers Row. He earns the community's respect, proves his skills, and gets swept into the orbit of **Marcus DeVille** — a charismatic hustler running a street brand out of his namesake district. The act ends with a DeVille Block Party that puts Ace on the map.
+
+### Act 2 — The Grind
+Marcus's empire cracks under a crypto collapse. Meanwhile Ace is drawn into conflicts with three other factions operating across Newport: a social-media influencer building a digital empire downtown, a tow-truck kingpin who runs the Diaz District, and a wellness guru whose Enlightenment Center is more cult than clinic. A leak exposes that the Mayor has been funding all of it.
+
+### Act 3 — The War
+Boss confrontations across every district. The DeVille Flagship. LexxCon. Rico's impound compound. The Enlightenment Center. Each fight settles a faction — and each defeated boss can become an unlikely ally if Ace showed them mercy.
+
+### Act 4 — The Reckoning
+Ace rallies Newport against **Mayor Harold T. Bucksworth III**, the man behind every power play in town. Storm City Hall. Face the final boss on Election Day. Three possible endings determine whether Newport gets a new kind of leader — or falls back into the same hands.
+
+---
+
+## Characters
+
+### Ace *(Player Character)*
+Returned to Newport after time away. Street-smart, community-rooted, and standing at a crossroads between who he was and who Newport needs him to be. Fully customizable — complexion, outfit, personality trait, and street name.
+
+### Mentor
+The old-guard barber who kept Barbers Row standing while everyone else left or sold out. Ace's moral compass and Act 1 anchor. His slow nod of approval is worth more than any paycheck.
+
+### Marcus DeVille
+Charismatic, gold-trimmed, Cadillac-driving entrepreneur who built the DeVille brand on Newport street culture. Flashy but fragile — his empire is built on hype and crypto that's about to collapse. Ally in Act 1, unstable rival in Act 2, boss fight in Act 3.
+
+### Lexi "The Algorithm" Vance
+Influencer, content strategist, and digital mercenary operating out of Downtown. She filmed Ace without consent and turned it into content. Her weapons are drones, bot armies, and T-shirt cannons. Boss fight happens at LexxCon.
+
+### Big Rico "The Repo King"
+Runs Rico's Fleet out of the Diaz District. His tow trucks are everywhere, his impound compound is a fortress, and his pet monster truck "Deborah" is the Act 3 boss vehicle. More blunt instrument than chess player, but loyal to whoever last crossed him.
+
+### Dr. Fable
+Wellness influencer and self-appointed spiritual leader of the Spa District's Enlightenment Center. The flyers around town look friendly. The supplement line is less friendly. The acolyte swarms and incense traps during the raid are definitely not friendly.
+
+### Mayor Harold T. Bucksworth III
+The true final boss. Old-money Newport establishment, publicly neutral, privately funding every faction to keep the city divided and controllable. The evidence trail leads to City Hall. The Election Day showdown determines whether Newport changes or doesn't.
+
+---
+
+## The City — Newport, AR
+
+Eight explorable districts built on the real geography of Newport, Arkansas:
+
+| District | Description |
+|---|---|
+| **Barbers Row** | Ace's home turf. Community anchor. Mentor's barbershop. |
+| **DeVille District** | Marcus's territory. Flagship store, print shop, DeVille Coin kiosk. |
+| **Downtown Newport** | City Hall, commercial strip, Lexi's content studio. |
+| **Spa District** | Dr. Fable's Enlightenment Center and wellness empire. |
+| **Diaz District** | Big Rico's tow yards and impound compound. |
+| **Jacksonport Area** | Ace's safehouse. Quieter side of the map. |
+| **Residential** | Where everybody actually lives. Mrs. Henderson watches from her porch. |
+| **Riverfront** | The White River. History. The final convergence of everything. |
+
+The in-game map uses real Newport geography — White River to the east, Rocky Bayou to the northeast, Malcolm Avenue as the north-south spine, and the C&N Railroad running diagonally through the middle.
+
+---
+
+## Gameplay
+
+- **Open-world movement** — third-person camera, WASD on desktop, dual joystick on mobile
+- **22 story missions** across 4 acts with branching boss outcomes
+- **4 story paths** — Street Hustler, Corporate Snake, Influencer Gone Wrong, Chaos Mode — each with its own tone
+- **Character creator** — complexion, outfit, personality trait ("Big Talker," "Too Smooth," "Chaotic Good," etc.)
+- **5-star wanted system** — Newport PD escalates from a friendly chat to a county-wide incident
+- **Faction respect meters** — how you treat each district affects what help you can call in during Act 4
+- **Three endings** — determined by choices made across the full playthrough
+
+---
+
+## Try the Demo
+
+**[► Live Web Demo ◄](https://debalent.github.io/Newport-Hustle/WebPreview/)**
+
+The web demo is a fully interactive preview running in the browser — no Unity, no install. It includes:
+
+- Animated splash screen and main menu
+- Character creator with live preview
+- Story mode and mission select (real mission data)
+- Playable Three.js 3D world with NPC interaction, dual joystick mobile controls, and vehicle entry
+- Full GTA-style HUD — minimap, cash counter, wanted stars, health/armor/rep bars
+- Newport AR mission map with real geography
+- Pause menu, settings, and back-to-menu navigation from anywhere
+
+Works on iOS, Android, and desktop browsers.
+
+---
+
+## Project Status
+
+| Component | Status |
+|---|---|
+| Web demo (browser playable) | ✅ Complete |
+| Story & mission design (22 missions, 4 acts) | ✅ Complete |
+| Character roster & boss arcs | ✅ Complete |
+| Newport AR map & district design | ✅ Complete |
+| Game configuration (JSON data layer) | ✅ Complete |
+| Unity mobile build | 🔧 In development |
+| NPC dialogue trees | 🔧 In development |
+| Mission gameplay implementation | 🔧 In development |
+| Community outreach & permissions | 📋 Planned pre-release |
+
+---
+
+## Technical Overview
+
+- **Web Demo:** Pure HTML/CSS/JS + Three.js — no framework, no bundler
+- **Game Engine:** Unity 2021.3 LTS
+- **Platform targets:** iOS, Android
+- **Language:** C# (game scripts) + JSON (mission/character/vehicle configuration)
+- **Architecture:** Data-driven — missions, characters, vehicles, and story arcs all live in JSON config files separate from code
+
+**Key scripts:**
+- [GameManager.cs](NewportHustleGame/Scripts/Core/GameManager.cs) — core game loop
+- [VehicleController.cs](NewportHustleGame/Scripts/Vehicles/VehicleController.cs) — vehicle physics
+- [PoliceSystem.cs](NewportHustleGame/Scripts/World/PoliceSystem.cs) — wanted level AI
+- [DialogueSystem.cs](NewportHustleGame/Scripts/Characters/DialogueSystem.cs) — NPC conversation engine
+- [world.js](WebPreview/world.js) — Three.js open-world engine (web demo)
+- [app.js](WebPreview/app.js) — UI navigation and screen system (web demo)
+
+---
+
+## Community & Respect
+
+Newport Hustle is built out of genuine appreciation for Newport, Arkansas — its people, its geography, its culture, and its particular brand of small-town life. The game celebrates the city; it doesn't mock it.
+
+Before any public release, all business references and community representations will go through proper consent and permission processes. Until then, this is a development demo and portfolio showcase.
+
+---
+
+## Run It Locally
+
+**Web demo:**
+```
+# No server needed — just open WebPreview/index.html in any browser
+# Or serve it:
+cd WebPreview
+npx serve .
+```
+
+**Unity project:**
+1. Install [Unity Hub](https://unity.com/download) + Unity 2021.3 LTS
+2. Open `NewportHustleGame/` as a Unity project
+3. Press Play
+
+Full setup guide: [UNITY_SETUP_GUIDE.md](UNITY_SETUP_GUIDE.md)
+
+---
+
+*Made with genuine love for Newport, Arkansas*  
+*© 2025 Newport Hustle — All story characters are fictional*
+
 
 ### 🤣 What is Newport Hustle?
 
