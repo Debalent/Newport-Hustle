@@ -83,7 +83,8 @@
 
     <!-- Global Audio Controls -->
     <div class="audio-controls" id="audio-controls">
-      <button id="mute-btn" class="audio-btn" aria-label="Toggle Music"></button>
+      <button id="mute-btn" class="audio-btn" aria-label="Toggle Music"
+              onclick="window._nhToggleMute&&window._nhToggleMute()"></button>
     </div>
 
     <!-- TOAST NOTIFICATION CONTAINER (global overlay) -->
@@ -579,6 +580,30 @@
           <div class="mission-intro__subtitle" id="mission-intro-subtitle">Meet your mentor downtown</div>
         </div>
       </div>
+
+      <!-- ── NPC DIALOGUE OVERLAY ── -->
+      <div class="nh-dialogue" id="nh-dialogue" aria-live="polite" hidden>
+        <div class="nh-dialogue__box">
+          <div class="nh-dialogue__player-line" id="dlg-player-line"></div>
+          <div class="nh-dialogue__name" id="dlg-speaker-name"></div>
+          <div class="nh-dialogue__text" id="dlg-text"></div>
+          <div class="nh-dialogue__footer">
+            <button class="nh-dialogue__next" id="dlg-next" aria-label="Continue dialogue"
+                    onclick="window.NHDialogue&&window.NHDialogue.advance()">Continue ▶</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── WEAPON TOGGLE (mobile) ── -->
+      <button class="hud-weapon-btn" id="hud-weapon-btn" aria-label="Draw / Holster Weapon" title="Draw Weapon"
+              onclick="window.NHWorld&&window.NHWorld.toggleWeapon()">🔫</button>
+
+      <!-- ── FIRE BUTTON (mobile, weapon drawn) ── -->
+      <button class="hud-fire-btn" id="hud-fire-btn" aria-label="Shoot" title="Shoot" hidden
+              onclick="window.NHWorld&&window.NHWorld.shoot()">💥</button>
+
+      <!-- ── MUZZLE FLASH ── -->
+      <div class="muzzle-flash" id="muzzle-flash" aria-hidden="true"></div>
 
     </section>
 

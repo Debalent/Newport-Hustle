@@ -15,6 +15,113 @@
   'use strict';
 
   /* -------------------------------------------------------
+     MUTE TOGGLE (exposed globally for inline onclick + touchstart)
+  ------------------------------------------------------- */
+  function toggleMuteAction() {
+    startMusic();   // ensures audio context is alive before toggling
+    toggleMute();
+  }
+  window._nhToggleMute = toggleMuteAction;
+
+  /* -------------------------------------------------------
+     NPC DIALOGUE DATA
+  ------------------------------------------------------- */
+  var NPC_DIALOGUES = {
+    mentor: [
+      { speaker: 'Big Earl', text: "Welcome back to Newport, young blood. City's changed while you were gone.", isNpc: true },
+      { speaker: 'Ace',      text: "How bad is it?",                                                            isNpc: false },
+      { speaker: 'Big Earl', text: "Bad enough the barbers got political. But you got hustle — that's all you need.", isNpc: true },
+      { speaker: 'Big Earl', text: "Head to Tre's Cuts first. Tell him Big Earl sent you.",                    isNpc: true },
+    ],
+    rival: [
+      { speaker: 'Darius Cole', text: "Look who came crawling back. Newport got too big for you, huh?",        isNpc: true },
+      { speaker: 'Ace',         text: "I'm not here to compete, Darius.",                                       isNpc: false },
+      { speaker: 'Darius Cole', text: "That's exactly what someone about to get styled on would say.",          isNpc: true },
+      { speaker: 'Darius Cole', text: "Watch your corners. I built this block while you were gone.",            isNpc: true },
+    ],
+    barber: [
+      { speaker: "Tre's Cuts", text: "Aye, you the one Big Earl called about? Your head needs serious work.",  isNpc: true },
+      { speaker: 'Ace',        text: "Just a trim.",                                                            isNpc: false },
+      { speaker: "Tre's Cuts", text: "A TRIM? Nah, we doing a full restoration. That'll be $200.",             isNpc: true },
+    ],
+    spa: [
+      { speaker: 'Jade Spa', text: "Welcome to Jade. Detox package or executive stress release?",              isNpc: true },
+      { speaker: 'Ace',      text: "Just looking around.",                                                      isNpc: false },
+      { speaker: 'Jade Spa', text: "Everyone says that. Then they see our hot stone menu and they're back every week.", isNpc: true },
+    ],
+    side: [
+      { speaker: 'Side Hustle Guy', text: "Psst. You move anything? Goods, services, vibes?",                  isNpc: true },
+      { speaker: 'Ace',             text: "What kind of goods?",                                                isNpc: false },
+      { speaker: 'Side Hustle Guy', text: "Energy drink called Grind — tastes like ambition and regret.",      isNpc: true },
+      { speaker: 'Side Hustle Guy', text: "Help me move 20 cases, I split the margin. Easy money.",            isNpc: true },
+    ],
+  };
+
+  /* -------------------------------------------------------
+     NPC DIALOGUE ENGINE
+  ------------------------------------------------------- */
+  var _dlgLines  = [];
+  var _dlgIdx    = 0;
+  var _dlgNpcDef = null;
+
+  function _dlgShowLine() {
+    var line   = _dlgLines[_dlgIdx];
+    var nameEl = document.getElementById('dlg-speaker-name');
+    var textEl = document.getElementById('dlg-text');
+    var plEl   = document.getElementById('dlg-player-line');
+    var nextBtn= document.getElementById('dlg-next');
+    if (!line || !nameEl || !textEl) return;
+
+    if (!line.isNpc) {
+      // Player's line — show in teal above NPC box, then auto-advance
+      if (plEl) plEl.textContent = '"' + line.text + '"';
+      nameEl.textContent = '';
+      textEl.textContent = '';
+      if (nextBtn) nextBtn.style.visibility = 'hidden';
+      setTimeout(function () { window.NHDialogue.advance(); }, 1100);
+    } else {
+      // NPC speaks
+      if (plEl) plEl.textContent = '';
+      nameEl.textContent = line.speaker;
+      nameEl.setAttribute('data-id', _dlgNpcDef ? _dlgNpcDef.id : '');
+      textEl.textContent = line.text;
+      if (nextBtn) {
+        nextBtn.style.visibility = 'visible';
+        var isLast = (_dlgIdx >= _dlgLines.length - 1);
+        nextBtn.textContent = isLast ? 'Close ✕' : 'Continue ▶';
+      }
+    }
+  }
+
+  window.NHDialogue = {
+    start: function (npcDef) {
+      var lines = NPC_DIALOGUES[npcDef.id];
+      if (!lines || !lines.length) return;   // no dialogue — ignore
+      _dlgLines  = lines;
+      _dlgIdx    = 0;
+      _dlgNpcDef = npcDef;
+      if (window.NHWorld && window.NHWorld.setDialogueLock) window.NHWorld.setDialogueLock(true);
+      var overlay = document.getElementById('nh-dialogue');
+      if (overlay) overlay.hidden = false;
+      _dlgShowLine();
+    },
+    advance: function () {
+      _dlgIdx++;
+      if (_dlgIdx >= _dlgLines.length) {
+        window.NHDialogue.end();
+      } else {
+        _dlgShowLine();
+      }
+    },
+    end: function () {
+      var overlay = document.getElementById('nh-dialogue');
+      if (overlay) overlay.hidden = true;
+      if (window.NHWorld && window.NHWorld.setDialogueLock) window.NHWorld.setDialogueLock(false);
+      _dlgNpcDef = null;
+    },
+  };
+
+  /* -------------------------------------------------------
      STATE
   ------------------------------------------------------- */
   const state = {
@@ -166,8 +273,8 @@
               requestAnimationFrame(function() {
                 window.NHWorld.init(threeCanvas);
                 window.NHWorld.onNPCInteract(function(npcId, name) {
+                  // Fallback used only if NHDialogue has no lines for this NPC
                   showToast('Talking to ' + name + '...');
-                  showScreen('screen-missions');
                 });
                 // Dismiss click-to-play prompt on first canvas touch
                 if (lockPrompt) {
@@ -231,6 +338,11 @@
       }
       if (e.key === 'Escape' && state.currentScreen === 'screen-hud') {
         showScreen('screen-pause');
+      }
+      // E key advances open dialogue
+      if ((e.key === 'e' || e.key === 'E') && !e.repeat) {
+        var dlg = document.getElementById('nh-dialogue');
+        if (dlg && !dlg.hidden) window.NHDialogue.advance();
       }
     });
   }
@@ -796,20 +908,29 @@
      INIT
   ------------------------------------------------------- */
   function init() {
-    // Mute button — respond to pointerdown for instant mobile response
+    // Mute button
+    // — touchstart (iOS Safari primary path): prevent default to kill 300ms delay
+    // — pointerdown guards desktop/hybrid devices
+    // — click handles keyboard (Enter/Space) and cases where pointerdown didn't fire
+    // — All paths call startMusic() first so AudioContext is guaranteed alive
     updateMuteBtn();
-    let _mutePointerFired = false;
-    muteBtn.addEventListener('pointerdown', (e) => {
+    var _muteFired = false;
+    muteBtn.addEventListener('touchstart', function (e) {
       e.preventDefault();
       e.stopPropagation();
-      _mutePointerFired = true;
-      toggleMute();
+      _muteFired = true;
+      toggleMuteAction();
     }, { passive: false });
-    // click handles keyboard (Enter/Space) without double-firing after pointerdown
-    muteBtn.addEventListener('click', (e) => {
+    muteBtn.addEventListener('pointerdown', function (e) {
+      e.preventDefault();
       e.stopPropagation();
-      if (_mutePointerFired) { _mutePointerFired = false; return; }
-      toggleMute();
+      if (_muteFired) { _muteFired = false; return; } // touchstart already handled it
+      toggleMuteAction();
+    }, { passive: false });
+    muteBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (_muteFired) { _muteFired = false; return; }
+      toggleMuteAction();
     });
 
     // Boot splash animation

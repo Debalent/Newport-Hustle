@@ -27,6 +27,9 @@
     resume:        resumeWorld,
     dispose:       disposeWorld,
     onNPCInteract: function (fn) { _cbNPCInteract = fn; },
+    toggleWeapon:  function ()   { toggleWeapon(); },
+    shoot:         function ()   { shoot(); },
+    setDialogueLock: function(v) { dialogueLock = !!v; },
     _inVehicle:    false,
   };
 
@@ -58,6 +61,14 @@
   // Mobile joysticks
   var joyMove = { active: false, id: null, ox: 0, oy: 0, x: 0, y: 0 };
   var joyLook = { active: false, id: null, ox: 0, oy: 0, x: 0, y: 0 };
+
+  // Weapon
+  var weaponDrawn  = false;
+  var _weaponGroup = null;
+  var _shootCooldown = 0;
+
+  // Dialogue
+  var dialogueLock = false;
 
   // World objects
   var colliders     = [];  // {minX, maxX, minZ, maxZ}
@@ -423,6 +434,24 @@
     shadowDisc.position.y = 0.015;
     playerGroup.add(shadowDisc);
 
+    // Weapon (holstered — drawn with F key or mobile button)
+    _weaponGroup = new THREE.Group();
+    // Grip
+    var wGripMat  = new THREE.MeshLambertMaterial({ color: 0x111114 });
+    var wGrip     = new THREE.Mesh(new THREE.BoxGeometry(0.055, 0.13, 0.07), wGripMat);
+    // Barrel / slide
+    var wBarrelMat = new THREE.MeshLambertMaterial({ color: 0x55555f });
+    var wBarrel    = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.05, 0.22), wBarrelMat);
+    wBarrel.position.set(0, 0.035, 0.13);
+    var wSlideMat  = new THREE.MeshLambertMaterial({ color: 0x888895 });
+    var wSlide     = new THREE.Mesh(new THREE.BoxGeometry(0.048, 0.042, 0.18), wSlideMat);
+    wSlide.position.set(0, 0.04, 0.11);
+    _weaponGroup.add(wGrip, wBarrel, wSlide);
+    _weaponGroup.position.set(0.28, 0.82, 0.14);
+    _weaponGroup.rotation.z = -0.14;
+    _weaponGroup.visible = false;
+    playerGroup.add(_weaponGroup);
+
     playerGroup.position.set(0, 0, 0);
   }
 
@@ -610,6 +639,7 @@
     _canvas.addEventListener('touchend',   onTouchEnd,   false);
     document.addEventListener('keydown', function (e) {
       if ((e.key === 'e' || e.key === 'E') && !e.repeat) doInteract();
+      if ((e.key === 'f' || e.key === 'F') && !e.repeat) toggleWeapon();
     });
     var interactBtn = document.getElementById('fps-interact');
     if (interactBtn) interactBtn.addEventListener('pointerdown', doInteract);
@@ -633,7 +663,11 @@
   function onKeyUp(e)   { keys[e.code] = false; }
 
   function onMouseDown(e) {
-    if (e.button === 0) { mouseDown = true; lastMX = e.clientX; lastMY = e.clientY; e.preventDefault(); }
+    if (e.button === 0) {
+      mouseDown = true; lastMX = e.clientX; lastMY = e.clientY;
+      e.preventDefault();
+      if (weaponDrawn) shoot();
+    }
   }
   function onMouseMove(e) {
     if (!mouseDown) return;
@@ -700,7 +734,11 @@
   function doInteract() {
     if (nearbyNPC) {
       var def = nearbyNPC.userData.def;
-      if (_cbNPCInteract) _cbNPCInteract(def.id, def.name, def.action);
+      if (window.NHDialogue) {
+        window.NHDialogue.start(def);
+      } else if (_cbNPCInteract) {
+        _cbNPCInteract(def.id, def.name, def.action);
+      }
     } else if (nearbyVehicle && !inVehicle) {
       inVehicle = nearbyVehicle;
       playerBodyMesh.visible   = false;
@@ -712,6 +750,48 @@
       inVehicle                = null;
       playerBodyMesh.visible   = true;
       window.NHWorld._inVehicle = false;
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     WEAPON
+  ═══════════════════════════════════════════ */
+  function toggleWeapon() {
+    weaponDrawn = !weaponDrawn;
+    if (_weaponGroup) _weaponGroup.visible = weaponDrawn;
+
+    var xhair  = document.getElementById('fps-crosshair');
+    if (xhair)  xhair.classList.toggle('fps-crosshair--armed', weaponDrawn);
+
+    var wBtn   = document.getElementById('hud-weapon-btn');
+    if (wBtn)   wBtn.classList.toggle('hud-weapon-btn--armed', weaponDrawn);
+
+    var fireBtn = document.getElementById('hud-fire-btn');
+    if (fireBtn) fireBtn.hidden = !weaponDrawn;
+
+    toast(weaponDrawn ? '🔫 Weapon drawn — click / 💥 to fire' : '🔒 Weapon holstered');
+  }
+
+  function shoot() {
+    if (!weaponDrawn || _shootCooldown > 0) return;
+    _shootCooldown = 0.35;
+
+    var flash = document.getElementById('muzzle-flash');
+    if (flash) {
+      flash.classList.add('muzzle-flash--bang');
+      setTimeout(function () { flash.classList.remove('muzzle-flash--bang'); }, 75);
+    }
+
+    // Brief camera kick
+    var savedPitch = camPitch;
+    camPitch = Math.min(CAM_MAX_PITCH, camPitch + 0.05);
+    setTimeout(function () { camPitch = savedPitch; }, 90);
+
+    // Decrement HUD ammo counter
+    var ammoEl = document.getElementById('hud-ammo');
+    if (ammoEl) {
+      var ammo = parseInt(ammoEl.textContent, 10) || 0;
+      if (ammo > 0) ammoEl.textContent = String(ammo - 1);
     }
   }
 
@@ -731,6 +811,7 @@
     _bobT      += dt * 7;
     _waveT     += dt * 1.2;
     _alertT    += dt;
+    if (_shootCooldown > 0) _shootCooldown -= dt;
 
     updateMovement(dt);
     updateNPCIdle(dt);
@@ -747,6 +828,7 @@
   ═══════════════════════════════════════════ */
   function updateMovement(dt) {
     if (!playerGroup) return;
+    if (dialogueLock) return;  // freeze player during NPC dialogue
 
     // Camera rotation from keyboard Q/Z (alternative to mouse drag)
     if (keys['KeyQ']) camYaw += dt * 2;
