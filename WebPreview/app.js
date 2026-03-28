@@ -209,7 +209,6 @@
       // browser can still scroll other containers freely.
       el.addEventListener('touchend', function () {
         startMusic();
-        showToast('\u2192 ' + dest.replace('screen-', ''));
         showScreen(dest);
       }, { passive: true });
 

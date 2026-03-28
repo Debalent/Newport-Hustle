@@ -1294,7 +1294,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
   z-index: 8;
   display: none;
   touch-action: none;
-  pointer-events: auto; /* re-enable inside hud-world */
+  /* pointer-events intentionally NOT set here — touches pass through to the canvas
+     beneath, which handles joystick logic via left/right-half split in world.js */
+  pointer-events: none;
 }
 @media (pointer: coarse) { .fps-joystick { display: block; } }
 .fps-joystick--move { left: 18px; }

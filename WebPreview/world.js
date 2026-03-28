@@ -138,13 +138,23 @@
     buildVehicles();
     bindInput();
 
-    // Dismiss lock prompt on first click
+    // Dismiss lock prompt
     var prompt = document.getElementById('fps-lock-prompt');
     if (prompt) {
-      canvas.addEventListener('pointerdown', function dismiss() {
+      // On mobile / touch devices no pointer-lock is needed — hide immediately
+      if (window.matchMedia('(pointer: coarse)').matches) {
         prompt.classList.add('is-hidden');
-        canvas.removeEventListener('pointerdown', dismiss);
-      }, { once: false });
+      } else {
+        // Desktop: dismiss on first canvas click
+        canvas.addEventListener('pointerdown', function dismiss() {
+          prompt.classList.add('is-hidden');
+          canvas.removeEventListener('pointerdown', dismiss);
+        }, { once: true });
+        // Also dismiss if the prompt itself is tapped (it sits on top of canvas)
+        prompt.addEventListener('pointerdown', function () {
+          prompt.classList.add('is-hidden');
+        }, { once: true });
+      }
     }
 
     // Resize handler
