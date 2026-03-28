@@ -209,6 +209,7 @@
       // browser can still scroll other containers freely.
       el.addEventListener('touchend', function () {
         startMusic();
+        showToast('\u2192 ' + dest.replace('screen-', ''));
         showScreen(dest);
       }, { passive: true });
 
@@ -814,6 +815,10 @@
 
     // Boot splash animation
     animateBootText();
+
+    // Expose navigation globally — lets inline onclick + external calls invoke showScreen
+    window._nhGoMenu = function () { startMusic(); showScreen('screen-main-menu'); };
+    window._nhShowScreen = showScreen;
 
     // Wire up all subsystems
     initNavigation();

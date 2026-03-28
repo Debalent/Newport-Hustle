@@ -81,6 +81,8 @@ html {
   height: 100%;
   /* Ensure smooth scrolling inside panels */
   scroll-behavior: smooth;
+  /* Prevent iOS rubber-band bounce from eating touch events */
+  overscroll-behavior: none;
 }
 
 body {
@@ -173,22 +175,33 @@ body {
   flex-direction: column;
   padding: var(--space-lg);
   opacity: 0;
+  visibility: hidden;           /* hides from iOS render tree entirely */
   pointer-events: none;
   transform: translateX(32px);
-  transition: opacity var(--transition-screen), transform var(--transition-screen);
+  transition: opacity var(--transition-screen), transform var(--transition-screen),
+              visibility 0s linear var(--transition-screen);
   overflow: hidden;
   gap: var(--space-md);
 }
 
 .screen.screen--exit {
   opacity: 0;
+  visibility: visible;          /* keep visible while animating out */
   transform: translateX(-32px);
+  transition: opacity var(--transition-screen), transform var(--transition-screen),
+              visibility 0s linear var(--transition-screen);
 }
 
 .screen--active {
   opacity: 1;
-  pointer-events: auto;
+  visibility: visible;
+  pointer-events: auto !important;
   transform: translateX(0);
+  /* Force GPU compositing layer — prevents iOS Safari repaint bugs */
+  -webkit-transform: translateX(0) translateZ(0);
+  transform: translateX(0) translateZ(0);
+  transition: opacity var(--transition-screen), transform var(--transition-screen),
+              visibility 0s linear 0s;
 }
 
 .screen__content {
