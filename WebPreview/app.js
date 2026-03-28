@@ -194,51 +194,43 @@
   function initNavigation() {
     var _skipNextClick = false;
 
-    // MOBILE PRIMARY: touchend fires instantly without 300ms delay
-    // and avoids iOS Safari quirks with synthesized click events
-    document.addEventListener('touchend', function(e) {
-      startMusic();
+    // MOBILE PRIMARY: touchstart fires immediately (no 300ms delay),
+    // and preventDefault stops the synthesized click that follows.
+    // Only preventDefault when we're actually navigating so scrollable
+    // panels elsewhere are not affected.
+    document.addEventListener('touchstart', function(e) {
       var navTarget = e.target.closest('[data-target]');
-      if (navTarget) {
-        _skipNextClick = true;
-        showScreen(navTarget.getAttribute('data-target'));
-        // Ripple using touch coordinates
-        var t = e.changedTouches && e.changedTouches[0];
-        var rippleTarget = e.target.closest('.btn, .gta-nav-btn, .top-bar__back, .gta-menu-btn');
-        if (rippleTarget && t) {
-          try { spawnRipple(rippleTarget, { clientX: t.clientX, clientY: t.clientY }); } catch (_) {}
-        }
-      }
-    }, { passive: true });
-
-    // DESKTOP / KEYBOARD: click handles mouse and keyboard-triggered navigation
-    document.addEventListener('click', (e) => {
+      if (!navTarget) return;
+      e.preventDefault(); // block synthesized click
+      _skipNextClick = true;
       startMusic();
-
-      // Skip if touchend already handled this interaction
-      if (_skipNextClick) { _skipNextClick = false; return; }
-
-      // Ripple
-      const btn = e.target.closest('.btn, .gta-nav-btn, .top-bar__back, .gta-menu-btn');
-      try { if (btn) spawnRipple(btn, e); } catch (_) {}
-
-      // Screen navigation
-      const navTarget = e.target.closest('[data-target]');
-      if (navTarget) {
-        showScreen(navTarget.getAttribute('data-target'));
+      showScreen(navTarget.getAttribute('data-target'));
+      var rippleTarget = e.target.closest('.btn, .gta-nav-btn, .top-bar__back, .gta-menu-btn');
+      var t = e.changedTouches && e.changedTouches[0];
+      if (rippleTarget && t) {
+        try { spawnRipple(rippleTarget, { clientX: t.clientX, clientY: t.clientY }); } catch (_) {}
       }
+    }, { passive: false });
+
+    // DESKTOP / KEYBOARD fallback
+    document.addEventListener('click', function(e) {
+      startMusic();
+      if (_skipNextClick) { _skipNextClick = false; return; }
+      var btn = e.target.closest('.btn, .gta-nav-btn, .top-bar__back, .gta-menu-btn');
+      try { if (btn) spawnRipple(btn, e); } catch (_) {}
+      var navTarget = e.target.closest('[data-target]');
+      if (navTarget) showScreen(navTarget.getAttribute('data-target'));
     });
 
-    // Keyboard navigation: Enter/Space trigger click on focused data-target
-    document.addEventListener('keydown', (e) => {
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' || e.key === ' ') {
-        const focused = document.activeElement;
+        var focused = document.activeElement;
         if (focused && focused.hasAttribute('data-target')) {
           e.preventDefault();
           focused.click();
         }
       }
-      // ESC from HUD → Pause screen
       if (e.key === 'Escape' && state.currentScreen === 'screen-hud') {
         showScreen('screen-pause');
       }
