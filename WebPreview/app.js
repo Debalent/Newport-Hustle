@@ -192,26 +192,45 @@
      NAVIGATION (event delegation)
   ------------------------------------------------------- */
   function initNavigation() {
-    document.addEventListener('click', (e) => {
-      // Start music on first human interaction
+    var _skipNextClick = false;
+
+    // MOBILE PRIMARY: touchend fires instantly without 300ms delay
+    // and avoids iOS Safari quirks with synthesized click events
+    document.addEventListener('touchend', function(e) {
       startMusic();
+      var navTarget = e.target.closest('[data-target]');
+      if (navTarget) {
+        _skipNextClick = true;
+        showScreen(navTarget.getAttribute('data-target'));
+        // Ripple using touch coordinates
+        var t = e.changedTouches && e.changedTouches[0];
+        var rippleTarget = e.target.closest('.btn, .gta-nav-btn, .top-bar__back, .gta-menu-btn');
+        if (rippleTarget && t) {
+          try { spawnRipple(rippleTarget, { clientX: t.clientX, clientY: t.clientY }); } catch (_) {}
+        }
+      }
+    }, { passive: true });
+
+    // DESKTOP / KEYBOARD: click handles mouse and keyboard-triggered navigation
+    document.addEventListener('click', (e) => {
+      startMusic();
+
+      // Skip if touchend already handled this interaction
+      if (_skipNextClick) { _skipNextClick = false; return; }
 
       // Ripple
       const btn = e.target.closest('.btn, .gta-nav-btn, .top-bar__back, .gta-menu-btn');
-      if (btn) spawnRipple(btn, e);
+      try { if (btn) spawnRipple(btn, e); } catch (_) {}
 
-      // Screen navigation — closest() finds nearest ancestor with data-target
-      // so inner elements (spans inside buttons) correctly resolve to their button,
-      // and tapping any bare area of the splash section resolves to the section itself.
+      // Screen navigation
       const navTarget = e.target.closest('[data-target]');
       if (navTarget) {
-        const targetId = navTarget.getAttribute('data-target');
-        showScreen(targetId);
+        showScreen(navTarget.getAttribute('data-target'));
       }
     });
 
     // Keyboard navigation: Enter/Space trigger click on focused data-target
-    document.body.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         const focused = document.activeElement;
         if (focused && focused.hasAttribute('data-target')) {
