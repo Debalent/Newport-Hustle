@@ -121,12 +121,12 @@
     renderer.shadowMap.enabled  = true;
     renderer.shadowMap.type     = THREE.PCFSoftShadowMap;
     renderer.toneMapping        = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.85;
+    renderer.toneMappingExposure = 1.6;   // was 0.85 — much brighter overall
 
     // Scene
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0d1520);
-    scene.fog = new THREE.FogExp2(0x0d1520, 0.022);
+    scene.background = new THREE.Color(0x1a2e48); // was 0x0d1520 — lighter dusk sky
+    scene.fog = new THREE.FogExp2(0x1a2e48, 0.016); // was 0.022 — less dense fog
 
     // Camera
     camera = new THREE.PerspectiveCamera(68, W / H, 0.1, 350);
@@ -196,9 +196,9 @@
      LIGHTING
   ═══════════════════════════════════════════ */
   function buildLighting() {
-    scene.add(new THREE.AmbientLight(0x2a3a5a, 0.55));
+    scene.add(new THREE.AmbientLight(0x6080a0, 1.2));  // was 0x2a3a5a @ 0.55 — much brighter fill
 
-    var moon = new THREE.DirectionalLight(0x8ab4d4, 0.75);
+    var moon = new THREE.DirectionalLight(0xc8d8f0, 1.4); // was 0x8ab4d4 @ 0.75 — brighter key light
     moon.position.set(-40, 70, -30);
     moon.castShadow = true;
     moon.shadow.mapSize.width  = 2048;
@@ -209,11 +209,11 @@
     moon.shadow.camera.right   = moon.shadow.camera.top   =  90;
     scene.add(moon);
 
-    var fill = new THREE.DirectionalLight(0xFF8040, 0.22);
+    var fill = new THREE.DirectionalLight(0xFF9060, 0.55);  // was 0xFF8040 @ 0.22
     fill.position.set(40, 25, 40);
     scene.add(fill);
 
-    scene.add(new THREE.HemisphereLight(0x1a2a4a, 0x2a1808, 0.38));
+    scene.add(new THREE.HemisphereLight(0x3050a0, 0x402010, 0.8)); // was 0x1a2a4a/0x2a1808 @ 0.38
   }
 
   /* ═══════════════════════════════════════════
