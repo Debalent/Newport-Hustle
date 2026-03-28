@@ -475,7 +475,7 @@
 ### Intro Lines (10)
 1. "Thank you for coming. Your discretion is appreciated. And expected."
 2. "Newport is a town built on trust. I trust you because you have no other options."
-3. "Mayor Harold T. Bucksworth the Third. Four terms. Zero convictions. A perfect record."
+3. "Mayor Derek Shonn. Four terms. Zero convictions. A perfect record."
 4. "Welcome to City Hall. The heart of Newport. And the vault of its secrets."
 5. "I've shaped this town for sixteen years. Every road, every building, every carefully redirected fund."
 6. "In Newport, I am not just the Mayor. I am the system. The infrastructure. The last word."
@@ -502,7 +502,7 @@
 3. "Parking is now $50 per hour. Call it a democracy fee."
 4. "My private security has locked down City Hall. Consider this an emergency session."
 5. "I've been running Newport for sixteen years. You think one bad news cycle changes that?"
-6. "Gather your evidence. Bring your witnesses. See if anyone believes a word against Harold T. Bucksworth III."
+6. "Gather your evidence. Bring your witnesses. See if anyone believes a word against Derek Shonn."
 7. "Patricia Dawn is a tool. You're a tool. Everyone is a tool. I'm the MECHANIC."
 8. "The evidence you need is in three locations. I'm generously telling you to give you false hope."
 9. "City Hall has security systems you haven't dreamed of. Also secret passages. Because I'm DRAMATIC."

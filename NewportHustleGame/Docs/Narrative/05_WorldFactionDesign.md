@@ -131,7 +131,7 @@
 **Vibe:** Political power, old money, carefully maintained appearances. All brick and bronze.
 
 **Landmarks:**
-- **City Hall** — Columned building, two stories, with a clock tower. Interior: marble floors, oil portraits of every mayor (Bucksworth's is the largest), a chandelier the city can't technically afford. Mayor's office on the second floor — mahogany desk, leather chair, bay window overlooking the square.
+- **City Hall** — Columned building, two stories, with a clock tower. Interior: marble floors, oil portraits of every mayor (Shonn's is the largest), a chandelier the city can't technically afford. Mayor's office on the second floor — mahogany desk, leather chair, bay window overlooking the square.
 - **Newport Courthouse** — Adjacent to City Hall. Where the Mayor's legal maneuvers play out.
 - **The Square** — Central plaza with a fountain, park benches, and a gazebo. Site of campaign rallies and the final showdown.
 - **First Newport Bank** — The Mayor's preferred institution. Vault is rumored to contain more than money.
@@ -149,9 +149,9 @@
 - Government employees, lawyers, security guards in suits, campaign volunteers, Patricia Dawn with clipboard, journalists, the Mayor's aide (always sweating).
 
 **Environmental Storytelling:**
-- Campaign posters everywhere: "BUCKSWORTH — TRUST THE PROCESS" vs. Patricia Dawn's "TRANSPARENCY NOW."
+- Campaign posters everywhere: "SHONN — TRUST THE PROCESS" vs. Patricia Dawn's "TRANSPARENCY NOW."
 - A bronze plaque on City Hall listing "completed projects" — several are listed that clearly don't exist.
-- The fountain has a small dedication: "Donated by the Bucksworth Foundation." The foundation's only project is the fountain.
+- The fountain has a small dedication: "Donated by the Shonn Foundation." The foundation's only project is the fountain.
 - A shredder in the Mayor's office that runs constantly. Even when no one is in the room.
 
 ---
@@ -210,7 +210,7 @@
 
 **Environmental Storytelling:**
 - "RIVERFRONT RENEWAL — PHASE 3" banner over a construction zone that hasn't progressed in months.
-- The yacht is named "SS Bucksworth." It has a golden anchor.
+- The yacht is named "SS Shonn." It has a golden anchor.
 - A memorial plaque for "workers who built Newport" — placed by the Mayor to distract from current labor disputes.
 - Graffiti on the Old Mill: "THE MAYOR STOLE OUR HOMES."
 
@@ -239,7 +239,7 @@
 - Residents on porches, kids playing, someone always grilling, the mail carrier, an old man who sits in the same chair every day, stray cats.
 
 **Environmental Storytelling:**
-- "FOR SALE — BUCKSWORTH DEVELOPMENT" signs on vacant houses. The Mayor buying up the neighborhood.
+- "FOR SALE — SHONN DEVELOPMENT" signs on vacant houses. The Mayor buying up the neighborhood.
 - Ace's childhood home has a basketball hoop with no net — untouched for years.
 - The memorial bench reads: "For those who stayed." A reference to those who never left Newport.
 - Flyers on lampposts: "COMMUNITY MEETING — STOP THE SELL-OFF" — residents fighting displacement.
@@ -424,9 +424,9 @@
 
 ---
 
-### FACTION 5: THE BUCKSWORTH MACHINE
+### FACTION 5: THE SHONN MACHINE
 
-**Leader:** Mayor Harold T. Bucksworth III
+**Leader:** Mayor Derek Shonn
 **Territory:** Downtown + City Hall + influence over all districts
 **Colors:** Navy Blue and Gold
 **Logo:** The Newport city seal with the Mayor's initials hidden in the design.
@@ -445,10 +445,10 @@
 - **Captain Briggs** — Head of the private security detail. 15 years military. Takes the job seriously. Doesn't care about politics — he cares about his contract.
 
 **Vehicles:**
-- The Mayor: Black town car (chauffeured), the yacht "SS Bucksworth"
+- The Mayor: Black town car (chauffeured), the yacht "SS Shonn"
 - Security Detail: Black SUVs with tinted windows
 - City vehicles: Crown Victoria police cars (the Mayor controls enforcement)
-- Campaign: Minivans with "BUCKSWORTH" magnets
+- Campaign: Minivans with "SHONN" magnets
 
 **Slang:**
 - "In committee" — Under the Mayor's control/review
@@ -493,13 +493,13 @@
 
 ### Faction Conflict Matrix
 
-| | DeVille | Algorithm | Rico's Fleet | Enlightenment | Bucksworth |
+| | DeVille | Algorithm | Rico's Fleet | Enlightenment | Shonn |
 |---|---|---|---|---|---|
 | **DeVille** | — | Content rivalry | Border disputes | Recruitment poaching | Licensing threats |
 | **Algorithm** | Content rivalry | — | Parking disputes | Wellness exposé threats | Content deal |
 | **Rico's Fleet** | Border disputes | Parking disputes | — | Territory overlap | Parking contract |
 | **Enlightenment** | Recruitment poaching | Wellness exposé | Territory overlap | — | Campaign donations |
-| **Bucksworth** | Licensing threats | Content deal | Parking contract | Campaign donations | — |
+| **Shonn** | Licensing threats | Content deal | Parking contract | Campaign donations | — |
 
 ### Neutral Zones
 - **Miss Pearl's Diner** — Absolute neutral ground. No faction business inside. Everyone eats here. Miss Pearl enforces peace with a cast-iron skillet and moral authority.

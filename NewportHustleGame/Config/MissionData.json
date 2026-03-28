@@ -447,7 +447,7 @@
         { "id": "breach_plaza", "description": "Fight through City Hall Plaza — Captain Briggs commands the defense", "type": "combat_wave", "enemy_count": 15, "mini_boss": "captain_briggs" },
         { "id": "fight_through_hall", "description": "Clear City Hall floor by floor — security systems active", "type": "tactical_combat", "floors": 2 },
         { "id": "find_mayor", "description": "Track the Mayor through the secret passages", "type": "investigation_chase" },
-        { "id": "boss_fight_mayor", "description": "Boss fight — Mayor Bucksworth in the main chamber", "type": "boss_fight", "boss": "mayor_bucksworth", "phases": 3 }
+        { "id": "boss_fight_mayor", "description": "Boss fight — Mayor Shonn in the main chamber", "type": "boss_fight", "boss": "mayor_bucksworth", "phases": 3 }
       ],
       "rewards": { "money": 3000, "respect": 50, "items": ["mayors_gavel", "mayoral_evidence_vault_key"], "unlocks": ["mission_22_election_day"] },
       "boss_fight_phases": [

@@ -688,7 +688,7 @@ namespace NewportHustle.Characters
                 DialogueNode mayorIntro = new DialogueNode
                 {
                     nodeID = "start",
-                    speakerName = "Mayor Bucksworth",
+                    speakerName = "Mayor Shonn",
                     text = "Close the door. I know who you are. I know who you've been working for. And before you reach for whatever's in your pocket — I don't need threats. I need a fixer.",
                     nextNodeID = "mayor_offer"
                 };
@@ -696,7 +696,7 @@ namespace NewportHustle.Characters
                 DialogueNode mayorOffer = new DialogueNode
                 {
                     nodeID = "mayor_offer",
-                    speakerName = "Mayor Bucksworth",
+                    speakerName = "Mayor Shonn",
                     text = "Patricia Dawn has a file. It connects me to some... ambitious infrastructure arrangements. I need that file gone before Election Day. You get it done quietly, Newport stays the same. You get it done loudly, Newport stays the same — but you won't be here to see it.",
                     responses = new List<DialogueResponse>
                     {
@@ -708,7 +708,7 @@ namespace NewportHustle.Characters
                 DialogueNode mayorYes = new DialogueNode
                 {
                     nodeID = "mayor_yes",
-                    speakerName = "Mayor Bucksworth",
+                    speakerName = "Mayor Shonn",
                     text = "Your record? Son, I AM your record. Rodney will give you the address. Don't read the file.",
                     nextNodeID = "mayor_end"
                 };
@@ -716,7 +716,7 @@ namespace NewportHustle.Characters
                 DialogueNode mayorRefuse = new DialogueNode
                 {
                     nodeID = "mayor_refuse",
-                    speakerName = "Mayor Bucksworth",
+                    speakerName = "Mayor Shonn",
                     text = "You'd be surprised what people like me look like up close. Think about it overnight. Newport has long arms and they all bend my direction.",
                     nextNodeID = "mayor_end"
                 };

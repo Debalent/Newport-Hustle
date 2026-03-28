@@ -27,7 +27,7 @@ Marcus's empire cracks under a crypto collapse. Meanwhile Ace is drawn into conf
 Boss confrontations across every district. The DeVille Flagship. LexxCon. Rico's impound compound. The Enlightenment Center. Each fight settles a faction — and each defeated boss can become an unlikely ally if Ace showed them mercy.
 
 ### Act 4 — The Reckoning
-Ace rallies Newport against **Mayor Harold T. Bucksworth III**, the man behind every power play in town. Storm City Hall. Face the final boss on Election Day. Three possible endings determine whether Newport gets a new kind of leader — or falls back into the same hands.
+Ace rallies Newport against **Mayor Derek Shonn**, the man behind every power play in town. Storm City Hall. Face the final boss on Election Day. Three possible endings determine whether Newport gets a new kind of leader — or falls back into the same hands.
 
 ---
 
@@ -51,7 +51,7 @@ Runs Rico's Fleet out of the Diaz District. His tow trucks are everywhere, his i
 ### Dr. Fable
 Wellness influencer and self-appointed spiritual leader of the Spa District's Enlightenment Center. The flyers around town look friendly. The supplement line is less friendly. The acolyte swarms and incense traps during the raid are definitely not friendly.
 
-### Mayor Harold T. Bucksworth III
+### Mayor Derek Shonn
 The true final boss. Old-money Newport establishment, publicly neutral, privately funding every faction to keep the city divided and controllable. The evidence trail leads to City Hall. The Election Day showdown determines whether Newport changes or doesn't.
 
 ---

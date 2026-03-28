@@ -63,7 +63,7 @@
       "themes": ["legacy", "leadership", "community unity", "justice"],
       "description": "Ace rallies defeated bosses and the community against the Mayor. Gather evidence, storm City Hall, and face the final boss fight on Election Day. Three possible endings.",
       "districts_active": ["all"],
-      "boss_fight": "Mayor Bucksworth"
+      "boss_fight": "Mayor Shonn"
     }
   },
   "story_arcs": {
@@ -147,8 +147,8 @@
         ]
       },
       "mayor_bucksworth_arc": {
-        "character": "Mayor Harold T. Bucksworth III",
-        "faction": "The Bucksworth Machine",
+        "character": "Mayor Derek Shonn",
+        "faction": "The Shonn Machine",
         "territory": "Downtown / City Hall",
         "progression": [
           {"phase": "Hidden", "act": 1, "description": "Referenced but unseen. Controls Newport from behind the scenes."},
@@ -293,7 +293,7 @@
       "name": "Downtown",
       "faction": "bucksworth_machine",
       "vibe": "Political power, old money, brick and bronze",
-      "key_npcs": ["Mayor Bucksworth", "Rodney", "Captain Briggs", "Patricia Dawn"],
+      "key_npcs": ["Mayor Shonn", "Rodney", "Captain Briggs", "Patricia Dawn"],
       "landmarks": ["City Hall", "The Square", "First Newport Bank", "The Gazette"]
     },
     "jacksonport": {
@@ -355,7 +355,7 @@
       "weaknesses": ["expose supplements to break loyalty", "leader is a coward", "Chad"]
     },
     "bucksworth_machine": {
-      "leader": "Mayor Bucksworth",
+      "leader": "Mayor Shonn",
       "colors": ["navy_blue", "gold"],
       "logo": "City seal with hidden initials",
       "territory": "Downtown",

@@ -268,12 +268,12 @@ Fable tries to escape via rented news helicopter. QTE sequence and final dialogu
 ## 3.5 — THE MAYOR
 
 ### Bio
-**Full Name:** Mayor Harold T. Bucksworth III
+**Full Name:** Mayor Derek Shonn
 **Age:** 63
 **District:** City Hall / Downtown (controls all of Newport officially)
 **Occupation:** Mayor of Newport (4 terms), real estate developer, power broker
 
-Harold Bucksworth has been the Mayor of Newport for 16 years. He ran originally on a platform of "Newport Pride" and has held power through a combination of genuine civic work, strategic favors, and a network of backroom deals that would make a mob boss blush. He's the most dangerous person in Newport because he doesn't look dangerous. He looks like a bank commercial.
+Derek Shonn has been the Mayor of Newport for 16 years. He ran originally on a platform of "Newport Pride" and has held power through a combination of genuine civic work, strategic favors, and a network of backroom deals that would make a mob boss blush. He's the most dangerous person in Newport because he doesn't look dangerous. He looks like a bank commercial.
 
 The Mayor built Newport's modern infrastructure — the renovated Main Street, the Spa District, the Riverfront walk. He also skimmed from every project, redirected funds to personal investments, and ensured that every business in town owed him something. He's not a crime boss; he's a politician, which in Newport is basically the same thing with better suits.
 
